@@ -9,11 +9,13 @@ public class Player : MonoBehaviour
     public int Stamina;
     public int ComponentsTier2;
     public int ComponentsTier3;
+    public int WeaponEvo;
 
     // Movement
     [SerializeField] private Rigidbody2D rb;
     float moveHorizontal;
     float moveVertical;
+
     public int moveSpeed;
     public int dashCooldown;
 
@@ -24,12 +26,13 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        // Movement
         moveHorizontal = Input.GetAxisRaw("Horizontal");
         moveVertical = Input.GetAxisRaw("Vertical");
+        rb.velocity = new Vector2(moveHorizontal * moveSpeed, moveVertical * moveSpeed);
     }
 
     void FixedUpdate()
     {
-        rb.velocity = new Vector2(moveHorizontal * moveSpeed, rb.velocity.y);
     }
 }

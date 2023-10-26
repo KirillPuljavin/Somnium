@@ -8,12 +8,9 @@ public class GameController : MonoBehaviour
     {
 
     }
-    void OnCollisionEnter(Collision other)
-    {
-
-    }
 
     void Update()
     {
+
     }
 }
