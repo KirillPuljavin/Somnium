@@ -8,11 +8,12 @@ public class Helo : MonoBehaviour
     void Start()
     {
         Debug.Log("HELO");
+        Debug.Log("COMRADE");
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
