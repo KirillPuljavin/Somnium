@@ -48,7 +48,7 @@ public class Player : MonoBehaviour
         Hearts += 0.5f;
         heartsHUD.text = "Hearts: " + Hearts;
     }
-    public void TakeDamage(int amount)
+    public void TakeDamage(float amount)
     {
         Hearts -= amount;
         heartsHUD.text = "Hearts: " + Hearts;
