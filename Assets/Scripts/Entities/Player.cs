@@ -43,12 +43,12 @@ public class Player : MonoBehaviour
     {
     }
 
-    void HealPotion()
+    public void HealPotion()
     {
         Hearts += 0.5f;
         heartsHUD.text = "Hearts: " + Hearts;
     }
-    void TakeDamage(int amount)
+    public void TakeDamage(int amount)
     {
         Hearts -= amount;
         heartsHUD.text = "Hearts: " + Hearts;
