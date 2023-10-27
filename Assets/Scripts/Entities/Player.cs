@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     public int dashCooldown;
 
     // UI
-    [SerializeField] private GameObject heartIcon;
+    [SerializeField] private Sprite heartIcon;
 
     void Start()
     {

@@ -17,14 +17,14 @@ public class EnemyBlob : MonoBehaviour
 
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, new Vector2(PlayerObj.transform.position.x, PlayerObj.transform.position.y - 0.2f), speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, new Vector2(PlayerObj.transform.position.x, PlayerObj.transform.position.y - 0f), speed * Time.deltaTime);
 
         // Cooldown
         if (cooldown <= 1) cooldown += Time.deltaTime;
     }
 
     float cooldown = 1;
-    
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
