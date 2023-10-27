@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    // Info
+    // Variables
     public float Hearts = 5;
     public int Stamina;
     public int ComponentsTier2;
@@ -39,10 +39,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
-    {
-    }
-
     public void HealPotion()
     {
         Hearts += 0.5f;
@@ -52,5 +48,12 @@ public class Player : MonoBehaviour
     {
         Hearts -= amount;
         heartsHUD.text = "Hearts: " + Hearts;
+
+        if (Hearts <= 0) Death();
+    }
+    public void Death()
+    {
+        Debug.Log("YOU DIED");
+        Destroy(gameObject);
     }
 }
