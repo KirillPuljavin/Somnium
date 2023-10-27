@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,12 +15,15 @@ public class Player : MonoBehaviour
 
     // Movement
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private Text heartsHUD;
+    [SerializeField] private HorizontalLayoutGroup heartsHUD;
     float moveHorizontal;
     float moveVertical;
 
     public int moveSpeed;
     public int dashCooldown;
+
+    // UI
+    [SerializeField] private GameObject heartIcon;
 
     void Start()
     {
@@ -42,15 +46,25 @@ public class Player : MonoBehaviour
     public void HealPotion()
     {
         Hearts += 0.5f;
-        heartsHUD.text = "Hearts: " + Hearts;
+        UpdateHearts();
     }
     public void TakeDamage(float amount)
     {
         Hearts -= amount;
-        heartsHUD.text = "Hearts: " + Hearts;
+        UpdateHearts();
 
         if (Hearts <= 0) Death();
     }
+    private void UpdateHearts()
+    {
+        foreach (Transform childObj in heartsHUD.transform)
+        {
+            Destroy(childObj.gameObject);
+        }
+
+        Instantiate(heartIcon, heartsHUD.gameObject.transform);
+    }
+
     public void Death()
     {
         Debug.Log("YOU DIED");
