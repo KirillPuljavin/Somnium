@@ -24,6 +24,14 @@ public class EnemyBlob : MonoBehaviour
     }
 
     float cooldown = 1;
+    
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            speed = 0.005f;
+        }
+    }
     private void OnTriggerStay2D(Collider2D collider)
     {
         Debug.Log(cooldown);
@@ -32,6 +40,13 @@ public class EnemyBlob : MonoBehaviour
         {
             player.TakeDamage(0.5f);
             cooldown = 0;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            speed = 1.3f;
         }
     }
 }
