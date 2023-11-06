@@ -19,11 +19,11 @@ public class Player : MonoBehaviour
     float moveHorizontal;
     float moveVertical;
 
-    public int moveSpeed;
-    public int dashCooldown;
+    public float moveSpeed;
+    public float dashCooldown;
 
     // UI
-    [SerializeField] private Sprite heartIcon;
+    [SerializeField] private GameObject heartIcon;
 
     void Start()
     {
@@ -32,10 +32,22 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        // Movement
-        moveHorizontal = Input.GetAxisRaw("Horizontal");
-        moveVertical = Input.GetAxisRaw("Vertical");
-        rb.velocity = new Vector2(moveHorizontal * moveSpeed, moveVertical * moveSpeed);
+
+        if (Input.GetKey(KeyCode.Space) && dashCooldown <= 0)
+        {
+            Debug.Log("YEETERS MY GUY");
+            rb.AddForce(Vector2.right * 100f, ForceMode2D.Impulse);
+            dashCooldown = 3;
+        }
+        else
+        {
+            // Movement
+            moveHorizontal = Input.GetAxisRaw("Horizontal");
+            moveVertical = Input.GetAxisRaw("Vertical");
+            rb.velocity = new Vector2(moveHorizontal * moveSpeed, moveVertical * moveSpeed);
+            dashCooldown -= Time.deltaTime;
+        }
+
 
         if (Input.GetKeyDown(KeyCode.H))
         {
