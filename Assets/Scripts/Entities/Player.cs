@@ -33,22 +33,12 @@ public class Player : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKey(KeyCode.Space) && dashCooldown <= 0)
-        {
-            Debug.Log("YEETERS MY GUY");
-            rb.AddForce(Vector2.right * 100f, ForceMode2D.Impulse);
-            dashCooldown = 3;
-        }
-        else
-        {
-            // Movement
-            moveHorizontal = Input.GetAxisRaw("Horizontal");
-            moveVertical = Input.GetAxisRaw("Vertical");
-            rb.velocity = new Vector2(moveHorizontal * moveSpeed, moveVertical * moveSpeed);
-            dashCooldown -= Time.deltaTime;
-        }
-
-
+        // Movement
+        moveHorizontal = Input.GetAxisRaw("Horizontal");
+        moveVertical = Input.GetAxisRaw("Vertical");
+        rb.velocity = new Vector2(moveHorizontal * moveSpeed, moveVertical * moveSpeed);
+        dashCooldown -= Time.deltaTime;
+        
         if (Input.GetKeyDown(KeyCode.H))
         {
             HealPotion();
