@@ -6,6 +6,9 @@ public class Player : MonoBehaviour
 {
 
     // Variables
+    public int inDungeon;
+    public int currRoom = 2;
+    
     public float Hearts = 5;
     public int Stamina;
     public int ComponentsTier2;
