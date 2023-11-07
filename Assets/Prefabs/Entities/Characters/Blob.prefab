@@ -37,7 +37,7 @@ RectTransform:
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -0.054, y: -0.498}
   m_SizeDelta: {x: 1, y: 1}
-  m_Pivot: {x: 0.5, y: -0}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &6845852730796308385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52,6 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerObj: {fileID: 0}
   speed: 1
+  enemyHP: 3
 --- !u!70 &986158315572252183
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -84,8 +85,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.0000001, y: 1}
+  m_Offset: {x: 0, y: 0.4}
+  m_Size: {x: 1.0000001, y: 1.2}
   m_Direction: 1
 --- !u!1 &6833761153160537416
 GameObject:
@@ -118,11 +119,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 6211383269970791323}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!212 &3224518204555280323
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -174,4 +175,4 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
