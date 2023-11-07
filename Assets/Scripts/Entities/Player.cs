@@ -6,6 +6,9 @@ public class Player : MonoBehaviour
 {
 
     // Variables
+    public bool inDungeon = false;
+    public int currRoom = 2;
+
     public float Hearts = 5;
     public int Stamina;
     public int ComponentsTier2;
@@ -14,14 +17,14 @@ public class Player : MonoBehaviour
     private float horizontal;
     private float vertical;
     private float speed = 2f;
-    private float jumpingPower = 16f;
-    private bool isFacingRight = true;
 
     private bool canDash = true;
     private bool isDashing;
     private float dashingPower = 10f;
     private float dashingTime = 0.2f;
     private float dashingCooldown = 3f;
+    public Animator animator;
+    Vector2 movement;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private HorizontalLayoutGroup heartsHUD;
@@ -35,8 +38,8 @@ public class Player : MonoBehaviour
             return;
         }
 
-        horizontal = Input.GetAxisRaw("Horizontal");
-        vertical = Input.GetAxisRaw("Vertical");
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.y = Input.GetAxisRaw("Vertical");
 
         if (Input.GetKeyDown(KeyCode.Mouse1) && canDash)
         {
@@ -48,6 +51,9 @@ public class Player : MonoBehaviour
         {
             HealPotion();
         }
+        animator.SetFloat("Horizontal", movement.x);
+        animator.SetFloat("Vertical", movement.y);
+        animator.SetFloat("Speed", movement.sqrMagnitude);
     }
 
     private void FixedUpdate()
@@ -58,7 +64,7 @@ public class Player : MonoBehaviour
         }
 
         
-        rb.velocity = new Vector2(horizontal * speed, vertical * speed);
+        rb.velocity = new Vector2(movement.x * speed, movement.y * speed);
         
     }
     private IEnumerator Dash()
@@ -67,7 +73,7 @@ public class Player : MonoBehaviour
         isDashing = true;
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
-        rb.velocity = new Vector2(horizontal * dashingPower, vertical * dashingPower);
+        rb.velocity = new Vector2(movement.x * dashingPower, movement.y * dashingPower);
         yield return new WaitForSeconds(dashingTime);
         rb.gravityScale = originalGravity;
         isDashing = false;
@@ -89,12 +95,12 @@ public class Player : MonoBehaviour
     }
     private void UpdateHearts()
     {
-        foreach (Transform childObj in heartsHUD.transform)
-        {
-            Destroy(childObj.gameObject);
-        }
+        // foreach (Transform childObj in heartsHUD.transform)
+        // {
+        //     Destroy(childObj.gameObject);
+        // }
 
-        Instantiate(heartIcon, heartsHUD.gameObject.transform);
+        // Instantiate(heartIcon, heartsHUD.gameObject.transform);
     }
     
     public void Death()

@@ -7,6 +7,7 @@ public class EnemyBlob : MonoBehaviour
 {
     public GameObject PlayerObj;
     Player player;
+    float cooldown = 0;
     public float speed;
 
     void Start()
@@ -20,10 +21,9 @@ public class EnemyBlob : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, new Vector2(PlayerObj.transform.position.x, PlayerObj.transform.position.y - 0f), speed * Time.deltaTime);
 
         // Cooldown
-        if (cooldown <= 1) cooldown += Time.deltaTime;
+        if (cooldown < 1) cooldown += Time.deltaTime;
     }
 
-    float cooldown = 1;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
