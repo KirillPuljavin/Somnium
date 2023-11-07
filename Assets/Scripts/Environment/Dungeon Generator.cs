@@ -10,6 +10,7 @@ public class DungeonGenerator : MonoBehaviour
     private DungeonPreset currentPreset;
     public GameObject passagePrefab;
     public GameObject roomPrefab;
+    public GameObject doorPrefab;
 
     void Start()
     {
@@ -25,13 +26,93 @@ public class DungeonGenerator : MonoBehaviour
         }
 
         currentPreset = new Dungeon1();
-        // VisualizeDungeon();
+        VisualizeDungeon();
 
-        // Choose rooms
-        foreach (var room in currentPreset.roomsAvailable)
+        // Setup Rooms
+        foreach (var roomIndex in currentPreset.roomsAvailable)
         {
-            GameObject newRoom = Instantiate(roomPrefab, new Vector3(CalculateRoomPosition(room).x, CalculateRoomPosition(room).y, 0f), Quaternion.identity);
+            GameObject newRoom = Instantiate(roomPrefab, new Vector3(CalculateRoomPosition(roomIndex).x, CalculateRoomPosition(roomIndex).y, 0f), Quaternion.identity);
         }
+
+        // Instantiate room doors
+        InstantiateRoomDoors();
+    }
+
+    void InstantiateRoomDoors()
+    {
+        foreach (var connection in currentPreset.passages)
+        {
+            int roomIndex1 = connection.roomIndex1;
+            int roomIndex2 = connection.roomIndex2;
+
+            // Get door positions for roomIndex1
+            DoorPlacement doorPlacement1 = GetDoorPlacement(roomIndex1, roomIndex2);
+            Vector2 doorPosition1 = CalculateDoorPosition(doorPlacement1, roomIndex1);
+
+            // Get door positions for roomIndex2
+            DoorPlacement doorPlacement2 = GetDoorPlacement(roomIndex2, roomIndex1);
+            Vector2 doorPosition2 = CalculateDoorPosition(doorPlacement2, roomIndex2);
+
+            // Instantiate doors
+            Instantiate(doorPrefab, doorPosition1, Quaternion.identity);
+            Instantiate(doorPrefab, doorPosition2, Quaternion.identity);
+        }
+    }
+    DoorPlacement GetDoorPlacement(int roomIndex1, int roomIndex2)
+    {
+        int row1 = roomIndex1 / Rooms.GetLength(1);
+        int col1 = roomIndex1 % Rooms.GetLength(1);
+        int row2 = roomIndex2 / Rooms.GetLength(1);
+        int col2 = roomIndex2 % Rooms.GetLength(1);
+
+        if (row1 == row2) // Horizontal passage
+        {
+            return new DoorPlacement
+            {
+                position = col1 < col2 ? DoorPosition.Right : DoorPosition.Left,
+                roomIndex = col1 < col2 ? roomIndex1 : roomIndex2
+            };
+        }
+        else if (col1 == col2) // Vertical passage
+        {
+            return new DoorPlacement
+            {
+                position = row1 < row2 ? DoorPosition.Top : DoorPosition.Bottom,
+                roomIndex = row1 < row2 ? roomIndex1 : roomIndex2
+            };
+        }
+        // Invalid passage
+        else return new DoorPlacement();
+    }
+
+    Vector2 CalculateDoorPosition(DoorPlacement doorPlacement, int roomIndex)
+    {
+        Vector2 roomPosition = CalculateRoomPosition(roomIndex);
+        switch (doorPlacement.position)
+        {
+            case DoorPosition.Top:
+                return new Vector2(roomPosition.x, roomPosition.y + 1f);
+            case DoorPosition.Bottom:
+                return new Vector2(roomPosition.x, roomPosition.y - 1f);
+            case DoorPosition.Left:
+                return new Vector2(roomPosition.x - 1f, roomPosition.y);
+            case DoorPosition.Right:
+                return new Vector2(roomPosition.x + 1f, roomPosition.y);
+            default:
+                return roomPosition;
+        }
+    }
+    public enum DoorPosition
+    {
+        Top,
+        Bottom,
+        Left,
+        Right
+    }
+    public class DoorPlacement
+    {
+        public DoorPosition position;
+        public int roomIndex;
     }
 
     void VisualizeDungeon()
