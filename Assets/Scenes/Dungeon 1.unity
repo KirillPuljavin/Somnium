@@ -234,6 +234,10 @@ PrefabInstance:
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 6359226010696778297}
+    - target: {fileID: 4889943354059910841, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
+      propertyPath: m_Lens.OrthographicSize
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7919883277961508943, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -257,6 +261,10 @@ PrefabInstance:
     - target: {fileID: 7919883277961508943, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8572995283403586746, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
+      propertyPath: orthographic size
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -604,6 +612,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passagePrefab: {fileID: 2277336942516811396, guid: d79bf7e34eb05bf4989482abd8c7e9bf, type: 3}
+  roomPrefab: {fileID: 1889435654105591893, guid: cc9f03fff7f42124aab381e33a54faf1, type: 3}
 --- !u!114 &483126003
 MonoBehaviour:
   m_ObjectHideFlags: 0
