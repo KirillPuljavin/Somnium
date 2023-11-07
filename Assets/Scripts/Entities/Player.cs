@@ -54,9 +54,6 @@ public class Player : MonoBehaviour
         animator.SetFloat("Horizontal", movement.x);
         animator.SetFloat("Vertical", movement.y);
         animator.SetFloat("Speed", movement.sqrMagnitude);
-        Debug.Log(movement.x);
-        Debug.Log(movement.y);
-        Debug.Log(movement.sqrMagnitude);
     }
 
     private void FixedUpdate()
@@ -98,12 +95,12 @@ public class Player : MonoBehaviour
     }
     private void UpdateHearts()
     {
-        foreach (Transform childObj in heartsHUD.transform)
-        {
-            Destroy(childObj.gameObject);
-        }
+        // foreach (Transform childObj in heartsHUD.transform)
+        // {
+        //     Destroy(childObj.gameObject);
+        // }
 
-        Instantiate(heartIcon, heartsHUD.gameObject.transform);
+        // Instantiate(heartIcon, heartsHUD.gameObject.transform);
     }
     
     public void Death()
