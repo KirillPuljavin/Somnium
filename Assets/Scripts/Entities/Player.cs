@@ -1,43 +1,48 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+
     // Variables
     public float Hearts = 5;
     public int Stamina;
     public int ComponentsTier2;
     public int ComponentsTier3;
     public int WeaponEvo;
+    private float horizontal;
+    private float vertical;
+    private float speed = 2f;
+    private float jumpingPower = 16f;
+    private bool isFacingRight = true;
 
-    // Movement
+    private bool canDash = true;
+    private bool isDashing;
+    private float dashingPower = 10f;
+    private float dashingTime = 0.2f;
+    private float dashingCooldown = 3f;
+
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private HorizontalLayoutGroup heartsHUD;
-    float moveHorizontal;
-    float moveVertical;
-
-    public float moveSpeed;
-    public float dashCooldown;
-
     // UI
     [SerializeField] private GameObject heartIcon;
 
-    void Start()
+    private void Update()
     {
+        if (isDashing)
+        {
+            return;
+        }
 
-    }
+        horizontal = Input.GetAxisRaw("Horizontal");
+        vertical = Input.GetAxisRaw("Vertical");
 
-    void Update()
-    {
+        if (Input.GetKeyDown(KeyCode.Mouse1) && canDash)
+        {
+            StartCoroutine(Dash());
+        }
 
-        // Movement
-        moveHorizontal = Input.GetAxisRaw("Horizontal");
-        moveVertical = Input.GetAxisRaw("Vertical");
-        rb.velocity = new Vector2(moveHorizontal * moveSpeed, moveVertical * moveSpeed);
-        dashCooldown -= Time.deltaTime;
         
         if (Input.GetKeyDown(KeyCode.H))
         {
@@ -45,6 +50,31 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        if (isDashing)
+        {
+            return;
+        }
+
+        
+        rb.velocity = new Vector2(horizontal * speed, vertical * speed);
+        
+    }
+    private IEnumerator Dash()
+    {
+        canDash = false;
+        isDashing = true;
+        float originalGravity = rb.gravityScale;
+        rb.gravityScale = 0f;
+        rb.velocity = new Vector2(horizontal * dashingPower, vertical * dashingPower);
+        yield return new WaitForSeconds(dashingTime);
+        rb.gravityScale = originalGravity;
+        isDashing = false;
+        rb.velocity = new Vector2(0, 0);
+        yield return new WaitForSeconds(dashingCooldown);
+        canDash = true;
+    }
     public void HealPotion()
     {
         Hearts += 0.5f;
@@ -66,7 +96,7 @@ public class Player : MonoBehaviour
 
         Instantiate(heartIcon, heartsHUD.gameObject.transform);
     }
-
+    
     public void Death()
     {
         Debug.Log("YOU DIED");
