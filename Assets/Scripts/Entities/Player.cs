@@ -14,7 +14,6 @@ public class Player : MonoBehaviour
     private float horizontal;
     private float vertical;
     private float speed = 2f;
-    private float jumpingPower = 16f;
     private bool isFacingRight = true;
 
     private bool canDash = true;
