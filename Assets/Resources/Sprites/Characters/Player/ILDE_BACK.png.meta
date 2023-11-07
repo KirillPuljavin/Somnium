@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 32c2d3a8f75646d4cb88e6288cd12ecc
+guid: ad35112d01a26fa47bf7bc94941525b6
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -39,7 +39,7 @@ TextureImporter:
     mipBias: 0
     wrapU: 1
     wrapV: 1
-    wrapW: 1
+    wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -123,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SWORD_WALK_FRONT_0
+      name: ILDE_BACK_0
       rect:
         serializedVersion: 2
         x: 0
@@ -137,14 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 45ce07e4f09d81a4b913eda45db84408
-      internalID: -1726839535
+      spriteID: e25bb6b2663aafb4984581b3b1b355f7
+      internalID: -2095898562
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SWORD_WALK_FRONT_1
+      name: ILDE_BACK_1
       rect:
         serializedVersion: 2
         x: 48
@@ -158,14 +158,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 77375a4bf841b93498bcb89fb5885c4a
-      internalID: -1320750270
+      spriteID: bbfb3c95dc597d94aaf8a84e78b1ec32
+      internalID: -609035993
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SWORD_WALK_FRONT_2
+      name: ILDE_BACK_2
       rect:
         serializedVersion: 2
         x: 96
@@ -179,14 +179,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6ff34a833b7205348a87bddb8fff7d21
-      internalID: 491014965
+      spriteID: f595db2364d7cd1478c09f9ed7250abe
+      internalID: -1418012317
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SWORD_WALK_FRONT_3
+      name: ILDE_BACK_3
       rect:
         serializedVersion: 2
         x: 144
@@ -200,14 +200,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eea253c71b8bc14499ced2ff26045b62
-      internalID: 1735037080
+      spriteID: e44dd50502cc3db4f83c52f2b660fb1c
+      internalID: -1915235338
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SWORD_WALK_FRONT_4
+      name: ILDE_BACK_4
       rect:
         serializedVersion: 2
         x: 192
@@ -221,14 +221,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9bf7bd271219eb648aca7d9936698306
-      internalID: -2084920369
+      spriteID: 871a19aa502ea5e4faf4e2a4c197e272
+      internalID: -418101694
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SWORD_WALK_FRONT_5
+      name: ILDE_BACK_5
       rect:
         serializedVersion: 2
         x: 240
@@ -242,14 +242,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e1e75ce0a9d60eb48be38e3aac5147ca
-      internalID: -1381643506
+      spriteID: cccec7b6149edc24082123dfaace4ff0
+      internalID: 784938511
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SWORD_WALK_FRONT_6
+      name: ILDE_BACK_6
       rect:
         serializedVersion: 2
         x: 288
@@ -263,14 +263,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 491c072e47752d940bb62a73e9fc8021
-      internalID: -1337269474
+      spriteID: 2a7b8d19a2b3ce246841c0b0e95b8e43
+      internalID: 775001024
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SWORD_WALK_FRONT_7
+      name: ILDE_BACK_7
       rect:
         serializedVersion: 2
         x: 336
@@ -284,14 +284,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ebb007ad13a38ff41838b01e348cb893
-      internalID: -938469919
+      spriteID: 3a1b014e811029d41a7fc01e37b89bc4
+      internalID: -577899079
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SWORD_WALK_FRONT_8
+      name: ILDE_BACK_8
       rect:
         serializedVersion: 2
         x: 384
@@ -305,14 +305,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 46a4f0f6fbb8200499210329007384a1
-      internalID: 1190476862
+      spriteID: d6c3fd46af161bd40962ffbcd3c78a2f
+      internalID: 1360575526
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SWORD_WALK_FRONT_9
+      name: ILDE_BACK_9
       rect:
         serializedVersion: 2
         x: 432
@@ -326,8 +326,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f500e27d2d0e9f744a780b334e33a195
-      internalID: -717189647
+      spriteID: 5cd64a411dfa8e14292bb68e3ad0707d
+      internalID: -201363143
       vertices: []
       indices: 
       edges: []
@@ -335,7 +335,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 00fab8b3b081f774d92899fe6afe8da0
     internalID: 0
     vertices: []
     indices: 
@@ -343,16 +343,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      SWORD_WALK_FRONT_0: -1726839535
-      SWORD_WALK_FRONT_1: -1320750270
-      SWORD_WALK_FRONT_2: 491014965
-      SWORD_WALK_FRONT_3: 1735037080
-      SWORD_WALK_FRONT_4: -2084920369
-      SWORD_WALK_FRONT_5: -1381643506
-      SWORD_WALK_FRONT_6: -1337269474
-      SWORD_WALK_FRONT_7: -938469919
-      SWORD_WALK_FRONT_8: 1190476862
-      SWORD_WALK_FRONT_9: -717189647
+      ILDE_BACK_0: -2095898562
+      ILDE_BACK_1: -609035993
+      ILDE_BACK_2: -1418012317
+      ILDE_BACK_3: -1915235338
+      ILDE_BACK_4: -418101694
+      ILDE_BACK_5: 784938511
+      ILDE_BACK_6: 775001024
+      ILDE_BACK_7: -577899079
+      ILDE_BACK_8: 1360575526
+      ILDE_BACK_9: -201363143
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

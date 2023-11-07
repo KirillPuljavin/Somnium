@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 32c2d3a8f75646d4cb88e6288cd12ecc
+guid: 6ef3cd79000b72a4ab9ed808a72cf096
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SWORD_WALK_FRONT_0
+      name: WALK_BACK_0
       rect:
         serializedVersion: 2
         x: 0
@@ -137,14 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 45ce07e4f09d81a4b913eda45db84408
-      internalID: -1726839535
+      spriteID: 0715a08a0a39bd74993ad28d8b7ec97b
+      internalID: 396783757
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SWORD_WALK_FRONT_1
+      name: WALK_BACK_1
       rect:
         serializedVersion: 2
         x: 48
@@ -158,14 +158,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 77375a4bf841b93498bcb89fb5885c4a
-      internalID: -1320750270
+      spriteID: a517a6cb6aaae094f99f189eceeca321
+      internalID: -49464173
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SWORD_WALK_FRONT_2
+      name: WALK_BACK_2
       rect:
         serializedVersion: 2
         x: 96
@@ -179,14 +179,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6ff34a833b7205348a87bddb8fff7d21
-      internalID: 491014965
+      spriteID: 17590fd30afac4747981a2e4722ef072
+      internalID: -1479883471
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SWORD_WALK_FRONT_3
+      name: WALK_BACK_3
       rect:
         serializedVersion: 2
         x: 144
@@ -200,14 +200,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eea253c71b8bc14499ced2ff26045b62
-      internalID: 1735037080
+      spriteID: 03c013c61fb4bc84c840475a54f4e4b7
+      internalID: -1025763768
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SWORD_WALK_FRONT_4
+      name: WALK_BACK_4
       rect:
         serializedVersion: 2
         x: 192
@@ -221,14 +221,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9bf7bd271219eb648aca7d9936698306
-      internalID: -2084920369
+      spriteID: c59d27b14b01c834e98cb4d5acd0c2b8
+      internalID: -617138012
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SWORD_WALK_FRONT_5
+      name: WALK_BACK_5
       rect:
         serializedVersion: 2
         x: 240
@@ -242,14 +242,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e1e75ce0a9d60eb48be38e3aac5147ca
-      internalID: -1381643506
+      spriteID: aed428d33b809564282195c53cb7f0e4
+      internalID: -876044848
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SWORD_WALK_FRONT_6
+      name: WALK_BACK_6
       rect:
         serializedVersion: 2
         x: 288
@@ -263,14 +263,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 491c072e47752d940bb62a73e9fc8021
-      internalID: -1337269474
+      spriteID: efd1018737222714ab1f502e27e9b543
+      internalID: 1058347357
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SWORD_WALK_FRONT_7
+      name: WALK_BACK_7
       rect:
         serializedVersion: 2
         x: 336
@@ -284,14 +284,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ebb007ad13a38ff41838b01e348cb893
-      internalID: -938469919
+      spriteID: d9d82c326dd7fcb49b63510cae8ea593
+      internalID: 1414954232
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SWORD_WALK_FRONT_8
+      name: WALK_BACK_8
       rect:
         serializedVersion: 2
         x: 384
@@ -305,14 +305,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 46a4f0f6fbb8200499210329007384a1
-      internalID: 1190476862
+      spriteID: 91be18c53f17e174eb6bf42edbd23fd4
+      internalID: 2076684477
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SWORD_WALK_FRONT_9
+      name: WALK_BACK_9
       rect:
         serializedVersion: 2
         x: 432
@@ -326,8 +326,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f500e27d2d0e9f744a780b334e33a195
-      internalID: -717189647
+      spriteID: 16546a044cb3a7d4ea08fd03d2800259
+      internalID: -1129286702
       vertices: []
       indices: 
       edges: []
@@ -335,7 +335,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 67981958130299f4f9d43565ede60fb1
     internalID: 0
     vertices: []
     indices: 
@@ -343,16 +343,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      SWORD_WALK_FRONT_0: -1726839535
-      SWORD_WALK_FRONT_1: -1320750270
-      SWORD_WALK_FRONT_2: 491014965
-      SWORD_WALK_FRONT_3: 1735037080
-      SWORD_WALK_FRONT_4: -2084920369
-      SWORD_WALK_FRONT_5: -1381643506
-      SWORD_WALK_FRONT_6: -1337269474
-      SWORD_WALK_FRONT_7: -938469919
-      SWORD_WALK_FRONT_8: 1190476862
-      SWORD_WALK_FRONT_9: -717189647
+      WALK_BACK_0: 396783757
+      WALK_BACK_1: -49464173
+      WALK_BACK_2: -1479883471
+      WALK_BACK_3: -1025763768
+      WALK_BACK_4: -617138012
+      WALK_BACK_5: -876044848
+      WALK_BACK_6: 1058347357
+      WALK_BACK_7: 1414954232
+      WALK_BACK_8: 2076684477
+      WALK_BACK_9: -1129286702
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

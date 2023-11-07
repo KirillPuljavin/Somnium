@@ -14,13 +14,14 @@ public class Player : MonoBehaviour
     private float horizontal;
     private float vertical;
     private float speed = 2f;
-    private bool isFacingRight = true;
 
     private bool canDash = true;
     private bool isDashing;
     private float dashingPower = 10f;
     private float dashingTime = 0.2f;
     private float dashingCooldown = 3f;
+    public Animator animator;
+    Vector2 movement;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private HorizontalLayoutGroup heartsHUD;
@@ -34,8 +35,8 @@ public class Player : MonoBehaviour
             return;
         }
 
-        horizontal = Input.GetAxisRaw("Horizontal");
-        vertical = Input.GetAxisRaw("Vertical");
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.y = Input.GetAxisRaw("Vertical");
 
         if (Input.GetKeyDown(KeyCode.Mouse1) && canDash)
         {
@@ -47,6 +48,12 @@ public class Player : MonoBehaviour
         {
             HealPotion();
         }
+        animator.SetFloat("Horizontal", movement.x);
+        animator.SetFloat("Vertical", movement.y);
+        animator.SetFloat("Speed", movement.sqrMagnitude);
+        Debug.Log(movement.x);
+        Debug.Log(movement.y);
+        Debug.Log(movement.sqrMagnitude);
     }
 
     private void FixedUpdate()
@@ -57,7 +64,7 @@ public class Player : MonoBehaviour
         }
 
         
-        rb.velocity = new Vector2(horizontal * speed, vertical * speed);
+        rb.velocity = new Vector2(movement.x * speed, movement.y * speed);
         
     }
     private IEnumerator Dash()
@@ -66,7 +73,7 @@ public class Player : MonoBehaviour
         isDashing = true;
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
-        rb.velocity = new Vector2(horizontal * dashingPower, vertical * dashingPower);
+        rb.velocity = new Vector2(movement.x * dashingPower, movement.y * dashingPower);
         yield return new WaitForSeconds(dashingTime);
         rb.gravityScale = originalGravity;
         isDashing = false;

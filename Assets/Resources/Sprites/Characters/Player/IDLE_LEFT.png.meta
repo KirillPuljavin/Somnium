@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 32c2d3a8f75646d4cb88e6288cd12ecc
+guid: 1aadfdc208d6d624ca5d188e8d94244e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -39,7 +39,7 @@ TextureImporter:
     mipBias: 0
     wrapU: 1
     wrapV: 1
-    wrapW: 1
+    wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -123,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SWORD_WALK_FRONT_0
+      name: IDLE_LEFT_0
       rect:
         serializedVersion: 2
         x: 0
@@ -137,14 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 45ce07e4f09d81a4b913eda45db84408
-      internalID: -1726839535
+      spriteID: 20ea379b513adbe4b8aa694605769f7b
+      internalID: 786193016
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SWORD_WALK_FRONT_1
+      name: IDLE_LEFT_1
       rect:
         serializedVersion: 2
         x: 48
@@ -158,14 +158,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 77375a4bf841b93498bcb89fb5885c4a
-      internalID: -1320750270
+      spriteID: 0753b747e879c2245b7ea09affe5956c
+      internalID: -404163832
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SWORD_WALK_FRONT_2
+      name: IDLE_LEFT_2
       rect:
         serializedVersion: 2
         x: 96
@@ -179,14 +179,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6ff34a833b7205348a87bddb8fff7d21
-      internalID: 491014965
+      spriteID: c3e819052f959714c94604ecb702abed
+      internalID: 993525833
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SWORD_WALK_FRONT_3
+      name: IDLE_LEFT_3
       rect:
         serializedVersion: 2
         x: 144
@@ -200,14 +200,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eea253c71b8bc14499ced2ff26045b62
-      internalID: 1735037080
+      spriteID: d691b9b1397c2c848a17af387d3f3c2c
+      internalID: -1803717403
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SWORD_WALK_FRONT_4
+      name: IDLE_LEFT_4
       rect:
         serializedVersion: 2
         x: 192
@@ -221,14 +221,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9bf7bd271219eb648aca7d9936698306
-      internalID: -2084920369
+      spriteID: e62b98621f0e2df4b8de5f408a9e759e
+      internalID: 571337176
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SWORD_WALK_FRONT_5
+      name: IDLE_LEFT_5
       rect:
         serializedVersion: 2
         x: 240
@@ -242,14 +242,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e1e75ce0a9d60eb48be38e3aac5147ca
-      internalID: -1381643506
+      spriteID: 7b4d0da88c7f0a1449f379ad4cbf4609
+      internalID: 1968676307
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SWORD_WALK_FRONT_6
+      name: IDLE_LEFT_6
       rect:
         serializedVersion: 2
         x: 288
@@ -263,14 +263,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 491c072e47752d940bb62a73e9fc8021
-      internalID: -1337269474
+      spriteID: f6cf8d57be3ad9b4e8780a28b5a97446
+      internalID: -699289291
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SWORD_WALK_FRONT_7
+      name: IDLE_LEFT_7
       rect:
         serializedVersion: 2
         x: 336
@@ -284,14 +284,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ebb007ad13a38ff41838b01e348cb893
-      internalID: -938469919
+      spriteID: 83dc97b5cf164ca4d922c3bd39367e85
+      internalID: -1070782554
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SWORD_WALK_FRONT_8
+      name: IDLE_LEFT_8
       rect:
         serializedVersion: 2
         x: 384
@@ -305,14 +305,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 46a4f0f6fbb8200499210329007384a1
-      internalID: 1190476862
+      spriteID: 4599f1926cb9b6e43b929a837635d91d
+      internalID: 1516550386
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SWORD_WALK_FRONT_9
+      name: IDLE_LEFT_9
       rect:
         serializedVersion: 2
         x: 432
@@ -326,8 +326,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f500e27d2d0e9f744a780b334e33a195
-      internalID: -717189647
+      spriteID: fc4155a951e83384286a846512eab616
+      internalID: -1386712371
       vertices: []
       indices: 
       edges: []
@@ -335,7 +335,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 9a18d6dea4ec1f44696b751851a02c88
     internalID: 0
     vertices: []
     indices: 
@@ -343,16 +343,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      SWORD_WALK_FRONT_0: -1726839535
-      SWORD_WALK_FRONT_1: -1320750270
-      SWORD_WALK_FRONT_2: 491014965
-      SWORD_WALK_FRONT_3: 1735037080
-      SWORD_WALK_FRONT_4: -2084920369
-      SWORD_WALK_FRONT_5: -1381643506
-      SWORD_WALK_FRONT_6: -1337269474
-      SWORD_WALK_FRONT_7: -938469919
-      SWORD_WALK_FRONT_8: 1190476862
-      SWORD_WALK_FRONT_9: -717189647
+      IDLE_LEFT_0: 786193016
+      IDLE_LEFT_1: -404163832
+      IDLE_LEFT_2: 993525833
+      IDLE_LEFT_3: -1803717403
+      IDLE_LEFT_4: 571337176
+      IDLE_LEFT_5: 1968676307
+      IDLE_LEFT_6: -699289291
+      IDLE_LEFT_7: -1070782554
+      IDLE_LEFT_8: 1516550386
+      IDLE_LEFT_9: -1386712371
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
