@@ -19,18 +19,25 @@ public class Player : MonoBehaviour
     private float speed = 2f;
 
     private bool canDash = true;
-    private bool isDashing;
+    public bool isDashing = false;
     private float dashingPower = 10f;
     private float dashingTime = 0.2f;
     private float dashingCooldown = 3f;
     public Animator animator;
     Vector2 movement;
+    public float damage = 1;
+    public GameObject EnemyObj;
+    EnemyBlob enemyBlob;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private HorizontalLayoutGroup heartsHUD;
     // UI
     [SerializeField] private GameObject heartIcon;
 
+    void Start()
+    {
+        enemyBlob = EnemyObj.GetComponent<EnemyBlob>();
+    }
     private void Update()
     {
         if (isDashing)
@@ -46,7 +53,7 @@ public class Player : MonoBehaviour
             StartCoroutine(Dash());
         }
 
-        
+
         if (Input.GetKeyDown(KeyCode.H))
         {
             HealPotion();
@@ -63,9 +70,9 @@ public class Player : MonoBehaviour
             return;
         }
 
-        
+
         rb.velocity = new Vector2(movement.x * speed, movement.y * speed);
-        
+
     }
     private IEnumerator Dash()
     {
@@ -93,16 +100,17 @@ public class Player : MonoBehaviour
 
         if (Hearts <= 0) Death();
     }
+    
     private void UpdateHearts()
     {
         // foreach (Transform childObj in heartsHUD.transform)
         // {
         //     Destroy(childObj.gameObject);
         // }
-
         // Instantiate(heartIcon, heartsHUD.gameObject.transform);
     }
     
+
     public void Death()
     {
         Debug.Log("YOU DIED");

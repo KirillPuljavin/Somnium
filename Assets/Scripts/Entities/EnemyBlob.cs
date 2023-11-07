@@ -9,6 +9,7 @@ public class EnemyBlob : MonoBehaviour
     Player player;
     float cooldown = 0;
     public float speed;
+    public float enemyHP = 3;
 
     void Start()
     {
@@ -22,6 +23,11 @@ public class EnemyBlob : MonoBehaviour
 
         // Cooldown
         if (cooldown < 1) cooldown += Time.deltaTime;
+
+        if (enemyHP <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
 
@@ -31,6 +37,10 @@ public class EnemyBlob : MonoBehaviour
         {
             speed = 0.005f;
         }
+        if (collision.gameObject.tag == "dashHitbox" && player.isDashing)
+        {
+            TakeDamage();
+        }
     }
     private void OnTriggerStay2D(Collider2D collider)
     {
@@ -38,8 +48,11 @@ public class EnemyBlob : MonoBehaviour
 
         if (collider.gameObject.tag == "Player" && cooldown >= 1)
         {
-            player.TakeDamage(0.5f);
-            cooldown = 0;
+            if (!player.isDashing)
+            {
+                player.TakeDamage(0.5f);
+                cooldown = 0;
+            }
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -49,4 +62,9 @@ public class EnemyBlob : MonoBehaviour
             speed = 1.3f;
         }
     }
+    public void TakeDamage()
+    {
+        enemyHP -= player.damage;;
+    }
+    
 }
