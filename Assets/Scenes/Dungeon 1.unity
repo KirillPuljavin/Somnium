@@ -557,7 +557,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   passagePrefab: {fileID: 2277336942516811396, guid: d79bf7e34eb05bf4989482abd8c7e9bf, type: 3}
   roomPrefab: {fileID: 1889435654105591893, guid: cc9f03fff7f42124aab381e33a54faf1, type: 3}
-  doorPrefab: {fileID: 0}
+  doorPrefab: {fileID: 1889435654105591893, guid: c6c0313ad1cccd942adaff06d6cc43dd, type: 3}
 --- !u!114 &483126003
 MonoBehaviour:
   m_ObjectHideFlags: 0
