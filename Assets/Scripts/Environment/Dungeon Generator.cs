@@ -28,11 +28,28 @@ public class DungeonGenerator : MonoBehaviour
 
         // Choose passage preset
         currentPreset = new Dungeon1();
-        GenerateDungeonLayout();
+        VisualizeDungeon();
 
         // Choose rooms
     }
 
+    void VisualizeDungeon()
+    {
+        foreach (var connection in currentPreset.connections)
+        {
+            int roomIndex1 = connection.roomIndex1;
+            int roomIndex2 = connection.roomIndex2;
+            Vector2 position1 = CalculateRoomPosition(roomIndex1);
+            Vector2 position2 = CalculateRoomPosition(roomIndex2);
+            Vector2 midpoint = (position1 + position2) / 2f;
+
+            float angle = Mathf.Atan2(position2.y - position1.y, position2.x - position1.x) * Mathf.Rad2Deg;
+            float distance = Vector2.Distance(position1, position2);
+
+            GameObject passage = Instantiate(passagePrefab, midpoint, Quaternion.Euler(0f, 0f, angle));
+            passage.transform.localScale = new Vector3(distance, 1f, 1f);
+        }
+    }
     Vector2 CalculateRoomPosition(int roomIndex)
     {
         int rowIndex = roomIndex / Rooms.GetLength(1);
@@ -40,31 +57,6 @@ public class DungeonGenerator : MonoBehaviour
 
         Vector3 position = Rooms[rowIndex, columnIndex].transform.position;
         return new Vector2(position.x, position.y);
-    }
-    void GenerateDungeonLayout()
-    {
-        foreach (var connection in currentPreset.connections)
-        {
-            int roomIndex1 = connection.roomIndex1;
-            int roomIndex2 = connection.roomIndex2;
-
-            Vector2 position1 = CalculateRoomPosition(roomIndex1);
-            Vector2 position2 = CalculateRoomPosition(roomIndex2);
-
-            // Calculate the midpoint between two rooms
-            Vector2 midpoint = (position1 + position2) / 2f;
-
-            // Calculate the rotation angle between two rooms
-            float angle = Mathf.Atan2(position2.y - position1.y, position2.x - position1.x) * Mathf.Rad2Deg;
-
-            // Calculate the distance between two rooms
-            float distance = Vector2.Distance(position1, position2);
-
-            // Instantiate the passage prefab at the midpoint with rotation
-            GameObject passage = Instantiate(passagePrefab, midpoint, Quaternion.Euler(0f, 0f, angle));
-
-            passage.transform.localScale = new Vector3(distance, 1f, 1f);
-        }
     }
 }
 
@@ -84,6 +76,10 @@ public class Connection
 public abstract class DungeonPreset
 {
     public List<Connection> connections = new List<Connection>();
+    public int positionBossRoom = 27;
+    public int positionBossTransitionRoom;
+    public int positionUpgrade1;
+    public int positionUpgrade2;
 }
 
 [System.Serializable]
@@ -91,6 +87,10 @@ public class Dungeon1 : DungeonPreset
 {
     public Dungeon1()
     {
+        positionBossTransitionRoom = 26;
+        positionUpgrade1 = 13;
+        positionUpgrade2 = 19;
+
         connections.Add(new Connection(2, 3));
         connections.Add(new Connection(2, 7));
         connections.Add(new Connection(7, 6));
@@ -116,7 +116,23 @@ public class Dungeon2 : DungeonPreset
 {
     public Dungeon2()
     {
-        connections.Add(new Connection(1, 6));
-        connections.Add(new Connection(3, 8));
+        positionBossTransitionRoom = 28;
+        positionUpgrade1 = 0;
+        positionUpgrade2 = 0;
+
+        connections.Add(new Connection(0, 0));
+        connections.Add(new Connection(0, 0));
+        connections.Add(new Connection(0, 0));
+        connections.Add(new Connection(0, 0));
+        connections.Add(new Connection(0, 0));
+        connections.Add(new Connection(0, 0));
+        connections.Add(new Connection(0, 0));
+        connections.Add(new Connection(0, 0));
+        connections.Add(new Connection(0, 0));
+        connections.Add(new Connection(0, 0));
+        connections.Add(new Connection(0, 0));
+        connections.Add(new Connection(0, 0));
+        connections.Add(new Connection(0, 0));
+        connections.Add(new Connection(0, 0));
     }
 }
