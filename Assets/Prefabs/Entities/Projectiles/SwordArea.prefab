@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5718685159390540621}
   - component: {fileID: 2441621122471616658}
   - component: {fileID: 2934494696569715232}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SwordArea
   m_TagString: attackHitbox
   m_Icon: {fileID: 0}

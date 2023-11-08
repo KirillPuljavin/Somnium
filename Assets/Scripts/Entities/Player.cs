@@ -26,8 +26,7 @@ public class Player : MonoBehaviour
     public Animator animator;
     Vector2 movement;
     public float damage = 1;
-    public GameObject EnemyObj;
-    EnemyBlob enemyBlob;
+
     private string Facing = "down";
     public GameObject HitArea;
     [SerializeField] private Rigidbody2D rb;
@@ -35,11 +34,12 @@ public class Player : MonoBehaviour
     // UI
     [SerializeField] private GameObject heartIcon;
     float attackCooldown = 0;
+    string dashDirAnim = "Dash_Down";
 
 
     void Start()
     {
-        enemyBlob = EnemyObj.GetComponent<EnemyBlob>();
+
     }
     private void Update()
     {
@@ -71,6 +71,7 @@ public class Player : MonoBehaviour
         if (movement.x == 1 && movement.y == 0)
         {
             Facing = "right";
+            dashDirAnim = "Dash_Right";
         }
         if (movement.x == 1 && movement.y == 1)
         {
@@ -91,14 +92,17 @@ public class Player : MonoBehaviour
         if (movement.x == -1 && movement.y == 0)
         {
             Facing = "left";
+            dashDirAnim = "Dash_Left";
         }
         if (movement.x == 0 && movement.y == 1)
         {
             Facing = "up";
+            dashDirAnim = "Dash_Up";
         }
         if (movement.x == 0 && movement.y == -1)
         {
             Facing = "down";
+            dashDirAnim = "Dash_Down";
         }
         if (Input.GetKeyDown(KeyCode.Mouse0) && attackCooldown <= 0)
         {
@@ -118,6 +122,7 @@ public class Player : MonoBehaviour
             if (randNumb >= 2) animator.Play("Attack_Right2");
 
 
+
         }
         else if (Facing == "left")
         {
@@ -127,6 +132,7 @@ public class Player : MonoBehaviour
             randNumb = Random.Range(0, 4);
             if (randNumb < 2) animator.Play("Attack_Left1");
             if (randNumb >= 2) animator.Play("Attack_Left2");
+
         }
         else if (Facing == "up")
         {
@@ -134,12 +140,14 @@ public class Player : MonoBehaviour
             Instantiate(HitArea, newPosition, Quaternion.identity);
             animator.Play("Attack_Up");
 
+
         }
         else if (Facing == "down")
         {
             Vector3 newPosition = gameObject.transform.position + new Vector3(0f, -0.5f, 0f);
             Instantiate(HitArea, newPosition, Quaternion.identity);
             animator.Play("Attack_Down");
+
         }
         else if (Facing == "up-right")
         {
@@ -171,10 +179,12 @@ public class Player : MonoBehaviour
         if (movement.magnitude > 1)
         {
             rb.velocity = new Vector2(movement.x * (dashingPower - 3), movement.y * (dashingPower - 3));
+            animator.Play(dashDirAnim);
         }
         else
         {
             rb.velocity = new Vector2(movement.x * dashingPower, movement.y * dashingPower);
+            animator.Play(dashDirAnim);
         }
         yield return new WaitForSeconds(dashingTime);
         isDashing = false;

@@ -5,13 +5,16 @@ using UnityEngine;
 
 public class SwordAttack : MonoBehaviour
 {
+
+    public GameObject EnemyObj;
+    EnemyBlob enemy;
     public float cooldown = 0.2f;
-    // Start is called before the first frame update
+
     void Start()
     {
+        EnemyObj = GameObject.FindWithTag("Blob");
+        enemy = EnemyObj.GetComponent<EnemyBlob>();
     }
-
-    // Update is called once per frame
     void Update()
     {
         if (cooldown <= 0)
@@ -19,5 +22,13 @@ public class SwordAttack : MonoBehaviour
             Destroy(gameObject);
         }
         cooldown -= Time.deltaTime;
+    }
+    private void OnTriggerStay2D(Collider2D collider)
+    {
+        if (collider.gameObject.tag == "Blob")
+        {
+            enemy.TakeDamage();
+            Debug.Log(collider);
+        }
     }
 }

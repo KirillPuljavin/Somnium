@@ -39,16 +39,13 @@ public class EnemyBlob : MonoBehaviour
         {
             speed = 0.005f;
         }
-        if (collision.gameObject.tag == "attackHitbox" && damageCooldown <= 0)
-        {
-            TakeDamage();
-            damageCooldown = 0.5f;
-        }
-        
     }
     private void OnTriggerStay2D(Collider2D collider)
     {
-        Debug.Log(attackCooldown);
+        if (collider.gameObject.tag == "attackHitbox")
+        {
+            TakeDamage();
+        }
 
         if (collider.gameObject.tag == "Player" && attackCooldown >= 1)
         {
@@ -58,24 +55,24 @@ public class EnemyBlob : MonoBehaviour
                 attackCooldown = 0;
             }
         }
-        
         if (collider.gameObject.tag == "dashHitbox" && damageCooldown <= 0 && player.isDashing)
         {
             TakeDamage();
             damageCooldown = 0.5f;
         }
     }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
             speed = 1.3f;
         }
-        
+
     }
     public void TakeDamage()
     {
-        enemyHP -= player.damage;;
+        enemyHP -= player.damage;
     }
-    
+
 }
