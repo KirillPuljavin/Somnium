@@ -37,7 +37,7 @@ public class EnemyBlob : MonoBehaviour
         {
             speed = 0.005f;
         }
-        if (collision.gameObject.tag == "dashHitbox" && player.isDashing)
+        if (collision.gameObject.tag == "attackHitbox" && player.isDashing)
         {
             TakeDamage();
         }

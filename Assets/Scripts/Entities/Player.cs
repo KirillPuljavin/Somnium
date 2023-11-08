@@ -28,6 +28,8 @@ public class Player : MonoBehaviour
     public float damage = 1;
     public GameObject EnemyObj;
     EnemyBlob enemyBlob;
+    private string Facing = "down";
+    public GameObject HitArea;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private HorizontalLayoutGroup heartsHUD;
@@ -61,28 +63,96 @@ public class Player : MonoBehaviour
         animator.SetFloat("Horizontal", movement.x);
         animator.SetFloat("Vertical", movement.y);
         animator.SetFloat("Speed", movement.sqrMagnitude);
+        Debug.Log(movement.x);
+        Debug.Log(movement.y);
+        if (movement.x == 1 && movement.y == 0)
+        {
+            Facing = "right";
+        }
+        if (movement.x == 1 && movement.y == 1)
+        {
+            Facing = "up-right";
+        }
+        if (movement.x == 1 && movement.y == -1)
+        {
+            Facing = "down-right";
+        }
+        if (movement.x == -1 && movement.y == 1)
+        {
+            Facing = "up-left";
+        }
+        if (movement.x == -1 && movement.y == -1)
+        {
+            Facing = "down-left";
+        }
+        if (movement.x == -1 && movement.y == 0)
+        {
+            Facing = "left";
+        }
+        if (movement.x == 0 && movement.y == 1)
+        {
+            Facing = "up";
+        }
+        if (movement.x == 0 && movement.y == -1)
+        {
+            Facing = "down";
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Hit();
+        }
     }
-
+    private void Hit()
+    {
+        if (Facing == "right")
+        {
+            Vector3 newPosition = gameObject.transform.position + new Vector3(2f, 0f, 0f);
+            Instantiate(HitArea, newPosition, Quaternion.identity);
+        }
+        if (Facing == "left")
+        {
+            Vector3 newPosition = gameObject.transform.position + new Vector3(-2f, 0f, 0f);
+            Instantiate(HitArea, newPosition, Quaternion.identity);
+        }
+        if (Facing == "up")
+        {
+            Vector3 newPosition = gameObject.transform.position + new Vector3(0f, 2f, 0f);
+            Instantiate(HitArea, newPosition, Quaternion.identity);
+        }
+        if (Facing == "down")
+        {
+            Vector3 newPosition = gameObject.transform.position + new Vector3(0f, -2f, 0f);
+            Instantiate(HitArea, newPosition, Quaternion.identity);
+        }
+    }
     private void FixedUpdate()
     {
         if (isDashing)
         {
             return;
         }
-
-
-        rb.velocity = new Vector2(movement.x * speed, movement.y * speed);
-
+        if (movement.magnitude > 1)
+        {
+            rb.velocity = new Vector2(movement.x * (speed - 0.5f), movement.y * (speed - 0.5f));
+        }
+        else
+        {
+            rb.velocity = new Vector2(movement.x * speed, movement.y * speed);
+        }
     }
     private IEnumerator Dash()
     {
         canDash = false;
         isDashing = true;
-        float originalGravity = rb.gravityScale;
-        rb.gravityScale = 0f;
-        rb.velocity = new Vector2(movement.x * dashingPower, movement.y * dashingPower);
+        if (movement.magnitude > 1)
+        {
+            rb.velocity = new Vector2(movement.x * (dashingPower - 3), movement.y * (dashingPower - 3));
+        }
+        else
+        {
+            rb.velocity = new Vector2(movement.x * dashingPower, movement.y * dashingPower);
+        }
         yield return new WaitForSeconds(dashingTime);
-        rb.gravityScale = originalGravity;
         isDashing = false;
         rb.velocity = new Vector2(0, 0);
         yield return new WaitForSeconds(dashingCooldown);
@@ -100,7 +170,7 @@ public class Player : MonoBehaviour
 
         if (Hearts <= 0) Death();
     }
-    
+
     private void UpdateHearts()
     {
         // foreach (Transform childObj in heartsHUD.transform)
@@ -109,7 +179,7 @@ public class Player : MonoBehaviour
         // }
         // Instantiate(heartIcon, heartsHUD.gameObject.transform);
     }
-    
+
 
     public void Death()
     {
