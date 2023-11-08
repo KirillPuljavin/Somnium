@@ -9,9 +9,8 @@ public class DungeonGenerator : MonoBehaviour
     private GameObject[,] Rooms;
     private DungeonPreset currentPreset;
     public GameObject passagePrefab;
-
-    // Variables
-
+    public GameObject roomPrefab;
+    public GameObject doorPrefab;
 
     void Start()
     {
@@ -26,16 +25,99 @@ public class DungeonGenerator : MonoBehaviour
             }
         }
 
-        // Choose passage preset
         currentPreset = new Dungeon1();
         VisualizeDungeon();
 
-        // Choose rooms
+        // Setup Rooms
+        foreach (var roomIndex in currentPreset.roomsAvailable)
+        {
+            GameObject newRoom = Instantiate(roomPrefab, new Vector3(CalculateRoomPosition(roomIndex).x, CalculateRoomPosition(roomIndex).y, 0f), Quaternion.identity);
+        }
+
+        // Instantiate room doors
+        InstantiateRoomDoors();
+    }
+
+    void InstantiateRoomDoors()
+    {
+        foreach (var connection in currentPreset.passages)
+        {
+            int roomIndex1 = connection.roomIndex1;
+            int roomIndex2 = connection.roomIndex2;
+
+            // Get door positions for roomIndex1
+            DoorPlacement doorPlacement1 = GetDoorPlacement(roomIndex1, roomIndex2);
+            Vector2 doorPosition1 = CalculateDoorPosition(doorPlacement1, roomIndex1);
+
+            // Get door positions for roomIndex2
+            DoorPlacement doorPlacement2 = GetDoorPlacement(roomIndex2, roomIndex1);
+            Vector2 doorPosition2 = CalculateDoorPosition(doorPlacement2, roomIndex2);
+
+            // Instantiate doors
+            Instantiate(doorPrefab, doorPosition1, Quaternion.identity);
+            Instantiate(doorPrefab, doorPosition2, Quaternion.identity);
+        }
+    }
+    DoorPlacement GetDoorPlacement(int roomIndex1, int roomIndex2)
+    {
+        int row1 = roomIndex1 / Rooms.GetLength(1);
+        int col1 = roomIndex1 % Rooms.GetLength(1);
+        int row2 = roomIndex2 / Rooms.GetLength(1);
+        int col2 = roomIndex2 % Rooms.GetLength(1);
+
+        if (row1 == row2) // Horizontal passage
+        {
+            return new DoorPlacement
+            {
+                position = col1 < col2 ? DoorPosition.Right : DoorPosition.Left,
+                roomIndex = col1 < col2 ? roomIndex1 : roomIndex2
+            };
+        }
+        else if (col1 == col2) // Vertical passage
+        {
+            return new DoorPlacement
+            {
+                position = row1 < row2 ? DoorPosition.Top : DoorPosition.Bottom,
+                roomIndex = row1 < row2 ? roomIndex1 : roomIndex2
+            };
+        }
+        // Invalid passage
+        else return new DoorPlacement();
+    }
+
+    Vector2 CalculateDoorPosition(DoorPlacement doorPlacement, int roomIndex)
+    {
+        Vector2 roomPosition = CalculateRoomPosition(roomIndex);
+        switch (doorPlacement.position)
+        {
+            case DoorPosition.Top:
+                return new Vector2(roomPosition.x, roomPosition.y + 1f);
+            case DoorPosition.Bottom:
+                return new Vector2(roomPosition.x, roomPosition.y - 1f);
+            case DoorPosition.Left:
+                return new Vector2(roomPosition.x - 1f, roomPosition.y);
+            case DoorPosition.Right:
+                return new Vector2(roomPosition.x + 1f, roomPosition.y);
+            default:
+                return roomPosition;
+        }
+    }
+    public enum DoorPosition
+    {
+        Top,
+        Bottom,
+        Left,
+        Right
+    }
+    public class DoorPlacement
+    {
+        public DoorPosition position;
+        public int roomIndex;
     }
 
     void VisualizeDungeon()
     {
-        foreach (var connection in currentPreset.connections)
+        foreach (var connection in currentPreset.passages)
         {
             int roomIndex1 = connection.roomIndex1;
             int roomIndex2 = connection.roomIndex2;
@@ -61,12 +143,12 @@ public class DungeonGenerator : MonoBehaviour
 }
 
 [System.Serializable]
-public class Connection
+public class Passage
 {
     public int roomIndex1;
     public int roomIndex2;
 
-    public Connection(int roomIndex1, int roomIndex2)
+    public Passage(int roomIndex1, int roomIndex2)
     {
         this.roomIndex1 = roomIndex1;
         this.roomIndex2 = roomIndex2;
@@ -75,11 +157,13 @@ public class Connection
 [System.Serializable]
 public abstract class DungeonPreset
 {
-    public List<Connection> connections = new List<Connection>();
+    public List<Passage> passages = new List<Passage>();
+    public HashSet<int> roomsAvailable = new HashSet<int>();
     public int positionBossRoom = 27;
     public int positionBossTransitionRoom;
     public int positionUpgrade1;
     public int positionUpgrade2;
+
 }
 
 [System.Serializable]
@@ -91,24 +175,30 @@ public class Dungeon1 : DungeonPreset
         positionUpgrade1 = 13;
         positionUpgrade2 = 19;
 
-        connections.Add(new Connection(2, 3));
-        connections.Add(new Connection(2, 7));
-        connections.Add(new Connection(7, 6));
-        connections.Add(new Connection(6, 5));
-        connections.Add(new Connection(6, 11));
-        connections.Add(new Connection(7, 12));
-        connections.Add(new Connection(11, 12));
-        connections.Add(new Connection(12, 13));
-        connections.Add(new Connection(11, 16));
-        connections.Add(new Connection(16, 17));
-        connections.Add(new Connection(17, 22));
-        connections.Add(new Connection(22, 21));
-        connections.Add(new Connection(21, 20));
-        connections.Add(new Connection(22, 23));
-        connections.Add(new Connection(23, 24));
-        connections.Add(new Connection(24, 19));
-        connections.Add(new Connection(21, 26));
-        connections.Add(new Connection(26, 27));
+        passages.Add(new Passage(2, 3));
+        passages.Add(new Passage(2, 7));
+        passages.Add(new Passage(7, 6));
+        passages.Add(new Passage(6, 5));
+        passages.Add(new Passage(6, 11));
+        passages.Add(new Passage(7, 12));
+        passages.Add(new Passage(11, 12));
+        passages.Add(new Passage(12, 13));
+        passages.Add(new Passage(11, 16));
+        passages.Add(new Passage(16, 17));
+        passages.Add(new Passage(17, 22));
+        passages.Add(new Passage(22, 21));
+        passages.Add(new Passage(21, 20));
+        passages.Add(new Passage(22, 23));
+        passages.Add(new Passage(23, 24));
+        passages.Add(new Passage(24, 19));
+        passages.Add(new Passage(21, 26));
+        passages.Add(new Passage(26, 27));
+
+        foreach (var connection in passages)
+        {
+            roomsAvailable.Add(connection.roomIndex1);
+            roomsAvailable.Add(connection.roomIndex2);
+        }
     }
 }
 [System.Serializable]
@@ -120,19 +210,19 @@ public class Dungeon2 : DungeonPreset
         positionUpgrade1 = 0;
         positionUpgrade2 = 0;
 
-        connections.Add(new Connection(0, 0));
-        connections.Add(new Connection(0, 0));
-        connections.Add(new Connection(0, 0));
-        connections.Add(new Connection(0, 0));
-        connections.Add(new Connection(0, 0));
-        connections.Add(new Connection(0, 0));
-        connections.Add(new Connection(0, 0));
-        connections.Add(new Connection(0, 0));
-        connections.Add(new Connection(0, 0));
-        connections.Add(new Connection(0, 0));
-        connections.Add(new Connection(0, 0));
-        connections.Add(new Connection(0, 0));
-        connections.Add(new Connection(0, 0));
-        connections.Add(new Connection(0, 0));
+        passages.Add(new Passage(0, 0));
+        passages.Add(new Passage(0, 0));
+        passages.Add(new Passage(0, 0));
+        passages.Add(new Passage(0, 0));
+        passages.Add(new Passage(0, 0));
+        passages.Add(new Passage(0, 0));
+        passages.Add(new Passage(0, 0));
+        passages.Add(new Passage(0, 0));
+        passages.Add(new Passage(0, 0));
+        passages.Add(new Passage(0, 0));
+        passages.Add(new Passage(0, 0));
+        passages.Add(new Passage(0, 0));
+        passages.Add(new Passage(0, 0));
+        passages.Add(new Passage(0, 0));
     }
 }
