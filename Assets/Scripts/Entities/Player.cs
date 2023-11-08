@@ -16,12 +16,12 @@ public class Player : MonoBehaviour
     public int WeaponEvo;
     private float horizontal;
     private float vertical;
-    private float speed = 2f;
+    private float speed = 3f;
 
     private bool canDash = true;
     public bool isDashing = false;
     private float dashingPower = 10f;
-    private float dashingTime = 0.2f;
+    private float dashingTime = 0.3f;
     private float dashingCooldown = 3f;
     public Animator animator;
     Vector2 movement;
