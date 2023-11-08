@@ -577,11 +577,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6211383269970791323, guid: 4d0c754b308b705449c4446cc92a913d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 3.253
+      value: -0.934
       objectReference: {fileID: 0}
     - target: {fileID: 6211383269970791323, guid: 4d0c754b308b705449c4446cc92a913d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -1.508
+      value: -2.03
       objectReference: {fileID: 0}
     - target: {fileID: 6211383269970791323, guid: 4d0c754b308b705449c4446cc92a913d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -614,7 +614,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2853064647060092493, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
       propertyPath: m_TagString
-      value: attackHitbox
+      value: dashHitbox
+      objectReference: {fileID: 0}
+    - target: {fileID: 4195860284930794465, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
+      propertyPath: HitArea
+      value: 
+      objectReference: {fileID: 824380474014414362, guid: 8f6ce12db6a19c44a9504fe36c3f25ea, type: 3}
+    - target: {fileID: 4245140248369936858, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
+      propertyPath: m_Size.y
+      value: 0.6935842
+      objectReference: {fileID: 0}
+    - target: {fileID: 4245140248369936858, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.25882375
       objectReference: {fileID: 0}
     - target: {fileID: 5446435883745518241, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
       propertyPath: m_Pivot.x

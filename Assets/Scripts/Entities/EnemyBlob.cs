@@ -7,7 +7,8 @@ public class EnemyBlob : MonoBehaviour
 {
     public GameObject PlayerObj;
     Player player;
-    float cooldown = 0;
+    float attackCooldown = 0;
+    float damageCooldown = 0;
     public float speed;
     public float enemyHP = 3;
 
@@ -19,10 +20,11 @@ public class EnemyBlob : MonoBehaviour
 
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, new Vector2(PlayerObj.transform.position.x, PlayerObj.transform.position.y - 0f), speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, new Vector2(PlayerObj.transform.position.x, PlayerObj.transform.position.y + 0.5f), speed * Time.deltaTime);
 
         // Cooldown
-        if (cooldown < 1) cooldown += Time.deltaTime;
+        if (attackCooldown < 1) attackCooldown += Time.deltaTime;
+        if (damageCooldown > 0) damageCooldown -= Time.deltaTime;
 
         if (enemyHP <= 0)
         {
@@ -37,22 +39,30 @@ public class EnemyBlob : MonoBehaviour
         {
             speed = 0.005f;
         }
-        if (collision.gameObject.tag == "attackHitbox" && player.isDashing)
+        if (collision.gameObject.tag == "attackHitbox" && damageCooldown <= 0)
         {
             TakeDamage();
+            damageCooldown = 0.5f;
         }
+        
     }
     private void OnTriggerStay2D(Collider2D collider)
     {
-        Debug.Log(cooldown);
+        Debug.Log(attackCooldown);
 
-        if (collider.gameObject.tag == "Player" && cooldown >= 1)
+        if (collider.gameObject.tag == "Player" && attackCooldown >= 1)
         {
             if (!player.isDashing)
             {
                 player.TakeDamage(0.5f);
-                cooldown = 0;
+                attackCooldown = 0;
             }
+        }
+        
+        if (collider.gameObject.tag == "dashHitbox" && damageCooldown <= 0 && player.isDashing)
+        {
+            TakeDamage();
+            damageCooldown = 0.5f;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -61,6 +71,7 @@ public class EnemyBlob : MonoBehaviour
         {
             speed = 1.3f;
         }
+        
     }
     public void TakeDamage()
     {

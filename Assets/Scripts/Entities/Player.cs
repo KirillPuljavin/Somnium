@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
 
     private bool canDash = true;
     public bool isDashing = false;
-    private float dashingPower = 10f;
+    private float dashingPower = 14f;
     private float dashingTime = 0.3f;
     private float dashingCooldown = 3f;
     public Animator animator;
@@ -30,11 +30,12 @@ public class Player : MonoBehaviour
     EnemyBlob enemyBlob;
     private string Facing = "down";
     public GameObject HitArea;
-
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private HorizontalLayoutGroup heartsHUD;
     // UI
     [SerializeField] private GameObject heartIcon;
+    float attackCooldown = 0;
+
 
     void Start()
     {
@@ -42,6 +43,7 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
+        if (attackCooldown > 0) attackCooldown -= Time.deltaTime;
         if (isDashing)
         {
             return;
@@ -60,11 +62,12 @@ public class Player : MonoBehaviour
         {
             HealPotion();
         }
+
         animator.SetFloat("Horizontal", movement.x);
         animator.SetFloat("Vertical", movement.y);
         animator.SetFloat("Speed", movement.sqrMagnitude);
-        Debug.Log(movement.x);
-        Debug.Log(movement.y);
+
+
         if (movement.x == 1 && movement.y == 0)
         {
             Facing = "right";
@@ -97,33 +100,54 @@ public class Player : MonoBehaviour
         {
             Facing = "down";
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Mouse0) && attackCooldown <= 0)
         {
             Hit();
         }
     }
     private void Hit()
     {
+        attackCooldown = 0.5f;
         if (Facing == "right")
         {
-            Vector3 newPosition = gameObject.transform.position + new Vector3(2f, 0f, 0f);
+            Vector3 newPosition = gameObject.transform.position + new Vector3(1f, 0.5f, 0f);
             Instantiate(HitArea, newPosition, Quaternion.identity);
+            float randNumb;
+            randNumb = Random.Range(0, 4);
+            if (randNumb < 2) animator.Play("Attack_Right1");
+            if (randNumb >= 2) animator.Play("Attack_Right2");
+
+
         }
-        if (Facing == "left")
+        else if (Facing == "left")
         {
-            Vector3 newPosition = gameObject.transform.position + new Vector3(-2f, 0f, 0f);
+            Vector3 newPosition = gameObject.transform.position + new Vector3(-1f, 0.5f, 0f);
             Instantiate(HitArea, newPosition, Quaternion.identity);
+            float randNumb;
+            randNumb = Random.Range(0, 4);
+            if (randNumb < 2) animator.Play("Attack_Left1");
+            if (randNumb >= 2) animator.Play("Attack_Left2");
         }
-        if (Facing == "up")
+        else if (Facing == "up")
         {
             Vector3 newPosition = gameObject.transform.position + new Vector3(0f, 2f, 0f);
             Instantiate(HitArea, newPosition, Quaternion.identity);
+            animator.Play("Attack_Up");
+
         }
-        if (Facing == "down")
+        else if (Facing == "down")
         {
-            Vector3 newPosition = gameObject.transform.position + new Vector3(0f, -2f, 0f);
+            Vector3 newPosition = gameObject.transform.position + new Vector3(0f, -0.5f, 0f);
             Instantiate(HitArea, newPosition, Quaternion.identity);
+            animator.Play("Attack_Down");
         }
+        else if (Facing == "up-right")
+        {
+            Vector3 newPosition = gameObject.transform.position + new Vector3(1f, 2f, 0f);
+            Instantiate(HitArea, newPosition, Quaternion.identity);
+            animator.Play("Attack_Up");
+        }
+        // FIXING MORE DIRECTIONS LATER
     }
     private void FixedUpdate()
     {
