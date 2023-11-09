@@ -212,11 +212,11 @@ PrefabInstance:
       objectReference: {fileID: 6359226010696778297}
     - target: {fileID: 4889943354059910841, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
       propertyPath: m_Lens.OrthographicSize
-      value: 3.5
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 8572995283403586746, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
       propertyPath: orthographic size
-      value: 3.5
+      value: 25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

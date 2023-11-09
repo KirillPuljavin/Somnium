@@ -4,52 +4,58 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    // References
+    public Animator animator;
+    Vector2 movement;
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private HorizontalLayoutGroup heartsHUD;
+    [SerializeField] private GameObject heartIcon;
+    public LayerMask enemyLayers;
+    public Transform attackPoint;
 
     // Variables
     public bool inDungeon = false;
     public int currRoom = 2;
-
     public float Hearts = 5;
     public int Stamina;
     public int ComponentsTier2;
     public int ComponentsTier3;
     public int WeaponEvo;
-    private float horizontal;
-    private float vertical;
-    private float speed = 3f;
 
+    private float speed = 3f;
     private bool canDash = true;
     public bool isDashing = false;
     private float dashingPower = 14f;
     private float dashingTime = 0.3f;
     private float dashingCooldown = 3f;
-    public Animator animator;
-    Vector2 movement;
-    public float damage = 1;
+    string dashDirAnim = "Dash_Down";
 
     private string Facing = "down";
-    [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private HorizontalLayoutGroup heartsHUD;
-    // UI
-    [SerializeField] private GameObject heartIcon;
+    public float damage = 1;
     float attackCooldown = 0;
-    string dashDirAnim = "Dash_Down";
-    public Transform attackPoint;
     public float attackRange = 1f;
-    public LayerMask enemyLayers;
-
 
     void Start()
     {
-        
     }
+
+    private float tpCooldown;
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (tpCooldown >= 1)
+        {
+            transform.position = collider.gameObject.GetComponent<DoorMechanics>().targetDoorPos;
+            tpCooldown = 0;
+        }
+    }
+
     private void Update()
     {
+        // Cooldown
+        if (tpCooldown <= 1) tpCooldown += Time.deltaTime;
         if (attackCooldown > 0) attackCooldown -= Time.deltaTime;
-        if (isDashing)
-        {
-            return;
-        }
+
+        if (isDashing) return;
 
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
@@ -58,8 +64,6 @@ public class Player : MonoBehaviour
         {
             StartCoroutine(Dash());
         }
-
-
         if (Input.GetKeyDown(KeyCode.H))
         {
             HealPotion();
@@ -68,7 +72,6 @@ public class Player : MonoBehaviour
         animator.SetFloat("Horizontal", movement.x);
         animator.SetFloat("Vertical", movement.y);
         animator.SetFloat("Speed", movement.sqrMagnitude);
-
 
         if (movement.x == 1 && movement.y == 0)
         {
@@ -151,7 +154,7 @@ public class Player : MonoBehaviour
             animator.Play("Attack_Up");
         }
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-        foreach(Collider2D enemy in hitEnemies)
+        foreach (Collider2D enemy in hitEnemies)
         {
             Debug.Log("hit: " + enemy.name);
             EnemyBlob enemyb = enemy.gameObject.GetComponent<EnemyBlob>();
@@ -215,7 +218,6 @@ public class Player : MonoBehaviour
         // }
         // Instantiate(heartIcon, heartsHUD.gameObject.transform);
     }
-
 
     public void Death()
     {

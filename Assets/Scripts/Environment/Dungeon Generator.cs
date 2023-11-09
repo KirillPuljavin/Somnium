@@ -54,13 +54,11 @@ public class DungeonGenerator : MonoBehaviour
 
             GameObject newDoor = Instantiate(doorPrefab, doorPosition1, Quaternion.identity, doorParent);
             DoorMechanics door1 = newDoor.AddComponent<DoorMechanics>();
-            door1.placement = doorPlacement1;
-            door1.targetDoor = doorPlacement2;
+            door1.targetDoorPos = doorPosition2;
 
             GameObject newDoor2 = Instantiate(doorPrefab, doorPosition2, Quaternion.identity, doorParent);
             DoorMechanics door2 = newDoor2.AddComponent<DoorMechanics>();
-            door2.placement = doorPlacement2;
-            door2.targetDoor = doorPlacement1;
+            door2.targetDoorPos = doorPosition1;
         }
     }
     DoorPlacement GetDoorPlacement(int roomIndex1, int roomIndex2)

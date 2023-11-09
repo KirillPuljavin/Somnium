@@ -13,10 +13,10 @@ public class DoorPlacement
 {
     public InRoomPos position;
     public int roomIndex;
+    public Vector2 transformPosition;
 }
 
 public class DoorMechanics : MonoBehaviour
 {
-    public DoorPlacement placement;
-    public DoorPlacement targetDoor;
+    public Vector2 targetDoorPos;
 }
