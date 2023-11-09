@@ -4,25 +4,16 @@ using UnityEngine;
 
 public class HeartUpdate : MonoBehaviour
 {
-    //gameObjects
-    public GameObject heartsHUD;
-    
     //Prefabs
-    public Prefab
-
-    // Start is called before the first frame update
-    void Start()
+    public GameObject fullHeartIcon;
+    public GameObject halfHeartIcon;
+    public GameObject emptyHeartIcon;
+    public void UpdateHearts()
     {
-        foreach (Transform childObj in heartsHUD.transform)
+        foreach (Transform childObj in transform)
         {
             Destroy(childObj.gameObject);
         }
-        Instantiate(heartIcon, heartsHUD.gameObject.transform);
-    }
-
-    // Update is called once per frame
-    public void UpdateHearts()
-    {
-        
+        Instantiate(fullHeartIcon, gameObject.transform);
     }
 }
