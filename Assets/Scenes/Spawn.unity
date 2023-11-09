@@ -192,6 +192,11 @@ Transform:
   - {fileID: 920161607}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!224 &246655107 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5117390771748221489, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
+  m_PrefabInstance: {fileID: 3815078443758937339}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &629424140
 GameObject:
   m_ObjectHideFlags: 0
@@ -500,6 +505,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 986158315572252183, guid: 4d0c754b308b705449c4446cc92a913d, type: 3}
+      propertyPath: m_Size.x
+      value: 1.0176225
+      objectReference: {fileID: 0}
+    - target: {fileID: 986158315572252183, guid: 4d0c754b308b705449c4446cc92a913d, type: 3}
+      propertyPath: m_Size.y
+      value: 0.8865223
+      objectReference: {fileID: 0}
+    - target: {fileID: 986158315572252183, guid: 4d0c754b308b705449c4446cc92a913d, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.0034167767
+      objectReference: {fileID: 0}
+    - target: {fileID: 986158315572252183, guid: 4d0c754b308b705449c4446cc92a913d, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.44210887
+      objectReference: {fileID: 0}
+    - target: {fileID: 986158315572252183, guid: 4d0c754b308b705449c4446cc92a913d, type: 3}
+      propertyPath: m_Direction
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3563160528595184985, guid: 4d0c754b308b705449c4446cc92a913d, type: 3}
       propertyPath: m_Name
       value: Blob
@@ -617,6 +642,14 @@ PrefabInstance:
       propertyPath: EnemyObj
       value: 
       objectReference: {fileID: 3563160528595184985, guid: 4d0c754b308b705449c4446cc92a913d, type: 3}
+    - target: {fileID: 4195860284930794465, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
+      propertyPath: attackPoint
+      value: 
+      objectReference: {fileID: 246655107}
+    - target: {fileID: 4195860284930794465, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
+      propertyPath: enemyLayers.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 4245140248369936858, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
       propertyPath: m_Size.y
       value: 0.6935842
