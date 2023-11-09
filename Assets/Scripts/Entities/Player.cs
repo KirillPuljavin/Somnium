@@ -36,6 +36,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        heartsHUD.UpdateHearts();
     }
 
     private float tpCooldown;
