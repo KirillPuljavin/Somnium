@@ -203,7 +203,7 @@ public class Player : MonoBehaviour
         if (Hearts <= 10)
         {
             Hearts += 1;
-            UpdateHearts();
+            heartsHUD.UpdateHearts();
         }
     }
     public void TakeDamage(int amount)
@@ -212,9 +212,6 @@ public class Player : MonoBehaviour
         UpdateHearts();
 
         if (Hearts <= 0) Death();
-    }
-    private void UpdateHearts()
-    {
     }
 
     public void Death()
