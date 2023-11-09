@@ -42,11 +42,6 @@ public class EnemyBlob : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D collider)
     {
-        if (collider.gameObject.tag == "attackHitbox")
-        {
-            TakeDamage();
-        }
-
         if (collider.gameObject.tag == "Player" && attackCooldown >= 1)
         {
             if (!player.isDashing)
