@@ -662,6 +662,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 161686740}
     m_Modifications:
     - target: {fileID: 4195860284930794465, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
+      propertyPath: Hearts
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4195860284930794465, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
       propertyPath: heartsHUD
       value: 
       objectReference: {fileID: 1648695256}
