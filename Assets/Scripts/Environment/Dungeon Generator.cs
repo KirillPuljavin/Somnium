@@ -6,32 +6,35 @@ using UnityEngine.UI;
 public class DungeonGenerator : MonoBehaviour
 {
     // Objects
-    private GameObject[,] Rooms;
+    private GameObject[,] RoomGrid;
+    private GameObject[] RoomsInDungeon;
     private DungeonPreset currentPreset;
+
     public GameObject passagePrefab;
     public GameObject roomPrefab;
     public GameObject doorPrefab;
+    public Transform doorParent;
 
     void Start()
     {
         // Startup
-        Rooms = new GameObject[5, 6];
-        for (int x = 0; x < Rooms.GetLength(0); x++)
+        RoomsInDungeon = new GameObject[30];
+        RoomGrid = new GameObject[5, 6];
+        for (int x = 0; x < RoomGrid.GetLength(0); x++)
         {
-            for (int y = 0; y < Rooms.GetLength(1); y++)
+            for (int y = 0; y < RoomGrid.GetLength(1); y++)
             {
-                GameObject room = transform.GetChild(x * Rooms.GetLength(1) + y).gameObject;
-                Rooms[x, y] = room;
+                GameObject room = transform.GetChild(x * RoomGrid.GetLength(1) + y).gameObject;
+                RoomGrid[x, y] = room;
             }
         }
-
         currentPreset = new Dungeon1();
-        VisualizeDungeon();
 
         // Setup Rooms
         foreach (var roomIndex in currentPreset.roomsAvailable)
         {
-            GameObject newRoom = Instantiate(roomPrefab, new Vector3(CalculateRoomPosition(roomIndex).x, CalculateRoomPosition(roomIndex).y, 0f), Quaternion.identity);
+            GameObject newRoom = Instantiate(roomPrefab, new Vector3(CalculateRoomPosition(roomIndex).x, CalculateRoomPosition(roomIndex).y, 0f), Quaternion.identity, transform.GetChild(roomIndex).transform);
+            RoomsInDungeon[roomIndex] = newRoom;
         }
 
         // Instantiate room doors
@@ -44,32 +47,31 @@ public class DungeonGenerator : MonoBehaviour
         {
             int roomIndex1 = connection.roomIndex1;
             int roomIndex2 = connection.roomIndex2;
-
-            // Get door positions for roomIndex1
             DoorPlacement doorPlacement1 = GetDoorPlacement(roomIndex1, roomIndex2);
             Vector2 doorPosition1 = CalculateDoorPosition(doorPlacement1, roomIndex1);
-
-            // Get door positions for roomIndex2
             DoorPlacement doorPlacement2 = GetDoorPlacement(roomIndex2, roomIndex1);
             Vector2 doorPosition2 = CalculateDoorPosition(doorPlacement2, roomIndex2);
 
-            // Instantiate doors
-            Instantiate(doorPrefab, doorPosition1, Quaternion.identity);
-            Instantiate(doorPrefab, doorPosition2, Quaternion.identity);
+            GameObject
+            newDoor = Instantiate(doorPrefab, doorPosition1, Quaternion.identity, doorParent);
+            newDoor.AddComponent<DoorMechanics>();
+
+            newDoor = Instantiate(doorPrefab, doorPosition2, Quaternion.identity, doorParent);
+            newDoor.AddComponent<DoorMechanics>();
         }
     }
     DoorPlacement GetDoorPlacement(int roomIndex1, int roomIndex2)
     {
-        int row1 = roomIndex1 / Rooms.GetLength(1);
-        int col1 = roomIndex1 % Rooms.GetLength(1);
-        int row2 = roomIndex2 / Rooms.GetLength(1);
-        int col2 = roomIndex2 % Rooms.GetLength(1);
+        int row1 = roomIndex1 / RoomGrid.GetLength(0);
+        int col1 = roomIndex1 % RoomGrid.GetLength(0);
+        int row2 = roomIndex2 / RoomGrid.GetLength(0);
+        int col2 = roomIndex2 % RoomGrid.GetLength(0);
 
         if (row1 == row2) // Horizontal passage
         {
             return new DoorPlacement
             {
-                position = col1 < col2 ? DoorPosition.Right : DoorPosition.Left,
+                position = col1 < col2 ? InRoomPos.Right : InRoomPos.Left,
                 roomIndex = col1 < col2 ? roomIndex1 : roomIndex2
             };
         }
@@ -77,11 +79,10 @@ public class DungeonGenerator : MonoBehaviour
         {
             return new DoorPlacement
             {
-                position = row1 < row2 ? DoorPosition.Top : DoorPosition.Bottom,
+                position = row1 < row2 ? InRoomPos.Top : InRoomPos.Bottom,
                 roomIndex = row1 < row2 ? roomIndex1 : roomIndex2
             };
         }
-        // Invalid passage
         else return new DoorPlacement();
     }
 
@@ -90,29 +91,17 @@ public class DungeonGenerator : MonoBehaviour
         Vector2 roomPosition = CalculateRoomPosition(roomIndex);
         switch (doorPlacement.position)
         {
-            case DoorPosition.Top:
-                return new Vector2(roomPosition.x, roomPosition.y + 1f);
-            case DoorPosition.Bottom:
-                return new Vector2(roomPosition.x, roomPosition.y - 1f);
-            case DoorPosition.Left:
-                return new Vector2(roomPosition.x - 1f, roomPosition.y);
-            case DoorPosition.Right:
-                return new Vector2(roomPosition.x + 1f, roomPosition.y);
+            case InRoomPos.Top:
+                return RoomsInDungeon[roomIndex].transform.GetChild(0).GetChild(0).transform.position;
+            case InRoomPos.Right:
+                return RoomsInDungeon[roomIndex].transform.GetChild(0).GetChild(1).transform.position;
+            case InRoomPos.Bottom:
+                return RoomsInDungeon[roomIndex].transform.GetChild(0).GetChild(2).transform.position;
+            case InRoomPos.Left:
+                return RoomsInDungeon[roomIndex].transform.GetChild(0).GetChild(3).transform.position;
             default:
                 return roomPosition;
         }
-    }
-    public enum DoorPosition
-    {
-        Top,
-        Bottom,
-        Left,
-        Right
-    }
-    public class DoorPlacement
-    {
-        public DoorPosition position;
-        public int roomIndex;
     }
 
     void VisualizeDungeon()
@@ -134,10 +123,10 @@ public class DungeonGenerator : MonoBehaviour
     }
     Vector2 CalculateRoomPosition(int roomIndex)
     {
-        int rowIndex = roomIndex / Rooms.GetLength(1);
-        int columnIndex = roomIndex % Rooms.GetLength(1);
+        int rowIndex = roomIndex / RoomGrid.GetLength(1);
+        int columnIndex = roomIndex % RoomGrid.GetLength(1);
 
-        Vector3 position = Rooms[rowIndex, columnIndex].transform.position;
+        Vector3 position = RoomGrid[rowIndex, columnIndex].transform.position;
         return new Vector2(position.x, position.y);
     }
 }
@@ -163,7 +152,6 @@ public abstract class DungeonPreset
     public int positionBossTransitionRoom;
     public int positionUpgrade1;
     public int positionUpgrade2;
-
 }
 
 [System.Serializable]
