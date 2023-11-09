@@ -1474,7 +1474,7 @@ PrefabInstance:
     - target: {fileID: 4195860284930794465, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
       propertyPath: HitArea
       value: 
-      objectReference: {fileID: 824380474014414362, guid: 8f6ce12db6a19c44a9504fe36c3f25ea, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 5446435883745518241, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
