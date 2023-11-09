@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HeartUpdate : MonoBehaviour
 {
-    public GameObject PlayerObj;
+    private GameObject PlayerObj;
     Player player;
 
     //Prefabs
@@ -22,6 +22,7 @@ public class HeartUpdate : MonoBehaviour
         {
             Destroy(childObj.gameObject);
         }
-        Instantiate(fullHeartIcon, gameObject.transform);
+        if (player.Hearts % 2 == 0)
+            Instantiate(fullHeartIcon, gameObject.transform);
     }
 }
