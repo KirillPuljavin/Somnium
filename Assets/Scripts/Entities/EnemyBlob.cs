@@ -7,10 +7,11 @@ public class EnemyBlob : MonoBehaviour
 {
     public GameObject PlayerObj;
     Player player;
+
     float attackCooldown = 0;
     float damageCooldown = 0;
     public float speed;
-    public float enemyHP = 3;
+    public float enemyHP = 6;
 
     void Start()
     {
@@ -46,7 +47,7 @@ public class EnemyBlob : MonoBehaviour
         {
             if (!player.isDashing)
             {
-                player.TakeDamage(0.5f);
+                player.TakeDamage(1);
                 attackCooldown = 0;
             }
         }

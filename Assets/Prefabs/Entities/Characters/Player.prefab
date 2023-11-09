@@ -188,8 +188,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.245, y: -0.224}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -16.1199, y: -16.1779}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6607715729755257798
 GameObject:
@@ -321,8 +321,8 @@ MonoBehaviour:
   heartIcon: {fileID: 0}
   enemyLayers:
     serializedVersion: 2
-    m_Bits: 0
-  attackPoint: {fileID: 0}
+    m_Bits: 64
+  attackPoint: {fileID: 5117390771748221489}
   inDungeon: 0
   currRoom: 2
   Hearts: 5
@@ -330,6 +330,7 @@ MonoBehaviour:
   ComponentsTier2: 0
   ComponentsTier3: 0
   WeaponEvo: 0
+  speed: 3
   isDashing: 0
   damage: 1
   attackRange: 1

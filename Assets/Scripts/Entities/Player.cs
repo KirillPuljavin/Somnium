@@ -16,13 +16,13 @@ public class Player : MonoBehaviour
     // Variables
     public bool inDungeon = false;
     public int currRoom = 2;
-    public float Hearts = 5;
+    public int Hearts = 10;
     public int Stamina;
     public int ComponentsTier2;
     public int ComponentsTier3;
     public int WeaponEvo;
 
-    private float speed = 3f;
+    public float speed = 3f;
     private bool canDash = true;
     public bool isDashing = false;
     private float dashingPower = 14f;
@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
     string dashDirAnim = "Dash_Down";
 
     private string Facing = "down";
-    public float damage = 1;
+    public int damage = 2;
     float attackCooldown = 0;
     public float attackRange = 1f;
 
@@ -109,6 +109,7 @@ public class Player : MonoBehaviour
             Facing = "down";
             dashDirAnim = "Dash_Down";
         }
+
         if (Input.GetKeyDown(KeyCode.Mouse0) && attackCooldown <= 0)
         {
             Hit();
@@ -153,13 +154,12 @@ public class Player : MonoBehaviour
             attackPoint.position = newPosition;
             animator.Play("Attack_Up");
         }
+
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         foreach (Collider2D enemy in hitEnemies)
         {
-            Debug.Log("hit: " + enemy.name);
             EnemyBlob enemyb = enemy.gameObject.GetComponent<EnemyBlob>();
             enemyb.enemyHP -= damage;
-            Debug.Log(enemyb.enemyHP);
         }
     }
     private void FixedUpdate()
@@ -199,17 +199,16 @@ public class Player : MonoBehaviour
     }
     public void HealPotion()
     {
-        Hearts += 0.5f;
+        Hearts += 1;
         UpdateHearts();
     }
-    public void TakeDamage(float amount)
+    public void TakeDamage(int amount)
     {
         Hearts -= amount;
         UpdateHearts();
 
         if (Hearts <= 0) Death();
     }
-
     private void UpdateHearts()
     {
         // foreach (Transform childObj in heartsHUD.transform)

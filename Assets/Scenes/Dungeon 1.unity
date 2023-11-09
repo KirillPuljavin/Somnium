@@ -1471,18 +1471,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 660863960}
     m_Modifications:
-    - target: {fileID: 4195860284930794465, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
-      propertyPath: Stamina
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4195860284930794465, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
-      propertyPath: WeaponEvo
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4195860284930794465, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
-      propertyPath: isDashing
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5446435883745518241, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
