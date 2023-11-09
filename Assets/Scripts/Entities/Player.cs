@@ -200,7 +200,7 @@ public class Player : MonoBehaviour
     }
     public void HealPotion()
     {
-        if (Hearts <= 10)
+        if (Hearts < 10)
         {
             Hearts += 1;
             heartsHUD.UpdateHearts();
