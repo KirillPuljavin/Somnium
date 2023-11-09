@@ -73,86 +73,87 @@ public class Player : MonoBehaviour
         animator.SetFloat("Vertical", movement.y);
         animator.SetFloat("Speed", movement.sqrMagnitude);
 
-        if (movement.x == 1 && movement.y == 0)
+        switch ((movement.x, movement.y))
         {
-            Facing = "right";
-            dashDirAnim = "Dash_Right";
+            case (1, 0):
+                Facing = "right";
+                dashDirAnim = "Dash_Right";
+                break;
+            case (-1, 0):
+                Facing = "left";
+                dashDirAnim = "Dash_Left";
+                break;
+            case (0, 1):
+                Facing = "up";
+                dashDirAnim = "Dash_Up";
+                break;
+            case (0, -1):
+                Facing = "down";
+                dashDirAnim = "Dash_Down";
+                break;
+            case (1, 1):
+                Facing = "up-right";
+                dashDirAnim = "Dash_Up";
+                break;
+            case (1, -1):
+                Facing = "down-right";
+                dashDirAnim = "Dash_Down";
+                break;
+            case (-1, 1):
+                Facing = "up-left";
+                dashDirAnim = "Dash_Up";
+                break;
+            case (-1, -1):
+                Facing = "down-left";
+                dashDirAnim = "Dash_Down";
+                break;
+            default:
+                Facing = "up";
+                dashDirAnim = "Dash_Up";
+                break;
         }
-        if (movement.x == 1 && movement.y == 1)
-        {
-            Facing = "up-right";
-        }
-        if (movement.x == 1 && movement.y == -1)
-        {
-            Facing = "down-right";
-        }
-        if (movement.x == -1 && movement.y == 1)
-        {
-            Facing = "up-left";
-        }
-        if (movement.x == -1 && movement.y == -1)
-        {
-            Facing = "down-left";
-        }
-        if (movement.x == -1 && movement.y == 0)
-        {
-            Facing = "left";
-            dashDirAnim = "Dash_Left";
-        }
-        if (movement.x == 0 && movement.y == 1)
-        {
-            Facing = "up";
-            dashDirAnim = "Dash_Up";
-        }
-        if (movement.x == 0 && movement.y == -1)
-        {
-            Facing = "down";
-            dashDirAnim = "Dash_Down";
-        }
-
-        if (Input.GetKeyDown(KeyCode.Mouse0) && attackCooldown <= 0)
-        {
-            Hit();
-        }
+        if (Input.GetKeyDown(KeyCode.Mouse0) && attackCooldown <= 0) Hit();
     }
     private void Hit()
     {
         attackCooldown = 0.5f;
-        if (Facing == "right")
+
+        int randNumb = Random.Range(0, 1);
+        switch (Facing)
         {
-            Vector3 newPosition = gameObject.transform.position + new Vector3(1f, 0.5f, 0f);
-            attackPoint.position = newPosition;
-            float randNumb;
-            randNumb = Random.Range(0, 4);
-            if (randNumb < 2) animator.Play("Attack_Right1");
-            if (randNumb >= 2) animator.Play("Attack_Right2");
-        }
-        else if (Facing == "left")
-        {
-            Vector3 newPosition = gameObject.transform.position + new Vector3(-1f, 0.5f, 0f);
-            attackPoint.position = newPosition;
-            float randNumb;
-            randNumb = Random.Range(0, 4);
-            if (randNumb < 2) animator.Play("Attack_Left1");
-            if (randNumb >= 2) animator.Play("Attack_Left2");
-        }
-        else if (Facing == "up")
-        {
-            Vector3 newPosition = gameObject.transform.position + new Vector3(0f, 2f, 0f);
-            attackPoint.position = newPosition;
-            animator.Play("Attack_Up");
-        }
-        else if (Facing == "down")
-        {
-            Vector3 newPosition = gameObject.transform.position + new Vector3(0f, -0.5f, 0f);
-            attackPoint.position = newPosition;
-            animator.Play("Attack_Down");
-        }
-        else if (Facing == "up-right")
-        {
-            Vector3 newPosition = gameObject.transform.position + new Vector3(1f, 2f, 0f);
-            attackPoint.position = newPosition;
-            animator.Play("Attack_Up");
+            case "right":
+                attackPoint.position = gameObject.transform.position + new Vector3(1f, 0.5f, 0f);
+                if (randNumb == 0) animator.Play("Attack_Right1"); else animator.Play("Attack_Right2");
+                break;
+            case "left":
+                attackPoint.position = gameObject.transform.position + new Vector3(-1f, 0.5f, 0f);
+                if (randNumb == 0) animator.Play("Attack_Left1"); else animator.Play("Attack_Left2");
+                break;
+            case "up":
+                attackPoint.position = gameObject.transform.position + new Vector3(0f, 2f, 0f);
+                animator.Play("Attack_Up");
+                break;
+            case "down":
+                attackPoint.position = gameObject.transform.position + new Vector3(0f, -0.5f, 0f);
+                animator.Play("Attack_Down");
+                break;
+
+            case "up-right":
+                attackPoint.position = gameObject.transform.position + new Vector3(1f, 2f, 0f);
+                animator.Play("Attack_Up");
+                break;
+            case "up-left":
+                attackPoint.position = gameObject.transform.position + new Vector3(-1f, 2f, 0f);
+                animator.Play("Attack_Up");
+                break;
+            case "down-right":
+                attackPoint.position = gameObject.transform.position + new Vector3(1f, -0.5f, 0f);
+                animator.Play("Attack_Down");
+                break;
+            case "down-left":
+                attackPoint.position = gameObject.transform.position + new Vector3(-1f, -0.5f, 0f);
+                animator.Play("Attack_Down");
+                break;
         }
 
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
@@ -199,8 +200,11 @@ public class Player : MonoBehaviour
     }
     public void HealPotion()
     {
-        Hearts += 1;
-        UpdateHearts();
+        if (Hearts <= 10)
+        {
+            Hearts += 1;
+            UpdateHearts();
+        }
     }
     public void TakeDamage(int amount)
     {
@@ -211,11 +215,6 @@ public class Player : MonoBehaviour
     }
     private void UpdateHearts()
     {
-        // foreach (Transform childObj in heartsHUD.transform)
-        // {
-        //     Destroy(childObj.gameObject);
-        // }
-        // Instantiate(heartIcon, heartsHUD.gameObject.transform);
     }
 
     public void Death()

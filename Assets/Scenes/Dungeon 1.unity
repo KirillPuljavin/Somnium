@@ -206,17 +206,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3240072342329762470, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3240072342329762470, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -100
+      objectReference: {fileID: 0}
     - target: {fileID: 4889943354059910841, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 6359226010696778297}
-    - target: {fileID: 4889943354059910841, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
-      propertyPath: m_Lens.OrthographicSize
-      value: 25
+    - target: {fileID: 7919883277961508943, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8572995283403586746, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
-      propertyPath: orthographic size
-      value: 25
+    - target: {fileID: 7919883277961508943, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

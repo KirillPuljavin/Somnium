@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3593270463417963838}
   - component: {fileID: 7390713467456444573}
   - component: {fileID: 8604797685075023723}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door Prefab
   m_TagString: Door
   m_Icon: {fileID: 0}
