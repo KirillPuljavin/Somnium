@@ -34,11 +34,6 @@ public class Player : MonoBehaviour
     float attackCooldown = 0;
     public float attackRange = 1f;
 
-    void Start()
-    {
-        heartsHUD.UpdateHearts();
-    }
-
     private float tpCooldown;
     void OnTriggerEnter2D(Collider2D collider)
     {
