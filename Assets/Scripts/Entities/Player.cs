@@ -26,15 +26,18 @@ public class Player : MonoBehaviour
     public Animator animator;
     Vector2 movement;
     public float damage = 1;
+    public GameObject blob;
 
     private string Facing = "down";
-    public GameObject HitArea;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private HorizontalLayoutGroup heartsHUD;
     // UI
     [SerializeField] private GameObject heartIcon;
     float attackCooldown = 0;
     string dashDirAnim = "Dash_Down";
+    public Transform attackPoint;
+    public float attackRange = 1f;
+    public LayerMask enemyLayers;
 
 
     void Start()
@@ -115,47 +118,44 @@ public class Player : MonoBehaviour
         if (Facing == "right")
         {
             Vector3 newPosition = gameObject.transform.position + new Vector3(1f, 0.5f, 0f);
-            Instantiate(HitArea, newPosition, Quaternion.identity);
+            attackPoint.position = newPosition;
             float randNumb;
             randNumb = Random.Range(0, 4);
             if (randNumb < 2) animator.Play("Attack_Right1");
             if (randNumb >= 2) animator.Play("Attack_Right2");
-
-
-
         }
         else if (Facing == "left")
         {
             Vector3 newPosition = gameObject.transform.position + new Vector3(-1f, 0.5f, 0f);
-            Instantiate(HitArea, newPosition, Quaternion.identity);
+            attackPoint.position = newPosition;
             float randNumb;
             randNumb = Random.Range(0, 4);
             if (randNumb < 2) animator.Play("Attack_Left1");
             if (randNumb >= 2) animator.Play("Attack_Left2");
-
         }
         else if (Facing == "up")
         {
             Vector3 newPosition = gameObject.transform.position + new Vector3(0f, 2f, 0f);
-            Instantiate(HitArea, newPosition, Quaternion.identity);
+            attackPoint.position = newPosition;
             animator.Play("Attack_Up");
-
-
         }
         else if (Facing == "down")
         {
             Vector3 newPosition = gameObject.transform.position + new Vector3(0f, -0.5f, 0f);
-            Instantiate(HitArea, newPosition, Quaternion.identity);
+            attackPoint.position = newPosition;
             animator.Play("Attack_Down");
-
         }
         else if (Facing == "up-right")
         {
             Vector3 newPosition = gameObject.transform.position + new Vector3(1f, 2f, 0f);
-            Instantiate(HitArea, newPosition, Quaternion.identity);
+            attackPoint.position = newPosition;
             animator.Play("Attack_Up");
         }
-        // FIXING MORE DIRECTIONS LATER
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+        foreach(Collider2D enemy in hitEnemies)
+        {
+            Debug.Log("hit" + enemy.name);
+        }
     }
     private void FixedUpdate()
     {
