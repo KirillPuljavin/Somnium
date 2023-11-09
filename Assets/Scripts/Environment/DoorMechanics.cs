@@ -17,9 +17,6 @@ public class DoorPlacement
 
 public class DoorMechanics : MonoBehaviour
 {
-
-    void Start()
-    {
-
-    }
+    public DoorPlacement placement;
+    public DoorPlacement targetDoor;
 }
