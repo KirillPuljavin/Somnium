@@ -155,7 +155,6 @@ public class Player : MonoBehaviour
         foreach(Collider2D enemy in hitEnemies)
         {
             Debug.Log("hit" + enemy.name);
-            enemy.
         }
     }
     private void FixedUpdate()
