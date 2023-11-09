@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
     private float tpCooldown;
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (tpCooldown >= 1)
+        if (tpCooldown >= 1 && collider.gameObject.tag == "Door")
         {
             transform.position = collider.gameObject.GetComponent<DoorMechanics>().targetDoorPos;
             tpCooldown = 0;

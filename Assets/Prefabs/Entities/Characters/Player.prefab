@@ -219,7 +219,7 @@ RectTransform:
   m_GameObject: {fileID: 6607715729755257798}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8033547166841850316}
@@ -315,6 +315,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4323c6570afb6a246bb9e313437a611d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 7539349131257505368}
+  rb: {fileID: 7078594632026464168}
+  heartsHUD: {fileID: 0}
+  heartIcon: {fileID: 0}
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  attackPoint: {fileID: 0}
   inDungeon: 0
   currRoom: 2
   Hearts: 5
@@ -323,14 +331,5 @@ MonoBehaviour:
   ComponentsTier3: 0
   WeaponEvo: 0
   isDashing: 0
-  animator: {fileID: 7539349131257505368}
   damage: 1
-  HitArea: {fileID: 0}
-  rb: {fileID: 7078594632026464168}
-  heartsHUD: {fileID: 0}
-  heartIcon: {fileID: 0}
-  attackPoint: {fileID: 0}
   attackRange: 1
-  enemyLayers:
-    serializedVersion: 2
-    m_Bits: 0

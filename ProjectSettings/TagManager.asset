@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Blob
   - attackHitbox
+  - dashHitbox
+  - Door
   layers:
   - Default
   - TransparentFX
