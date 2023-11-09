@@ -8,8 +8,7 @@ public class Player : MonoBehaviour
     public Animator animator;
     Vector2 movement;
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private HorizontalLayoutGroup heartsHUD;
-    [SerializeField] private GameObject heartIcon;
+    [SerializeField] private HeartUpdate heartsHUD;
     public LayerMask enemyLayers;
     public Transform attackPoint;
 
@@ -203,11 +202,13 @@ public class Player : MonoBehaviour
         if (Hearts <= 10)
         {
             Hearts += 1;
+            heartsHUD.UpdateHearts();
         }
     }
     public void TakeDamage(int amount)
     {
         Hearts -= amount;
+        heartsHUD.UpdateHearts();
 
         if (Hearts <= 0) Death();
     }
