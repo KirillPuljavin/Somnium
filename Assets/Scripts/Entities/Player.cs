@@ -26,7 +26,6 @@ public class Player : MonoBehaviour
     public Animator animator;
     Vector2 movement;
     public float damage = 1;
-    public GameObject blob;
 
     private string Facing = "down";
     [SerializeField] private Rigidbody2D rb;
@@ -42,7 +41,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-
+        
     }
     private void Update()
     {
@@ -154,7 +153,10 @@ public class Player : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         foreach(Collider2D enemy in hitEnemies)
         {
-            Debug.Log("hit" + enemy.name);
+            Debug.Log("hit: " + enemy.name);
+            EnemyBlob enemyb = enemy.gameObject.GetComponent<EnemyBlob>();
+            enemyb.enemyHP -= damage;
+            Debug.Log(enemyb.enemyHP);
         }
     }
     private void FixedUpdate()
