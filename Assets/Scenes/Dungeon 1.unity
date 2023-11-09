@@ -210,6 +210,14 @@ PrefabInstance:
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 6359226010696778297}
+    - target: {fileID: 4889943354059910841, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
+      propertyPath: m_Lens.OrthographicSize
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8572995283403586746, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
+      propertyPath: orthographic size
+      value: 3.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -558,6 +566,7 @@ MonoBehaviour:
   passagePrefab: {fileID: 2277336942516811396, guid: d79bf7e34eb05bf4989482abd8c7e9bf, type: 3}
   roomPrefab: {fileID: 1889435654105591893, guid: cc9f03fff7f42124aab381e33a54faf1, type: 3}
   doorPrefab: {fileID: 1889435654105591893, guid: c6c0313ad1cccd942adaff06d6cc43dd, type: 3}
+  doorParent: {fileID: 1705998722}
 --- !u!114 &483126003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1234,6 +1243,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 483126001}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1705998721
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1705998722}
+  m_Layer: 0
+  m_Name: Doors
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1705998722
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1705998721}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1827097228}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1713122812
 GameObject:
   m_ObjectHideFlags: 0
@@ -1420,6 +1460,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 483126001}
+  - {fileID: 1705998722}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &6359226010696778296
@@ -1430,6 +1471,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 660863960}
     m_Modifications:
+    - target: {fileID: 4195860284930794465, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
+      propertyPath: HitArea
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4195860284930794465, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
+      propertyPath: enemyLayers.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 5446435883745518241, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
