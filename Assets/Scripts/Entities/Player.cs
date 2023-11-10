@@ -192,6 +192,11 @@ public class Player : MonoBehaviour
         if (Hearts <= 0) Death();
     }
 
+    void UpdateStamina()
+    {
+        // UI
+    }
+
     public void Death()
     {
         Debug.Log("YOU DIED");
