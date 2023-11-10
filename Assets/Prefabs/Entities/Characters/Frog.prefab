@@ -173,5 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 575527f0dc677594cad72f16c2329efd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flyPrefab: {fileID: 5440715981286148443, guid: c91e3e63063e64947885a87609c37719, type: 3}
   speed: 0.3
   enemyHP: 4
+  range: 0
