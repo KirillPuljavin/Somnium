@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
 using UnityEngine;
 
 public class EnemyFrog : MonoBehaviour
 {
+    public GameObject flyPrefab;
     Player Player;
     public float speed;
-    public float enemyHP = 4;
+    public float enemyHP;
+    public int range;
 
     float shootCooldown = 0;
     float dashCooldown = 0;
@@ -23,6 +26,15 @@ public class EnemyFrog : MonoBehaviour
         // Cooldown
         if (shootCooldown < 1) shootCooldown += Time.deltaTime;
         if (dashCooldown > 0) dashCooldown -= Time.deltaTime;
+
+        bool inRange = false;
+        if (inRange) Shoot();
+    }
+
+    void Shoot()
+    {
+        // Instantiate a fly
+        GameObject fly = Instantiate(flyPrefab, transform.position, Quaternion.identity);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

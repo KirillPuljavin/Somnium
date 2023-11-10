@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8024115429545657820}
   - component: {fileID: 8610502917572684205}
   - component: {fileID: 5737177025579078161}
+  - component: {fileID: 684017595675785449}
   m_Layer: 6
   m_Name: Frog Fly
   m_TagString: Untagged
@@ -134,3 +135,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &684017595675785449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5440715981286148443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88fdab46af7a31a48bf29d1b548b26cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
