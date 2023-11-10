@@ -318,14 +318,13 @@ MonoBehaviour:
   animator: {fileID: 7539349131257505368}
   rb: {fileID: 7078594632026464168}
   heartsHUD: {fileID: 0}
-  heartIcon: {fileID: 0}
   enemyLayers:
     serializedVersion: 2
     m_Bits: 64
   attackPoint: {fileID: 5117390771748221489}
   inDungeon: 0
   currRoom: 2
-  Hearts: 5
+  Hearts: 10
   Stamina: 0
   ComponentsTier2: 0
   ComponentsTier3: 0
