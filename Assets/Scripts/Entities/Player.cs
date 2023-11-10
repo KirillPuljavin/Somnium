@@ -22,17 +22,17 @@ public class Player : MonoBehaviour
     public int WeaponEvo;
 
     public float speed = 3f;
-    private bool canDash = true;
     public bool isDashing = false;
-    private float dashingPower = 14f;
+    private float dashingPower = 12f;
     private float dashingTime = 0.3f;
     private float dashingCooldown = 3f;
+    private bool canDash = true;
     string dashDirAnim = "Dash_Down";
 
-    private string Facing = "down";
     public int damage = 2;
-    float attackCooldown = 0;
     public float attackRange = 1f;
+    private string Facing = "down";
+    private float attackCooldown = 0;
 
     private float tpCooldown;
     void OnTriggerEnter2D(Collider2D collider)
@@ -111,7 +111,7 @@ public class Player : MonoBehaviour
     }
     private void Hit()
     {
-        attackCooldown = 0.5f;
+        attackCooldown = 0.7f;
 
         int randNumb = Random.Range(0, 1);
         switch (Facing)
@@ -132,7 +132,6 @@ public class Player : MonoBehaviour
                 attackPoint.position = gameObject.transform.position + new Vector3(0f, -0.5f, 0f);
                 animator.Play("Attack_Down");
                 break;
-
             case "up-right":
                 attackPoint.position = gameObject.transform.position + new Vector3(1f, 2f, 0f);
                 animator.Play("Attack_Up");
