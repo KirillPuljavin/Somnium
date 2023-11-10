@@ -5,68 +5,63 @@ using UnityEngine;
 
 public class EnemyBlob : MonoBehaviour
 {
-    public GameObject PlayerObj;
-    Player player;
-
-    float attackCooldown = 0;
-    float damageCooldown = 0;
+    Player Player;
     public float speed;
-    public float enemyHP = 6;
+    public float enemyHP = 8;
 
+    private float oldSpeed;
+    float attackCooldown = 0;
+    float dashCooldown = 0;
     void Start()
     {
-        PlayerObj = GameObject.FindWithTag("Player");
-        player = PlayerObj.GetComponent<Player>();
+        Player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        oldSpeed = speed;
     }
 
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, new Vector2(PlayerObj.transform.position.x, PlayerObj.transform.position.y + 0.5f), speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, new Vector2(Player.gameObject.transform.position.x, Player.gameObject.transform.position.y + 0.5f), speed * Time.deltaTime);
 
         // Cooldown
         if (attackCooldown < 1) attackCooldown += Time.deltaTime;
-        if (damageCooldown > 0) damageCooldown -= Time.deltaTime;
-
-        if (enemyHP <= 0)
-        {
-            Destroy(gameObject);
-        }
+        if (dashCooldown > 0) dashCooldown -= Time.deltaTime;
     }
 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
-        {
-            speed = 0.005f;
-        }
+        if (collision.gameObject.tag == "Player") speed = 0.005f;
     }
     private void OnTriggerStay2D(Collider2D collider)
     {
+        // Attack Player
         if (collider.gameObject.tag == "Player" && attackCooldown >= 1)
         {
-            if (!player.isDashing)
+            if (!Player.isDashing)
             {
-                player.TakeDamage(1);
+                Player.TakeDamage(1);
                 attackCooldown = 0;
             }
         }
-        if (collider.gameObject.tag == "dashHitbox" && damageCooldown <= 0 && player.isDashing)
+        // Dash Take Damage
+        if (collider.gameObject.tag == "dashHitbox" && dashCooldown <= 0 && Player.isDashing)
         {
             TakeDamage();
-            damageCooldown = 0.5f;
+            dashCooldown = 0.5f;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
-        {
-            speed = 1.3f;
-        }
-
+        if (collision.gameObject.tag == "Player") speed = oldSpeed;
     }
+
     public void TakeDamage()
     {
-        enemyHP -= player.damage;
+        enemyHP -= Player.damage;
+
+        if (enemyHP <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }

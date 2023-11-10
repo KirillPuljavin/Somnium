@@ -50,9 +50,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddaece45ef360034698ba099ca055d46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerObj: {fileID: 0}
   speed: 0.5
-  enemyHP: 3
+  enemyHP: 8
 --- !u!70 &986158315572252183
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
