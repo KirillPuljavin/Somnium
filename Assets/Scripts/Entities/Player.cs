@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
     public int damage;
     public float attackRange;
     private string Facing = "down";
-    private float attackCooldown = 0; // Set in Hit();
+    private float attackCooldown = 0.8f;
 
     private float tpCooldown;
     void OnTriggerEnter2D(Collider2D collider)
@@ -48,7 +48,7 @@ public class Player : MonoBehaviour
     {
         // Cooldown
         if (tpCooldown <= 1) tpCooldown += Time.deltaTime;
-        if (attackCooldown > 0) attackCooldown -= Time.deltaTime;
+        if (attackCooldown <= 0) attackCooldown += Time.deltaTime;
 
         if (isDashing) return;
 
@@ -100,11 +100,11 @@ public class Player : MonoBehaviour
                 dashDirAnim = "Dash_Down";
                 break;
         }
-        if (Input.GetKeyDown(KeyCode.Mouse0) && attackCooldown <= 0) Hit();
+        if (Input.GetKeyDown(KeyCode.Mouse0) && attackCooldown >= 0) Hit();
     }
     private void Hit()
     {
-        attackCooldown = 0.8f;
+        attackCooldown = 0;
 
         int randNumb = Random.Range(0, 1);
         switch (Facing)
