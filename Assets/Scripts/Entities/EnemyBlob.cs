@@ -57,7 +57,6 @@ public class EnemyBlob : MonoBehaviour
             damageCooldown = 0.5f;
         }
     }
-
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
@@ -70,5 +69,4 @@ public class EnemyBlob : MonoBehaviour
     {
         enemyHP -= player.damage;
     }
-
 }
