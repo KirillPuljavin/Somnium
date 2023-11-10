@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
 
     public float speed = 3f;
     public bool isDashing = false;
-    private float dashingPower = 14f;
+    private float dashingPower = 12f;
     private float dashingTime = 0.3f;
     private float dashingCooldown = 3f;
     private bool canDash = true;
@@ -132,7 +132,6 @@ public class Player : MonoBehaviour
                 attackPoint.position = gameObject.transform.position + new Vector3(0f, -0.5f, 0f);
                 animator.Play("Attack_Down");
                 break;
-
             case "up-right":
                 attackPoint.position = gameObject.transform.position + new Vector3(1f, 2f, 0f);
                 animator.Play("Attack_Up");
