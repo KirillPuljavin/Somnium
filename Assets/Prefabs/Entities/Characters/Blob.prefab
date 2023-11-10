@@ -50,9 +50,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddaece45ef360034698ba099ca055d46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerObj: {fileID: 0}
   speed: 0.5
-  enemyHP: 3
+  enemyHP: 8
 --- !u!70 &986158315572252183
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -85,9 +84,9 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0034167767, y: 0.44210887}
-  m_Size: {x: 1.0176225, y: 0.8865223}
-  m_Direction: 0
+  m_Offset: {x: -0.0000000062957426, y: 0.4471876}
+  m_Size: {x: 1.0000002, y: 0.9}
+  m_Direction: 1
 --- !u!1 &6833761153160537416
 GameObject:
   m_ObjectHideFlags: 0
