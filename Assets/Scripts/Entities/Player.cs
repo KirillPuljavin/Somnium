@@ -54,7 +54,7 @@ public class Player : MonoBehaviour
         if (attackCooldown < 1) attackCooldown += Time.deltaTime;
         if (stamina < dashingCooldown) stamina += Time.deltaTime;
         if (stamina < dashingCooldown) UpdateStamina();
-        
+
 
         if (isDashing) return;
 
@@ -202,7 +202,7 @@ public class Player : MonoBehaviour
 
         staminaProcent = stamina / dashingCooldown;
         Debug.Log("Stamina: " + staminaProcent);
-        staminaBar.transform.localScale = new Vector3(staminaProcent*250, transform.localScale.y*25, transform.localScale.z);
+        staminaBar.transform.localScale = new Vector3(staminaProcent * 250, transform.localScale.y * 25, transform.localScale.z);
     }
 
     public void Death()

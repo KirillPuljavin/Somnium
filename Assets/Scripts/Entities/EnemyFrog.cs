@@ -28,7 +28,7 @@ public class EnemyFrog : MonoBehaviour
         if (dashCooldown > 0) dashCooldown -= Time.deltaTime;
 
         bool inRange = false;
-        if (inRange) Shoot();
+        if (shootCooldown >= 1) Shoot();
     }
 
     void Shoot()
