@@ -473,6 +473,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Blob
       objectReference: {fileID: 0}
+    - target: {fileID: 5390512736680521591, guid: 4d0c754b308b705449c4446cc92a913d, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: b920132e8b001ab49af177ca1b760484, type: 2}
     - target: {fileID: 6211383269970791323, guid: 4d0c754b308b705449c4446cc92a913d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

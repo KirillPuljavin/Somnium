@@ -1,21 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 
-public class EnemyBlob : MonoBehaviour
+public class EnemyFrog : MonoBehaviour
 {
     Player Player;
     public float speed;
-    public float enemyHP = 8;
+    public float enemyHP = 4;
 
-    private float oldSpeed;
     float attackCooldown = 0;
     float dashCooldown = 0;
+
     void Start()
     {
         Player = GameObject.FindWithTag("Player").GetComponent<Player>();
-        oldSpeed = speed;
     }
 
     void Update()
@@ -27,22 +25,15 @@ public class EnemyBlob : MonoBehaviour
         if (dashCooldown > 0) dashCooldown -= Time.deltaTime;
     }
 
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player") speed = 0.005f;
+        if (collision.gameObject.tag == "Player")
+        {
+            speed = 0.005f;
+        }
     }
     private void OnTriggerStay2D(Collider2D collider)
     {
-        // Attack Player
-        if (collider.gameObject.tag == "Player" && attackCooldown >= 1)
-        {
-            if (!Player.isDashing)
-            {
-                Player.TakeDamage(1);
-                attackCooldown = 0;
-            }
-        }
         // Dash Take Damage
         if (collider.gameObject.tag == "dashHitbox" && dashCooldown <= 0 && Player.isDashing)
         {
@@ -52,7 +43,10 @@ public class EnemyBlob : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player") speed = oldSpeed;
+        if (collision.gameObject.tag == "Player")
+        {
+            speed = 1.3f;
+        }
     }
 
     public void TakeDamage()

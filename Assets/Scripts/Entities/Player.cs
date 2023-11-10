@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
     public int ComponentsTier3;
     public int WeaponEvo;
 
-    public float speed = 3f;
+    public float speed;
     public bool isDashing = false;
     private float dashingPower = 12f;
     private float dashingTime = 0.3f;
@@ -29,10 +29,10 @@ public class Player : MonoBehaviour
     private bool canDash = true;
     string dashDirAnim = "Dash_Down";
 
-    public int damage = 2;
-    public float attackRange = 1f;
+    public int damage;
+    public float attackRange;
     private string Facing = "down";
-    private float attackCooldown = 0;
+    private float attackCooldown = 0; // Set in Hit();
 
     private float tpCooldown;
     void OnTriggerEnter2D(Collider2D collider)
@@ -59,10 +59,7 @@ public class Player : MonoBehaviour
         {
             StartCoroutine(Dash());
         }
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            HealPotion();
-        }
+        if (Input.GetKeyDown(KeyCode.H)) HealPotion();
 
         animator.SetFloat("Horizontal", movement.x);
         animator.SetFloat("Vertical", movement.y);
@@ -102,75 +99,62 @@ public class Player : MonoBehaviour
                 Facing = "down-left";
                 dashDirAnim = "Dash_Down";
                 break;
-            default:
-                Facing = "up";
-                dashDirAnim = "Dash_Up";
-                break;
         }
         if (Input.GetKeyDown(KeyCode.Mouse0) && attackCooldown <= 0) Hit();
     }
     private void Hit()
     {
-        attackCooldown = 0.7f;
+        attackCooldown = 0.8f;
 
         int randNumb = Random.Range(0, 1);
         switch (Facing)
         {
             case "right":
-                attackPoint.position = gameObject.transform.position + new Vector3(1f, 0.5f, 0f);
+                attackPoint.position = gameObject.transform.position + new Vector3(attackRange, 0f, 0f);
                 if (randNumb == 0) animator.Play("Attack_Right1"); else animator.Play("Attack_Right2");
                 break;
             case "left":
-                attackPoint.position = gameObject.transform.position + new Vector3(-1f, 0.5f, 0f);
+                attackPoint.position = gameObject.transform.position + new Vector3(-attackRange, 0f, 0f);
                 if (randNumb == 0) animator.Play("Attack_Left1"); else animator.Play("Attack_Left2");
                 break;
             case "up":
-                attackPoint.position = gameObject.transform.position + new Vector3(0f, 2f, 0f);
+                attackPoint.position = gameObject.transform.position + new Vector3(0f, attackRange, 0f);
                 animator.Play("Attack_Up");
                 break;
             case "down":
-                attackPoint.position = gameObject.transform.position + new Vector3(0f, -0.5f, 0f);
+                attackPoint.position = gameObject.transform.position + new Vector3(0f, -attackRange, 0f);
                 animator.Play("Attack_Down");
                 break;
             case "up-right":
-                attackPoint.position = gameObject.transform.position + new Vector3(1f, 2f, 0f);
+                attackPoint.position = gameObject.transform.position + new Vector3(attackRange, attackRange, 0f);
                 animator.Play("Attack_Up");
                 break;
             case "up-left":
-                attackPoint.position = gameObject.transform.position + new Vector3(-1f, 2f, 0f);
+                attackPoint.position = gameObject.transform.position + new Vector3(-attackRange, attackRange, 0f);
                 animator.Play("Attack_Up");
                 break;
             case "down-right":
-                attackPoint.position = gameObject.transform.position + new Vector3(1f, -0.5f, 0f);
+                attackPoint.position = gameObject.transform.position + new Vector3(attackRange, -attackRange, 0f);
                 animator.Play("Attack_Down");
                 break;
             case "down-left":
-                attackPoint.position = gameObject.transform.position + new Vector3(-1f, -0.5f, 0f);
+                attackPoint.position = gameObject.transform.position + new Vector3(-attackRange, -attackRange, 0f);
                 animator.Play("Attack_Down");
                 break;
         }
 
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, 1, enemyLayers);
         foreach (Collider2D enemy in hitEnemies)
         {
-            EnemyBlob enemyb = enemy.gameObject.GetComponent<EnemyBlob>();
-            enemyb.enemyHP -= damage;
+            if (enemy.gameObject.GetComponent<EnemyBlob>() != null) enemy.gameObject.GetComponent<EnemyBlob>().TakeDamage();
+            if (enemy.gameObject.GetComponent<EnemyFrog>() != null) enemy.gameObject.GetComponent<EnemyFrog>().TakeDamage();
         }
     }
     private void FixedUpdate()
     {
-        if (isDashing)
-        {
-            return;
-        }
-        if (movement.magnitude > 1)
-        {
-            rb.velocity = new Vector2(movement.x * (speed - 0.5f), movement.y * (speed - 0.5f));
-        }
-        else
-        {
-            rb.velocity = new Vector2(movement.x * speed, movement.y * speed);
-        }
+        if (isDashing) return;
+        if (movement.magnitude > 1) rb.velocity = new Vector2(movement.x * (speed - 0.5f), movement.y * (speed - 0.5f));
+        else rb.velocity = new Vector2(movement.x * speed, movement.y * speed);
     }
     private IEnumerator Dash()
     {

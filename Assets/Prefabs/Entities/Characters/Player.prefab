@@ -321,5 +321,5 @@ MonoBehaviour:
   WeaponEvo: 0
   speed: 2.5
   isDashing: 0
-  damage: 1
-  attackRange: 1
+  damage: 2
+  attackRange: 0.5
