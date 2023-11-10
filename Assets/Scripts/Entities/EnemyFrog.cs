@@ -8,7 +8,7 @@ public class EnemyFrog : MonoBehaviour
     public float speed;
     public float enemyHP = 4;
 
-    float attackCooldown = 0;
+    float shootCooldown = 0;
     float dashCooldown = 0;
 
     void Start()
@@ -21,7 +21,7 @@ public class EnemyFrog : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, new Vector2(Player.gameObject.transform.position.x, Player.gameObject.transform.position.y + 0.5f), speed * Time.deltaTime);
 
         // Cooldown
-        if (attackCooldown < 1) attackCooldown += Time.deltaTime;
+        if (shootCooldown < 1) shootCooldown += Time.deltaTime;
         if (dashCooldown > 0) dashCooldown -= Time.deltaTime;
     }
 
