@@ -192,13 +192,6 @@ public class Player : MonoBehaviour
         if (Hearts <= 0) Death();
     }
 
-    void OnDrawGizmosSelected()
-    {
-        if (attackPoint == null) return;
-
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
-    }
-
     public void Death()
     {
         Debug.Log("YOU DIED");
