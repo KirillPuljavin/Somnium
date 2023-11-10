@@ -48,17 +48,15 @@ public class Player : MonoBehaviour
     {
         // Cooldown
         if (tpCooldown <= 1) tpCooldown += Time.deltaTime;
-        if (attackCooldown <= 0) attackCooldown += Time.deltaTime;
+        if (attackCooldown < 1) attackCooldown += Time.deltaTime;
 
         if (isDashing) return;
 
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetKeyDown(KeyCode.Mouse1) && canDash)
-        {
-            StartCoroutine(Dash());
-        }
+        if (Input.GetKeyDown(KeyCode.Mouse0) && attackCooldown >= 1) StartCoroutine(Hit());
+        if (Input.GetKeyDown(KeyCode.Mouse1) && canDash) StartCoroutine(Dash());
         if (Input.GetKeyDown(KeyCode.H)) HealPotion();
 
         animator.SetFloat("Horizontal", movement.x);
@@ -100,12 +98,16 @@ public class Player : MonoBehaviour
                 dashDirAnim = "Dash_Down";
                 break;
         }
-        if (Input.GetKeyDown(KeyCode.Mouse0) && attackCooldown >= 0) Hit();
     }
-    private void Hit()
+    private void FixedUpdate()
+    {
+        if (isDashing) return;
+        if (movement.magnitude > 1) rb.velocity = new Vector2(movement.x * (speed - 0.5f), movement.y * (speed - 0.5f));
+        else rb.velocity = new Vector2(movement.x * speed, movement.y * speed);
+    }
+    private IEnumerator Hit()
     {
         attackCooldown = 0;
-
         int randNumb = Random.Range(0, 1);
         switch (Facing)
         {
@@ -142,6 +144,7 @@ public class Player : MonoBehaviour
                 animator.Play("Attack_Down");
                 break;
         }
+        yield return new WaitForSeconds(0.2f);
 
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, 1, enemyLayers);
         foreach (Collider2D enemy in hitEnemies)
@@ -149,12 +152,6 @@ public class Player : MonoBehaviour
             if (enemy.gameObject.GetComponent<EnemyBlob>() != null) enemy.gameObject.GetComponent<EnemyBlob>().TakeDamage();
             if (enemy.gameObject.GetComponent<EnemyFrog>() != null) enemy.gameObject.GetComponent<EnemyFrog>().TakeDamage();
         }
-    }
-    private void FixedUpdate()
-    {
-        if (isDashing) return;
-        if (movement.magnitude > 1) rb.velocity = new Vector2(movement.x * (speed - 0.5f), movement.y * (speed - 0.5f));
-        else rb.velocity = new Vector2(movement.x * speed, movement.y * speed);
     }
     private IEnumerator Dash()
     {
