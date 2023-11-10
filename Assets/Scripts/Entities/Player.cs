@@ -159,18 +159,9 @@ public class Player : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (isDashing)
-        {
-            return;
-        }
-        if (movement.magnitude > 1)
-        {
-            rb.velocity = new Vector2(movement.x * (speed - 0.5f), movement.y * (speed - 0.5f));
-        }
-        else
-        {
-            rb.velocity = new Vector2(movement.x * speed, movement.y * speed);
-        }
+        if (isDashing) return;
+        if (movement.magnitude > 1) rb.velocity = new Vector2(movement.x * (speed - 0.5f), movement.y * (speed - 0.5f));
+        else rb.velocity = new Vector2(movement.x * speed, movement.y * speed);
     }
     private IEnumerator Dash()
     {
