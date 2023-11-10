@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
     Vector2 movement;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private HeartUpdate heartsHUD;
+
+    [SerializeField] private StaminaUpdate staminaBar;
     public LayerMask enemyLayers;
     public Transform attackPoint;
 
@@ -16,7 +18,8 @@ public class Player : MonoBehaviour
     public bool inDungeon = false;
     public int currRoom = 2;
     public int Hearts = 10;
-    public int Stamina;
+    public float stamina;
+    public float staminaProcent = 0;
     public int ComponentsTier2;
     public int ComponentsTier3;
     public int WeaponEvo;
@@ -25,7 +28,7 @@ public class Player : MonoBehaviour
     public bool isDashing = false;
     private float dashingPower = 12f;
     private float dashingTime = 0.3f;
-    private float dashingCooldown = 3f;
+    private float dashingCooldown = 2.7f;
     private bool canDash = true;
     string dashDirAnim = "Dash_Down";
 
@@ -49,6 +52,9 @@ public class Player : MonoBehaviour
         // Cooldown
         if (tpCooldown <= 1) tpCooldown += Time.deltaTime;
         if (attackCooldown < 1) attackCooldown += Time.deltaTime;
+        if (stamina < dashingCooldown) stamina += Time.deltaTime;
+        if (stamina < dashingCooldown) UpdateStamina();
+        
 
         if (isDashing) return;
 
@@ -167,6 +173,7 @@ public class Player : MonoBehaviour
             rb.velocity = new Vector2(movement.x * dashingPower, movement.y * dashingPower);
             animator.Play(dashDirAnim);
         }
+        stamina = 0;
         yield return new WaitForSeconds(dashingTime);
         isDashing = false;
         rb.velocity = new Vector2(0, 0);
@@ -191,7 +198,9 @@ public class Player : MonoBehaviour
 
     void UpdateStamina()
     {
-        // UI
+        staminaProcent = stamina / dashingCooldown;
+        Debug.Log("Stamina: " + staminaProcent);
+        staminaBar.transform.localScale = new Vector3(staminaProcent*250, transform.localScale.y*25, transform.localScale.z);
     }
 
     public void Death()
