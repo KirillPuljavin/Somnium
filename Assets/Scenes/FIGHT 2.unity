@@ -350,6 +350,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &633413305 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8181317451532059471, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
+  m_PrefabInstance: {fileID: 727911674}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69ce7c4d707eb68438dde61b68c1ea6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &727911674
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -557,11 +568,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6845852730796308385, guid: 4d0c754b308b705449c4446cc92a913d, type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 1561759629}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d0c754b308b705449c4446cc92a913d, type: 3}
+--- !u!50 &1561759629 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 1158800672516244121, guid: 4d0c754b308b705449c4446cc92a913d, type: 3}
+  m_PrefabInstance: {fileID: 1469108505}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1648695256 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1310512940645201084, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
@@ -585,6 +605,10 @@ PrefabInstance:
       propertyPath: heartsHUD
       value: 
       objectReference: {fileID: 1648695256}
+    - target: {fileID: 4195860284930794465, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
+      propertyPath: staminaBar
+      value: 
+      objectReference: {fileID: 633413305}
     - target: {fileID: 5446435883745518241, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
