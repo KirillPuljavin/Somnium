@@ -16,6 +16,8 @@ public class HeartUpdate : MonoBehaviour
     {
         PlayerObj = GameObject.FindWithTag("Player");
         player = PlayerObj.GetComponent<Player>();
+
+        UpdateHearts();
     }
     public void UpdateHearts()
     {
