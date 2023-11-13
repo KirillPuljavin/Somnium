@@ -6,15 +6,19 @@ using UnityEngine;
 public class EnemyBlob : MonoBehaviour
 {
     public Rigidbody2D rb;
+    public Animator animator;
+    public float speed;
+    public float enemyHP;
+    public float agroRange;
+
     private Player Player;
     private Vector3 directionToPlayer;
     private Vector3 localScale;
-    public float speed;
-    public float enemyHP = 8;
-    public Animator animator;
+
     private float oldSpeed;
-    float attackCooldown = 0;
-    float dashCooldown = 0;
+    private float attackCooldown = 0;
+    private float dashCooldown = 0;
+    private bool agro;
 
     void Start()
     {
@@ -26,24 +30,26 @@ public class EnemyBlob : MonoBehaviour
 
     void Update()
     {
+        float distance = Vector2.Distance(transform.position, Player.gameObject.transform.position);
+
+        if (distance <= agroRange) agro = true; else agro = false;
+        if (agro) MoveEnemy();
+        else
+        {
+            rb.velocity = new Vector2(0, 0);
+            animator.Play("Idle_Right");
+        }
 
         // Cooldown
         if (attackCooldown < 1) attackCooldown += Time.deltaTime;
         if (dashCooldown > 0) dashCooldown -= Time.deltaTime;
-
-
-
-        // animator.SetFloat("Horizontal", rb.velocity.x);
-        // animator.SetFloat("Vertical", rb.velocity.y);
-        // animator.SetFloat("Speed", rb.velocity.sqrMagnitude);
-        MoveEnemy();
-        Debug.Log(rb.velocity);
     }
     private void MoveEnemy()
     {
         directionToPlayer = (Player.transform.position - transform.position).normalized;
         rb.velocity = new Vector2(directionToPlayer.x, directionToPlayer.y) * speed;
     }
+
     private void LateUpdate()
     {
         if (rb.velocity.x > 0)
