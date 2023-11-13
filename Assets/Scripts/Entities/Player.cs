@@ -30,16 +30,17 @@ public class Player : MonoBehaviour
     public bool isDashing = false;
     public int damage;
     public int dashDamage;
+    public float attackCooldown;
 
+    private float attackTime;
     private float dashingPower = 12f;
     private float dashingTime = 0.3f;
     private float dashingCooldown = 2.7f;
     private bool canDash = true;
 
     private string dashDirAnim = "Dash_Down";
-    public float attackRange;
     private string Facing = "down";
-    private float attackCooldown = 0.8f;
+    public float attackRange;
 
     private float tpCooldown;
     void OnTriggerEnter2D(Collider2D collider)
@@ -47,6 +48,7 @@ public class Player : MonoBehaviour
         if (tpCooldown >= 1 && collider.gameObject.tag == "Door")
         {
             transform.position = collider.gameObject.GetComponent<DoorMechanics>().targetDoorPos;
+            currRoom = collider.gameObject.GetComponent<DoorMechanics>().roomIndex;
             tpCooldown = 0;
         }
     }
@@ -55,16 +57,16 @@ public class Player : MonoBehaviour
     {
         // Cooldown
         if (tpCooldown <= 1) tpCooldown += Time.deltaTime;
-        if (attackCooldown < 1) attackCooldown += Time.deltaTime;
+        if (attackTime <= attackCooldown) attackTime += Time.deltaTime;
         if (stamina < dashingCooldown) stamina += Time.deltaTime;
         if (stamina < dashingCooldown) UpdateStamina();
-
         if (isDashing) return;
 
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetKeyDown(KeyCode.Mouse0) && attackCooldown >= 1) StartCoroutine(Hit());
+        // Controls
+        if (Input.GetKeyDown(KeyCode.Mouse0) && attackTime >= attackCooldown) StartCoroutine(Hit());
         if (Input.GetKeyDown(KeyCode.Mouse1) && canDash) StartCoroutine(Dash());
         if (Input.GetKeyDown(KeyCode.H)) HealPotion();
 
@@ -116,7 +118,7 @@ public class Player : MonoBehaviour
     }
     private IEnumerator Hit()
     {
-        attackCooldown = 0;
+        attackTime = 0;
         int randNumb = Random.Range(0, 1);
         switch (Facing)
         {
