@@ -54,7 +54,7 @@ public class Player : MonoBehaviour
         if (attackCooldown < 1) attackCooldown += Time.deltaTime;
         if (stamina < dashingCooldown) stamina += Time.deltaTime;
         if (stamina < dashingCooldown) UpdateStamina();
-        
+
 
         if (isDashing) return;
 
