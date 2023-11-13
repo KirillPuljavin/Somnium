@@ -1660,6 +1660,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5707493149554207809, guid: a38bac27c145f9741b5776d7974f6aeb, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 68877617d08ed83478d6ce7cf103181f, type: 2}
     - target: {fileID: 6535933288907584640, guid: a38bac27c145f9741b5776d7974f6aeb, type: 3}
       propertyPath: m_Name
       value: Frog
