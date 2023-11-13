@@ -43,29 +43,16 @@ public class EnemyBlob : MonoBehaviour
         if (attackCooldown < 1) attackCooldown += Time.deltaTime;
         if (dashCooldown > 0) dashCooldown -= Time.deltaTime;
 
-        animator.SetFloat("Horizontal", localScale.x);
-        animator.SetFloat("Vertical", localScale.y);
-        animator.SetFloat("Speed", localScale.sqrMagnitude);
+        animator.SetFloat("Horizontal", rb.velocity.x);
+        animator.SetFloat("Vertical", rb.velocity.y);
+        animator.SetFloat("Speed", rb.velocity.sqrMagnitude);
     }
     private void MoveEnemy()
     {
         directionToPlayer = (Player.transform.position - transform.position).normalized;
         rb.velocity = new Vector2(directionToPlayer.x, directionToPlayer.y) * speed;
     }
-
-    private void LateUpdate()
-    {
-        if (rb.velocity.x > 0)
-        {
-            transform.localScale = new Vector3(localScale.x, localScale.y, localScale.z);
-        }
-        else if (rb.velocity.x < 0)
-        {
-            transform.localScale = new Vector3(-localScale.x, localScale.y, localScale.z);
-        }
-    }
-
-
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player") speed = 0.005f;
