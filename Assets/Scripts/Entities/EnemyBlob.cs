@@ -34,7 +34,11 @@ public class EnemyBlob : MonoBehaviour
 
         if (distance <= agroRange) agro = true; else agro = false;
         if (agro) MoveEnemy();
-        else rb.velocity = new Vector2(0, 0);
+        else
+        {
+            rb.velocity = new Vector2(0, 0);
+            animator.Play("Idle_Right");
+        }
 
         // Cooldown
         if (attackCooldown < 1) attackCooldown += Time.deltaTime;
