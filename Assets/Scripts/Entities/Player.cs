@@ -203,10 +203,11 @@ public class Player : MonoBehaviour
     void UpdateStamina()
     {
         staminaProcent = stamina / dashingCooldown;
-        staminaBar.transform.localScale = new Vector3(transform.localScale.x * 25, transform.localScale.y * 25, transform.localScale.z);
-        staminaMask.transform.localScale = new Vector3(staminaProcent * 250, transform.localPosition.y * 25, transform.localPosition.z);
 
-        staminaMask.transform.localPosition = new Vector3(staminaProcent * 125 + 25, transform.localPosition.y - 125, transform.localPosition.z);
+        staminaBar.transform.localScale = new Vector3(transform.localScale.x * 25, transform.localScale.y * 25, transform.localScale.z);
+
+        staminaMask.transform.localScale = new Vector3(staminaProcent * 250, transform.localPosition.y * 25, transform.localPosition.z);
+        staminaMask.transform.localPosition = new Vector3(staminaProcent * 125 + 25, transform.localPosition.y - 100, transform.localPosition.z);
     }
 
     public void Death()
