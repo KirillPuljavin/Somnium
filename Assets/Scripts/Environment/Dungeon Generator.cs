@@ -11,7 +11,7 @@ public class DungeonGenerator : MonoBehaviour
     private DungeonPreset currentPreset;
 
     public GameObject passagePrefab;
-    public GameObject roomPrefab;
+    public GameObject[] roomPrefabs;
     public GameObject doorPrefab;
     public Transform doorParent;
 
@@ -33,9 +33,12 @@ public class DungeonGenerator : MonoBehaviour
         else currentPreset = new Dungeon2();
 
         // Setup Rooms
+        roomPrefabs = Resources.LoadAll<GameObject>("/Assets/Prefabs/Map/Rooms");
+        Debug.Log(roomPrefabs.Length);
         foreach (var roomIndex in currentPreset.roomsAvailable)
         {
-            GameObject newRoom = Instantiate(roomPrefab, new Vector3(CalculateRoomPosition(roomIndex).x, CalculateRoomPosition(roomIndex).y, 0f), Quaternion.identity, transform.GetChild(roomIndex).transform);
+            int roomX = Random.Range(0, roomPrefabs.Length);
+            GameObject newRoom = Instantiate(roomPrefabs[roomX], new Vector3(CalculateRoomPosition(roomIndex).x, CalculateRoomPosition(roomIndex).y, 0f), Quaternion.identity, transform.GetChild(roomIndex).transform);
             RoomsInDungeon[roomIndex] = newRoom;
         }
 
