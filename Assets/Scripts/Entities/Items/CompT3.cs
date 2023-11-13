@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CompT2 : MonoBehaviour
+public class CompT3 : MonoBehaviour
 {
 
     private Player player;
@@ -23,7 +23,7 @@ public class CompT2 : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            player.ComponentsTier2++;
+            player.ComponentsTier3++;
             Destroy(gameObject);
         }
     }

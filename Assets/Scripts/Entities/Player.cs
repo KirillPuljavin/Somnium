@@ -216,4 +216,5 @@ public class Player : MonoBehaviour
         Debug.Log("YOU DIED");
         Destroy(gameObject);
     }
+    
 }
