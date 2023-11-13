@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: 32ef19d8deb64bf46b7efa6895534e27, type: 3}
+  m_Sprite: {fileID: -1945244938, guid: 834dbec1a62499648a919928fbcff6c6, type: 3}
   m_Color: {r: 0.085280865, g: 0.4056604, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -120,7 +120,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4878284003151342829}
   - component: {fileID: 3319313218856008162}
-  - component: {fileID: 1830552354560316082}
+  - component: {fileID: 9081140504178458426}
   - component: {fileID: 2686352599277428024}
   m_Layer: 6
   m_Name: Frog
@@ -163,11 +163,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flyPrefab: {fileID: 5440715981286148443, guid: c91e3e63063e64947885a87609c37719, type: 3}
   rb: {fileID: 0}
+  animator: {fileID: 5707493149554207809}
   speed: 0.7
   enemyHP: 4
-  agroRange: 10
---- !u!70 &1830552354560316082
-CapsuleCollider2D:
+  agroRange: 8
+--- !u!61 &9081140504178458426
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -198,9 +199,19 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.5}
-  m_Size: {x: 1, y: 1}
-  m_Direction: 1
+  m_Offset: {x: -0.005419135, y: 0.14386813}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.5750494, y: 0.33758792}
+  m_EdgeRadius: 0
 --- !u!50 &2686352599277428024
 Rigidbody2D:
   serializedVersion: 4
