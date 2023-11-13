@@ -37,12 +37,15 @@ public class EnemyBlob : MonoBehaviour
         else
         {
             rb.velocity = new Vector2(0, 0);
-            animator.Play("Idle_Right");
         }
 
         // Cooldown
         if (attackCooldown < 1) attackCooldown += Time.deltaTime;
         if (dashCooldown > 0) dashCooldown -= Time.deltaTime;
+
+        animator.SetFloat("Horizontal", localScale.x);
+        animator.SetFloat("Vertical", localScale.y);
+        animator.SetFloat("Speed", localScale.sqrMagnitude);
     }
     private void MoveEnemy()
     {
