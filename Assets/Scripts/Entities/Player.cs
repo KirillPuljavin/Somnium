@@ -9,6 +9,10 @@ public class Player : MonoBehaviour
     Vector2 movement;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private HeartUpdate heartsHUD;
+
+    [SerializeField] private GameObject staminaBar;
+
+    [SerializeField] private GameObject staminaMask;
     public LayerMask enemyLayers;
     public Transform attackPoint;
 
@@ -16,7 +20,8 @@ public class Player : MonoBehaviour
     public bool inDungeon = false;
     public int currRoom = 2;
     public int Hearts = 10;
-    public int Stamina;
+    public float stamina;
+    public float staminaProcent = 0;
     public int ComponentsTier2;
     public int ComponentsTier3;
     public int WeaponEvo;
@@ -25,14 +30,16 @@ public class Player : MonoBehaviour
     public bool isDashing = false;
     private float dashingPower = 12f;
     private float dashingTime = 0.3f;
-    private float dashingCooldown = 3f;
+    private float dashingCooldown = 2.7f;
     private bool canDash = true;
     string dashDirAnim = "Dash_Down";
 
     public int damage;
+    public int dashDamage;
+
     public float attackRange;
     private string Facing = "down";
-    private float attackCooldown = 0; // Set in Hit();
+    private float attackCooldown = 0.8f;
 
     private float tpCooldown;
     void OnTriggerEnter2D(Collider2D collider)
@@ -48,17 +55,18 @@ public class Player : MonoBehaviour
     {
         // Cooldown
         if (tpCooldown <= 1) tpCooldown += Time.deltaTime;
-        if (attackCooldown > 0) attackCooldown -= Time.deltaTime;
+        if (attackCooldown < 1) attackCooldown += Time.deltaTime;
+        if (stamina < dashingCooldown) stamina += Time.deltaTime;
+        if (stamina < dashingCooldown) UpdateStamina();
+
 
         if (isDashing) return;
 
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetKeyDown(KeyCode.Mouse1) && canDash)
-        {
-            StartCoroutine(Dash());
-        }
+        if (Input.GetKeyDown(KeyCode.Mouse0) && attackCooldown >= 1) StartCoroutine(Hit());
+        if (Input.GetKeyDown(KeyCode.Mouse1) && canDash) StartCoroutine(Dash());
         if (Input.GetKeyDown(KeyCode.H)) HealPotion();
 
         animator.SetFloat("Horizontal", movement.x);
@@ -100,12 +108,16 @@ public class Player : MonoBehaviour
                 dashDirAnim = "Dash_Down";
                 break;
         }
-        if (Input.GetKeyDown(KeyCode.Mouse0) && attackCooldown <= 0) Hit();
     }
-    private void Hit()
+    private void FixedUpdate()
     {
-        attackCooldown = 0.8f;
-
+        if (isDashing) return;
+        if (movement.magnitude > 1) rb.velocity = new Vector2(movement.x * (speed - 0.5f), movement.y * (speed - 0.5f));
+        else rb.velocity = new Vector2(movement.x * speed, movement.y * speed);
+    }
+    private IEnumerator Hit()
+    {
+        attackCooldown = 0;
         int randNumb = Random.Range(0, 1);
         switch (Facing)
         {
@@ -142,19 +154,14 @@ public class Player : MonoBehaviour
                 animator.Play("Attack_Down");
                 break;
         }
+        yield return new WaitForSeconds(0.2f);
 
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, 1, enemyLayers);
         foreach (Collider2D enemy in hitEnemies)
         {
-            if (enemy.gameObject.GetComponent<EnemyBlob>() != null) enemy.gameObject.GetComponent<EnemyBlob>().TakeDamage();
-            if (enemy.gameObject.GetComponent<EnemyFrog>() != null) enemy.gameObject.GetComponent<EnemyFrog>().TakeDamage();
+            if (enemy.gameObject.GetComponent<EnemyBlob>() != null) enemy.gameObject.GetComponent<EnemyBlob>().TakeDamage(damage);
+            if (enemy.gameObject.GetComponent<EnemyFrog>() != null) enemy.gameObject.GetComponent<EnemyFrog>().TakeDamage(damage);
         }
-    }
-    private void FixedUpdate()
-    {
-        if (isDashing) return;
-        if (movement.magnitude > 1) rb.velocity = new Vector2(movement.x * (speed - 0.5f), movement.y * (speed - 0.5f));
-        else rb.velocity = new Vector2(movement.x * speed, movement.y * speed);
     }
     private IEnumerator Dash()
     {
@@ -170,6 +177,7 @@ public class Player : MonoBehaviour
             rb.velocity = new Vector2(movement.x * dashingPower, movement.y * dashingPower);
             animator.Play(dashDirAnim);
         }
+        stamina = 0;
         yield return new WaitForSeconds(dashingTime);
         isDashing = false;
         rb.velocity = new Vector2(0, 0);
@@ -190,6 +198,16 @@ public class Player : MonoBehaviour
         heartsHUD.UpdateHearts();
 
         if (Hearts <= 0) Death();
+    }
+
+    void UpdateStamina()
+    {
+        staminaProcent = stamina / dashingCooldown;
+
+        staminaBar.transform.localScale = new Vector3(transform.localScale.x * 25, transform.localScale.y * 25, transform.localScale.z);
+
+        staminaMask.transform.localScale = new Vector3(staminaProcent * 250, transform.localPosition.y * 25, transform.localPosition.z);
+        staminaMask.transform.localPosition = new Vector3(staminaProcent * 125 + 25, transform.localPosition.y - 100, transform.localPosition.z);
     }
 
     public void Death()

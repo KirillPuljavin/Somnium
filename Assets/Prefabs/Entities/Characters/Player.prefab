@@ -308,6 +308,8 @@ MonoBehaviour:
   animator: {fileID: 7539349131257505368}
   rb: {fileID: 7078594632026464168}
   heartsHUD: {fileID: 0}
+  staminaBar: {fileID: 0}
+  staminaMask: {fileID: 0}
   enemyLayers:
     serializedVersion: 2
     m_Bits: 64
@@ -315,11 +317,13 @@ MonoBehaviour:
   inDungeon: 0
   currRoom: 2
   Hearts: 10
-  Stamina: 0
+  stamina: 0
+  staminaProcent: 0
   ComponentsTier2: 0
   ComponentsTier3: 0
   WeaponEvo: 0
   speed: 2.5
   isDashing: 0
   damage: 2
+  dashDamage: 4
   attackRange: 0.5

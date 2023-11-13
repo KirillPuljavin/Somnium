@@ -1,15 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
 using UnityEngine;
 
 public class EnemyFrog : MonoBehaviour
 {
+    public GameObject flyPrefab;
     Player Player;
     public float speed;
-    public float enemyHP = 4;
+    public float enemyHP;
+    public float agroRange;
 
-    float attackCooldown = 0;
-    float dashCooldown = 0;
+
+    private bool agro;
+    private float closeRange = 4;
+    private float shootCooldown = 0;
+    private float dashCooldown = 0;
 
     void Start()
     {
@@ -18,11 +24,27 @@ public class EnemyFrog : MonoBehaviour
 
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, new Vector2(Player.gameObject.transform.position.x, Player.gameObject.transform.position.y + 0.5f), speed * Time.deltaTime);
+        float distance = Vector2.Distance(transform.position, Player.gameObject.transform.position);
+
+        if (distance <= agroRange) agro = true; else agro = false;
+        if (distance >= closeRange && agro)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, new Vector2(Player.gameObject.transform.position.x, Player.gameObject.transform.position.y + 0.5f), speed * Time.deltaTime);
+        }
 
         // Cooldown
-        if (attackCooldown < 1) attackCooldown += Time.deltaTime;
+        if (shootCooldown <= 4) shootCooldown += Time.deltaTime;
         if (dashCooldown > 0) dashCooldown -= Time.deltaTime;
+
+        if (shootCooldown >= 1 && agro) Shoot();
+    }
+
+    void Shoot()
+    {
+        shootCooldown = 0;
+
+        // Instantiate a fly
+        GameObject fly = Instantiate(flyPrefab, transform.position, Quaternion.identity);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -37,7 +59,7 @@ public class EnemyFrog : MonoBehaviour
         // Dash Take Damage
         if (collider.gameObject.tag == "dashHitbox" && dashCooldown <= 0 && Player.isDashing)
         {
-            TakeDamage();
+            TakeDamage(Player.dashDamage);
             dashCooldown = 0.5f;
         }
     }
@@ -49,9 +71,9 @@ public class EnemyFrog : MonoBehaviour
         }
     }
 
-    public void TakeDamage()
+    public void TakeDamage(int amount)
     {
-        enemyHP -= Player.damage;
+        enemyHP -= amount;
 
         if (enemyHP <= 0)
         {
