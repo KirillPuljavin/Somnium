@@ -28,7 +28,7 @@ RectTransform:
   m_GameObject: {fileID: 3563160528595184985}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8377128762552628638}
@@ -51,10 +51,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddaece45ef360034698ba099ca055d46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
+  rb: {fileID: 1158800672516244121}
   speed: 0.5
   enemyHP: 8
-  animator: {fileID: 0}
+  animator: {fileID: 5390512736680521591}
 --- !u!70 &986158315572252183
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -87,8 +87,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0000000062957426, y: 0.4471876}
-  m_Size: {x: 1.0000002, y: 0.9}
+  m_Offset: {x: -0.05231498, y: 0.19084471}
+  m_Size: {x: 0.5605604, y: 0.47102857}
   m_Direction: 1
 --- !u!50 &1158800672516244121
 Rigidbody2D:
@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 3224518204555280323}
   - component: {fileID: 5390512736680521591}
   m_Layer: 6
-  m_Name: Sprite
+  m_Name: BlobSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -195,8 +195,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 32ef19d8deb64bf46b7efa6895534e27, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 186036701, guid: cdc5a2961ea619147bc14790949149a5, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -216,7 +216,7 @@ Animator:
   m_GameObject: {fileID: 6833761153160537416}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4427780be78372144a9ce33fb564f128, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
