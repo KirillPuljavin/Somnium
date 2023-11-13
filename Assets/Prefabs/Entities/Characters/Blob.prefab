@@ -28,8 +28,8 @@ RectTransform:
   m_GameObject: {fileID: 3563160528595184985}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.4999999, y: 1.4999999, z: 1.4999999}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8377128762552628638}
   m_Father: {fileID: 0}
@@ -52,9 +52,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1158800672516244121}
-  speed: 0.5
-  enemyHP: 8
   animator: {fileID: 5390512736680521591}
+  speed: 2
+  enemyHP: 8
+  agroRange: 8
 --- !u!70 &986158315572252183
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -87,8 +88,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.05231498, y: 0.19084471}
-  m_Size: {x: 0.5605604, y: 0.47102857}
+  m_Offset: {x: -0.06030037, y: 0.1322833}
+  m_Size: {x: 0.5445907, y: 0.35390815}
   m_Direction: 1
 --- !u!50 &1158800672516244121
 Rigidbody2D:
@@ -152,7 +153,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!212 &3224518204555280323
 SpriteRenderer:
@@ -194,7 +195,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 186036701, guid: cdc5a2961ea619147bc14790949149a5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

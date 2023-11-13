@@ -78,7 +78,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 1542228921, guid: 4dcd145311f12594f9f8914d6f0014ce, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -200,9 +200,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5446435883745518241}
+  - component: {fileID: 4195860284930794465}
   - component: {fileID: 7078594632026464168}
   - component: {fileID: 2670255446649554775}
-  - component: {fileID: 4195860284930794465}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -219,8 +219,8 @@ RectTransform:
   m_GameObject: {fileID: 6607715729755257798}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2.2, y: 2.2, z: 1.1}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8033547166841850316}
   - {fileID: 5117390771748221489}
@@ -231,6 +231,41 @@ RectTransform:
   m_AnchoredPosition: {x: -2.063, y: -0.457}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0}
+--- !u!114 &4195860284930794465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6607715729755257798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4323c6570afb6a246bb9e313437a611d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 7539349131257505368}
+  rb: {fileID: 7078594632026464168}
+  heartsHUD: {fileID: 0}
+  staminaBar: {fileID: 0}
+  staminaMask: {fileID: 0}
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  attackPoint: {fileID: 5117390771748221489}
+  inDungeon: 0
+  currRoom: 2
+  Hearts: 10
+  stamina: 0
+  staminaProcent: 0
+  ComponentsTier2: 0
+  ComponentsTier3: 0
+  WeaponEvo: 0
+  speed: 3.5
+  isDashing: 0
+  damage: 2
+  dashDamage: 4
+  attackCooldown: 0.7
+  attackRange: 0.5
 --- !u!50 &7078594632026464168
 Rigidbody2D:
   serializedVersion: 4
@@ -290,40 +325,6 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.027464228, y: 0.13991608}
-  m_Size: {x: 0.34584606, y: 0.23376319}
+  m_Offset: {x: -0.010067339, y: 0.07017847}
+  m_Size: {x: 0.35537198, y: 0.19307916}
   m_Direction: 1
---- !u!114 &4195860284930794465
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6607715729755257798}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4323c6570afb6a246bb9e313437a611d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 7539349131257505368}
-  rb: {fileID: 7078594632026464168}
-  heartsHUD: {fileID: 0}
-  staminaBar: {fileID: 0}
-  staminaMask: {fileID: 0}
-  enemyLayers:
-    serializedVersion: 2
-    m_Bits: 64
-  attackPoint: {fileID: 5117390771748221489}
-  inDungeon: 0
-  currRoom: 2
-  Hearts: 10
-  stamina: 0
-  staminaProcent: 0
-  ComponentsTier2: 0
-  ComponentsTier3: 0
-  WeaponEvo: 0
-  speed: 2.5
-  isDashing: 0
-  damage: 2
-  dashDamage: 4
-  attackRange: 0.5

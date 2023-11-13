@@ -6,11 +6,15 @@ using UnityEngine;
 public class EnemyFrog : MonoBehaviour
 {
     public GameObject flyPrefab;
-    Player Player;
+    public Rigidbody2D rb;
+    public Animator animator;
     public float speed;
     public float enemyHP;
     public float agroRange;
 
+    private Player Player;
+    private Vector3 directionToPlayer;
+    private Vector3 localScale;
 
     private bool agro;
     private float closeRange = 4;
@@ -20,6 +24,8 @@ public class EnemyFrog : MonoBehaviour
     void Start()
     {
         Player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        rb = GetComponent<Rigidbody2D>();
+        localScale = transform.localScale;
     }
 
     void Update()
@@ -27,16 +33,38 @@ public class EnemyFrog : MonoBehaviour
         float distance = Vector2.Distance(transform.position, Player.gameObject.transform.position);
 
         if (distance <= agroRange) agro = true; else agro = false;
-        if (distance >= closeRange && agro)
+        if (distance >= closeRange && agro) MoveEnemy();
+        else
         {
-            transform.position = Vector3.MoveTowards(transform.position, new Vector2(Player.gameObject.transform.position.x, Player.gameObject.transform.position.y + 0.5f), speed * Time.deltaTime);
+            rb.velocity = new Vector2(0, 0);
+            animator.Play("Idle_Right");
         }
 
         // Cooldown
         if (shootCooldown <= 4) shootCooldown += Time.deltaTime;
         if (dashCooldown > 0) dashCooldown -= Time.deltaTime;
 
-        if (shootCooldown >= 1 && agro) Shoot();
+        if (shootCooldown >= 4 && agro) Shoot();
+        
+        animator.SetFloat("Horizontal", rb.velocity.x);
+        animator.SetFloat("Vertical", rb.velocity.y);
+        animator.SetFloat("Speed", rb.velocity.sqrMagnitude);
+    }
+    private void MoveEnemy()
+    {
+        directionToPlayer = (Player.transform.position - transform.position).normalized;
+        rb.velocity = new Vector2(directionToPlayer.x, directionToPlayer.y) * speed;
+    }
+    private void LateUpdate()
+    {
+        if (rb.velocity.x > 0)
+        {
+            transform.localScale = new Vector3(localScale.x, localScale.y, localScale.z);
+        }
+        else if (rb.velocity.x < 0)
+        {
+            transform.localScale = new Vector3(-localScale.x, localScale.y, localScale.z);
+        }
     }
 
     void Shoot()
