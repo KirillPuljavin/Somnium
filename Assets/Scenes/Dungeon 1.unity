@@ -1581,6 +1581,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 80923008}
     - target: {fileID: 4195860284930794465, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
+      propertyPath: dashDamage
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4195860284930794465, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
       propertyPath: staminaBar
       value: 
       objectReference: {fileID: 148003508}

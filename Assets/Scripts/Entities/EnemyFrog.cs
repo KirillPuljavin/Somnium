@@ -59,7 +59,7 @@ public class EnemyFrog : MonoBehaviour
         // Dash Take Damage
         if (collider.gameObject.tag == "dashHitbox" && dashCooldown <= 0 && Player.isDashing)
         {
-            TakeDamage();
+            TakeDamage(Player.dashDamage);
             dashCooldown = 0.5f;
         }
     }
@@ -71,9 +71,9 @@ public class EnemyFrog : MonoBehaviour
         }
     }
 
-    public void TakeDamage()
+    public void TakeDamage(int amount)
     {
-        enemyHP -= Player.damage;
+        enemyHP -= amount;
 
         if (enemyHP <= 0)
         {
