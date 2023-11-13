@@ -28,15 +28,15 @@ public class Player : MonoBehaviour
 
     public float speed;
     public bool isDashing = false;
+    public int damage;
+    public int dashDamage;
+
     private float dashingPower = 12f;
     private float dashingTime = 0.3f;
     private float dashingCooldown = 2.7f;
     private bool canDash = true;
-    string dashDirAnim = "Dash_Down";
 
-    public int damage;
-    public int dashDamage;
-
+    private string dashDirAnim = "Dash_Down";
     public float attackRange;
     private string Facing = "down";
     private float attackCooldown = 0.8f;
@@ -58,7 +58,6 @@ public class Player : MonoBehaviour
         if (attackCooldown < 1) attackCooldown += Time.deltaTime;
         if (stamina < dashingCooldown) stamina += Time.deltaTime;
         if (stamina < dashingCooldown) UpdateStamina();
-
 
         if (isDashing) return;
 
@@ -206,8 +205,8 @@ public class Player : MonoBehaviour
 
         staminaBar.transform.localScale = new Vector3(transform.localScale.x * 25, transform.localScale.y * 25, transform.localScale.z);
 
-        staminaMask.transform.localScale = new Vector3(staminaProcent * 500, transform.localScale.y*25, transform.localScale.z);
-       
+        staminaMask.transform.localScale = new Vector3(staminaProcent * 500, transform.localScale.y * 25, transform.localScale.z);
+
     }
 
     public void Death()
