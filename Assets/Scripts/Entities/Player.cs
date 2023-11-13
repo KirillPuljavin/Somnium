@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     [SerializeField] private HeartUpdate heartsHUD;
 
     [SerializeField] private StaminaUpdate staminaBar;
+
+    [SerializeField] private GameObject staminaMask;
     public LayerMask enemyLayers;
     public Transform attackPoint;
 
@@ -200,8 +202,10 @@ public class Player : MonoBehaviour
     {
 
         staminaProcent = stamina / dashingCooldown;
-        staminaBar.transform.localScale = new Vector3(staminaProcent * 250, transform.localScale.y * 25, transform.localScale.z);
-        staminaBar.transform.localPosition = new Vector3(staminaProcent * 125 + 25, transform.localPosition.y - 125, transform.localPosition.z);        
+        staminaBar.transform.localScale = new Vector3(transform.localScale.x * 250, transform.localScale.y * 25, transform.localScale.z);
+        staminaMask.transform.localScale = new Vector3(staminaProcent * 250, transform.localPosition.y * 25, transform.localPosition.z);
+
+        staminaMask.transform.localPosition = new Vector3(staminaProcent * 125 + 25, transform.localPosition.y - 125, transform.localPosition.z);        
     }
 
     public void Death()
