@@ -45,6 +45,10 @@ public class EnemyFrog : MonoBehaviour
         if (dashCooldown > 0) dashCooldown -= Time.deltaTime;
 
         if (shootCooldown >= 4 && agro) Shoot();
+        
+        animator.SetFloat("Horizontal", rb.velocity.x);
+        animator.SetFloat("Vertical", rb.velocity.y);
+        animator.SetFloat("Speed", rb.velocity.sqrMagnitude);
     }
     private void MoveEnemy()
     {
