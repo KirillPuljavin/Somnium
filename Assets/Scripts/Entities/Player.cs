@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private HeartUpdate heartsHUD;
 
-    [SerializeField] private StaminaUpdate staminaBar;
+    [SerializeField] private GameObject staminaBar;
 
     [SerializeField] private GameObject staminaMask;
     public LayerMask enemyLayers;
