@@ -9,10 +9,13 @@ public class EnemyFrog : MonoBehaviour
     Player Player;
     public float speed;
     public float enemyHP;
-    public int range;
+    public float agroRange;
 
-    float shootCooldown = 0;
-    float dashCooldown = 0;
+
+    private bool agro;
+    private float closeRange = 4;
+    private float shootCooldown = 0;
+    private float dashCooldown = 0;
 
     void Start()
     {
@@ -21,18 +24,25 @@ public class EnemyFrog : MonoBehaviour
 
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, new Vector2(Player.gameObject.transform.position.x, Player.gameObject.transform.position.y + 0.5f), speed * Time.deltaTime);
+        float distance = Vector2.Distance(transform.position, Player.gameObject.transform.position);
+
+        if (distance <= agroRange) agro = true; else agro = false;
+        if (distance >= closeRange && agro)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, new Vector2(Player.gameObject.transform.position.x, Player.gameObject.transform.position.y + 0.5f), speed * Time.deltaTime);
+        }
 
         // Cooldown
-        if (shootCooldown < 1) shootCooldown += Time.deltaTime;
+        if (shootCooldown <= 4) shootCooldown += Time.deltaTime;
         if (dashCooldown > 0) dashCooldown -= Time.deltaTime;
 
-        bool inRange = false;
-        if (shootCooldown >= 1) Shoot();
+        if (shootCooldown >= 1 && agro) Shoot();
     }
 
     void Shoot()
     {
+        shootCooldown = 0;
+
         // Instantiate a fly
         GameObject fly = Instantiate(flyPrefab, transform.position, Quaternion.identity);
     }
