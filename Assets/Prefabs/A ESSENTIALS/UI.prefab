@@ -10,8 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 798875851938051453}
   - component: {fileID: 8950236129881626411}
-  - component: {fileID: 8181317451532059471}
-  - component: {fileID: 385444582705323876}
   m_Layer: 0
   m_Name: Stamina
   m_TagString: Untagged
@@ -78,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 23
   m_Sprite: {fileID: 21300000, guid: 32ef19d8deb64bf46b7efa6895534e27, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -90,30 +88,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 1
   m_SpriteSortPoint: 0
---- !u!114 &8181317451532059471
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 560572297645400585}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69ce7c4d707eb68438dde61b68c1ea6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &385444582705323876
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 560572297645400585}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69ce7c4d707eb68438dde61b68c1ea6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2057488125095240392
 GameObject:
   m_ObjectHideFlags: 0

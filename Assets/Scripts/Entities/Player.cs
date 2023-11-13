@@ -35,6 +35,8 @@ public class Player : MonoBehaviour
     string dashDirAnim = "Dash_Down";
 
     public int damage;
+    public int dashDamage;
+
     public float attackRange;
     private string Facing = "down";
     private float attackCooldown = 0.8f;
@@ -157,8 +159,8 @@ public class Player : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, 1, enemyLayers);
         foreach (Collider2D enemy in hitEnemies)
         {
-            if (enemy.gameObject.GetComponent<EnemyBlob>() != null) enemy.gameObject.GetComponent<EnemyBlob>().TakeDamage();
-            if (enemy.gameObject.GetComponent<EnemyFrog>() != null) enemy.gameObject.GetComponent<EnemyFrog>().TakeDamage();
+            if (enemy.gameObject.GetComponent<EnemyBlob>() != null) enemy.gameObject.GetComponent<EnemyBlob>().TakeDamage(damage);
+            if (enemy.gameObject.GetComponent<EnemyFrog>() != null) enemy.gameObject.GetComponent<EnemyFrog>().TakeDamage(damage);
         }
     }
     private IEnumerator Dash()

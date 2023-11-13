@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemyBlob : MonoBehaviour
 {
     public Rigidbody2D rb;
-    private Player player;
+    private Player Player;
     private Vector3 directionToPlayer;
     private Vector3 localScale;
     public float speed;
@@ -15,10 +15,10 @@ public class EnemyBlob : MonoBehaviour
     private float oldSpeed;
     float attackCooldown = 0;
     float dashCooldown = 0;
-    
+
     void Start()
     {
-        player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        Player = GameObject.FindWithTag("Player").GetComponent<Player>();
         oldSpeed = speed;
         rb = GetComponent<Rigidbody2D>();
         localScale = transform.localScale;
@@ -31,7 +31,7 @@ public class EnemyBlob : MonoBehaviour
         if (attackCooldown < 1) attackCooldown += Time.deltaTime;
         if (dashCooldown > 0) dashCooldown -= Time.deltaTime;
 
-        
+
 
         // animator.SetFloat("Horizontal", rb.velocity.x);
         // animator.SetFloat("Vertical", rb.velocity.y);
@@ -41,7 +41,7 @@ public class EnemyBlob : MonoBehaviour
     }
     private void MoveEnemy()
     {
-        directionToPlayer = (player.transform.position - transform.position).normalized;
+        directionToPlayer = (Player.transform.position - transform.position).normalized;
         rb.velocity = new Vector2(directionToPlayer.x, directionToPlayer.y) * speed;
     }
     private void LateUpdate()
@@ -66,17 +66,17 @@ public class EnemyBlob : MonoBehaviour
         // Attack Player
         if (collider.gameObject.tag == "Player" && attackCooldown >= 1)
         {
-            if (!player.isDashing)
+            if (!Player.isDashing)
             {
-                player.TakeDamage(1);
+                Player.TakeDamage(1);
                 attackCooldown = 0;
                 animator.Play("Attack_Right");
             }
         }
         // Dash Take Damage
-        if (collider.gameObject.tag == "dashHitbox" && dashCooldown <= 0 && player.isDashing)
+        if (collider.gameObject.tag == "dashHitbox" && dashCooldown <= 0 && Player.isDashing)
         {
-            TakeDamage();
+            TakeDamage(Player.dashDamage);
             dashCooldown = 0.5f;
         }
     }
@@ -85,9 +85,9 @@ public class EnemyBlob : MonoBehaviour
         if (collision.gameObject.tag == "Player") speed = oldSpeed;
     }
 
-    public void TakeDamage()
+    public void TakeDamage(int amount)
     {
-        enemyHP -= player.damage;
+        enemyHP -= amount;
 
         if (enemyHP <= 0)
         {
