@@ -7,6 +7,7 @@ public class EnemyFrog : MonoBehaviour
 {
     public GameObject flyPrefab;
     public Rigidbody2D rb;
+    public Animator animator;
     public float speed;
     public float enemyHP;
     public float agroRange;
@@ -32,8 +33,12 @@ public class EnemyFrog : MonoBehaviour
         float distance = Vector2.Distance(transform.position, Player.gameObject.transform.position);
 
         if (distance <= agroRange) agro = true; else agro = false;
-        if (agro) MoveEnemy();
-        else rb.velocity = new Vector2(0, 0);
+        if (distance >= closeRange && agro) MoveEnemy();
+        else
+        {
+            rb.velocity = new Vector2(0, 0);
+            animator.Play("Idle_Right");
+        }
 
         // Cooldown
         if (shootCooldown <= 4) shootCooldown += Time.deltaTime;
