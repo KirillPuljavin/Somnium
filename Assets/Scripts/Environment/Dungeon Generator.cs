@@ -28,7 +28,9 @@ public class DungeonGenerator : MonoBehaviour
                 RoomGrid[x, y] = room;
             }
         }
-        currentPreset = new Dungeon1();
+        int r = Random.Range(0, 2);
+        if (r == 0) currentPreset = new Dungeon1();
+        else currentPreset = new Dungeon2();
 
         // Setup Rooms
         foreach (var roomIndex in currentPreset.roomsAvailable)
@@ -196,22 +198,31 @@ public class Dungeon2 : DungeonPreset
     public Dungeon2()
     {
         positionBossTransitionRoom = 28;
-        positionUpgrade1 = 0;
-        positionUpgrade2 = 0;
+        positionUpgrade1 = 5;
+        positionUpgrade2 = 15;
 
-        passages.Add(new Passage(0, 0));
-        passages.Add(new Passage(0, 0));
-        passages.Add(new Passage(0, 0));
-        passages.Add(new Passage(0, 0));
-        passages.Add(new Passage(0, 0));
-        passages.Add(new Passage(0, 0));
-        passages.Add(new Passage(0, 0));
-        passages.Add(new Passage(0, 0));
-        passages.Add(new Passage(0, 0));
-        passages.Add(new Passage(0, 0));
-        passages.Add(new Passage(0, 0));
-        passages.Add(new Passage(0, 0));
-        passages.Add(new Passage(0, 0));
-        passages.Add(new Passage(0, 0));
+        passages.Add(new Passage(2, 1));
+        passages.Add(new Passage(2, 7));
+        passages.Add(new Passage(7, 6));
+        passages.Add(new Passage(6, 5));
+        passages.Add(new Passage(7, 8));
+        passages.Add(new Passage(6, 11));
+        passages.Add(new Passage(8, 13));
+        passages.Add(new Passage(11, 16));
+        passages.Add(new Passage(13, 18));
+        passages.Add(new Passage(16, 15));
+        passages.Add(new Passage(16, 17));
+        passages.Add(new Passage(17, 18));
+        passages.Add(new Passage(18, 19));
+        passages.Add(new Passage(17, 22));
+        passages.Add(new Passage(22, 23));
+        passages.Add(new Passage(23, 28));
+        passages.Add(new Passage(28, 27));
+
+        foreach (var connection in passages)
+        {
+            roomsAvailable.Add(connection.roomIndex1);
+            roomsAvailable.Add(connection.roomIndex2);
+        }
     }
 }
