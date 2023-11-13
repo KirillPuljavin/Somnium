@@ -76,9 +76,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 979950499
-  m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 1542228921, guid: 4dcd145311f12594f9f8914d6f0014ce, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -290,8 +290,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.027464228, y: 0.13991608}
-  m_Size: {x: 0.34584606, y: 0.23376319}
+  m_Offset: {x: 0.33709076, y: 0.15905747}
+  m_Size: {x: 0.36915416, y: 0.21545415}
   m_Direction: 1
 --- !u!114 &4195860284930794465
 MonoBehaviour:
@@ -322,7 +322,7 @@ MonoBehaviour:
   ComponentsTier2: 0
   ComponentsTier3: 0
   WeaponEvo: 0
-  speed: 2.5
+  speed: 2.7
   isDashing: 0
   damage: 2
   dashDamage: 4
