@@ -198,11 +198,10 @@ public class Player : MonoBehaviour
 
     void UpdateStamina()
     {
-        //if (staminaBar == null) return; // Check if staminaBar exists
 
         staminaProcent = stamina / dashingCooldown;
-        Debug.Log("Stamina: " + staminaProcent);
         staminaBar.transform.localScale = new Vector3(staminaProcent * 250, transform.localScale.y * 25, transform.localScale.z);
+        staminaBar.transform.localPosition = new Vector3(staminaProcent * 125 + 25, transform.localPosition.y - 125, transform.localPosition.z);        
     }
 
     public void Death()
