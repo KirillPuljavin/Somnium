@@ -1680,10 +1680,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5707493149554207809, guid: a38bac27c145f9741b5776d7974f6aeb, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 68877617d08ed83478d6ce7cf103181f, type: 2}
     - target: {fileID: 6535933288907584640, guid: a38bac27c145f9741b5776d7974f6aeb, type: 3}
       propertyPath: m_Name
       value: Frog
@@ -1706,22 +1702,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 660863960}
     m_Modifications:
-    - target: {fileID: 2670255446649554775, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
-      propertyPath: m_Size.x
-      value: 0.35537198
-      objectReference: {fileID: 0}
-    - target: {fileID: 2670255446649554775, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
-      propertyPath: m_Size.y
-      value: 0.19307916
-      objectReference: {fileID: 0}
-    - target: {fileID: 2670255446649554775, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
-      propertyPath: m_Offset.x
-      value: -0.010067339
-      objectReference: {fileID: 0}
-    - target: {fileID: 2670255446649554775, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
-      propertyPath: m_Offset.y
-      value: 0.07017847
-      objectReference: {fileID: 0}
     - target: {fileID: 4195860284930794465, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
       propertyPath: heartsHUD
       value: 
@@ -1817,14 +1797,6 @@ PrefabInstance:
     - target: {fileID: 6607715729755257798, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 8033547166841850316, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8033547166841850316, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
