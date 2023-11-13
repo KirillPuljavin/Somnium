@@ -22,15 +22,14 @@ public class FrogFly : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            Debug.Log("HIT");
-            Player.TakeDamage(2);
+            Player.TakeDamage(1);
             Destroy(gameObject);
         }
     }
 
     private IEnumerator Kill()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(3);
         Destroy(gameObject);
     }
 }
