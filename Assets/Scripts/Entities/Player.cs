@@ -206,8 +206,8 @@ public class Player : MonoBehaviour
 
         staminaBar.transform.localScale = new Vector3(transform.localScale.x * 25, transform.localScale.y * 25, transform.localScale.z);
 
-        staminaMask.transform.localScale = new Vector3(staminaProcent * 250, transform.localPosition.y * 25, transform.localPosition.z);
-        staminaMask.transform.localPosition = new Vector3(staminaProcent * 125 + 25, transform.localPosition.y - 100, transform.localPosition.z);
+        staminaMask.transform.localScale = new Vector3(staminaProcent * 500, transform.localScale.y*25, transform.localScale.z);
+       
     }
 
     public void Death()
