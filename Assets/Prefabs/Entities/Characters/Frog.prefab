@@ -164,7 +164,7 @@ MonoBehaviour:
   flyPrefab: {fileID: 5440715981286148443, guid: c91e3e63063e64947885a87609c37719, type: 3}
   rb: {fileID: 0}
   animator: {fileID: 5707493149554207809}
-  speed: 0.7
+  speed: 1
   enemyHP: 4
   agroRange: 8
 --- !u!61 &9081140504178458426

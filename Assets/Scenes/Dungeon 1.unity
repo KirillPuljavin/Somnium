@@ -881,6 +881,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1191339122979532917, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2899823166677993154, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
       propertyPath: m_Name
       value: UI
@@ -1324,6 +1328,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6845852730796308385, guid: 4d0c754b308b705449c4446cc92a913d, type: 3}
+      propertyPath: speed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8377128762552628638, guid: 4d0c754b308b705449c4446cc92a913d, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8377128762552628638, guid: 4d0c754b308b705449c4446cc92a913d, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1556,6 +1572,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 660863960}
     m_Modifications:
+    - target: {fileID: 3319313218856008162, guid: a38bac27c145f9741b5776d7974f6aeb, type: 3}
+      propertyPath: speed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4024955580222247538, guid: a38bac27c145f9741b5776d7974f6aeb, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4024955580222247538, guid: a38bac27c145f9741b5776d7974f6aeb, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4024955580222247538, guid: a38bac27c145f9741b5776d7974f6aeb, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4024955580222247538, guid: a38bac27c145f9741b5776d7974f6aeb, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4878284003151342829, guid: a38bac27c145f9741b5776d7974f6aeb, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1658,6 +1694,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 660863960}
     m_Modifications:
+    - target: {fileID: 4195860284930794465, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
+      propertyPath: speed
+      value: 3.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4195860284930794465, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
       propertyPath: heartsHUD
       value: 
