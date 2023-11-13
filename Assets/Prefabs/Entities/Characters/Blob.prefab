@@ -55,7 +55,7 @@ MonoBehaviour:
   animator: {fileID: 5390512736680521591}
   speed: 1
   enemyHP: 8
-  agroRange: 10
+  agroRange: 8
 --- !u!70 &986158315572252183
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -88,8 +88,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.05231498, y: 0.19084471}
-  m_Size: {x: 0.5605604, y: 0.47102857}
+  m_Offset: {x: -0.06030037, y: 0.1322833}
+  m_Size: {x: 0.5445907, y: 0.35390815}
   m_Direction: 1
 --- !u!50 &1158800672516244121
 Rigidbody2D:
