@@ -11,6 +11,8 @@ TagManager:
   - CompT2
   - HeartsUI
   - UI
+  - HUD
+  - Card
   layers:
   - Default
   - TransparentFX
