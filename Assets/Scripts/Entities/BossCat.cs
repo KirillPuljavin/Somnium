@@ -211,7 +211,7 @@ public class BossCat : MonoBehaviour
 
     void damagePlayer()
     {
-        Debug.Log("Damage");
+        Player.TakeDamage(1);
     }
 
 }
