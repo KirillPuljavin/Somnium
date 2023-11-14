@@ -10,6 +10,8 @@ TagManager:
   - Door
   - CompT2
   - bossBasicAttack
+  - HeartsUI
+  - UI
   layers:
   - Default
   - TransparentFX
