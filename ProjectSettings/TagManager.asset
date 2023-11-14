@@ -9,6 +9,7 @@ TagManager:
   - dashHitbox
   - Door
   - CompT2
+  - bossBasicAttack
   layers:
   - Default
   - TransparentFX
