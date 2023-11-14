@@ -9,6 +9,8 @@ TagManager:
   - dashHitbox
   - Door
   - CompT2
+  - HeartsUI
+  - UI
   layers:
   - Default
   - TransparentFX
