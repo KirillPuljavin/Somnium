@@ -20,6 +20,7 @@ public class EnemyFrog : MonoBehaviour
     private float closeRange = 4;
     private float shootCooldown = 0;
     private float dashCooldown = 0;
+    private float reverseCooldown = 0.2f;
 
     void Start()
     {
@@ -33,19 +34,25 @@ public class EnemyFrog : MonoBehaviour
         float distance = Vector2.Distance(transform.position, Player.gameObject.transform.position);
 
         if (distance <= agroRange) agro = true; else agro = false;
-        if (distance >= closeRange && agro) MoveEnemy();
-        else
+        if (reverseCooldown >= 0.2)
         {
-            rb.velocity = new Vector2(0, 0);
-            animator.Play("Idle_Right");
+            speed = 1;
+            if (distance >= closeRange && agro) MoveEnemy();
+            else
+            {
+                rb.velocity = new Vector2(0, 0);
+                animator.Play("Idle_Right");
+            }
         }
 
         // Cooldown
         if (shootCooldown <= 4) shootCooldown += Time.deltaTime;
         if (dashCooldown > 0) dashCooldown -= Time.deltaTime;
+        if (reverseCooldown <= 0.2) reverseCooldown += Time.deltaTime;
+        if (reverseCooldown >= 0.2) speed = 2;
 
         if (shootCooldown >= 4 && agro) Shoot();
-        
+
         animator.SetFloat("Horizontal", rb.velocity.x);
         animator.SetFloat("Vertical", rb.velocity.y);
         animator.SetFloat("Speed", rb.velocity.sqrMagnitude);
@@ -102,6 +109,10 @@ public class EnemyFrog : MonoBehaviour
     public void TakeDamage(int amount)
     {
         enemyHP -= amount;
+        reverseCooldown = 0;
+        speed = -1;
+        directionToPlayer = (Player.transform.position - transform.position).normalized;
+        rb.velocity = new Vector2(directionToPlayer.x, directionToPlayer.y) * speed;
 
         if (enemyHP <= 0)
         {
