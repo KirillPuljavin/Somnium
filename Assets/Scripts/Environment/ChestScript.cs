@@ -2,11 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ChestScript : MonoBehaviour
 {
     public Animator animator;
-    private bool isTriggered = false;
     private Vector3 cardLocation1;
     private Vector3 cardLocation2;
     private Vector3 cardLocation3;
@@ -15,7 +15,7 @@ public class ChestScript : MonoBehaviour
     public GameObject card3;
     public GameObject card4;
     public Array Cards;
-
+    private bool clickable = false;
 
     // Start is called before the first frame update
     void Start()
@@ -33,14 +33,10 @@ public class ChestScript : MonoBehaviour
         {
             obj.gameObject.transform.localScale = new Vector3(150, 150, 0);
         }
-    }
-
-    void OnTriggerEnter2D(Collider2D collider)
-    {
-        if (collider.gameObject.tag == "dashHitbox" && isTriggered == false)
+        if (clickable && Input.GetKeyDown(KeyCode.E))
         {
+            clickable = false;
             animator.Play("ChestAnim");
-            isTriggered = true;
             int r = UnityEngine.Random.Range(1, 5);
             switch (r)
             {
@@ -65,6 +61,21 @@ public class ChestScript : MonoBehaviour
                     Instantiate(card4, cardLocation3, Quaternion.identity, GameObject.FindGameObjectWithTag("HUD").transform);
                     break;
             }
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.tag == "dashHitbox")
+        {
+            clickable = true;
+        }
+    }
+    void OnTriggerExit2D(Collider2D collider)
+    {
+        if (collider.gameObject.tag == "dashHitbox")
+        {
+            clickable = false;
         }
     }
 }

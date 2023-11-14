@@ -113,21 +113,6 @@ public class Player : MonoBehaviour
                 dashDirAnim = "Dash_Down";
                 break;
         }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (ComponentsTier2 >= 3)
-            {
-                WeaponEvo++;
-                ComponentsTier2 -= 3;
-                uiScript.UpdateUI();
-            }
-            else if (ComponentsTier3 >= 3)
-            {
-                WeaponEvo++;
-                ComponentsTier3 -= 3;
-                uiScript.UpdateUI();
-            }
-        }
     }
     private void FixedUpdate()
     {
