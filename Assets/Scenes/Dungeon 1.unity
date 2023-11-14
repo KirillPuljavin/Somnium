@@ -474,6 +474,16 @@ MonoBehaviour:
   roomPrefabs:
   - {fileID: 1688061444946906044, guid: f384be1a5f00c4244af728ee01a8913a, type: 3}
   - {fileID: 7536494706408217839, guid: bbdcc4ae84f2546499e5e662ccc853b1, type: 3}
+  - {fileID: 5403364124650646463, guid: da226ac94e3d38e4db55c9809f3e149c, type: 3}
+  - {fileID: 2463631711727109870, guid: d4de92ef630dc5c4f8004bfdff5b743b, type: 3}
+  - {fileID: 7185977196598707307, guid: d6e2c8dae83f710488e7f7a8a30a0fee, type: 3}
+  - {fileID: 1813524516831953432, guid: 3fb95be02ec9480438a312dccfb3501c, type: 3}
+  - {fileID: 8324675388806418176, guid: 5dd09e35942850646821dacdf2678c55, type: 3}
+  - {fileID: 5283614874751912214, guid: fff01b524bd87fe4796586b15cc5eba9, type: 3}
+  - {fileID: 6149066677782249898, guid: a4158ec0968eb2a458aa97855ee986a4, type: 3}
+  - {fileID: 5823313036724079425, guid: f69549f3ef83c7141a4425a75de0da48, type: 3}
+  - {fileID: 5453524690699234258, guid: 4a6a2ce5afe785a4f910e24463b40280, type: 3}
+  - {fileID: 7884988723219691427, guid: bc312fba00dc8f542bf37e84378d4bdc, type: 3}
   doorPrefab: {fileID: 1889435654105591893, guid: c6c0313ad1cccd942adaff06d6cc43dd, type: 3}
   doorParent: {fileID: 1705998722}
 --- !u!114 &483126003
