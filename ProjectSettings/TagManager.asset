@@ -12,6 +12,8 @@ TagManager:
   - bossBasicAttack
   - HeartsUI
   - UI
+  - HUD
+  - Card
   layers:
   - Default
   - TransparentFX

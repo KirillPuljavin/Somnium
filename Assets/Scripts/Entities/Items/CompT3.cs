@@ -7,6 +7,7 @@ public class CompT3 : MonoBehaviour
 {
 
     private Player player;
+    [SerializeField] private UIScript uiScript;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,7 @@ public class CompT3 : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             player.ComponentsTier3++;
+            uiScript.UpdateUI();
             Destroy(gameObject);
         }
     }

@@ -9,17 +9,20 @@ public class Player : MonoBehaviour
     Vector2 movement;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private HeartUpdate heartsHUD;
+    [SerializeField] private UIScript uiScript;
 
     [SerializeField] private GameObject staminaBar;
 
     [SerializeField] private GameObject staminaMask;
     public LayerMask enemyLayers;
     public Transform attackPoint;
+    
 
     // Variables
     public bool inDungeon = false;
     public int currRoom = 2;
     public int Hearts = 10;
+    public int MaxHearts = 10;
     public float stamina;
     public float staminaProcent = 0;
     public int ComponentsTier2;
@@ -31,12 +34,13 @@ public class Player : MonoBehaviour
     public int damage;
     public int dashDamage;
     public float attackCooldown;
+    public float dashingPower = 12f;
 
     private float attackTime;
-    private float dashingPower = 12f;
     private float dashingTime = 0.3f;
     private float dashingCooldown = 2.7f;
     private bool canDash = true;
+    public int Vision = 1;
 
     private string dashDirAnim = "Dash_Down";
     private string Facing = "down";
@@ -115,11 +119,13 @@ public class Player : MonoBehaviour
             {
                 WeaponEvo++;
                 ComponentsTier2 -= 3;
+                uiScript.UpdateUI();
             }
             else if (ComponentsTier3 >= 3)
             {
                 WeaponEvo++;
                 ComponentsTier3 -= 3;
+                uiScript.UpdateUI();
             }
         }
     }
@@ -128,6 +134,7 @@ public class Player : MonoBehaviour
         if (isDashing) return;
         if (movement.magnitude > 1) rb.velocity = new Vector2(movement.x * (speed - 0.5f), movement.y * (speed - 0.5f));
         else rb.velocity = new Vector2(movement.x * speed, movement.y * speed);
+        uiScript.UpdateUI();
     }
     private IEnumerator Hit()
     {
@@ -200,7 +207,7 @@ public class Player : MonoBehaviour
     }
     public void HealPotion()
     {
-        if (Hearts < 10)
+        if (Hearts < MaxHearts)
         {
             Hearts += 1;
             heartsHUD.UpdateHearts();

@@ -19,6 +19,7 @@ public class EnemyBlob : MonoBehaviour
     private float attackCooldown = 0;
     private float dashCooldown = 0;
     private bool agro;
+    private float reverseCooldown = 0.2f;
 
     void Start()
     {
@@ -42,6 +43,8 @@ public class EnemyBlob : MonoBehaviour
         // Cooldown
         if (attackCooldown < 1) attackCooldown += Time.deltaTime;
         if (dashCooldown > 0) dashCooldown -= Time.deltaTime;
+        if (reverseCooldown <= 0.2) reverseCooldown += Time.deltaTime;
+        if (reverseCooldown >= 0.2) speed = 2;
 
         animator.SetFloat("Horizontal", rb.velocity.x);
         animator.SetFloat("Vertical", rb.velocity.y);
@@ -84,7 +87,9 @@ public class EnemyBlob : MonoBehaviour
     public void TakeDamage(int amount)
     {
         enemyHP -= amount;
-
+        reverseCooldown = 0;
+        speed = -2;
+        
         if (enemyHP <= 0)
         {
             Destroy(gameObject);
