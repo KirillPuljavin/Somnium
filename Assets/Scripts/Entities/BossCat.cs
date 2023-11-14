@@ -17,7 +17,7 @@ public class BossCat : MonoBehaviour
     public GameObject BasicDown;
 
     public int speed;
-    public float agroRange;
+    public float attackRange;
     public float basicCooldown;
     private float distance;
 
@@ -25,9 +25,6 @@ public class BossCat : MonoBehaviour
     public bool spawned = false;
     public bool inAnimation;
     private float angle;
-
-
-
     private float basicTimer;
 
     void Start()
@@ -87,7 +84,7 @@ public class BossCat : MonoBehaviour
 
         previousPosition = currentPosition;
 
-        if (distance <= agroRange)
+        if (distance <= attackRange)
         {
             inRange = true;
             if (basicTimer >= basicCooldown)
@@ -97,6 +94,11 @@ public class BossCat : MonoBehaviour
                     inAnimation = true;
                     BasicRight.SetActive(true);
                     animator.Play("BasicRight");
+                    Collider2D hitEnemy = Physics2D.OverlapCircle(BasicRight.transform.position, 1, LayerMask.GetMask("Player"));
+                    if (hitEnemy != null)
+                    {
+                        damagePlayer();
+                    }
                     basicTimer = 0;
                     yield return new WaitForSeconds(0.917f);
                     BasicRight.SetActive(false);
@@ -107,6 +109,11 @@ public class BossCat : MonoBehaviour
                     inAnimation = true;
                     BasicLeft.SetActive(true);
                     animator.Play("BasicLeft");
+                    Collider2D hitEnemy = Physics2D.OverlapCircle(BasicLeft.transform.position, 1, LayerMask.GetMask("Player"));
+                    if (hitEnemy != null)
+                    {
+                        damagePlayer();
+                    }
                     basicTimer = 0;
                     yield return new WaitForSeconds(0.917f);
                     BasicLeft.SetActive(false);
@@ -115,21 +122,67 @@ public class BossCat : MonoBehaviour
                 else if (angle < 145 && angle > 30)
                 {
                     inAnimation = true;
-                    BasicUp.SetActive(true);
+                    BasicRight.SetActive(true);
                     animator.Play("BasicUp");
+                    yield return new WaitForSeconds(0.5835f);
+                    BasicRight.SetActive(false);
+                    BasicUp.SetActive(true);
+                    Collider2D hitEnemy = Physics2D.OverlapCircle(BasicUp.transform.position, 1, LayerMask.GetMask("Player"));
+                    if (hitEnemy != null)
+                    {
+                        damagePlayer();
+                    }
                     basicTimer = 0;
-                    yield return new WaitForSeconds(1.167f);
+                    yield return new WaitForSeconds(0.5835f);
                     BasicUp.SetActive(false);
+
+                    BasicLeft.SetActive(true);
+                    animator.Play("BasicUpL");
+                    yield return new WaitForSeconds(0.5835f);
+                    BasicLeft.SetActive(false);
+                    BasicUp.SetActive(true);
+                    hitEnemy = Physics2D.OverlapCircle(BasicDown.transform.position, 1, LayerMask.GetMask("Player"));
+                    if (hitEnemy != null)
+                    {
+                        damagePlayer();
+                    }
+                    basicTimer = 0;
+                    yield return new WaitForSeconds(0.5835f);
+                    BasicUp.SetActive(false);
+
                     inAnimation = false;
                 }
                 else if (angle > -130 && angle < -45)
                 {
                     inAnimation = true;
-                    BasicDown.SetActive(true);
+                    BasicLeft.SetActive(true);
                     animator.Play("BasicDown");
+                    yield return new WaitForSeconds(0.5835f);
+                    BasicLeft.SetActive(false);
+                    BasicDown.SetActive(true);
+                    Collider2D hitEnemy = Physics2D.OverlapCircle(BasicDown.transform.position, 1, LayerMask.GetMask("Player"));
+                    if (hitEnemy != null)
+                    {
+                        damagePlayer();
+                    }
                     basicTimer = 0;
-                    yield return new WaitForSeconds(1.167f);
+                    yield return new WaitForSeconds(0.5835f);
                     BasicDown.SetActive(false);
+
+                    BasicRight.SetActive(true);
+                    animator.Play("BasicDownL");
+                    yield return new WaitForSeconds(0.5835f);
+                    BasicRight.SetActive(false);
+                    BasicDown.SetActive(true);
+                    hitEnemy = Physics2D.OverlapCircle(BasicDown.transform.position, 1, LayerMask.GetMask("Player"));
+                    if (hitEnemy != null)
+                    {
+                        damagePlayer();
+                    }
+                    basicTimer = 0;
+                    yield return new WaitForSeconds(0.5835f);
+                    BasicDown.SetActive(false);
+
                     inAnimation = false;
                 }
                 else
@@ -156,12 +209,9 @@ public class BossCat : MonoBehaviour
         angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
     }
 
-    void OnTriggerStay2D(Collider2D collision)
+    void damagePlayer()
     {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            Debug.Log("Collision with player detected!");
-        }
+        Debug.Log("Damage");
     }
 
 }

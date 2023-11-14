@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3783278175081977622}
   - component: {fileID: 5803243085670126822}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BasicRight
   m_TagString: bossBasicAttack
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 8183182038434459141}
   - component: {fileID: 1646377115953396684}
   - component: {fileID: 7263192500600031081}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -304,7 +304,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8578460836661538115}
   - component: {fileID: 639644472740740479}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BasicDown
   m_TagString: bossBasicAttack
   m_Icon: {fileID: 0}
@@ -385,7 +385,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1231537504296009012}
   - component: {fileID: 4371734883784451955}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BasicUp
   m_TagString: bossBasicAttack
   m_Icon: {fileID: 0}
@@ -466,7 +466,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2146091701041196915}
   - component: {fileID: 7583939518511382555}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BasicLeft
   m_TagString: bossBasicAttack
   m_Icon: {fileID: 0}
