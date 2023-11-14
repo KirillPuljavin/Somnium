@@ -33,8 +33,8 @@ public class DungeonGenerator : MonoBehaviour
         else currentPreset = new Dungeon2();
 
         // Setup Rooms
-        roomPrefabs = Resources.LoadAll<GameObject>("/Assets/Prefabs/Map/Rooms");
-        Debug.Log(roomPrefabs.Length);
+        // roomPrefabs = Resources.LoadAll<GameObject>("/Assets/Prefabs/Map/Rooms");
+        Debug.Log("Array Length: " + roomPrefabs.Length);
         foreach (var roomIndex in currentPreset.roomsAvailable)
         {
             int roomX = Random.Range(0, roomPrefabs.Length);
