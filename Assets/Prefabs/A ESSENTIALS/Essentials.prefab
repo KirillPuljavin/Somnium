@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 2417858090454543777}
   - component: {fileID: 2619379401386452830}
   - component: {fileID: 3564124938534258389}
+  - component: {fileID: 3044775136059884598}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -102,6 +103,22 @@ MonoBehaviour:
   m_InputActionsPerSecond: 10
   m_RepeatDelay: 0.5
   m_ForceModuleActive: 0
+--- !u!114 &3044775136059884598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931056563135747041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4096ae3ddf7ab164b94c326cc8871de1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scene1: Main Meny
+  scene2: Spawn
+  scene3: FIGHT 2
+  scene4: Dungeon 1
 --- !u!1 &1910478169838077729
 GameObject:
   m_ObjectHideFlags: 0
