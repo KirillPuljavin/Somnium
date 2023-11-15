@@ -55,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -167,6 +167,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 5227334474021898834}
   card1: {fileID: 3832351113249132469, guid: aa8ecf127f9155f4f9f2e81404a78dc8, type: 3}
-  card2: {fileID: 7416091105775790816, guid: 28ec153d0bff5ab438486844fe03fa00, type: 3}
-  card3: {fileID: 4518363707623984725, guid: 3ba7f8ba27aa9aa48b813864160d641a, type: 3}
-  card4: {fileID: 2584897844893126940, guid: 257a3a08a6e315a4abbf6d6cb965d64b, type: 3}
+  card2: {fileID: 3832351113249132469, guid: 3638f56699147bd47b7e0f5d4c5470bc, type: 3}
+  card3: {fileID: 3832351113249132469, guid: b88252b46f6a1f9409c35bdb8021ec20, type: 3}
+  card4: {fileID: 3832351113249132469, guid: de7479cd8c83fd34a8cdacece5bc45df, type: 3}

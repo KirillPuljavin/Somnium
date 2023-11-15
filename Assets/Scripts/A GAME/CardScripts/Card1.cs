@@ -6,11 +6,13 @@ using UnityEngine;
 public class Card1 : MonoBehaviour{
     public Array Cards;
     private Player Player;
+    public Animator animator;
+    public Animation anim;
     void Start()
     {
         Player = GameObject.FindWithTag("Player").GetComponent<Player>();
     }
-    void OnMouseDown()
+    public void OnMouseDown()
     {
         Cards = GameObject.FindGameObjectsWithTag("Card");
         Player.Vision += 1;
@@ -18,5 +20,14 @@ public class Card1 : MonoBehaviour{
         {
             Destroy(obj);
         }
+    }
+
+    void OnMouseOver()
+    {
+        animator.Play("Card1");
+    }
+    void OnMouseExit()
+    {
+        animator.Play("Card1 1");
     }
 }

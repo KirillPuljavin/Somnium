@@ -7,6 +7,8 @@ public class Card4 : MonoBehaviour{
     public Array Cards;
     private Player Player;
     private HeartUpdate heartsHUD;
+    public Animator animator;
+    public Animation anim;
     void Start()
     {
         Player = GameObject.FindWithTag("Player").GetComponent<Player>();
@@ -22,5 +24,13 @@ public class Card4 : MonoBehaviour{
         {
             Destroy(obj);
         }
+    }
+    void OnMouseOver()
+    {
+        animator.Play("Card4");
+    }
+    void OnMouseExit()
+    {
+        animator.Play("Card4 1");
     }
 }
