@@ -6,6 +6,8 @@ using UnityEngine;
 public class Card3 : MonoBehaviour{
     public Array Cards;
     private Player Player;
+    public Animator animator;
+    public Animation anim;
     void Start()
     {
         Player = GameObject.FindWithTag("Player").GetComponent<Player>();
@@ -19,5 +21,13 @@ public class Card3 : MonoBehaviour{
         {
             Destroy(obj);
         }
+    }
+    void OnMouseOver()
+    {
+        animator.Play("Card3");
+    }
+    void OnMouseExit()
+    {
+        animator.Play("Card3 1");
     }
 }

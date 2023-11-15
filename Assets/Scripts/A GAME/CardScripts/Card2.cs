@@ -3,9 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Card2 : MonoBehaviour{
+public class Card2 : MonoBehaviour
+{
     public Array Cards;
     private Player Player;
+    public Animator animator;
+    public Animation anim;
     void Start()
     {
         Player = GameObject.FindWithTag("Player").GetComponent<Player>();
@@ -19,5 +22,13 @@ public class Card2 : MonoBehaviour{
         {
             Destroy(obj);
         }
+    }
+    void OnMouseOver()
+    {
+        animator.Play("Card2");
+    }
+    void OnMouseExit()
+    {
+        animator.Play("Card2 1");
     }
 }
