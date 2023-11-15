@@ -340,6 +340,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   attackPoint: {fileID: 5117390771748221489}
+  myLight: {fileID: 0}
   inDungeon: 0
   currRoom: 2
   Hearts: 10
