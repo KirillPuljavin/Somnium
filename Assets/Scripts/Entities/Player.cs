@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour
@@ -16,6 +18,8 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject staminaMask;
     public LayerMask enemyLayers;
     public Transform attackPoint;
+    public Light2D myLight;
+
 
 
     // Variables
@@ -117,6 +121,8 @@ public class Player : MonoBehaviour
                 dashDirAnim = "Dash_Down";
                 break;
         }
+
+        myLight.pointLightOuterRadius = Vision*5;
     }
     private void FixedUpdate()
     {
@@ -128,7 +134,7 @@ public class Player : MonoBehaviour
     private IEnumerator Hit()
     {
         attackTime = 0;
-        int randNumb = Random.Range(0, 1);
+        int randNumb = UnityEngine.Random.Range(0, 1);
         switch (Facing)
         {
             case "right":
