@@ -213,6 +213,7 @@ public class Player : MonoBehaviour
     {
         Hearts -= amount;
         heartsHUD.UpdateHearts();
+        StartCoroutine(DamageFlash());
 
         if (Hearts <= 0) Death();
     }
@@ -225,6 +226,13 @@ public class Player : MonoBehaviour
 
         staminaMask.transform.localScale = new Vector3(staminaProcent * 500, transform.localScale.y * 25, transform.localScale.z);
 
+    }
+
+    private IEnumerator DamageFlash()
+    {
+        myLight.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        myLight.color = Color.white;
     }
 
     public void Death()
