@@ -30,6 +30,7 @@ public class BossCat : MonoBehaviour
     private float basicTimer;
     private float damageTimer;
     private float damageCooldown = 1f;
+    private float bossInvisFrames = 1f;
 
     void Start()
     {
@@ -52,6 +53,7 @@ public class BossCat : MonoBehaviour
     {
         if (basicTimer <= basicCooldown) basicTimer += Time.deltaTime;
         if (damageTimer <= damageCooldown) damageTimer += Time.deltaTime;
+        if (bossInvisFrames > 0) bossInvisFrames -= Time.deltaTime;
 
         if (spawned == true)
         {
@@ -224,11 +226,30 @@ public class BossCat : MonoBehaviour
         }
     }
 
-    void takeDamage(){
-        health -= 1;
+    public void TakeDamage(int amount)
+    {
+        health -= amount;
         if (health <= 0)
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collider)
+    {
+        if (collider.gameObject.tag == "Player")
+        {
+            if (!Player.isDashing)
+            {
+                damagePlayer();
+            }
+        }
+
+        // Dash Take Damage
+        if (collider.gameObject.tag == "dashHitbox" && bossInvisFrames <= 0 && Player.isDashing)
+        {
+            TakeDamage(Player.dashDamage);
+            bossInvisFrames = 0.5f;
         }
     }
 

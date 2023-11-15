@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 7263192500600031081}
   m_Layer: 6
   m_Name: Boss
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -143,6 +143,7 @@ MonoBehaviour:
   BasicLeft: {fileID: 6455054121925680837}
   BasicUp: {fileID: 6405653575547690341}
   BasicDown: {fileID: 5475653971427881424}
+  health: 20
   speed: 2
   attackRange: 5
   basicCooldown: 4
