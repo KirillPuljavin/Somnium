@@ -83,6 +83,14 @@ public class Player : MonoBehaviour
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
+        // Mouse position Calculations and storing for checking where to attack.
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 temp = new Vector3(mousePos.x, mousePos.y, 0);
+        Vector3 direction = temp - gameObject.transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
+        
+
+
         // Controls
         if (Input.GetKeyDown(KeyCode.Mouse0) && attackTime >= attackCooldown) StartCoroutine(Hit());
         if (Input.GetKeyDown(KeyCode.Mouse1) && canDash && movement.sqrMagnitude != 0) StartCoroutine(Dash());
@@ -95,19 +103,15 @@ public class Player : MonoBehaviour
         switch ((movement.x, movement.y))
         {
             case (1, 0):
-                Facing = "right";
                 dashDirAnim = "Dash_Right";
                 break;
             case (-1, 0):
-                Facing = "left";
                 dashDirAnim = "Dash_Left";
                 break;
             case (0, 1):
-                Facing = "up";
                 dashDirAnim = "Dash_Up";
                 break;
             case (0, -1):
-                Facing = "down";
                 dashDirAnim = "Dash_Down";
                 break;
             case (1, 1):
@@ -128,7 +132,27 @@ public class Player : MonoBehaviour
                 break;
         }
 
-        myLight.pointLightOuterRadius = Vision*5;
+        if (angle > -45 && angle < 45)
+        {
+            Facing = "up";
+        }
+        else if (angle > -135 && angle < -45)
+        {
+            Facing = "right";
+        }
+        else if (angle > -225 && angle < -135)
+        {
+            Facing = "down";
+        }
+        else if (angle > -270 && angle < -225 || angle > 45  && angle < 90)
+        {
+            Facing = "left";
+        }
+        else
+        {
+            Debug.Log("Error ANGLE");
+        }
+        myLight.pointLightOuterRadius = Vision * 5;
     }
     private void FixedUpdate()
     {

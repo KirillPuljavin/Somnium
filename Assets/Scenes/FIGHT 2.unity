@@ -723,12 +723,28 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8053809871869886996, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
+      propertyPath: m_ShadowIntensity
+      value: 0.698
+      objectReference: {fileID: 0}
+    - target: {fileID: 8053809871869886996, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
       propertyPath: m_PointLightInnerRadius
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8053809871869886996, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
       propertyPath: m_PointLightOuterRadius
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8053809871869886996, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
+      propertyPath: m_ShadowIntensityEnabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8053809871869886996, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
+      propertyPath: m_LightVolumeIntensityEnabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8053809871869886996, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
+      propertyPath: m_ShadowVolumeIntensityEnabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
