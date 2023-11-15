@@ -239,7 +239,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6479639455373034780, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
       propertyPath: m_ConstraintCount
-      value: 6
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8430058909267680900, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
       propertyPath: m_Pivot.x
@@ -673,9 +673,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 161686740}
     m_Modifications:
     - target: {fileID: 4195860284930794465, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
+      propertyPath: Hearts
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4195860284930794465, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
       propertyPath: uiScript
       value: 
       objectReference: {fileID: 1644549312}
+    - target: {fileID: 4195860284930794465, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
+      propertyPath: MaxHearts
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4195860284930794465, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
       propertyPath: heartsHUD
       value: 

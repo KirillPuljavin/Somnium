@@ -12,217 +12,41 @@ public class HeartUpdate : MonoBehaviour
     public GameObject fullHeartIcon;
     public GameObject halfHeartIcon;
     public GameObject emptyHeartIcon;
+    private int playerHearts;
+    private int tempAmt = 0;
     void Start()
     {
         PlayerObj = GameObject.FindWithTag("Player");
         player = PlayerObj.GetComponent<Player>();
+        
 
         UpdateHearts();
     }
     public void UpdateHearts()
     {
+        playerHearts = player.Hearts;
+        tempAmt = 0;
         foreach (Transform childObj in transform)
         {
             Destroy(childObj.gameObject);
         }
-        if (player.MaxHearts == 10)
+        for (int i = 0; i < player.MaxHearts; i += 2)
         {
-
-            if (player.Hearts % 2 == 0)
+            tempAmt += 2;
+            if (tempAmt <= playerHearts)
             {
-                switch ((player.Hearts))
-                {
-                    case (2):
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        break;
-                    case (4):
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        break;
-                    case (6):
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        break;
-                    case (8):
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        break;
-                    case (10):
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        break;
-
-                }
+                Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
+                Debug.Log("Full Heart Added");
+            }
+            else if (tempAmt == playerHearts + 1)
+            {
+                Instantiate(halfHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
+                Debug.Log("Half Heart Added");
             }
             else
             {
-                switch ((player.Hearts))
-                {
-                    case (1):
-                        Instantiate(halfHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        break;
-                    case (3):
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(halfHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        break;
-                    case (5):
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(halfHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        break;
-                    case (7):
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(halfHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        break;
-                    case (9):
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(halfHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        break;
-                }
-            }
-        }
-        if (player.MaxHearts == 12)
-        {
-
-            if (player.Hearts % 2 == 0)
-            {
-                switch ((player.Hearts))
-                {
-                    case (2):
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        break;
-                    case (4):
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        break;
-                    case (6):
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        break;
-                    case (8):
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        break;
-                    case (10):
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        break;
-                    case (12):
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        break;
-
-                }
-            }
-            else
-            {
-                switch ((player.Hearts))
-                {
-                    case (1):
-                        Instantiate(halfHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        break;
-                    case (3):
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(halfHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        break;
-                    case (5):
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(halfHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        break;
-                    case (7):
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(halfHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        break;
-                    case (9):
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(halfHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        break;
-                    case (11):
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        Instantiate(halfHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                        break;
-                }
+                Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
+                Debug.Log("Empty Heart Added");
             }
         }
     }
