@@ -75,7 +75,7 @@ public class Player : MonoBehaviour
 
         // Controls
         if (Input.GetKeyDown(KeyCode.Mouse0) && attackTime >= attackCooldown) StartCoroutine(Hit());
-        if (Input.GetKeyDown(KeyCode.Mouse1) && canDash) StartCoroutine(Dash());
+        if (Input.GetKeyDown(KeyCode.Mouse1) && canDash && movement.sqrMagnitude != 0) StartCoroutine(Dash());
         if (Input.GetKeyDown(KeyCode.H)) HealPotion();
 
         animator.SetFloat("Horizontal", movement.x);
@@ -171,7 +171,7 @@ public class Player : MonoBehaviour
         {
             if (enemy.gameObject.GetComponent<EnemyBlob>() != null) enemy.gameObject.GetComponent<EnemyBlob>().TakeDamage(damage);
             if (enemy.gameObject.GetComponent<EnemyFrog>() != null) enemy.gameObject.GetComponent<EnemyFrog>().TakeDamage(damage);
-            if (enemy.gameObject.GetComponent<BossCat>() != null) enemy.gameObject.GetComponent<BossCat>().TakeDamage(damage);
+            // if (enemy.gameObject.GetComponent<BossCat>() != null) enemy.gameObject.GetComponent<BossCat>().TakeDamage(damage);
         }
     }
     private IEnumerator Dash()
