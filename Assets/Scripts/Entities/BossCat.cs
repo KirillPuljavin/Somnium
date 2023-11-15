@@ -16,16 +16,20 @@ public class BossCat : MonoBehaviour
     public GameObject BasicUp;
     public GameObject BasicDown;
 
+    public int health;
     public int speed;
     public float attackRange;
     public float basicCooldown;
-    private float distance;
+
 
     public bool inRange;
     public bool spawned = false;
     public bool inAnimation;
     private float angle;
+    private float distance;
     private float basicTimer;
+    private float damageTimer;
+    private float damageCooldown = 1f;
 
     void Start()
     {
@@ -47,6 +51,8 @@ public class BossCat : MonoBehaviour
     void Update()
     {
         if (basicTimer <= basicCooldown) basicTimer += Time.deltaTime;
+        if (damageTimer <= damageCooldown) damageTimer += Time.deltaTime;
+
         if (spawned == true)
         {
             if (!inRange && !inAnimation)
@@ -89,7 +95,7 @@ public class BossCat : MonoBehaviour
             inRange = true;
             if (basicTimer >= basicCooldown)
             {
-                if (angle < 30 && angle > -45)
+                if (angle < 55 && angle > 0)
                 {
                     inAnimation = true;
                     BasicRight.SetActive(true);
@@ -104,7 +110,7 @@ public class BossCat : MonoBehaviour
                     BasicRight.SetActive(false);
                     inAnimation = false;
                 }
-                else if (angle > 145 && angle < 180 || angle > -180 && angle < -130)
+                else if (angle > 130 && angle < 180 || angle > -180 && angle < -130)
                 {
                     inAnimation = true;
                     BasicLeft.SetActive(true);
@@ -119,7 +125,7 @@ public class BossCat : MonoBehaviour
                     BasicLeft.SetActive(false);
                     inAnimation = false;
                 }
-                else if (angle < 145 && angle > 30)
+                else if (angle < 130 && angle > 55)
                 {
                     inAnimation = true;
                     BasicRight.SetActive(true);
@@ -152,7 +158,7 @@ public class BossCat : MonoBehaviour
 
                     inAnimation = false;
                 }
-                else if (angle > -130 && angle < -45)
+                else if (angle > -130 && angle < 0)
                 {
                     inAnimation = true;
                     BasicLeft.SetActive(true);
@@ -211,7 +217,19 @@ public class BossCat : MonoBehaviour
 
     void damagePlayer()
     {
-        Player.TakeDamage(1);
+        if (damageTimer >= damageCooldown)
+        {
+            Player.TakeDamage(1);
+            damageTimer = 0f;
+        }
+    }
+
+    void takeDamage(){
+        health -= 1;
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
 }

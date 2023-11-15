@@ -26,7 +26,7 @@ RectTransform:
   m_GameObject: {fileID: 468030214940746706}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.625, y: 1, z: 1}
+  m_LocalScale: {x: 0.625, y: 1.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5397137655490079615}
@@ -144,7 +144,7 @@ MonoBehaviour:
   BasicUp: {fileID: 6405653575547690341}
   BasicDown: {fileID: 5475653971427881424}
   speed: 2
-  attackRange: 4
+  attackRange: 5
   basicCooldown: 4
   inRange: 0
   spawned: 0
@@ -482,7 +482,7 @@ RectTransform:
   m_GameObject: {fileID: 6455054121925680837}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.625, y: 1, z: 1}
+  m_LocalScale: {x: 0.625, y: 1.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5397137655490079615}

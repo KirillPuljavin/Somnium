@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Spawn.unity
     guid: e23b09c523da4894c8968a645e4d902f
   - enabled: 1
+    path: Assets/Scenes/FIGHT 2.unity
+    guid: 371ad175a064770489861a139febc87b
+  - enabled: 1
     path: Assets/Scenes/Dungeon 1.unity
     guid: 2440cba75a15eb04baf449e0b0cd7f6e
   m_configObjects: {}
