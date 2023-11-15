@@ -75,7 +75,7 @@ public class Player : MonoBehaviour
 
         // Controls
         if (Input.GetKeyDown(KeyCode.Mouse0) && attackTime >= attackCooldown) StartCoroutine(Hit());
-        if (Input.GetKeyDown(KeyCode.Mouse1) && canDash) StartCoroutine(Dash());
+        if (Input.GetKeyDown(KeyCode.Mouse1) && canDash && movement.sqrMagnitude != 0) StartCoroutine(Dash());
         if (Input.GetKeyDown(KeyCode.H)) HealPotion();
 
         animator.SetFloat("Horizontal", movement.x);
