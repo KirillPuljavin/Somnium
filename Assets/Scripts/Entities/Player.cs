@@ -40,6 +40,12 @@ public class Player : MonoBehaviour
     public float attackCooldown;
     public float dashingPower = 12f;
 
+    //Chest Bools
+    public bool Card1Picked = false;
+    public bool Card2Picked = false;
+    public bool Card3Picked = false;
+    public bool Card4Picked = false;
+
     private float attackTime;
     private float dashingTime = 0.3f;
     private float dashingCooldown = 2.7f;
