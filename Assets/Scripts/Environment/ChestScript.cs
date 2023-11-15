@@ -20,14 +20,16 @@ public class ChestScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cardLocation1 = new Vector3(-10, 0, 0);
-        cardLocation2 = new Vector3(-5, 0, 0);
-        cardLocation3 = new Vector3(0, 0, 0);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        cardLocation1 = new Vector3(GameObject.FindGameObjectWithTag("Player").transform.position.x - 5, GameObject.FindGameObjectWithTag("Player").transform.position.y + 1, 0);
+        cardLocation2 = new Vector3(GameObject.FindGameObjectWithTag("Player").transform.position.x, GameObject.FindGameObjectWithTag("Player").transform.position.y + 1, 0);
+        cardLocation3 = new Vector3(GameObject.FindGameObjectWithTag("Player").transform.position.x + 5, GameObject.FindGameObjectWithTag("Player").transform.position.y + 1, 0);
+
         Cards = GameObject.FindGameObjectsWithTag("Card");
         foreach (GameObject obj in Cards)
         {
