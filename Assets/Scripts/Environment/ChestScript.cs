@@ -101,7 +101,7 @@ public class ChestScript : MonoBehaviour
                     Instantiate(card3, cardLocation3, Quaternion.identity, GameObject.FindGameObjectWithTag("HUD").transform);
                     break;
                 default:
-                    Debug.Log("You already have 2 aguments! Can't procced!");
+                    Debug.Log("You already have 2 augments! Can't procced!");
                     break;
             }
         }
