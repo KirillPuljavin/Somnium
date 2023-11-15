@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject staminaMask;
     public LayerMask enemyLayers;
     public Transform attackPoint;
-    
+
 
     // Variables
     public bool inDungeon = false;
@@ -57,6 +57,10 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        uiScript = GameObject.FindWithTag("Components").GetComponent<UIScript>();
+    }
     private void Update()
     {
         // Cooldown
@@ -221,5 +225,5 @@ public class Player : MonoBehaviour
         Debug.Log("YOU DIED");
         Destroy(gameObject);
     }
-    
+
 }
