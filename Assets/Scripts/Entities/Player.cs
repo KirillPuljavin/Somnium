@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour
@@ -16,6 +18,8 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject staminaMask;
     public LayerMask enemyLayers;
     public Transform attackPoint;
+    public Light2D myLight;
+
 
 
     // Variables
@@ -117,6 +121,8 @@ public class Player : MonoBehaviour
                 dashDirAnim = "Dash_Down";
                 break;
         }
+
+        myLight.pointLightOuterRadius = Vision*5;
     }
     private void FixedUpdate()
     {
@@ -128,7 +134,7 @@ public class Player : MonoBehaviour
     private IEnumerator Hit()
     {
         attackTime = 0;
-        int randNumb = Random.Range(0, 1);
+        int randNumb = UnityEngine.Random.Range(0, 1);
         switch (Facing)
         {
             case "right":
@@ -207,6 +213,7 @@ public class Player : MonoBehaviour
     {
         Hearts -= amount;
         heartsHUD.UpdateHearts();
+        StartCoroutine(DamageFlash());
 
         if (Hearts <= 0) Death();
     }
@@ -219,6 +226,13 @@ public class Player : MonoBehaviour
 
         staminaMask.transform.localScale = new Vector3(staminaProcent * 500, transform.localScale.y * 25, transform.localScale.z);
 
+    }
+
+    private IEnumerator DamageFlash()
+    {
+        myLight.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        myLight.color = Color.white;
     }
 
     public void Death()
