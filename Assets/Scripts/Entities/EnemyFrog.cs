@@ -46,7 +46,7 @@ public class EnemyFrog : MonoBehaviour
         }
 
         // Cooldown
-        if (shootCooldown <= 4) shootCooldown += Time.deltaTime;
+        if (shootCooldown <= 4 && agro) shootCooldown += Time.deltaTime;
         if (dashCooldown > 0) dashCooldown -= Time.deltaTime;
         if (reverseCooldown <= 0.2) reverseCooldown += Time.deltaTime;
         if (reverseCooldown >= 0.2) speed = 2;
