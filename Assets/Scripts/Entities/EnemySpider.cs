@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemySpider : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class EnemySpider : MonoBehaviour
     public float speed;
     public float enemyHP;
     public float agroRange;
+    public GameObject SpiderWebArea;
 
     private Player Player;
     private Vector3 directionToPlayer;
@@ -20,6 +22,7 @@ public class EnemySpider : MonoBehaviour
     private float dashCooldown = 0;
     private bool agro;
     private float reverseCooldown = 0.2f;
+    private float webCooldown = 0;
 
     void Start()
     {
@@ -39,11 +42,13 @@ public class EnemySpider : MonoBehaviour
         {
             rb.velocity = new Vector2(0, 0);
         }
+        if (agro && webCooldown >= 10) SpiderWebAttack();
 
         // Cooldown
         if (attackCooldown < 1) attackCooldown += Time.deltaTime;
         if (dashCooldown > 0) dashCooldown -= Time.deltaTime;
         if (reverseCooldown <= 0.2) reverseCooldown += Time.deltaTime;
+        if (webCooldown <= 10) webCooldown += Time.deltaTime;
         if (reverseCooldown >= 0.2) speed = 2;
 
         animator.SetFloat("Horizontal", rb.velocity.x);
@@ -96,6 +101,8 @@ public class EnemySpider : MonoBehaviour
     }
     public void SpiderWebAttack()
     {
-        
+        //Add Shoot Animation
+        webCooldown = 0;
+        Instantiate(SpiderWebArea, Player.transform.position, Quaternion.identity);
     }
 }
