@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Data.Common;
+using System.Threading;
 using UnityEngine;
 
-public class EnemyFrog : MonoBehaviour
+public class EnemySpider : MonoBehaviour
 {
-    public GameObject flyPrefab;
     public Rigidbody2D rb;
     public Animator animator;
     public float speed;
@@ -16,15 +15,16 @@ public class EnemyFrog : MonoBehaviour
     private Vector3 directionToPlayer;
     private Vector3 localScale;
 
-    private bool agro;
-    private float closeRange = 4;
-    private float shootCooldown = 0;
+    private float oldSpeed;
+    private float attackCooldown = 0;
     private float dashCooldown = 0;
+    private bool agro;
     private float reverseCooldown = 0.2f;
 
     void Start()
     {
         Player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        oldSpeed = speed;
         rb = GetComponent<Rigidbody2D>();
         localScale = transform.localScale;
     }
@@ -34,27 +34,19 @@ public class EnemyFrog : MonoBehaviour
         float distance = Vector2.Distance(transform.position, Player.gameObject.transform.position);
 
         if (distance <= agroRange) agro = true; else agro = false;
-        if (reverseCooldown >= 0.2)
+        if (agro) MoveEnemy();
+        else
         {
-            speed = 1;
-            if (distance >= closeRange && agro) MoveEnemy();
-            else
-            {
-                rb.velocity = new Vector2(0, 0);
-                animator.Play("Idle_Right");
-            }
+            rb.velocity = new Vector2(0, 0);
         }
 
         // Cooldown
-        if (shootCooldown <= 4 && agro) shootCooldown += Time.deltaTime;
+        if (attackCooldown < 1) attackCooldown += Time.deltaTime;
         if (dashCooldown > 0) dashCooldown -= Time.deltaTime;
         if (reverseCooldown <= 0.2) reverseCooldown += Time.deltaTime;
         if (reverseCooldown >= 0.2) speed = 2;
 
-        if (shootCooldown >= 4 && agro) Shoot();
-
         animator.SetFloat("Horizontal", rb.velocity.x);
-        animator.SetFloat("Vertical", rb.velocity.y);
         animator.SetFloat("Speed", rb.velocity.sqrMagnitude);
     }
     private void MoveEnemy()
@@ -62,35 +54,23 @@ public class EnemyFrog : MonoBehaviour
         directionToPlayer = (Player.transform.position - transform.position).normalized;
         rb.velocity = new Vector2(directionToPlayer.x, directionToPlayer.y) * speed;
     }
-    private void LateUpdate()
-    {
-        if (rb.velocity.x > 0)
-        {
-            transform.localScale = new Vector3(localScale.x, localScale.y, localScale.z);
-        }
-        else if (rb.velocity.x < 0)
-        {
-            transform.localScale = new Vector3(-localScale.x, localScale.y, localScale.z);
-        }
-    }
-
-    void Shoot()
-    {
-        shootCooldown = 0;
-
-        // Instantiate a fly
-        GameObject fly = Instantiate(flyPrefab, transform.position, Quaternion.identity);
-    }
-
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
-        {
-            speed = 0.005f;
-        }
+        if (collision.gameObject.tag == "Player") speed = 0.005f;
     }
     private void OnTriggerStay2D(Collider2D collider)
     {
+        // Attack Player
+        if (collider.gameObject.tag == "Player" && attackCooldown >= 1)
+        {
+            if (!Player.isDashing)
+            {
+                Player.TakeDamage(1);
+                attackCooldown = 0;
+                animator.Play("Attack_Right");
+            }
+        }
         // Dash Take Damage
         if (collider.gameObject.tag == "dashHitbox" && dashCooldown <= 0 && Player.isDashing)
         {
@@ -100,23 +80,22 @@ public class EnemyFrog : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
-        {
-            speed = 1.3f;
-        }
+        if (collision.gameObject.tag == "Player") speed = oldSpeed;
     }
 
     public void TakeDamage(int amount)
     {
         enemyHP -= amount;
         reverseCooldown = 0;
-        speed = -1;
-        directionToPlayer = (Player.transform.position - transform.position).normalized;
-        rb.velocity = new Vector2(directionToPlayer.x, directionToPlayer.y) * speed;
-
+        speed = -2;
+        
         if (enemyHP <= 0)
         {
             Destroy(gameObject);
         }
+    }
+    public void SpiderWebAttack()
+    {
+        
     }
 }

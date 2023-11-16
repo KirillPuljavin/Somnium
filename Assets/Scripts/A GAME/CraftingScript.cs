@@ -21,9 +21,9 @@ public class CraftingScript : MonoBehaviour
 
     void Update()
     {
-        int amount = UpgradeCosts[player.WeaponEvo + 1];
         if (clickable && Input.GetKeyDown(KeyCode.E))
         {
+            int amount = UpgradeCosts[player.WeaponEvo + 1];
             if (craftingLvl == 1)
             {
                 if (player.Components >= amount && player.WeaponEvo < 3)
