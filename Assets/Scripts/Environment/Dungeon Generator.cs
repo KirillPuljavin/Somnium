@@ -52,12 +52,7 @@ public class DungeonGenerator : MonoBehaviour
             }
         }
 
-        // Instantiate room doors
-        InstantiateRoomDoors();
-    }
-
-    void InstantiateRoomDoors()
-    {
+        // Instantiate Doors
         foreach (var connection in currentPreset.passages)
         {
             int roomIndex1 = connection.roomIndex1;
@@ -76,6 +71,7 @@ public class DungeonGenerator : MonoBehaviour
             door2.targetDoorPos = doorPosition1;
         }
     }
+
     DoorPlacement GetDoorPlacement(int roomIndex1, int roomIndex2)
     {
         int row1 = roomIndex1 / RoomGrid.GetLength(0);
@@ -101,7 +97,6 @@ public class DungeonGenerator : MonoBehaviour
         }
         else return new DoorPlacement();
     }
-
     Vector2 CalculateDoorPosition(DoorPlacement doorPlacement, int roomIndex)
     {
         Vector2 roomPosition = CalculateRoomPosition(roomIndex);
@@ -120,6 +115,15 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
+    Vector2 CalculateRoomPosition(int roomIndex)
+    {
+        int rowIndex = roomIndex / RoomGrid.GetLength(1);
+        int columnIndex = roomIndex % RoomGrid.GetLength(1);
+
+        Vector3 position = RoomGrid[rowIndex, columnIndex].transform.position;
+        return new Vector2(position.x, position.y);
+    }
+
     void VisualizeDungeon()
     {
         foreach (var connection in currentPreset.passages)
@@ -136,14 +140,6 @@ public class DungeonGenerator : MonoBehaviour
             GameObject passage = Instantiate(passagePrefab, midpoint, Quaternion.Euler(0f, 0f, angle));
             passage.transform.localScale = new Vector3(distance, 1f, 1f);
         }
-    }
-    Vector2 CalculateRoomPosition(int roomIndex)
-    {
-        int rowIndex = roomIndex / RoomGrid.GetLength(1);
-        int columnIndex = roomIndex % RoomGrid.GetLength(1);
-
-        Vector3 position = RoomGrid[rowIndex, columnIndex].transform.position;
-        return new Vector2(position.x, position.y);
     }
 }
 
