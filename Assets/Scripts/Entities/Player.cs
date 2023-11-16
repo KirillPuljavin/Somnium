@@ -8,19 +8,14 @@ public class Player : MonoBehaviour
 {
     // References
     public Animator animator;
-    Vector2 movement;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private HeartUpdate heartsHUD;
     [SerializeField] private UIScript uiScript;
-
     [SerializeField] private GameObject staminaBar;
-
     [SerializeField] private GameObject staminaMask;
     public LayerMask enemyLayers;
     public Transform attackPoint;
     public Light2D myLight;
-
-
 
     // Variables
     public bool inDungeon = false;
@@ -29,9 +24,9 @@ public class Player : MonoBehaviour
     public int MaxHearts = 10;
     public float stamina;
     public float staminaProcent = 0;
-    public int ComponentsTier2;
-    public int ComponentsTier3;
-    public int WeaponEvo;
+    public int Components;
+    public int WeaponEvo = 0;
+    public int Vision = 2;
 
     public float speed;
     public bool isDashing = false;
@@ -50,11 +45,11 @@ public class Player : MonoBehaviour
     private float dashingTime = 0.3f;
     private float dashingCooldown = 2.7f;
     private bool canDash = true;
-    public int Vision = 1;
 
+    public float attackRange;
     private string dashDirAnim = "Dash_Down";
     private string Facing = "down";
-    public float attackRange;
+    private Vector2 movement;
 
     private float tpCooldown;
     void OnTriggerEnter2D(Collider2D collider)
@@ -88,8 +83,6 @@ public class Player : MonoBehaviour
         Vector3 temp = new Vector3(mousePos.x, mousePos.y, 0);
         Vector3 direction = temp - gameObject.transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
-        
-
 
         // Controls
         if (Input.GetKeyDown(KeyCode.Mouse0) && attackTime >= attackCooldown) StartCoroutine(Hit());
@@ -144,7 +137,7 @@ public class Player : MonoBehaviour
         {
             Facing = "down";
         }
-        else if (angle > -270 && angle < -225 || angle > 45  && angle < 90)
+        else if (angle > -270 && angle < -225 || angle > 45 && angle < 90)
         {
             Facing = "left";
         }
@@ -152,7 +145,8 @@ public class Player : MonoBehaviour
         {
             Debug.Log("Error ANGLE");
         }
-        myLight.pointLightOuterRadius = Vision * 5;
+
+        myLight.pointLightOuterRadius = Vision * 4;
     }
     private void FixedUpdate()
     {
@@ -161,6 +155,12 @@ public class Player : MonoBehaviour
         else rb.velocity = new Vector2(movement.x * speed, movement.y * speed);
         uiScript.UpdateUI();
     }
+
+    public void UpgradeEvo()
+    {
+        WeaponEvo++;
+    }
+
     private IEnumerator Hit()
     {
         attackTime = 0;

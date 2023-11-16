@@ -18,13 +18,13 @@ public class CompT2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            player.ComponentsTier2++;
+            player.Components++;
             uiScript.UpdateUI();
             Destroy(gameObject);
         }
