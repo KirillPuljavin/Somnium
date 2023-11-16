@@ -221,6 +221,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 3279158353296424874, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
+      propertyPath: Augment1
+      value: 
+      objectReference: {fileID: 490455294136833100, guid: a82e7f1ab4c6b8243b70c20f5c00d316, type: 3}
+    - target: {fileID: 3279158353296424874, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
+      propertyPath: Augment2
+      value: 
+      objectReference: {fileID: 5769719172950789379, guid: ab20abb61e323c947bc29b6f90999004, type: 3}
+    - target: {fileID: 3279158353296424874, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
+      propertyPath: Augment3
+      value: 
+      objectReference: {fileID: 8242562528149003760, guid: 3c3a6e7de3f1fb041a963c415122ffbf, type: 3}
+    - target: {fileID: 3279158353296424874, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
+      propertyPath: Augment4
+      value: 
+      objectReference: {fileID: 5945049037851476347, guid: 202d9cb41689bde47a245f5af1032102, type: 3}
     - target: {fileID: 4255302789976220322, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
       propertyPath: m_TagString
       value: HUD
@@ -229,6 +245,26 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 8274514920762887378}
+    - target: {fileID: 4327694462807454791, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
+      propertyPath: m_TagString
+      value: AugmentsUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 4492747082960262752, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 171.91
+      objectReference: {fileID: 0}
+    - target: {fileID: 4492747082960262752, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 57.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 4492747082960262752, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 100.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 4492747082960262752, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -628
+      objectReference: {fileID: 0}
     - target: {fileID: 5970269873304502181, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
       propertyPath: m_SizeDelta.x
       value: 841.89
@@ -320,6 +356,18 @@ PrefabInstance:
     - target: {fileID: 8430058909267680900, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8751776028264526709, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
+      propertyPath: m_Spacing.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8751776028264526709, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
+      propertyPath: m_Constraint
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8751776028264526709, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
+      propertyPath: m_ConstraintCount
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

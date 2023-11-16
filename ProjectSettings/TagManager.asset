@@ -17,6 +17,7 @@ TagManager:
   - Components
   - Boss
   - Chest
+  - AugmentsUI
   layers:
   - Default
   - TransparentFX
