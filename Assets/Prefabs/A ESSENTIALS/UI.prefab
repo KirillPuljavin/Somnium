@@ -320,7 +320,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4492747082960262752}
-  - component: {fileID: 8751776028264526709}
+  - component: {fileID: 3279158353296424874}
+  - component: {fileID: 3731569010322779134}
   m_Layer: 0
   m_Name: Augments
   m_TagString: HeartsUI
@@ -344,10 +345,26 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 420.94, y: -93.56}
+  m_AnchoredPosition: {x: 420.94, y: -581}
   m_SizeDelta: {x: 841.89, y: 187.13}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &8751776028264526709
+--- !u!114 &3279158353296424874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4327694462807454791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54eda295bd5fc0941a81cafcb2df37c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Augment1: {fileID: 1426876108, guid: f4c6bb6cae864644aafed0b2a63d0dca, type: 3}
+  Augment2: {fileID: 1119777129, guid: f4c6bb6cae864644aafed0b2a63d0dca, type: 3}
+  Augment3: {fileID: -908668129, guid: f4c6bb6cae864644aafed0b2a63d0dca, type: 3}
+  Augment4: {fileID: -646830047, guid: f4c6bb6cae864644aafed0b2a63d0dca, type: 3}
+--- !u!114 &3731569010322779134
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
