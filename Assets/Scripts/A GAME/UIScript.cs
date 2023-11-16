@@ -11,10 +11,8 @@ public class UIScript : MonoBehaviour
 
     public Text text;
 
-    private int playerCompT2;
-    private int playerCompT3;
+    private int playerComp;
 
-    // Start is called before the first frame update
     void Start()
     {
         PlayerObj = GameObject.FindWithTag("Player");
@@ -24,15 +22,13 @@ public class UIScript : MonoBehaviour
         UpdateUI();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        playerCompT2 = player.ComponentsTier2;
-        playerCompT3 = player.ComponentsTier3;
+        playerComp = player.Components;
     }
 
     public void UpdateUI()
     {
-        text.text = "Components Tier 2: " + playerCompT2.ToString() + " Components Tier 3: " + playerCompT3.ToString() + " Weapon Tier: " + player.WeaponEvo;
+        text.text = "Components: " + playerComp.ToString() + " Weapon Tier: " + player.WeaponEvo;
     }
 }
