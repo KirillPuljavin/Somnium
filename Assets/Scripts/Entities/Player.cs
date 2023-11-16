@@ -22,7 +22,6 @@ public class Player : MonoBehaviour
     public int currRoom = 2;
     public int Hearts = 10;
     public int MaxHearts = 10;
-    public float stamina;
     public float staminaProcent = 0;
     public int Components;
     public int WeaponEvo = 0;
@@ -36,10 +35,10 @@ public class Player : MonoBehaviour
     public float attackCooldown;
     public bool dashUpgraded = false;
 
+    private float stamina;
     private float attackTime;
     private float dashingTime = 0.3f;
-    private float dashingCooldown = 2.7f;
-    private bool canDash = true;
+    private float dashingCooldown = 3f;
 
     public float attackRange;
     private string dashDirAnim = "Dash_Down";
@@ -74,7 +73,9 @@ public class Player : MonoBehaviour
         // Cooldown
         if (tpCooldown <= 1) tpCooldown += Time.deltaTime;
         if (attackTime <= attackCooldown) attackTime += Time.deltaTime;
-        if (stamina < dashingCooldown) stamina += Time.deltaTime;
+        if (stamina < dashingCooldown && WeaponEvo < 4) stamina += Time.deltaTime;
+        else if (stamina < dashingCooldown) { stamina += (Time.deltaTime * 1.3f); }
+
         if (stamina < dashingCooldown) UpdateStamina();
         if (trulyDashing) return;
 
@@ -89,7 +90,7 @@ public class Player : MonoBehaviour
 
         // Controls
         if (Input.GetKeyDown(KeyCode.Mouse0) && attackTime >= attackCooldown) StartCoroutine(Hit());
-        if (Input.GetKeyDown(KeyCode.Mouse1) && canDash && movement.sqrMagnitude != 0) StartCoroutine(Dash());
+        if (Input.GetKeyDown(KeyCode.Mouse1) && stamina >= 3 && movement.sqrMagnitude != 0) StartCoroutine(Dash());
         if (Input.GetKeyDown(KeyCode.H)) HealPotion();
 
         animator.SetFloat("Horizontal", movement.x);
@@ -141,12 +142,14 @@ public class Player : MonoBehaviour
         if (trulyDashing) return;
         if (movement.magnitude > 1) rb.velocity = new Vector2(movement.x * (speed - 0.5f), movement.y * (speed - 0.5f));
         else rb.velocity = new Vector2(movement.x * speed, movement.y * speed);
+        Debug.Log(stamina);
     }
 
     bool trulyDashing;
     private IEnumerator Dash()
     {
-        canDash = false; trulyDashing = true;
+        stamina -= 3;
+        trulyDashing = true;
         if (dashUpgraded) isDashing = true;
         if (movement.magnitude > 1)
         {
@@ -158,11 +161,9 @@ public class Player : MonoBehaviour
             rb.velocity = new Vector2(movement.x * dashingPower, movement.y * dashingPower);
             animator.Play(dashDirAnim);
         }
-        stamina -= 3;
         yield return new WaitForSeconds(dashingTime);
         trulyDashing = false; isDashing = false;
-        yield return new WaitForSeconds(dashingCooldown);
-        canDash = true;
+        yield return new WaitForSeconds(dashingCooldown - dashingTime);
     }
 
     public void UpgradeEvo()
@@ -183,7 +184,7 @@ public class Player : MonoBehaviour
                 break;
             case 3:
                 // Double Dash
-                dashingCooldown = 5.6f;
+                dashingCooldown = 6f;
 
                 break;
             case 4:
