@@ -222,7 +222,7 @@ public class Player : MonoBehaviour
         {
             if (enemy.gameObject.GetComponent<EnemyBlob>() != null) enemy.gameObject.GetComponent<EnemyBlob>().TakeDamage(damage);
             if (enemy.gameObject.GetComponent<EnemyFrog>() != null) enemy.gameObject.GetComponent<EnemyFrog>().TakeDamage(damage);
-            if (enemy.gameObject.GetComponent<BossCat>() != null) enemy.gameObject.GetComponent<BossCat>().TakeDamage(damage);
+            if (enemy.gameObject.GetComponent<EnemySpider>() != null) enemy.gameObject.GetComponent<EnemySpider>().TakeDamage(damage);
             if (enemy.gameObject.GetComponent<BossCat>() != null) enemy.gameObject.GetComponent<BossCat>().TakeDamage(damage);
         }
     }
