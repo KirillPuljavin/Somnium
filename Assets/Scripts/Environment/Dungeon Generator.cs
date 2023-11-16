@@ -133,10 +133,7 @@ public class DungeonGenerator : MonoBehaviour
         int columnIndex = roomIndex % RoomGrid.GetLength(1);
 
         Vector3 position = RoomGrid[rowIndex, columnIndex].transform.position;
-        // Added offset to move the rooms away from each other so they don't overlap.
-        float xOffset = columnIndex * 100f; // adjust this value to increase or decrease the distance between rooms horizontally
-        float yOffset = rowIndex * 100f; // adjust this value to increase or decrease the distance between rooms vertically
-        return new Vector2(position.x + xOffset, position.y + yOffset);
+        return new Vector2(position.x, position.y);
     }
 }
 
