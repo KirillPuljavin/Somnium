@@ -49,7 +49,27 @@ public class ChestScript : MonoBehaviour
         }
         if (clickable && Input.GetKeyDown(KeyCode.E))
         {
+            CardPick();
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.tag == "dashHitbox")
+        {
+            clickable = true;
+        }
+    }
+    void OnTriggerExit2D(Collider2D collider)
+    {
+        if (collider.gameObject.tag == "dashHitbox")
+        {
             clickable = false;
+        }
+    }
+    void CardPick()
+    {
+        clickable = false;
             animator.Play("ChestAnim");
             if (!Card1Picked && !Card2Picked && !Card3Picked && !Card4Picked)
             {
@@ -104,21 +124,5 @@ public class ChestScript : MonoBehaviour
                     Debug.Log("You already have 2 augments! Can't procced!");
                     break;
             }
-        }
-    }
-
-    void OnTriggerEnter2D(Collider2D collider)
-    {
-        if (collider.gameObject.tag == "dashHitbox")
-        {
-            clickable = true;
-        }
-    }
-    void OnTriggerExit2D(Collider2D collider)
-    {
-        if (collider.gameObject.tag == "dashHitbox")
-        {
-            clickable = false;
-        }
     }
 }
