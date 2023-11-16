@@ -34,7 +34,6 @@ public class DungeonGenerator : MonoBehaviour
 
         // Setup Rooms
         roomPrefabs = Resources.LoadAll<GameObject>("Prefabs/Map/Rooms");
-        Debug.Log("Rooms Length: " + roomPrefabs.Length);
         foreach (var roomIndex in currentPreset.roomsAvailable)
         {
             int roomX = Random.Range(0, roomPrefabs.Length);
