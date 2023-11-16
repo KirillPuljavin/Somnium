@@ -20,10 +20,10 @@ public class SpiderWeb : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.tag == "Player") player.speed = 2; player.dashingPower /= 2;
+        if (collider.gameObject.tag == "Player") player.speed /= 2; player.dashingPower /= 1.2f;
     }
     void OnTriggerExit2D(Collider2D collider)
     {
-        if (collider.gameObject.tag == "Player") player.speed = 3.5f; player.dashingPower *= 2;
+        if (collider.gameObject.tag == "Player") player.speed *= 2; player.dashingPower *= 1.2f;
     }
 }
