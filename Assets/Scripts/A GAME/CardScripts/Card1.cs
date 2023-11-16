@@ -10,10 +10,12 @@ public class Card1 : MonoBehaviour
     public Animator animator;
     public Animation anim;
     public ChestScript chest;
+    public AugmentsVis aug;
     void Start()
     {
         Player = GameObject.FindWithTag("Player").GetComponent<Player>();
         chest = GameObject.FindWithTag("Chest").GetComponent<ChestScript>();
+        aug = GameObject.FindWithTag("AugmentsUI").GetComponent<AugmentsVis>();
     }
     public void OnMouseDown()
     {
@@ -24,6 +26,7 @@ public class Card1 : MonoBehaviour
         {
             Destroy(obj);
         }
+        aug.UpdateAugments();
     }
 
     void OnMouseOver()
