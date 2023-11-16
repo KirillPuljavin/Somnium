@@ -6,14 +6,14 @@ using UnityEngine.UI;
 public class DungeonGenerator : MonoBehaviour
 {
     // Objects
-    private GameObject[,] RoomGrid;
-    private GameObject[] RoomsInDungeon;
-    private DungeonPreset currentPreset;
-
     public GameObject passagePrefab;
-    public GameObject[] roomPrefabs;
     public GameObject doorPrefab;
     public Transform doorParent;
+
+    private GameObject[,] RoomGrid;
+    private GameObject[] RoomsInDungeon;
+    private GameObject[] roomPrefabs;
+    private DungeonPreset currentPreset;
 
     void Start()
     {
@@ -33,8 +33,8 @@ public class DungeonGenerator : MonoBehaviour
         else currentPreset = new Dungeon2();
 
         // Setup Rooms
-        // roomPrefabs = Resources.LoadAll<GameObject>("/Assets/Prefabs/Map/Rooms");
-        Debug.Log("Array Length: " + roomPrefabs.Length);
+        roomPrefabs = Resources.LoadAll<GameObject>("Prefabs/Map/Rooms");
+        Debug.Log("Rooms Length: " + roomPrefabs.Length);
         foreach (var roomIndex in currentPreset.roomsAvailable)
         {
             int roomX = Random.Range(0, roomPrefabs.Length);
