@@ -15,3 +15,12 @@ MonoBehaviour:
   _health: 10
   _maxHealth: 10
   _vision: 4
+  _damage: 2
+  _dashDamage: 4
+  _dashCooldown: 3
+  _attackRange: 0.5
+  _weaponEvo: 0
+  _card1: 0
+  _card2: 0
+  _card3: 0
+  _card4: 0
