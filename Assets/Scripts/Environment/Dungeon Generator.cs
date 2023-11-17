@@ -73,7 +73,7 @@ public class DungeonGenerator : MonoBehaviour
             door2.targetRoomIndex = roomIndex1;
         }
 
-        RoomManager.Initialize();
+        GetComponent<RoomManager>().Initialize();
     }
 
     DoorPlacement GetDoorPlacement(int roomIndex1, int roomIndex2)

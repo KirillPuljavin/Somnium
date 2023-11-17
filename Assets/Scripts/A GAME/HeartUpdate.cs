@@ -18,7 +18,7 @@ public class HeartUpdate : MonoBehaviour
     {
         PlayerObj = GameObject.FindWithTag("Player");
         player = PlayerObj.GetComponent<Player>();
-        
+
 
         UpdateHearts();
     }
@@ -33,21 +33,9 @@ public class HeartUpdate : MonoBehaviour
         for (int i = 0; i < player.MaxHearts; i += 2)
         {
             tempAmt += 2;
-            if (tempAmt <= playerHearts)
-            {
-                Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                Debug.Log("Full Heart Added");
-            }
-            else if (tempAmt == playerHearts + 1)
-            {
-                Instantiate(halfHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                Debug.Log("Half Heart Added");
-            }
-            else
-            {
-                Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                Debug.Log("Empty Heart Added");
-            }
+            if (tempAmt <= playerHearts) Instantiate(fullHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
+            else if (tempAmt == playerHearts + 1) Instantiate(halfHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
+            else Instantiate(emptyHeartIcon, gameObject.transform.position, Quaternion.identity, gameObject.transform);
         }
     }
 }
