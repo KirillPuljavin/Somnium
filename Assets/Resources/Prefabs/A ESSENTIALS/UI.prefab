@@ -123,8 +123,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 321.07, y: -93.56}
-  m_SizeDelta: {x: 642.14, y: 187.13}
+  m_AnchoredPosition: {x: 420.94, y: -93.56}
+  m_SizeDelta: {x: 841.89, y: 187.13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1310512940645201084
 MonoBehaviour:
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_CellSize: {x: 60, y: 70}
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 1
-  m_ConstraintCount: 5
+  m_ConstraintCount: 100
 --- !u!1 &2899823166677993154
 GameObject:
   m_ObjectHideFlags: 0
@@ -324,7 +324,7 @@ GameObject:
   - component: {fileID: 3731569010322779134}
   m_Layer: 0
   m_Name: Augments
-  m_TagString: HeartsUI
+  m_TagString: AugmentsUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -345,8 +345,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 420.94, y: -581}
-  m_SizeDelta: {x: 841.89, y: 187.13}
+  m_AnchoredPosition: {x: 100.27, y: -628}
+  m_SizeDelta: {x: 171.91, y: 57.66}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3279158353296424874
 MonoBehaviour:
@@ -360,10 +360,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54eda295bd5fc0941a81cafcb2df37c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Augment1: {fileID: 1426876108, guid: f4c6bb6cae864644aafed0b2a63d0dca, type: 3}
-  Augment2: {fileID: 1119777129, guid: f4c6bb6cae864644aafed0b2a63d0dca, type: 3}
-  Augment3: {fileID: -908668129, guid: f4c6bb6cae864644aafed0b2a63d0dca, type: 3}
-  Augment4: {fileID: -646830047, guid: f4c6bb6cae864644aafed0b2a63d0dca, type: 3}
+  Augment1: {fileID: 490455294136833100, guid: a82e7f1ab4c6b8243b70c20f5c00d316, type: 3}
+  Augment2: {fileID: 5769719172950789379, guid: ab20abb61e323c947bc29b6f90999004, type: 3}
+  Augment3: {fileID: 8242562528149003760, guid: 3c3a6e7de3f1fb041a963c415122ffbf, type: 3}
+  Augment4: {fileID: 5945049037851476347, guid: 202d9cb41689bde47a245f5af1032102, type: 3}
 --- !u!114 &3731569010322779134
 MonoBehaviour:
   m_ObjectHideFlags: 0
