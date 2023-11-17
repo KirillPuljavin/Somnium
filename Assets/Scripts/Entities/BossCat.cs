@@ -10,6 +10,8 @@ public class BossCat : MonoBehaviour
     Player Player;
     public Rigidbody2D rb;
     public Animator animator;
+    public GameObject healthBar;
+    public GameObject healthMask;
 
     public GameObject BasicRight;
     public GameObject BasicLeft;
@@ -17,6 +19,8 @@ public class BossCat : MonoBehaviour
     public GameObject BasicDown;
 
     public int health;
+    public int maxHealth;
+    public float healthProcent;
     public int speed;
     public float attackRange;
     public float basicCooldown;
@@ -37,6 +41,9 @@ public class BossCat : MonoBehaviour
         basicTimer = basicCooldown;
 
         Player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        healthBar = GameObject.FindGameObjectWithTag("BossHealth");
+        healthMask = GameObject.FindGameObjectWithTag("BossMask");
+        healthBar.SetActive(false);
         StartCoroutine(Begin());
 
         // Hide all basic attacks
@@ -45,6 +52,7 @@ public class BossCat : MonoBehaviour
         BasicUp.SetActive(false);
         BasicDown.SetActive(false);
     }
+    
 
 
 
@@ -68,6 +76,7 @@ public class BossCat : MonoBehaviour
             StartCoroutine(Animations());
             calcDistance();
             calcDirection();
+            calcHealth();   
         }
     }
 
@@ -75,6 +84,7 @@ public class BossCat : MonoBehaviour
     {
         animator.SetBool("spawned", true);
         yield return new WaitForSeconds(0.833f);
+        healthBar.SetActive(true);
         spawned = true;
     }
 
@@ -219,6 +229,12 @@ public class BossCat : MonoBehaviour
         angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
     }
 
+    void calcHealth(){
+        healthProcent = (float)health / (float)maxHealth;
+        //healthMask.transform.localPosition = new UnityEngine.Vector3(healthProcent * -2, -0.3f, 0);
+        healthMask.transform.localScale = new UnityEngine.Vector3(healthProcent * 4, 0.5f, 1);
+    }
+
     void damagePlayer()
     {
         if (damageTimer >= damageCooldown)
@@ -233,6 +249,7 @@ public class BossCat : MonoBehaviour
         health -= amount;
         if (health <= 0)
         {
+            healthBar.SetActive(false);
             Destroy(gameObject);
         }
     }

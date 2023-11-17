@@ -19,6 +19,8 @@ TagManager:
   - Chest
   - AugmentsUI
   - Spider
+  - BossHealth
+  - BossMask
   layers:
   - Default
   - TransparentFX
