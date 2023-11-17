@@ -9,9 +9,9 @@ public class DungeonGenerator : MonoBehaviour
     public GameObject passagePrefab;
     public GameObject doorPrefab;
     public Transform doorParent;
+    public GameObject[] RoomsInDungeon;
 
     private GameObject[,] RoomGrid;
-    private GameObject[] RoomsInDungeon;
     private DungeonPreset currentPreset;
     private GameObject[] roomPrefabsForest;
     private GameObject[] roomPrefabsSnow;
@@ -72,6 +72,8 @@ public class DungeonGenerator : MonoBehaviour
             door2.targetDoorPos = doorPosition1;
             door2.targetRoomIndex = roomIndex1;
         }
+
+        RoomManager.Initialize();
     }
 
     DoorPlacement GetDoorPlacement(int roomIndex1, int roomIndex2)
