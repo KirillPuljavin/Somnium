@@ -100,38 +100,40 @@ public class BossCat : MonoBehaviour
                 if (angle < 55 && angle > 0)
                 {
                     inAnimation = true;
-                    BasicRight.SetActive(true);
                     animator.Play("BasicRight");
+                    yield return new WaitForSeconds(0.4f);
+                    BasicRight.SetActive(true);
                     Collider2D hitEnemy = Physics2D.OverlapCircle(BasicRight.transform.position, 1, LayerMask.GetMask("Player"));
                     if (hitEnemy != null)
                     {
                         damagePlayer();
                     }
                     basicTimer = 0;
-                    yield return new WaitForSeconds(0.917f);
+                    yield return new WaitForSeconds(0.517f);
                     BasicRight.SetActive(false);
                     inAnimation = false;
                 }
                 else if (angle > 130 && angle < 180 || angle > -180 && angle < -130)
                 {
                     inAnimation = true;
-                    BasicLeft.SetActive(true);
                     animator.Play("BasicLeft");
+                    yield return new WaitForSeconds(0.4f);
+                    BasicLeft.SetActive(true);
                     Collider2D hitEnemy = Physics2D.OverlapCircle(BasicLeft.transform.position, 1, LayerMask.GetMask("Player"));
                     if (hitEnemy != null)
                     {
                         damagePlayer();
                     }
                     basicTimer = 0;
-                    yield return new WaitForSeconds(0.917f);
+                    yield return new WaitForSeconds(0.517f);
                     BasicLeft.SetActive(false);
                     inAnimation = false;
                 }
                 else if (angle < 130 && angle > 55)
                 {
                     inAnimation = true;
-                    BasicRight.SetActive(true);
                     animator.Play("BasicUp");
+                    BasicRight.SetActive(true);
                     yield return new WaitForSeconds(0.5835f);
                     BasicRight.SetActive(false);
                     BasicUp.SetActive(true);
@@ -144,8 +146,8 @@ public class BossCat : MonoBehaviour
                     yield return new WaitForSeconds(0.5835f);
                     BasicUp.SetActive(false);
 
-                    BasicLeft.SetActive(true);
                     animator.Play("BasicUpL");
+                    BasicLeft.SetActive(true);
                     yield return new WaitForSeconds(0.5835f);
                     BasicLeft.SetActive(false);
                     BasicUp.SetActive(true);
@@ -163,8 +165,8 @@ public class BossCat : MonoBehaviour
                 else if (angle > -130 && angle < 0)
                 {
                     inAnimation = true;
-                    BasicLeft.SetActive(true);
                     animator.Play("BasicDown");
+                    BasicLeft.SetActive(true);
                     yield return new WaitForSeconds(0.5835f);
                     BasicLeft.SetActive(false);
                     BasicDown.SetActive(true);
@@ -177,8 +179,8 @@ public class BossCat : MonoBehaviour
                     yield return new WaitForSeconds(0.5835f);
                     BasicDown.SetActive(false);
 
-                    BasicRight.SetActive(true);
                     animator.Play("BasicDownL");
+                    BasicRight.SetActive(true);
                     yield return new WaitForSeconds(0.5835f);
                     BasicRight.SetActive(false);
                     BasicDown.SetActive(true);
