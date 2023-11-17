@@ -14,21 +14,7 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private GameObject frogEnemyPrefab;
     [SerializeField] private GameObject spiderEnemyPrefab;
 
-    private List<GameObject> _enemies = new List<GameObject>();
-    private List<GameObject> Enemies
-    {
-        get { return _enemies; }
-        set
-        {
-            _enemies.AddRange(value);
-            EnemyDied();
-        }
-    }
-    private void AddEnemy(GameObject enemy)
-    {
-        _enemies.Add(enemy);
-        EnemyDied();
-    }
+    private List<GameObject> Enemies = new List<GameObject>();
 
     public void Initialize()
     {
@@ -47,28 +33,28 @@ public class RoomManager : MonoBehaviour
             Transform enemyTypeParent = currentRoom.transform.GetChild(1).GetChild(enemyType);
             foreach (Transform enemy in enemyTypeParent)
             {
-                AddEnemy(enemy.gameObject);
+                Enemies.Add(enemy.gameObject);
                 switch (enemyType)
                 {
                     case 0:
-                        Instantiate(blobEnemyPrefab, enemy.position, Quaternion.identity, enemy);
+                        Instantiate(blobEnemyPrefab, enemy.position, Quaternion.identity, currentRoom.transform);
                         break;
                     case 1:
-                        Instantiate(frogEnemyPrefab, enemy.position, Quaternion.identity, enemy);
+                        Instantiate(frogEnemyPrefab, enemy.position, Quaternion.identity, currentRoom.transform);
                         break;
                     case 2:
-                        Instantiate(spiderEnemyPrefab, enemy.position, Quaternion.identity, enemy);
+                        Instantiate(spiderEnemyPrefab, enemy.position, Quaternion.identity, currentRoom.transform);
                         break;
                 }
             }
         }
     }
+
     public IEnumerator CheckForEnemies()
     {
         yield return new WaitForSeconds(0.3f);
 
-        _enemies.RemoveAll(item => item == null);
-        Debug.Log("ENEMY LIST UPDATED");
+        Enemies.RemoveAll(item => item == null);
         Debug.Log("Enemy count: " + Enemies.Count);
 
         if (Enemies.Count <= 0)
