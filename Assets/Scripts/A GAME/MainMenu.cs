@@ -5,6 +5,9 @@ using UnityEngine;
 public class MainMenu : MonoBehaviour
 {
     public sceneManagerScript sceneManager;
+    public Sprite normalSprite;
+    public Sprite hoverSprite;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,10 +26,10 @@ public class MainMenu : MonoBehaviour
 
     void OnMouseOver()
     {
-        
+        gameObject.GetComponent<SpriteRenderer>().sprite = hoverSprite;
     }
     void OnMouseExit()
     {
-        
+        gameObject.GetComponent<SpriteRenderer>().sprite = normalSprite;
     }
 }
