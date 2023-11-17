@@ -10272,7 +10272,7 @@ GameObject:
   - component: {fileID: 1336543861764348348}
   - component: {fileID: 5744157433506029428}
   m_Layer: 0
-  m_Name: Snow Room Prefab 3
+  m_Name: OldSnow Room Prefab 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
