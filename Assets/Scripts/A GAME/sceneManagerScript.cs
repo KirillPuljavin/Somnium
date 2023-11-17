@@ -64,6 +64,6 @@ public class sceneManagerScript : MonoBehaviour
     }
     public void SwitchToDungeon1()
     {
-
+        SceneManager.LoadScene(scene1);
     }
 }
