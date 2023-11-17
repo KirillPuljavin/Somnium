@@ -120,6 +120,7 @@ MonoBehaviour:
   scene2: Spawn
   scene3: FIGHT 2
   scene4: Dungeon 1
+  PlayerSO: {fileID: 11400000, guid: 7cfb78329567f4848a77e395d737187d, type: 2}
 --- !u!1 &1910478169838077729
 GameObject:
   m_ObjectHideFlags: 0
