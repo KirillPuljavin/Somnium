@@ -60,6 +60,8 @@ public class Player : MonoBehaviour
             transform.position = collider.gameObject.GetComponent<DoorMechanics>().targetDoorPos;
             currRoom = collider.gameObject.GetComponent<DoorMechanics>().targetRoomIndex;
             tpCooldown = 0;
+
+            RoomManager.RoomUpdate();
         }
     }
 
@@ -67,9 +69,6 @@ public class Player : MonoBehaviour
     {
         uiScript = GameObject.FindWithTag("Components").GetComponent<UIScript>();
         getStoredValues();
-
-        RoomManager.player = this;
-        RoomManager.Initialize();
     }
 
     private void getStoredValues()
@@ -89,7 +88,7 @@ public class Player : MonoBehaviour
         Card3Picked = PlayerSO.Card3;
         Card4Picked = PlayerSO.Card4;
     }
-    private void StoredValues()
+    private void StoreValues()
     {
         PlayerSO.Health = (float)Hearts;
         PlayerSO.MaxHealth = (float)MaxHearts;
@@ -110,8 +109,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-
-        StoredValues();
+        StoreValues();
         myLight.pointLightOuterRadius = Vision * 4;
 
         // Cooldown
@@ -310,11 +308,8 @@ public class Player : MonoBehaviour
     void UpdateStamina()
     {
         staminaProcent = stamina / dashingCooldown;
-
         staminaBar.transform.localScale = new Vector3(transform.localScale.x * 25, transform.localScale.y * 25, transform.localScale.z);
-
         staminaMask.transform.localScale = new Vector3(staminaProcent * 500, transform.localScale.y * 25, transform.localScale.z);
-
     }
 
     private IEnumerator DamageFlash()
