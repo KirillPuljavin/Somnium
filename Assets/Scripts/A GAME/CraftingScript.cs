@@ -7,9 +7,9 @@ using UnityEngine.UIElements;
 public class CraftingScript : MonoBehaviour
 {
     public Animator animator;
+    public int craftingLvl;
 
     private Player player;
-    private int craftingLvl = 2;
     private bool clickable = false;
     private int[] UpgradeCosts;
 

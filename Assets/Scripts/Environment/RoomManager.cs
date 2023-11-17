@@ -13,6 +13,8 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private GameObject blobEnemyPrefab;
     [SerializeField] private GameObject frogEnemyPrefab;
     [SerializeField] private GameObject spiderEnemyPrefab;
+    [SerializeField] private GameObject crafting1Prefab;
+    [SerializeField] private GameObject crafting2Prefab;
 
     private List<GameObject> Enemies = new List<GameObject>();
 
@@ -28,7 +30,10 @@ public class RoomManager : MonoBehaviour
 
     public void NewRoom()
     {
-        for (int enemyType = 0; enemyType < 3; enemyType++)
+        currentRoom = dungeon.RoomsInDungeon[player.currRoom];
+
+        // Spawn Enemies
+        /* for (int enemyType = 0; enemyType < 3; enemyType++)
         {
             Transform enemyTypeParent = currentRoom.transform.GetChild(1).GetChild(enemyType);
             foreach (Transform enemy in enemyTypeParent)
@@ -47,6 +52,18 @@ public class RoomManager : MonoBehaviour
                         break;
                 }
             }
+        } */
+
+        // Spawn Crafting Station
+        if (player.currRoom == dungeon.currentPreset.positionUpgrade1)
+        {
+            Instantiate(crafting1Prefab, currentRoom.transform.GetChild(3).GetChild(0).transform.position, Quaternion.identity, currentRoom.transform);
+            Debug.Log("Instantiated crafting 1 in room: " + dungeon.currentPreset.positionUpgrade1);
+        }
+        else if (player.currRoom == dungeon.currentPreset.positionUpgrade2)
+        {
+            Instantiate(crafting2Prefab, currentRoom.transform.GetChild(3).GetChild(0).transform.position, Quaternion.identity, currentRoom.transform);
+            Debug.Log("Instantiated crafting 2 in room: " + dungeon.currentPreset.positionUpgrade2);
         }
     }
 
