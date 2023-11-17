@@ -16,7 +16,8 @@ public class Player : MonoBehaviour
     [SerializeField] private FloatSO PlayerSO;
     public LayerMask enemyLayers;
     public Transform attackPoint;
-    public Light2D myLight;
+    public Light2D flashLight;
+    public Light2D damageLight;
 
     // Variables
     public bool inDungeon = false;
@@ -87,7 +88,8 @@ public class Player : MonoBehaviour
         Card3Picked = PlayerSO.Card3;
         Card4Picked = PlayerSO.Card4;
     }
-    private void StoredValues(){
+    private void StoredValues()
+    {
         PlayerSO.Health = (float)Hearts;
         PlayerSO.MaxHealth = (float)MaxHearts;
         PlayerSO.Vision = (float)Vision;
@@ -109,7 +111,7 @@ public class Player : MonoBehaviour
     {
 
         StoredValues();
-        myLight.pointLightOuterRadius = Vision * 4;
+        flashLight.pointLightOuterRadius = Vision * 4;
 
         // Cooldown
         if (tpCooldown <= 1) tpCooldown += Time.deltaTime;
@@ -300,7 +302,6 @@ public class Player : MonoBehaviour
         Hearts -= amount;
         heartsHUD.UpdateHearts();
         StartCoroutine(DamageFlash());
-
         if (Hearts <= 0) Death();
     }
 
@@ -316,9 +317,9 @@ public class Player : MonoBehaviour
 
     private IEnumerator DamageFlash()
     {
-        myLight.color = Color.red;
+        flashLight.color = Color.red;
         yield return new WaitForSeconds(0.1f);
-        myLight.color = Color.white;
+        flashLight.color = Color.white;
     }
 
     public void Death()
