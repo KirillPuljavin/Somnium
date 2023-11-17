@@ -244,7 +244,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.754
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.5
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: b953aebe00000000a3db683a
@@ -257,7 +257,7 @@ MonoBehaviour:
   m_NormalMapQuality: 2
   m_UseNormalMap: 0
   m_ShadowIntensityEnabled: 0
-  m_ShadowIntensity: 0.75
+  m_ShadowIntensity: 0.698
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
@@ -337,6 +337,7 @@ MonoBehaviour:
   uiScript: {fileID: 0}
   staminaBar: {fileID: 0}
   staminaMask: {fileID: 0}
+  HealthSO: {fileID: 11400000, guid: 5bd39376558f9b446a545e8bef63ef8d, type: 2}
   enemyLayers:
     serializedVersion: 2
     m_Bits: 64
@@ -346,19 +347,22 @@ MonoBehaviour:
   currRoom: 2
   Hearts: 10
   MaxHearts: 10
-  stamina: 0
   staminaProcent: 0
-  ComponentsTier2: 0
-  ComponentsTier3: 0
+  Components: 0
   WeaponEvo: 0
+  Vision: 4
   speed: 3.5
   isDashing: 0
   damage: 2
   dashDamage: 4
-  attackCooldown: 0.7
   dashingPower: 12
-  Vision: 1
+  attackCooldown: 0.7
+  dashUpgraded: 0
   attackRange: 0.5
+  Card1Picked: 0
+  Card2Picked: 0
+  Card3Picked: 0
+  Card4Picked: 0
 --- !u!50 &7078594632026464168
 Rigidbody2D:
   serializedVersion: 4

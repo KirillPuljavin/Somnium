@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     [SerializeField] private UIScript uiScript;
     [SerializeField] private GameObject staminaBar;
     [SerializeField] private GameObject staminaMask;
+    [SerializeField] private FloatSO HealthSO;
     public LayerMask enemyLayers;
     public Transform attackPoint;
     public Light2D myLight;
@@ -65,9 +66,11 @@ public class Player : MonoBehaviour
     private void Start()
     {
         uiScript = GameObject.FindWithTag("Components").GetComponent<UIScript>();
+        Hearts = (int)HealthSO.Value;
     }
     private void Update()
     {
+        HealthSO.Value = (float)Hearts;
         myLight.pointLightOuterRadius = Vision * 4;
 
         // Cooldown
