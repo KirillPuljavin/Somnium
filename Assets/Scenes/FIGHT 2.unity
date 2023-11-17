@@ -550,22 +550,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6113304163974231444, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
   m_PrefabInstance: {fileID: 727911674}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1376179238 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6499758890167080450, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
-  m_PrefabInstance: {fileID: 3815078443758937339}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1376179240 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8053809871869886996, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
-  m_PrefabInstance: {fileID: 3815078443758937339}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1376179238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1648695256 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1310512940645201084, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
@@ -590,18 +574,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 161686740}
     m_Modifications:
-    - target: {fileID: 4195860284930794465, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
-      propertyPath: Lantern
-      value: 
-      objectReference: {fileID: 1376179238}
-    - target: {fileID: 4195860284930794465, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
-      propertyPath: myLight
-      value: 
-      objectReference: {fileID: 1376179240}
-    - target: {fileID: 4195860284930794465, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
-      propertyPath: HealthSO
-      value: 
-      objectReference: {fileID: 11400000, guid: 5bd39376558f9b446a545e8bef63ef8d, type: 2}
     - target: {fileID: 4195860284930794465, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
       propertyPath: uiScript
       value: 
@@ -698,53 +670,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6499758890167080450, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6607715729755257798, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 8053809871869886996, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8053809871869886996, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8053809871869886996, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8053809871869886996, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
-      propertyPath: m_Intensity
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8053809871869886996, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
-      propertyPath: m_ShadowIntensity
-      value: 0.698
-      objectReference: {fileID: 0}
-    - target: {fileID: 8053809871869886996, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
-      propertyPath: m_PointLightInnerRadius
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8053809871869886996, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
-      propertyPath: m_PointLightOuterRadius
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8053809871869886996, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
-      propertyPath: m_ShadowIntensityEnabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8053809871869886996, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
-      propertyPath: m_LightVolumeIntensityEnabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8053809871869886996, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
-      propertyPath: m_ShadowVolumeIntensityEnabled
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

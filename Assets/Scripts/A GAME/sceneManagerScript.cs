@@ -5,20 +5,39 @@ using UnityEngine.SceneManagement;
 
 public class sceneManagerScript : MonoBehaviour
 {
-
-
-
     public string scene1;
     public string scene2;
     public string scene3;
     public string scene4;
-    // Start is called before the first frame update
+    [SerializeField]
+    private FloatSO PlayerSO;
     void Start()
     {
-
+        if (SceneManager.GetActiveScene().name == scene1)
+        {
+            setPlayerStats();
+        }
     }
 
-    // Update is called once per frame
+    private void setPlayerStats()
+    {
+        //This is the players baseStats and needs to be updated SEPERATELY from the player's values in Unity
+        PlayerSO.Health = 10f;
+        PlayerSO.MaxHealth = 10f;
+        PlayerSO.Vision = 4f;
+
+        PlayerSO.Damage = 2f;
+        PlayerSO.DashDamage = 4f;
+        PlayerSO.DashCooldown = 3f;
+        PlayerSO.AttackRange = 0.5f;
+        PlayerSO.WeaponEvo = 0f;
+
+        PlayerSO.Card1 = false;
+        PlayerSO.Card2 = false;
+        PlayerSO.Card3 = false;
+        PlayerSO.Card4 = false;
+    }
+
     void Update()
     {
 
@@ -42,6 +61,6 @@ public class sceneManagerScript : MonoBehaviour
         {
             SceneManager.LoadScene(scene4);
         }
-        
+
     }
 }

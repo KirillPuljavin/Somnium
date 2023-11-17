@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     [SerializeField] private UIScript uiScript;
     [SerializeField] private GameObject staminaBar;
     [SerializeField] private GameObject staminaMask;
-    [SerializeField] private FloatSO HealthSO;
+    [SerializeField] private FloatSO PlayerSO;
     public LayerMask enemyLayers;
     public Transform attackPoint;
     public Light2D myLight;
@@ -66,11 +66,49 @@ public class Player : MonoBehaviour
     private void Start()
     {
         uiScript = GameObject.FindWithTag("Components").GetComponent<UIScript>();
-        Hearts = (int)HealthSO.Value;
+
+        getStoredValues();
     }
+
+    private void getStoredValues()
+    {
+        Hearts = (int)PlayerSO.Health;
+        MaxHearts = (int)PlayerSO.MaxHealth;
+        Vision = (int)PlayerSO.Vision;
+
+        damage = (int)PlayerSO.Damage;
+        dashDamage = (int)PlayerSO.DashDamage;
+        dashingCooldown = PlayerSO.DashCooldown;
+        attackRange = PlayerSO.AttackRange;
+        WeaponEvo = (int)PlayerSO.WeaponEvo;
+
+        Card1Picked = PlayerSO.Card1;
+        Card2Picked = PlayerSO.Card2;
+        Card3Picked = PlayerSO.Card3;
+        Card4Picked = PlayerSO.Card4;
+    }
+    private void StoredValues(){
+        PlayerSO.Health = (float)Hearts;
+        PlayerSO.MaxHealth = (float)MaxHearts;
+        PlayerSO.Vision = (float)Vision;
+
+        PlayerSO.Damage = (float)damage;
+        PlayerSO.DashDamage = (float)dashDamage;
+        PlayerSO.DashCooldown = dashingCooldown;
+        PlayerSO.AttackRange = attackRange;
+        PlayerSO.WeaponEvo = (float)WeaponEvo;
+
+        PlayerSO.Card1 = Card1Picked;
+        PlayerSO.Card2 = Card2Picked;
+        PlayerSO.Card3 = Card3Picked;
+        PlayerSO.Card4 = Card4Picked;
+
+    }
+
     private void Update()
     {
-        HealthSO.Value = (float)Hearts;
+
+        StoredValues();
         myLight.pointLightOuterRadius = Vision * 4;
 
         // Cooldown
@@ -145,7 +183,6 @@ public class Player : MonoBehaviour
         if (trulyDashing) return;
         if (movement.magnitude > 1) rb.velocity = new Vector2(movement.x * (speed - 0.5f), movement.y * (speed - 0.5f));
         else rb.velocity = new Vector2(movement.x * speed, movement.y * speed);
-        Debug.Log(stamina);
     }
 
     bool trulyDashing;

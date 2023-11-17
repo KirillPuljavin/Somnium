@@ -337,7 +337,7 @@ MonoBehaviour:
   uiScript: {fileID: 0}
   staminaBar: {fileID: 0}
   staminaMask: {fileID: 0}
-  HealthSO: {fileID: 11400000, guid: 5bd39376558f9b446a545e8bef63ef8d, type: 2}
+  PlayerSO: {fileID: 11400000, guid: 7cfb78329567f4848a77e395d737187d, type: 2}
   enemyLayers:
     serializedVersion: 2
     m_Bits: 64
