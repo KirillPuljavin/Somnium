@@ -26,6 +26,8 @@ public class EnemyBlob : MonoBehaviour
     private Vector3 target;
     NavMeshAgent agent;
 
+    UnityEngine.Vector3 previousPosition;
+
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -57,11 +59,19 @@ public class EnemyBlob : MonoBehaviour
         if (reverseCooldown <= 0.2) reverseCooldown += Time.deltaTime;
         if (reverseCooldown >= 0.2) speed = 2;
 
-        animator.SetFloat("Horizontal", rb.velocity.x);
-        animator.SetFloat("Vertical", rb.velocity.y);
-        animator.SetFloat("Speed", rb.velocity.sqrMagnitude);
+        UnityEngine.Vector3 currentPosition = transform.position;
+
+        float horizontalVelocity = (currentPosition.x - previousPosition.x) / Time.deltaTime;
+        float verticalVelocity = (currentPosition.y - previousPosition.y) / Time.deltaTime;
+
+        animator.SetFloat("Horizontal", horizontalVelocity);
+        animator.SetFloat("Vertical", verticalVelocity);
+        animator.SetFloat("speed", Mathf.Sqrt(horizontalVelocity * horizontalVelocity + verticalVelocity * verticalVelocity));
+
+        previousPosition = currentPosition;
 
         SetTargetPosition();
+        agent.speed = speed;
     }
     // private void MoveEnemy()
     // {
