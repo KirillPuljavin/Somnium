@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyBlob : MonoBehaviour
 {
@@ -21,6 +22,16 @@ public class EnemyBlob : MonoBehaviour
     private bool agro;
     private float reverseCooldown = 0.2f;
 
+    //Pathfinding
+    private Vector3 target;
+    NavMeshAgent agent;
+
+    void Awake()
+    {
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
+    }
     void Start()
     {
         Player = GameObject.FindWithTag("Player").GetComponent<Player>();
@@ -34,7 +45,7 @@ public class EnemyBlob : MonoBehaviour
         float distance = Vector2.Distance(transform.position, Player.gameObject.transform.position);
 
         if (distance <= agroRange) agro = true; else agro = false;
-        if (agro) MoveEnemy();
+        if (agro) SetAgentPosition();
         else
         {
             rb.velocity = new Vector2(0, 0);
@@ -49,13 +60,15 @@ public class EnemyBlob : MonoBehaviour
         animator.SetFloat("Horizontal", rb.velocity.x);
         animator.SetFloat("Vertical", rb.velocity.y);
         animator.SetFloat("Speed", rb.velocity.sqrMagnitude);
+
+        SetTargetPosition();
     }
-    private void MoveEnemy()
-    {
-        directionToPlayer = (Player.transform.position - transform.position).normalized;
-        rb.velocity = new Vector2(directionToPlayer.x, directionToPlayer.y) * speed;
-    }
-    
+    // private void MoveEnemy()
+    // {
+    //     directionToPlayer = (Player.transform.position - transform.position).normalized;
+    //     rb.velocity = new Vector2(directionToPlayer.x, directionToPlayer.y) * speed;
+    // }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player") speed = 0.005f;
@@ -89,10 +102,20 @@ public class EnemyBlob : MonoBehaviour
         enemyHP -= amount;
         reverseCooldown = 0;
         speed = -2;
-        
+
         if (enemyHP <= 0)
         {
             Destroy(gameObject);
         }
+    }
+
+    void SetTargetPosition()
+    {
+        target = Player.transform.position;
+    }
+
+    void SetAgentPosition()
+    {
+        agent.SetDestination(new Vector3(target.x, target.y, transform.position.z));
     }
 }
