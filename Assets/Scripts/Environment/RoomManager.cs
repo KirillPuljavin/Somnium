@@ -1,57 +1,66 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
-public class RoomManager
+public class RoomManager : MonoBehaviour
 {
     public static GameObject currentRoom;
     public static DungeonGenerator dungeon;
     public static Player player;
     public static bool roomCleared = false;
 
-    public static List<GameObject> _enemies = new List<GameObject>();
-    private static List<GameObject> Enemies
-    {
-        get { CheckForEnemies(); return _enemies; }
-        set
-        {
-            _enemies.AddRange(value);
-            CheckForEnemies();
-        }
-    }
-    private static void AddEnemy(GameObject enemy)
-    {
-        _enemies.Add(enemy);
-        CheckForEnemies();
-    }
+    [SerializeField] private GameObject blobEnemyPrefab;
+    [SerializeField] private GameObject frogEnemyPrefab;
+    [SerializeField] private GameObject spiderEnemyPrefab;
 
-    public static void Initialize()
+    private List<GameObject> Enemies = new List<GameObject>();
+
+    public void Initialize()
     {
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
         dungeon = GameObject.Find("Dungeon Generator").GetComponent<DungeonGenerator>();
         currentRoom = dungeon.RoomsInDungeon[player.currRoom];
+
+        NewRoom();
+        EnemyDied();
     }
 
-    public static void RoomUpdate()
+    public void NewRoom()
     {
         for (int enemyType = 0; enemyType < 3; enemyType++)
         {
             Transform enemyTypeParent = currentRoom.transform.GetChild(1).GetChild(enemyType);
-            foreach (GameObject enemy in enemyTypeParent)
+            foreach (Transform enemy in enemyTypeParent)
             {
-                // Spawn enemies
-                AddEnemy(enemy);
+                Enemies.Add(enemy.gameObject);
+                switch (enemyType)
+                {
+                    case 0:
+                        Instantiate(blobEnemyPrefab, enemy.position, Quaternion.identity, currentRoom.transform);
+                        break;
+                    case 1:
+                        Instantiate(frogEnemyPrefab, enemy.position, Quaternion.identity, currentRoom.transform);
+                        break;
+                    case 2:
+                        Instantiate(spiderEnemyPrefab, enemy.position, Quaternion.identity, currentRoom.transform);
+                        break;
+                }
             }
         }
     }
-    public static void CheckForEnemies()
+
+    public IEnumerator CheckForEnemies()
     {
-        _enemies.RemoveAll(item => item == null);
+        yield return new WaitForSeconds(0.3f);
+
+        Enemies.RemoveAll(item => item == null);
+        Debug.Log("Enemy count: " + Enemies.Count);
 
         if (Enemies.Count <= 0)
         {
-
+            roomCleared = true;
         }
-        // Then open Doors
     }
+    public void EnemyDied() => StartCoroutine(CheckForEnemies());
 }

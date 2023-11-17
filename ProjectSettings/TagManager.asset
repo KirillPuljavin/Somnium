@@ -19,6 +19,7 @@ TagManager:
   - Chest
   - AugmentsUI
   - Spider
+  - EventSystem
   - BossHealth
   - BossMask
   layers:

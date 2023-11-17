@@ -62,7 +62,7 @@ public class Player : MonoBehaviour
             currRoom = collider.gameObject.GetComponent<DoorMechanics>().targetRoomIndex;
             tpCooldown = 0;
 
-            RoomManager.RoomUpdate();
+            GameObject.Find("Dungeon Generator").GetComponent<RoomManager>().NewRoom();
         }
     }
 
@@ -227,11 +227,9 @@ public class Player : MonoBehaviour
             case 3:
                 // Double Dash
                 dashingCooldown = 6f;
-
                 break;
             case 4:
                 // Sweeping Edge
-
                 break;
         }
         WeaponEvo++;
