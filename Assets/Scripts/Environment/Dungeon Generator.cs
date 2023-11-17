@@ -168,6 +168,8 @@ public abstract class DungeonPreset
     public int positionBossTransitionRoom;
     public int positionUpgrade1;
     public int positionUpgrade2;
+    public int positionChest1;
+    public int positionChest2;
 }
 
 [System.Serializable]
@@ -178,6 +180,8 @@ public class Dungeon1 : DungeonPreset
         positionBossTransitionRoom = 26;
         positionUpgrade1 = 13;
         positionUpgrade2 = 19;
+        positionChest1 = 5;
+        positionChest2 = 20;
 
         passages.Add(new Passage(2, 3));
         passages.Add(new Passage(2, 7));
@@ -213,6 +217,8 @@ public class Dungeon2 : DungeonPreset
         positionBossTransitionRoom = 28;
         positionUpgrade1 = 5;
         positionUpgrade2 = 15;
+        positionChest1 = 8;
+        positionChest2 = 23;
 
         passages.Add(new Passage(2, 1));
         passages.Add(new Passage(2, 7));
