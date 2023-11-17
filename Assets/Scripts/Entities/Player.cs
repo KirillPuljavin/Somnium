@@ -54,12 +54,12 @@ public class Player : MonoBehaviour
     public bool Card4Picked = false;
 
     private float tpCooldown;
-    void OnTriggerEnter2D(Collider2D collider)
+    void OnTriggerEnter2D(Collider2D collider) // Door collider
     {
-        if (tpCooldown >= 1 && collider.gameObject.tag == "Door")
+        if (tpCooldown >= 1 && collider.gameObject.tag == "Door" && RoomManager.roomCleared)
         {
             transform.position = collider.gameObject.GetComponent<DoorMechanics>().targetDoorPos;
-            currRoom = collider.gameObject.GetComponent<DoorMechanics>().roomIndex;
+            currRoom = collider.gameObject.GetComponent<DoorMechanics>().targetRoomIndex;
             tpCooldown = 0;
         }
     }
@@ -67,8 +67,10 @@ public class Player : MonoBehaviour
     private void Start()
     {
         uiScript = GameObject.FindWithTag("Components").GetComponent<UIScript>();
-
         getStoredValues();
+
+        RoomManager.player = this;
+        RoomManager.Initialize();
     }
 
     private void getStoredValues()

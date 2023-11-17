@@ -26,6 +26,17 @@ public class EnemySpider : MonoBehaviour
     private bool isShooting = false;
     private float isShootingCooldown = 0;
     private float shootingDir;
+    private Vector3 target;
+    NavMeshAgent agent;
+
+    UnityEngine.Vector3 previousPosition;
+
+    void Awake()
+    {
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
+    }
 
     void Start()
     {
@@ -40,7 +51,7 @@ public class EnemySpider : MonoBehaviour
         float distance = Vector2.Distance(transform.position, Player.gameObject.transform.position);
 
         if (distance <= agroRange) agro = true; else agro = false;
-        if (agro && !isShooting) MoveEnemy();
+        if (agro && !isShooting) SetAgentPosition();
         else
         {
             rb.velocity = new Vector2(0, 0);
@@ -55,16 +66,27 @@ public class EnemySpider : MonoBehaviour
         if (isShootingCooldown <= 0.5f) isShootingCooldown += Time.deltaTime;
         if (reverseCooldown >= 0.2) speed = 2;
 
-        animator.SetFloat("Horizontal", rb.velocity.x);
-        animator.SetFloat("Speed", rb.velocity.sqrMagnitude);
+                UnityEngine.Vector3 currentPosition = transform.position;
+
+        float horizontalVelocity = (currentPosition.x - previousPosition.x) / Time.deltaTime;
+        float verticalVelocity = (currentPosition.y - previousPosition.y) / Time.deltaTime;
+
+        animator.SetFloat("Horizontal", horizontalVelocity);
+        animator.SetFloat("Vertical", verticalVelocity);
+        animator.SetFloat("speed", Mathf.Sqrt(horizontalVelocity * horizontalVelocity + verticalVelocity * verticalVelocity));
+
+        previousPosition = currentPosition;
 
         if (isShootingCooldown >= 0.5) isShooting = false;
+
+        SetTargetPosition();
+        agent.speed = speed;
     }
-    private void MoveEnemy()
-    {
-        directionToPlayer = (Player.transform.position - transform.position).normalized;
-        rb.velocity = new Vector2(directionToPlayer.x, directionToPlayer.y) * speed;
-    }
+    // private void MoveEnemy()
+    // {
+    //     directionToPlayer = (Player.transform.position - transform.position).normalized;
+    //     rb.velocity = new Vector2(directionToPlayer.x, directionToPlayer.y) * speed;
+    // }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -116,5 +138,15 @@ public class EnemySpider : MonoBehaviour
         if (shootingDir >= 0) animator.Play("Attack_Ranged_Right");
         webCooldown = 0;
         Instantiate(SpiderWebArea, Player.transform.position, Quaternion.identity);
+    }
+
+    void SetTargetPosition()
+    {
+        target = Player.transform.position;
+    }
+
+    void SetAgentPosition()
+    {
+        agent.SetDestination(new Vector3(target.x, target.y, transform.position.z));
     }
 }

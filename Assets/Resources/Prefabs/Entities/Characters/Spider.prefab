@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 986158315572252183}
   - component: {fileID: 1158800672516244121}
   - component: {fileID: 8439908091720379440}
+  - component: {fileID: 3011626003188151906}
   m_Layer: 6
   m_Name: Spider
   m_TagString: Spider
@@ -119,6 +120,28 @@ MonoBehaviour:
   enemyHP: 6
   agroRange: 10
   SpiderWebArea: {fileID: 4450296235186559740, guid: 90759fe67fef23c48a63bd9648c4773d, type: 3}
+--- !u!195 &3011626003188151906
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3563160528595184985}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &6833761153160537416
 GameObject:
   m_ObjectHideFlags: 0

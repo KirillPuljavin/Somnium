@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyFrog : MonoBehaviour
 {
@@ -22,6 +23,12 @@ public class EnemyFrog : MonoBehaviour
     private float dashCooldown = 0;
     private float reverseCooldown = 0.2f;
 
+    //Pathfinding
+    private Vector3 target;
+    NavMeshAgent agent;
+
+    UnityEngine.Vector3 previousPosition;
+
     void Start()
     {
         Player = GameObject.FindWithTag("Player").GetComponent<Player>();
@@ -37,7 +44,7 @@ public class EnemyFrog : MonoBehaviour
         if (reverseCooldown >= 0.2)
         {
             speed = 1;
-            if (distance >= closeRange && agro) MoveEnemy();
+            if (distance >= closeRange && agro) SetAgentPosition();
             else
             {
                 rb.velocity = new Vector2(0, 0);
@@ -53,15 +60,25 @@ public class EnemyFrog : MonoBehaviour
 
         if (shootCooldown >= 4 && agro) Shoot();
 
-        animator.SetFloat("Horizontal", rb.velocity.x);
-        animator.SetFloat("Vertical", rb.velocity.y);
-        animator.SetFloat("Speed", rb.velocity.sqrMagnitude);
+        UnityEngine.Vector3 currentPosition = transform.position;
+
+        float horizontalVelocity = (currentPosition.x - previousPosition.x) / Time.deltaTime;
+        float verticalVelocity = (currentPosition.y - previousPosition.y) / Time.deltaTime;
+
+        animator.SetFloat("Horizontal", horizontalVelocity);
+        animator.SetFloat("Vertical", verticalVelocity);
+        animator.SetFloat("speed", Mathf.Sqrt(horizontalVelocity * horizontalVelocity + verticalVelocity * verticalVelocity));
+
+        previousPosition = currentPosition;
+
+        SetTargetPosition();
+        agent.speed = speed;
     }
-    private void MoveEnemy()
-    {
-        directionToPlayer = (Player.transform.position - transform.position).normalized;
-        rb.velocity = new Vector2(directionToPlayer.x, directionToPlayer.y) * speed;
-    }
+    // private void MoveEnemy()
+    // {
+    //     directionToPlayer = (Player.transform.position - transform.position).normalized;
+    //     rb.velocity = new Vector2(directionToPlayer.x, directionToPlayer.y) * speed;
+    // }
     private void LateUpdate()
     {
         if (rb.velocity.x > 0)
@@ -118,5 +135,14 @@ public class EnemyFrog : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+    void SetTargetPosition()
+    {
+        target = Player.transform.position;
+    }
+
+    void SetAgentPosition()
+    {
+        agent.SetDestination(new Vector3(target.x, target.y, transform.position.z));
     }
 }
