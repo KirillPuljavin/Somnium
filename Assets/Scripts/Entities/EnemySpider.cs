@@ -66,7 +66,7 @@ public class EnemySpider : MonoBehaviour
         if (isShootingCooldown <= 0.5f) isShootingCooldown += Time.deltaTime;
         if (reverseCooldown >= 0.2) speed = 2;
 
-                UnityEngine.Vector3 currentPosition = transform.position;
+        UnityEngine.Vector3 currentPosition = transform.position;
 
         float horizontalVelocity = (currentPosition.x - previousPosition.x) / Time.deltaTime;
         float verticalVelocity = (currentPosition.y - previousPosition.y) / Time.deltaTime;
@@ -124,9 +124,16 @@ public class EnemySpider : MonoBehaviour
 
         if (enemyHP <= 0)
         {
-            Destroy(gameObject);
+            GameObject.Find("Dungeon Generator").GetComponent<RoomManager>().EnemyDied(gameObject);
+            Death();
         }
     }
+    public void Death()
+    {
+        Debug.Log("ENEMY DIED");
+        Destroy(gameObject);
+    }
+
     public void SpiderWebAttack()
     {
         isShootingCooldown = 0;

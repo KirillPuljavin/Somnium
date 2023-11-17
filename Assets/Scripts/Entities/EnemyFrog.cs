@@ -74,7 +74,6 @@ public class EnemyFrog : MonoBehaviour
         animator.SetFloat("Horizontal", horizontalVelocity);
         // animator.SetFloat("Vertical", verticalVelocity);
         animator.SetFloat("Speed", Mathf.Sqrt(horizontalVelocity * horizontalVelocity + verticalVelocity * verticalVelocity));
-        Debug.Log(Mathf.Sqrt(horizontalVelocity * horizontalVelocity + verticalVelocity * verticalVelocity));
 
         previousPosition = currentPosition;
 
@@ -134,15 +133,20 @@ public class EnemyFrog : MonoBehaviour
     {
         enemyHP -= amount;
         reverseCooldown = 0;
-        speed = -1;
-        directionToPlayer = (Player.transform.position - transform.position).normalized;
-        rb.velocity = new Vector2(directionToPlayer.x, directionToPlayer.y) * speed;
+        speed = -2;
 
         if (enemyHP <= 0)
         {
-            Destroy(gameObject);
+            GameObject.Find("Dungeon Generator").GetComponent<RoomManager>().EnemyDied(gameObject);
+            Death();
         }
     }
+    public void Death()
+    {
+        Debug.Log("ENEMY DIED");
+        Destroy(gameObject);
+    }
+
     void SetTargetPosition()
     {
         target = Player.transform.position;

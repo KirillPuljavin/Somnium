@@ -115,7 +115,7 @@ public class EnemyBlob : MonoBehaviour
 
         if (enemyHP <= 0)
         {
-            GameObject.Find("Dungeon Generator").GetComponent<RoomManager>().EnemyDied();
+            GameObject.Find("Dungeon Generator").GetComponent<RoomManager>().EnemyDied(gameObject);
             Death();
         }
     }

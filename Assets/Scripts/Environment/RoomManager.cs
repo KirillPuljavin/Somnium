@@ -25,7 +25,13 @@ public class RoomManager : MonoBehaviour
         currentRoom = dungeon.RoomsInDungeon[player.currRoom];
 
         NewRoom();
-        EnemyDied();
+
+        // IF EMPTY
+        if (Enemies.Count <= 0)
+        {
+            roomCleared = true;
+            Debug.Log("ROOM CLEARED");
+        }
     }
 
     public void NewRoom()
@@ -67,17 +73,18 @@ public class RoomManager : MonoBehaviour
         }
     }
 
-    public IEnumerator CheckForEnemies()
+    public IEnumerator CheckForEnemies(GameObject dedEnemy)
     {
         yield return new WaitForSeconds(0.3f);
 
-        Enemies.RemoveAll(item => item == null);
+        Enemies.Remove(dedEnemy);
         Debug.Log("Enemy count: " + Enemies.Count);
 
         if (Enemies.Count <= 0)
         {
             roomCleared = true;
+            Debug.Log("ROOM CLEARED");
         }
     }
-    public void EnemyDied() => StartCoroutine(CheckForEnemies());
+    public void EnemyDied(GameObject dedEnemy) => StartCoroutine(CheckForEnemies(dedEnemy));
 }
