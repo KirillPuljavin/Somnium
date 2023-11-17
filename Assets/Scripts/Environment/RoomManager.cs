@@ -33,7 +33,7 @@ public class RoomManager : MonoBehaviour
         currentRoom = dungeon.RoomsInDungeon[player.currRoom];
 
         // Spawn Enemies
-        /* for (int enemyType = 0; enemyType < 3; enemyType++)
+        for (int enemyType = 0; enemyType < 3; enemyType++)
         {
             Transform enemyTypeParent = currentRoom.transform.GetChild(1).GetChild(enemyType);
             foreach (Transform enemy in enemyTypeParent)
@@ -52,7 +52,7 @@ public class RoomManager : MonoBehaviour
                         break;
                 }
             }
-        } */
+        }
 
         // Spawn Crafting Station
         if (player.currRoom == dungeon.currentPreset.positionUpgrade1)
