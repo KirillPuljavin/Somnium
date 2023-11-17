@@ -102,6 +102,8 @@ public class EnemySpider : MonoBehaviour
     public void SpiderWebAttack()
     {
         //Add Shoot Animation
+        if (rb.velocity.x <= 0) animator.Play("Attack_Ranged_Left");
+        if (rb.velocity.x >= 0) animator.Play("Attack_Ranged_Right");
         webCooldown = 0;
         Instantiate(SpiderWebArea, Player.transform.position, Quaternion.identity);
     }
