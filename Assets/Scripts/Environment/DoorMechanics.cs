@@ -19,5 +19,5 @@ public class DoorPlacement
 public class DoorMechanics : MonoBehaviour
 {
     public Vector2 targetDoorPos;
-    public int roomIndex;
+    public int targetRoomIndex;
 }
