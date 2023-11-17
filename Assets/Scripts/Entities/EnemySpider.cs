@@ -22,7 +22,10 @@ public class EnemySpider : MonoBehaviour
     private float dashCooldown = 0;
     private bool agro;
     private float reverseCooldown = 0.2f;
-    private float webCooldown = 0;
+    private float webCooldown = 5;
+    private bool isShooting = false;
+    private float isShootingCooldown = 0;
+    private float shootingDir;
 
     void Start()
     {
@@ -37,7 +40,7 @@ public class EnemySpider : MonoBehaviour
         float distance = Vector2.Distance(transform.position, Player.gameObject.transform.position);
 
         if (distance <= agroRange) agro = true; else agro = false;
-        if (agro) MoveEnemy();
+        if (agro && !isShooting) MoveEnemy();
         else
         {
             rb.velocity = new Vector2(0, 0);
@@ -49,17 +52,20 @@ public class EnemySpider : MonoBehaviour
         if (dashCooldown > 0) dashCooldown -= Time.deltaTime;
         if (reverseCooldown <= 0.2) reverseCooldown += Time.deltaTime;
         if (webCooldown <= 10) webCooldown += Time.deltaTime;
+        if (isShootingCooldown <= 0.5f) isShootingCooldown += Time.deltaTime;
         if (reverseCooldown >= 0.2) speed = 2;
 
         animator.SetFloat("Horizontal", rb.velocity.x);
         animator.SetFloat("Speed", rb.velocity.sqrMagnitude);
+
+        if (isShootingCooldown >= 0.5) isShooting = false;
     }
     private void MoveEnemy()
     {
         directionToPlayer = (Player.transform.position - transform.position).normalized;
         rb.velocity = new Vector2(directionToPlayer.x, directionToPlayer.y) * speed;
     }
-    
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player") speed = 0.005f;
@@ -93,7 +99,7 @@ public class EnemySpider : MonoBehaviour
         enemyHP -= amount;
         reverseCooldown = 0;
         speed = -2;
-        
+
         if (enemyHP <= 0)
         {
             Destroy(gameObject);
@@ -101,9 +107,13 @@ public class EnemySpider : MonoBehaviour
     }
     public void SpiderWebAttack()
     {
+        isShootingCooldown = 0;
+        isShooting = true;
         //Add Shoot Animation
-        if (rb.velocity.x <= 0) animator.Play("Attack_Ranged_Left");
-        if (rb.velocity.x >= 0) animator.Play("Attack_Ranged_Right");
+        shootingDir = rb.velocity.x;
+        rb.velocity = new Vector2(0, 0);
+        if (shootingDir <= 0) animator.Play("Attack_Ranged_Left");
+        if (shootingDir >= 0) animator.Play("Attack_Ranged_Right");
         webCooldown = 0;
         Instantiate(SpiderWebArea, Player.transform.position, Quaternion.identity);
     }
