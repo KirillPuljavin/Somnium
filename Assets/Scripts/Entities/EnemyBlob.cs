@@ -26,7 +26,7 @@ public class EnemyBlob : MonoBehaviour
     private Vector3 target;
     NavMeshAgent agent;
 
-    UnityEngine.Vector3 previousPosition;
+    Vector3 previousPosition;
 
     void Awake()
     {
@@ -115,15 +115,20 @@ public class EnemyBlob : MonoBehaviour
 
         if (enemyHP <= 0)
         {
-            Destroy(gameObject);
+            GameObject.Find("Dungeon Generator").GetComponent<RoomManager>().EnemyDied();
+            Death();
         }
+    }
+    public void Death()
+    {
+        Debug.Log("ENEMY DIED");
+        Destroy(gameObject);
     }
 
     void SetTargetPosition()
     {
         target = Player.transform.position;
     }
-
     void SetAgentPosition()
     {
         agent.SetDestination(new Vector3(target.x, target.y, transform.position.z));
