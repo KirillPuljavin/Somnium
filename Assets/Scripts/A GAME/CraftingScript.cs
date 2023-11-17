@@ -9,7 +9,7 @@ public class CraftingScript : MonoBehaviour
     public Animator animator;
 
     private Player player;
-    private int craftingLvl = 1;
+    private int craftingLvl = 2;
     private bool clickable = false;
     private int[] UpgradeCosts;
 
@@ -21,17 +21,18 @@ public class CraftingScript : MonoBehaviour
 
     void Update()
     {
-        if (clickable && Input.GetKeyDown(KeyCode.E))
+        if (clickable && Input.GetKeyDown(KeyCode.E) && player.WeaponEvo < 5)
         {
-            int amount = UpgradeCosts[player.WeaponEvo + 1];
+            int amount;
+            amount = UpgradeCosts[player.WeaponEvo];
             if (craftingLvl == 1)
             {
                 if (player.Components >= amount && player.WeaponEvo < 3)
                 {
                     player.UpgradeEvo();
                     player.Components -= amount;
-                    Debug.Log("You have " + player.Components + " Left!");
                 }
+                else if (player.WeaponEvo >= 3) Debug.Log("You need lvl 2 station now.");
                 else Debug.Log("Can't Craft! You need " + amount + " Components");
             }
             else
@@ -40,11 +41,11 @@ public class CraftingScript : MonoBehaviour
                 {
                     player.UpgradeEvo();
                     player.Components -= amount;
-                    Debug.Log("You have " + player.Components + " Left!");
                 }
                 else Debug.Log("Can't Craft! You need " + amount + " Components");
             }
         }
+        else if (clickable && Input.GetKeyDown(KeyCode.E) && player.WeaponEvo >= 5) Debug.Log("You have maxed all upgrades.");
     }
 
     void OnTriggerEnter2D(Collider2D collider)

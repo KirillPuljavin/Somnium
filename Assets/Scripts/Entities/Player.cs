@@ -22,7 +22,6 @@ public class Player : MonoBehaviour
     public int currRoom = 2;
     public int Hearts = 10;
     public int MaxHearts = 10;
-    public float stamina;
     public float staminaProcent = 0;
     public int Components;
     public int WeaponEvo = 0;
@@ -32,24 +31,25 @@ public class Player : MonoBehaviour
     public bool isDashing = false;
     public int damage;
     public int dashDamage;
-    public float attackCooldown;
     public float dashingPower = 12f;
+    public float attackCooldown;
+    public bool dashUpgraded = false;
+
+    private float stamina;
+    private float attackTime;
+    private float dashingTime = 0.3f;
+    private float dashingCooldown = 3f;
+
+    public float attackRange;
+    private string dashDirAnim = "Dash_Down";
+    private string Facing = "down";
+    private Vector2 movement;
 
     //Chest Bools
     public bool Card1Picked = false;
     public bool Card2Picked = false;
     public bool Card3Picked = false;
     public bool Card4Picked = false;
-
-    private float attackTime;
-    private float dashingTime = 0.3f;
-    private float dashingCooldown = 2.7f;
-    private bool canDash = true;
-
-    public float attackRange;
-    private string dashDirAnim = "Dash_Down";
-    private string Facing = "down";
-    private Vector2 movement;
 
     private float tpCooldown;
     void OnTriggerEnter2D(Collider2D collider)
@@ -68,12 +68,16 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
+        myLight.pointLightOuterRadius = Vision * 4;
+
         // Cooldown
         if (tpCooldown <= 1) tpCooldown += Time.deltaTime;
         if (attackTime <= attackCooldown) attackTime += Time.deltaTime;
-        if (stamina < dashingCooldown) stamina += Time.deltaTime;
+        if (stamina < dashingCooldown && WeaponEvo < 4) stamina += Time.deltaTime;
+        else if (stamina < dashingCooldown) { stamina += (Time.deltaTime * 1.3f); }
+
         if (stamina < dashingCooldown) UpdateStamina();
-        if (isDashing) return;
+        if (trulyDashing) return;
 
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
@@ -86,7 +90,7 @@ public class Player : MonoBehaviour
 
         // Controls
         if (Input.GetKeyDown(KeyCode.Mouse0) && attackTime >= attackCooldown) StartCoroutine(Hit());
-        if (Input.GetKeyDown(KeyCode.Mouse1) && canDash && movement.sqrMagnitude != 0) StartCoroutine(Dash());
+        if (Input.GetKeyDown(KeyCode.Mouse1) && stamina >= 3 && movement.sqrMagnitude != 0) StartCoroutine(Dash());
         if (Input.GetKeyDown(KeyCode.H)) HealPotion();
 
         animator.SetFloat("Horizontal", movement.x);
@@ -125,51 +129,67 @@ public class Player : MonoBehaviour
                 break;
         }
 
-        if (angle > -45 && angle < 45)
+        if (angle > -45 && angle < 45) Facing = "up";
+        else if (angle > -135 && angle < -45) Facing = "right";
+        else if (angle > -225 && angle < -135) Facing = "down";
+        else if (angle > -270 && angle < -225 || angle > 45 && angle < 90) Facing = "left";
+        else Debug.Log("Error ANGLE");
+    }
+    private void FixedUpdate() // Movement
+    {
+        uiScript.UpdateUI();
+
+        if (trulyDashing) return;
+        if (movement.magnitude > 1) rb.velocity = new Vector2(movement.x * (speed - 0.5f), movement.y * (speed - 0.5f));
+        else rb.velocity = new Vector2(movement.x * speed, movement.y * speed);
+        Debug.Log(stamina);
+    }
+
+    bool trulyDashing;
+    private IEnumerator Dash()
+    {
+        stamina -= 3;
+        trulyDashing = true;
+        if (dashUpgraded) isDashing = true;
+        if (movement.magnitude > 1)
         {
-            Facing = "up";
-        }
-        else if (angle > -135 && angle < -45)
-        {
-            Facing = "right";
-        }
-        else if (angle > -225 && angle < -135)
-        {
-            Facing = "down";
-        }
-        else if (angle > -270 && angle < -225 || angle > 45 && angle < 90)
-        {
-            Facing = "left";
+            rb.velocity = new Vector2(movement.x * (dashingPower - 3), movement.y * (dashingPower - 3));
+            animator.Play(dashDirAnim);
         }
         else
         {
-            Debug.Log("Error ANGLE");
+            rb.velocity = new Vector2(movement.x * dashingPower, movement.y * dashingPower);
+            animator.Play(dashDirAnim);
         }
-
-        myLight.pointLightOuterRadius = Vision * 4;
-    }
-    private void FixedUpdate()
-    {
-        if (isDashing) return;
-        if (movement.magnitude > 1) rb.velocity = new Vector2(movement.x * (speed - 0.5f), movement.y * (speed - 0.5f));
-        else rb.velocity = new Vector2(movement.x * speed, movement.y * speed);
-        uiScript.UpdateUI();
+        yield return new WaitForSeconds(dashingTime);
+        trulyDashing = false; isDashing = false;
+        yield return new WaitForSeconds(dashingCooldown - dashingTime);
     }
 
     public void UpgradeEvo()
     {
-        // Make changes based on evo
         switch (WeaponEvo)
         {
             case 0:
+                // Range
+                attackRange *= 1.5f;
                 break;
             case 1:
+                // Attack Speed
+                attackCooldown *= 0.7f;
                 break;
             case 2:
+                // Dash Damage
+                dashUpgraded = true;
                 break;
             case 3:
+                // Double Dash
+                dashingCooldown = 6f;
+
                 break;
             case 4:
+                // Sweeping Edge
+
                 break;
         }
         WeaponEvo++;
@@ -215,7 +235,7 @@ public class Player : MonoBehaviour
                 animator.Play("Attack_Down");
                 break;
         }
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
 
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, 1, enemyLayers);
         foreach (Collider2D enemy in hitEnemies)
@@ -226,27 +246,7 @@ public class Player : MonoBehaviour
             if (enemy.gameObject.GetComponent<BossCat>() != null) enemy.gameObject.GetComponent<BossCat>().TakeDamage(damage);
         }
     }
-    private IEnumerator Dash()
-    {
-        canDash = false;
-        isDashing = true;
-        if (movement.magnitude > 1)
-        {
-            rb.velocity = new Vector2(movement.x * (dashingPower - 3), movement.y * (dashingPower - 3));
-            animator.Play(dashDirAnim);
-        }
-        else
-        {
-            rb.velocity = new Vector2(movement.x * dashingPower, movement.y * dashingPower);
-            animator.Play(dashDirAnim);
-        }
-        stamina = 0;
-        yield return new WaitForSeconds(dashingTime);
-        isDashing = false;
-        rb.velocity = new Vector2(0, 0);
-        yield return new WaitForSeconds(dashingCooldown);
-        canDash = true;
-    }
+
     public void HealPotion()
     {
         if (Hearts < MaxHearts)
