@@ -10,9 +10,9 @@ public class DungeonGenerator : MonoBehaviour
     public GameObject doorPrefab;
     public Transform doorParent;
     public GameObject[] RoomsInDungeon;
+    public DungeonPreset currentPreset;
 
     private GameObject[,] RoomGrid;
-    private DungeonPreset currentPreset;
     private GameObject[] roomPrefabsForest;
     private GameObject[] roomPrefabsSnow;
 
