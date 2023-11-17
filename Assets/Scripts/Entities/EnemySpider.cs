@@ -73,7 +73,7 @@ public class EnemySpider : MonoBehaviour
 
         animator.SetFloat("Horizontal", horizontalVelocity);
         animator.SetFloat("Vertical", verticalVelocity);
-        animator.SetFloat("speed", Mathf.Sqrt(horizontalVelocity * horizontalVelocity + verticalVelocity * verticalVelocity));
+        animator.SetFloat("Speed", Mathf.Sqrt(horizontalVelocity * horizontalVelocity + verticalVelocity * verticalVelocity));
 
         previousPosition = currentPosition;
 

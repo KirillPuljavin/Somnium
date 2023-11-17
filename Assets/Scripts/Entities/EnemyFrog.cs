@@ -29,6 +29,12 @@ public class EnemyFrog : MonoBehaviour
 
     UnityEngine.Vector3 previousPosition;
 
+    void Awake()
+    {
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
+    }
     void Start()
     {
         Player = GameObject.FindWithTag("Player").GetComponent<Player>();
@@ -48,7 +54,7 @@ public class EnemyFrog : MonoBehaviour
             else
             {
                 rb.velocity = new Vector2(0, 0);
-                animator.Play("Idle_Right");
+                animator.Play("Idle");
             }
         }
 
@@ -66,8 +72,9 @@ public class EnemyFrog : MonoBehaviour
         float verticalVelocity = (currentPosition.y - previousPosition.y) / Time.deltaTime;
 
         animator.SetFloat("Horizontal", horizontalVelocity);
-        animator.SetFloat("Vertical", verticalVelocity);
-        animator.SetFloat("speed", Mathf.Sqrt(horizontalVelocity * horizontalVelocity + verticalVelocity * verticalVelocity));
+        // animator.SetFloat("Vertical", verticalVelocity);
+        animator.SetFloat("Speed", Mathf.Sqrt(horizontalVelocity * horizontalVelocity + verticalVelocity * verticalVelocity));
+        Debug.Log(Mathf.Sqrt(horizontalVelocity * horizontalVelocity + verticalVelocity * verticalVelocity));
 
         previousPosition = currentPosition;
 
@@ -79,17 +86,17 @@ public class EnemyFrog : MonoBehaviour
     //     directionToPlayer = (Player.transform.position - transform.position).normalized;
     //     rb.velocity = new Vector2(directionToPlayer.x, directionToPlayer.y) * speed;
     // }
-    private void LateUpdate()
-    {
-        if (rb.velocity.x > 0)
-        {
-            transform.localScale = new Vector3(localScale.x, localScale.y, localScale.z);
-        }
-        else if (rb.velocity.x < 0)
-        {
-            transform.localScale = new Vector3(-localScale.x, localScale.y, localScale.z);
-        }
-    }
+    // private void LateUpdate()
+    // {
+    //     if (rb.velocity.x > 0)
+    //     {
+    //         transform.localScale = new Vector3(localScale.x, localScale.y, localScale.z);
+    //     }
+    //     else if (rb.velocity.x < 0)
+    //     {
+    //         transform.localScale = new Vector3(-localScale.x, localScale.y, localScale.z);
+    //     }
+    // }
 
     void Shoot()
     {
