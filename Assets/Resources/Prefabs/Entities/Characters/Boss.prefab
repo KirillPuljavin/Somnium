@@ -110,7 +110,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 871301951817219215}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -5}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -139,14 +139,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 8183182038434459141}
   animator: {fileID: 7263192500600031081}
+  healthBar: {fileID: 0}
+  healthMask: {fileID: 0}
   BasicRight: {fileID: 468030214940746706}
   BasicLeft: {fileID: 6455054121925680837}
   BasicUp: {fileID: 6405653575547690341}
   BasicDown: {fileID: 5475653971427881424}
   health: 20
+  maxHealth: 0
+  healthProcent: 0
   speed: 2
   attackRange: 5
   basicCooldown: 4
+  activateRange: 6
   inRange: 0
   spawned: 0
   inAnimation: 0

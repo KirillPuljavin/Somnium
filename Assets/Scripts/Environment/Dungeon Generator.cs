@@ -15,6 +15,7 @@ public class DungeonGenerator : MonoBehaviour
     private GameObject[,] RoomGrid;
     private GameObject[] roomPrefabsForest;
     private GameObject[] roomPrefabsSnow;
+    private GameObject[] roomPrefabsBoss;
 
     void Start()
     {
@@ -36,9 +37,16 @@ public class DungeonGenerator : MonoBehaviour
         // Setup Rooms
         roomPrefabsForest = Resources.LoadAll<GameObject>("Prefabs/Map/Rooms/Forest");
         roomPrefabsSnow = Resources.LoadAll<GameObject>("Prefabs/Map/Rooms/Snow");
+        roomPrefabsBoss = Resources.LoadAll<GameObject>("Prefabs/Map/Rooms/Boss");
         foreach (var roomIndex in currentPreset.roomsAvailable)
         {
-            if (roomIndex < 15)
+            if (roomIndex == 27)
+            {
+                int roomX = Random.Range(0, roomPrefabsBoss.Length);
+                GameObject newRoom = Instantiate(roomPrefabsBoss[roomX], new Vector3(CalculateRoomPosition(roomIndex).x, CalculateRoomPosition(roomIndex).y, 0f), Quaternion.identity, transform.GetChild(roomIndex).transform);
+                RoomsInDungeon[roomIndex] = newRoom;
+            }
+            else if (roomIndex < 15)
             {
                 int roomX = Random.Range(0, roomPrefabsForest.Length);
                 GameObject newRoom = Instantiate(roomPrefabsForest[roomX], new Vector3(CalculateRoomPosition(roomIndex).x, CalculateRoomPosition(roomIndex).y, 0f), Quaternion.identity, transform.GetChild(roomIndex).transform);

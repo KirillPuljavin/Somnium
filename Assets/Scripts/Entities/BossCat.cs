@@ -26,6 +26,8 @@ public class BossCat : MonoBehaviour
     public float basicCooldown;
 
 
+    public float activateRange;
+
     public bool inRange;
     public bool spawned = false;
     public bool inAnimation;
@@ -41,10 +43,9 @@ public class BossCat : MonoBehaviour
         basicTimer = basicCooldown;
 
         Player = GameObject.FindWithTag("Player").GetComponent<Player>();
-        healthBar = GameObject.FindGameObjectWithTag("BossHealth");
+        /* healthBar = GameObject.FindGameObjectWithTag("BossHealth");
         healthMask = GameObject.FindGameObjectWithTag("BossMask");
-        healthBar.SetActive(false);
-        StartCoroutine(Begin());
+        healthBar.SetActive(false); */
 
         // Hide all basic attacks
         BasicRight.SetActive(false);
@@ -52,7 +53,7 @@ public class BossCat : MonoBehaviour
         BasicUp.SetActive(false);
         BasicDown.SetActive(false);
     }
-    
+
 
 
 
@@ -63,29 +64,37 @@ public class BossCat : MonoBehaviour
         if (damageTimer <= damageCooldown) damageTimer += Time.deltaTime;
         if (bossInvisFrames > 0) bossInvisFrames -= Time.deltaTime;
 
+        calcDistance();
+        calcDirection();
+        if (distance <= activateRange) { StartCoroutine(Begin()); }
+
         if (spawned == true)
         {
             if (!inRange && !inAnimation)
             {
-                transform.position = UnityEngine.Vector3.MoveTowards(transform.position, new UnityEngine.Vector2(Player.gameObject.transform.position.x, Player.gameObject.transform.position.y), speed * Time.deltaTime);
+                UnityEngine.Vector3 targetPosition = new UnityEngine.Vector3(Player.gameObject.transform.position.x, Player.gameObject.transform.position.y, transform.position.z);
+                transform.position = UnityEngine.Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
             }
             else
             {
                 transform.position = UnityEngine.Vector3.MoveTowards(transform.position, new UnityEngine.Vector2(Player.gameObject.transform.position.x, Player.gameObject.transform.position.y), 0);
             }
             StartCoroutine(Animations());
-            calcDistance();
-            calcDirection();
-            calcHealth();   
+            /*          calcHealth();  */
         }
+
     }
 
     private IEnumerator Begin()
     {
-        animator.SetBool("spawned", true);
-        yield return new WaitForSeconds(0.833f);
-        healthBar.SetActive(true);
-        spawned = true;
+        if (!spawned)
+        {
+            //Debug.Log("Begin");
+            animator.SetBool("activate", true);
+            yield return new WaitForSeconds(0.833f);
+            /*      healthBar.SetActive(true); */
+            spawned = true;
+        }
     }
 
 
@@ -229,7 +238,8 @@ public class BossCat : MonoBehaviour
         angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
     }
 
-    void calcHealth(){
+    void calcHealth()
+    {
         healthProcent = (float)health / (float)maxHealth;
         //healthMask.transform.localPosition = new UnityEngine.Vector3(healthProcent * -2, -0.3f, 0);
         healthMask.transform.localScale = new UnityEngine.Vector3(healthProcent * 4, 0.5f, 1);
@@ -247,11 +257,20 @@ public class BossCat : MonoBehaviour
     public void TakeDamage(int amount)
     {
         health -= amount;
-        if (health <= 0)
+        if ((maxHealth / health) == 2)
         {
-            healthBar.SetActive(false);
+            //StartCoroutine(Phase2());
+        }
+        else if (health <= 0)
+        {
+            //healthBar.SetActive(false);
             Destroy(gameObject);
         }
+    }
+
+    private IEnumerator Phase2()
+    {
+        yield return new WaitForSeconds(0.5835f);
     }
 
     private void OnTriggerStay2D(Collider2D collider)
