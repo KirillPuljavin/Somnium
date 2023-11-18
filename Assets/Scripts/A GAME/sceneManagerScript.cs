@@ -11,9 +11,11 @@ public class sceneManagerScript : MonoBehaviour
     public string scene4;
 
     [SerializeField] private FloatSO PlayerSO;
+    private Player PlayerPrefab;
 
     void Start()
     {
+        PlayerPrefab = Resources.Load<Player>("Prefabs/Entities/Characters/Player");
         if (SceneManager.GetActiveScene().name == scene1)
         {
             setPlayerStats();
@@ -22,16 +24,14 @@ public class sceneManagerScript : MonoBehaviour
 
     private void setPlayerStats()
     {
-        // This is the players baseStats and needs to be updated SEPERATELY from the player's values in Unity
-        PlayerSO.Health = 10f;
-        PlayerSO.MaxHealth = 10f;
-        PlayerSO.Vision = 4f;
+        PlayerSO.Hearts = PlayerPrefab.Hearts;
+        PlayerSO.MaxHearts = PlayerPrefab.MaxHearts;
+        PlayerSO.Vision = PlayerPrefab.Vision;
 
-        PlayerSO.Damage = 2f;
-        PlayerSO.DashDamage = 4f;
-        PlayerSO.DashCooldown = 3f;
-        PlayerSO.AttackRange = 0.5f;
-        PlayerSO.WeaponEvo = 0f;
+        PlayerSO.Damage = PlayerPrefab.damage;
+        PlayerSO.DashDamage = PlayerPrefab.dashDamage;
+        PlayerSO.AttackRange = PlayerPrefab.attackRange;
+        PlayerSO.WeaponEvo = PlayerPrefab.WeaponEvo;
 
         PlayerSO.Card1 = false;
         PlayerSO.Card2 = false;

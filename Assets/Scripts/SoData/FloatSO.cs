@@ -6,19 +6,19 @@ using UnityEngine;
 public class FloatSO : ScriptableObject
 {
     [SerializeField]
-    private float _health;
-    public float Health
+    private float _Hearts;
+    public float Hearts
     {
-        get { return _health; }
-        set { _health = value; }
+        get { return _Hearts; }
+        set { _Hearts = value; }
     }
 
     [SerializeField]
-    private float _maxHealth;
-    public float MaxHealth
+    private float _maxHearts;
+    public float MaxHearts
     {
-        get { return _maxHealth; }
-        set { _maxHealth = value; }
+        get { return _maxHearts; }
+        set { _maxHearts = value; }
     }
 
     [SerializeField]
@@ -46,14 +46,6 @@ public class FloatSO : ScriptableObject
     }
 
     [SerializeField]
-    private float _dashCooldown;
-    public float DashCooldown
-    {
-        get { return _dashCooldown; }
-        set { _dashCooldown = value; }
-    }
-
-    [SerializeField]
     private float _attackRange;
     public float AttackRange
     {
@@ -67,12 +59,12 @@ public class FloatSO : ScriptableObject
     {
         get { return _weaponEvo; }
         set { _weaponEvo = value; }
-    }  
+    }
 
 
 
     // Bools for cards
-    
+
     [SerializeField]
     private bool _card1;
     public bool Card1
@@ -105,5 +97,5 @@ public class FloatSO : ScriptableObject
         set { _card4 = value; }
     }
 
-    
+
 }

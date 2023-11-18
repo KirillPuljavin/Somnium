@@ -1714,6 +1714,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7903337393023771007, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8053809871869886996, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
       propertyPath: m_FalloffIntensity
       value: 0.8

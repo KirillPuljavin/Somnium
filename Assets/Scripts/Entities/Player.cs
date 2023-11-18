@@ -22,8 +22,8 @@ public class Player : MonoBehaviour
     // Variables
     public bool inDungeon = false;
     public int currRoom = 2;
-    public int Hearts = 10;
     public int MaxHearts = 10;
+    public int Hearts = 10;
     public float staminaProcent = 0;
     public int Components;
     public int WeaponEvo = 0;
@@ -74,13 +74,12 @@ public class Player : MonoBehaviour
 
     private void getStoredValues()
     {
-        Hearts = (int)PlayerSO.Health;
-        MaxHearts = (int)PlayerSO.MaxHealth;
+        Hearts = (int)PlayerSO.Hearts;
+        MaxHearts = (int)PlayerSO.MaxHearts;
         Vision = (int)PlayerSO.Vision;
 
         damage = (int)PlayerSO.Damage;
         dashDamage = (int)PlayerSO.DashDamage;
-        dashingCooldown = PlayerSO.DashCooldown;
         attackRange = PlayerSO.AttackRange;
         WeaponEvo = (int)PlayerSO.WeaponEvo;
 
@@ -91,13 +90,12 @@ public class Player : MonoBehaviour
     }
     private void StoreValues()
     {
-        PlayerSO.Health = (float)Hearts;
-        PlayerSO.MaxHealth = (float)MaxHearts;
+        PlayerSO.Hearts = (float)Hearts;
+        PlayerSO.MaxHearts = (float)MaxHearts;
         PlayerSO.Vision = (float)Vision;
 
         PlayerSO.Damage = (float)damage;
         PlayerSO.DashDamage = (float)dashDamage;
-        PlayerSO.DashCooldown = dashingCooldown;
         PlayerSO.AttackRange = attackRange;
         PlayerSO.WeaponEvo = (float)WeaponEvo;
 
