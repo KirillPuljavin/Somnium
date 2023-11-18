@@ -139,11 +139,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 8183182038434459141}
   animator: {fileID: 7263192500600031081}
+  healthBar: {fileID: 0}
+  healthMask: {fileID: 0}
   BasicRight: {fileID: 468030214940746706}
   BasicLeft: {fileID: 6455054121925680837}
   BasicUp: {fileID: 6405653575547690341}
   BasicDown: {fileID: 5475653971427881424}
   health: 20
+  maxHealth: 0
+  healthProcent: 0
   speed: 2
   attackRange: 5
   basicCooldown: 4
@@ -262,7 +266,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 1901512860, guid: 70a8fbfd6f7f7f84a869f26c62489239, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

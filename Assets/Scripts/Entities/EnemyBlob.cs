@@ -13,20 +13,19 @@ public class EnemyBlob : MonoBehaviour
     public float agroRange;
 
     private Player Player;
-    private Vector3 directionToPlayer;
-    private Vector3 localScale;
 
+    private bool agro;
     private float oldSpeed;
     private float attackCooldown = 0;
     private float dashCooldown = 0;
-    private bool agro;
     private float reverseCooldown = 0.2f;
 
     //Pathfinding
-    private Vector3 target;
-    NavMeshAgent agent;
-
-    Vector3 previousPosition;
+    private NavMeshAgent agent;
+    private Vector3 previousPosition;
+    private Vector3 currentPosition;
+    private float horizontalVelocity;
+    private float verticalVelocity;
 
     void Awake()
     {
@@ -39,45 +38,39 @@ public class EnemyBlob : MonoBehaviour
         Player = GameObject.FindWithTag("Player").GetComponent<Player>();
         oldSpeed = speed;
         rb = GetComponent<Rigidbody2D>();
-        localScale = transform.localScale;
     }
 
     void Update()
     {
         float distance = Vector2.Distance(transform.position, Player.gameObject.transform.position);
-
         if (distance <= agroRange) agro = true; else agro = false;
-        if (agro) SetAgentPosition();
+        if (agro) FollowPlayer();
         else
         {
             rb.velocity = new Vector2(0, 0);
         }
+
+        animator.SetFloat("Horizontal", horizontalVelocity);
+        animator.SetFloat("Vertical", verticalVelocity);
+        animator.SetFloat("Speed", Mathf.Sqrt(horizontalVelocity * horizontalVelocity + verticalVelocity * verticalVelocity));
 
         // Cooldown
         if (attackCooldown < 1) attackCooldown += Time.deltaTime;
         if (dashCooldown > 0) dashCooldown -= Time.deltaTime;
         if (reverseCooldown <= 0.2) reverseCooldown += Time.deltaTime;
         if (reverseCooldown >= 0.2) speed = 2;
+    }
+    void FollowPlayer()
+    {
+        agent.SetDestination(new Vector3(Player.transform.position.x, Player.transform.position.y, transform.position.z));
+        agent.speed = speed;
 
-        UnityEngine.Vector3 currentPosition = transform.position;
-
-        float horizontalVelocity = (currentPosition.x - previousPosition.x) / Time.deltaTime;
-        float verticalVelocity = (currentPosition.y - previousPosition.y) / Time.deltaTime;
-
-        animator.SetFloat("Horizontal", horizontalVelocity);
-        animator.SetFloat("Vertical", verticalVelocity);
-        animator.SetFloat("Speed", Mathf.Sqrt(horizontalVelocity * horizontalVelocity + verticalVelocity * verticalVelocity));
-
+        currentPosition = transform.position;
+        horizontalVelocity = (currentPosition.x - previousPosition.x) / Time.deltaTime;
+        verticalVelocity = (currentPosition.y - previousPosition.y) / Time.deltaTime;
         previousPosition = currentPosition;
 
-        SetTargetPosition();
-        agent.speed = speed;
     }
-    // private void MoveEnemy()
-    // {
-    //     directionToPlayer = (Player.transform.position - transform.position).normalized;
-    //     rb.velocity = new Vector2(directionToPlayer.x, directionToPlayer.y) * speed;
-    // }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -123,14 +116,5 @@ public class EnemyBlob : MonoBehaviour
     {
         Debug.Log("ENEMY DIED");
         Destroy(gameObject);
-    }
-
-    void SetTargetPosition()
-    {
-        target = Player.transform.position;
-    }
-    void SetAgentPosition()
-    {
-        agent.SetDestination(new Vector3(target.x, target.y, transform.position.z));
     }
 }
