@@ -13,10 +13,12 @@ public class MainMenu : MonoBehaviour
 
     public void PlayButton()
     {
+        Debug.Log("Play");
         sceneManager.SwitchToDungeon1();
     }
     public void ExitButton()
     {
+        Debug.Log("Exit");
         Application.Quit();
     }
 }
