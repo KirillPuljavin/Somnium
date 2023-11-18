@@ -27,6 +27,7 @@ public class FrogFly : MonoBehaviour
         }
     }
 
+    public void Hit() => Destroy(gameObject);
     private IEnumerator Kill()
     {
         yield return new WaitForSeconds(3);

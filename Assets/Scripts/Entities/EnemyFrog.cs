@@ -137,7 +137,7 @@ public class EnemyFrog : MonoBehaviour
 
         if (enemyHP <= 0)
         {
-            GameObject.Find("Dungeon Generator").GetComponent<RoomManager>().EnemyDied(gameObject);
+            GameObject.Find("Dungeon Generator").GetComponent<RoomManager>().EnemyDied();
             Death();
         }
     }

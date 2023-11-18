@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.UIElements;
 
 public class RoomManager : MonoBehaviour
 {
@@ -15,14 +18,16 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private GameObject spiderEnemyPrefab;
     [SerializeField] private GameObject crafting1Prefab;
     [SerializeField] private GameObject crafting2Prefab;
+    private Transform enemyParent;
 
-    private List<GameObject> Enemies = new List<GameObject>();
+    private static List<GameObject> Enemies = new List<GameObject>();
 
     public void Initialize()
     {
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
         dungeon = GameObject.Find("Dungeon Generator").GetComponent<DungeonGenerator>();
         currentRoom = dungeon.RoomsInDungeon[player.currRoom];
+        enemyParent = currentRoom.transform.GetChild(2).transform;
 
         NewRoom();
 
@@ -36,7 +41,9 @@ public class RoomManager : MonoBehaviour
 
     public void NewRoom()
     {
+        roomCleared = false;
         currentRoom = dungeon.RoomsInDungeon[player.currRoom];
+        enemyParent = currentRoom.transform.GetChild(2).transform;
 
         // Spawn Enemies
         for (int enemyType = 0; enemyType < 3; enemyType++)
@@ -48,13 +55,13 @@ public class RoomManager : MonoBehaviour
                 switch (enemyType)
                 {
                     case 0:
-                        Instantiate(blobEnemyPrefab, enemy.position, Quaternion.identity, currentRoom.transform);
+                        Instantiate(blobEnemyPrefab, enemy.position, Quaternion.identity, enemyParent);
                         break;
                     case 1:
-                        Instantiate(frogEnemyPrefab, enemy.position, Quaternion.identity, currentRoom.transform);
+                        Instantiate(frogEnemyPrefab, enemy.position, Quaternion.identity, enemyParent);
                         break;
                     case 2:
-                        Instantiate(spiderEnemyPrefab, enemy.position, Quaternion.identity, currentRoom.transform);
+                        Instantiate(spiderEnemyPrefab, enemy.position, Quaternion.identity, enemyParent);
                         break;
                 }
             }
@@ -63,21 +70,24 @@ public class RoomManager : MonoBehaviour
         // Spawn Crafting Station
         if (player.currRoom == dungeon.currentPreset.positionUpgrade1)
         {
-            Instantiate(crafting1Prefab, currentRoom.transform.GetChild(3).GetChild(0).transform.position, Quaternion.identity, currentRoom.transform);
+            Instantiate(crafting1Prefab, currentRoom.transform.GetChild(4).GetChild(0).transform.position, Quaternion.identity, currentRoom.transform);
             Debug.Log("Instantiated crafting 1 in room: " + dungeon.currentPreset.positionUpgrade1);
         }
         else if (player.currRoom == dungeon.currentPreset.positionUpgrade2)
         {
-            Instantiate(crafting2Prefab, currentRoom.transform.GetChild(3).GetChild(0).transform.position, Quaternion.identity, currentRoom.transform);
+            Instantiate(crafting2Prefab, currentRoom.transform.GetChild(4).GetChild(0).transform.position, Quaternion.identity, currentRoom.transform);
             Debug.Log("Instantiated crafting 2 in room: " + dungeon.currentPreset.positionUpgrade2);
         }
+
+        // Spawn Chest
     }
 
-    public IEnumerator CheckForEnemies(GameObject dedEnemy)
+    public void EnemyDied() => StartCoroutine(CheckForEnemies());
+    public IEnumerator CheckForEnemies()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.1f);
 
-        Enemies.Remove(dedEnemy);
+        Enemies.Clear(); foreach (Transform enemy in enemyParent) Enemies.Add(enemy.gameObject);
         Debug.Log("Enemy count: " + Enemies.Count);
 
         if (Enemies.Count <= 0)
@@ -86,5 +96,4 @@ public class RoomManager : MonoBehaviour
             Debug.Log("ROOM CLEARED");
         }
     }
-    public void EnemyDied(GameObject dedEnemy) => StartCoroutine(CheckForEnemies(dedEnemy));
 }
