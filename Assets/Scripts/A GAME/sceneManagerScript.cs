@@ -9,8 +9,9 @@ public class sceneManagerScript : MonoBehaviour
     public string scene2;
     public string scene3;
     public string scene4;
-    [SerializeField]
-    private FloatSO PlayerSO;
+
+    [SerializeField] private FloatSO PlayerSO;
+
     void Start()
     {
         if (SceneManager.GetActiveScene().name == scene1)
@@ -21,7 +22,7 @@ public class sceneManagerScript : MonoBehaviour
 
     private void setPlayerStats()
     {
-        //This is the players baseStats and needs to be updated SEPERATELY from the player's values in Unity
+        // This is the players baseStats and needs to be updated SEPERATELY from the player's values in Unity
         PlayerSO.Health = 10f;
         PlayerSO.MaxHealth = 10f;
         PlayerSO.Vision = 4f;

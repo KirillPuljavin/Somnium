@@ -5,31 +5,18 @@ using UnityEngine;
 public class MainMenu : MonoBehaviour
 {
     public sceneManagerScript sceneManager;
-    public Sprite normalSprite;
-    public Sprite hoverSprite;
 
-    // Start is called before the first frame update
     void Start()
     {
         sceneManager = GameObject.FindWithTag("EventSystem").GetComponent<sceneManagerScript>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    public void OnMouseDown()
+    public void PlayButton()
     {
         sceneManager.SwitchToDungeon1();
     }
-
-    void OnMouseOver()
+    public void ExitButton()
     {
-        gameObject.GetComponent<SpriteRenderer>().sprite = hoverSprite;
-    }
-    void OnMouseExit()
-    {
-        gameObject.GetComponent<SpriteRenderer>().sprite = normalSprite;
+        Application.Quit();
     }
 }
