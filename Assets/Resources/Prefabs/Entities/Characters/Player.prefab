@@ -34,7 +34,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1406773226417434254
 MonoBehaviour:
@@ -51,9 +51,9 @@ MonoBehaviour:
   m_ComponentVersion: 1
   m_LightType: 3
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.5
+  m_FalloffIntensity: 1
   m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_Intensity: 0.2
+  m_Intensity: 0.1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: b953aebe00000000a3db683a
@@ -310,8 +310,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -0.131}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8053809871869886996
 MonoBehaviour:
@@ -328,7 +328,7 @@ MonoBehaviour:
   m_ComponentVersion: 1
   m_LightType: 3
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.754
+  m_FalloffIntensity: 0.8
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 0.5
   m_LightVolumeIntensity: 1
@@ -375,7 +375,6 @@ GameObject:
   - component: {fileID: 4195860284930794465}
   - component: {fileID: 7078594632026464168}
   - component: {fileID: 2670255446649554775}
-  - component: {fileID: 7903337393023771007}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -419,12 +418,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 7539349131257505368}
-  rb: {fileID: 7078594632026464168}
-  heartsHUD: {fileID: 0}
-  uiScript: {fileID: 0}
-  staminaBar: {fileID: 0}
-  staminaMask: {fileID: 0}
-  PlayerSO: {fileID: 11400000, guid: 7cfb78329567f4848a77e395d737187d, type: 2}
   enemyLayers:
     serializedVersion: 2
     m_Bits: 64
@@ -433,19 +426,25 @@ MonoBehaviour:
   damageLight: {fileID: 1406773226417434254}
   inDungeon: 0
   currRoom: 2
-  Hearts: 10
   MaxHearts: 10
+  Hearts: 10
   staminaProcent: 0
   Components: 30
   WeaponEvo: 0
-  Vision: 1
+  Vision: 2
   speed: 3.5
   isDashing: 0
-  damage: 2
+  damage: 4
   dashDamage: 4
   dashingPower: 12
   attackCooldown: 0.7
   dashUpgraded: 0
+  rb: {fileID: 7078594632026464168}
+  heartsHUD: {fileID: 0}
+  uiScript: {fileID: 0}
+  staminaBar: {fileID: 0}
+  staminaMask: {fileID: 0}
+  PlayerSO: {fileID: 11400000, guid: 7cfb78329567f4848a77e395d737187d, type: 2}
   attackRange: 0.5
   Card1Picked: 0
   Card2Picked: 0
@@ -513,41 +512,3 @@ CapsuleCollider2D:
   m_Offset: {x: -0.010067339, y: 0.07017847}
   m_Size: {x: 0.35537198, y: 0.19307916}
   m_Direction: 1
---- !u!1839735485 &7903337393023771007
-Tilemap:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6607715729755257798}
-  m_Enabled: 1
-  m_Tiles: {}
-  m_AnimatedTiles: {}
-  m_TileAssetArray: []
-  m_TileSpriteArray: []
-  m_TileMatrixArray: []
-  m_TileColorArray: []
-  m_TileObjectToInstantiateArray: []
-  m_AnimationFrameRate: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: 0, y: 0, z: 0}
-  m_Size: {x: 0, y: 0, z: 1}
-  m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
-  m_TileOrientation: 0
-  m_TileOrientationMatrix:
-    e00: 1
-    e01: 0
-    e02: 0
-    e03: 0
-    e10: 0
-    e11: 1
-    e12: 0
-    e13: 0
-    e20: 0
-    e21: 0
-    e22: 1
-    e23: 0
-    e30: 0
-    e31: 0
-    e32: 0
-    e33: 1

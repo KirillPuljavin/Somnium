@@ -1574,34 +1574,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 660863960}
     m_Modifications:
-    - target: {fileID: 771758187877462719, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1406773226417434254, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
-      propertyPath: m_Intensity
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1406773226417434254, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
-      propertyPath: m_FalloffIntensity
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1544167505511828938, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1544167505511828938, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4195860284930794465, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
-      propertyPath: Vision
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4195860284930794465, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
-      propertyPath: damage
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 4195860284930794465, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
       propertyPath: heartsHUD
       value: 
@@ -1614,10 +1586,6 @@ PrefabInstance:
       propertyPath: staminaMask
       value: 
       objectReference: {fileID: 1295902780}
-    - target: {fileID: 4195860284930794465, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
-      propertyPath: attackCooldown
-      value: 0.7
-      objectReference: {fileID: 0}
     - target: {fileID: 5446435883745518241, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
       propertyPath: m_Pivot.x
       value: 0.48
@@ -1701,26 +1669,6 @@ PrefabInstance:
     - target: {fileID: 6607715729755257798, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 6791960103931176355, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6791960103931176355, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6791960103931176355, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7903337393023771007, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8053809871869886996, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
-      propertyPath: m_FalloffIntensity
-      value: 0.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

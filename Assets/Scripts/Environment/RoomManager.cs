@@ -19,6 +19,7 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private GameObject componentPrefab;
     private Transform enemyParent;
 
+    private static List<int> clearedRooms = new List<int>();
     private static List<GameObject> Enemies = new List<GameObject>();
 
     public void Initialize()
@@ -38,23 +39,26 @@ public class RoomManager : MonoBehaviour
         enemyParent = currentRoom.transform.GetChild(2).transform;
 
         // Spawn Enemies
-        for (int enemyType = 0; enemyType < 3; enemyType++)
+        if (!clearedRooms.Contains(player.currRoom))
         {
-            Transform enemyTypeParent = currentRoom.transform.GetChild(1).GetChild(enemyType);
-            foreach (Transform enemy in enemyTypeParent)
+            for (int enemyType = 0; enemyType < 3; enemyType++)
             {
-                Enemies.Add(enemy.gameObject);
-                switch (enemyType)
+                Transform enemyTypeParent = currentRoom.transform.GetChild(1).GetChild(enemyType);
+                foreach (Transform enemy in enemyTypeParent)
                 {
-                    case 0:
-                        Instantiate(blobEnemyPrefab, enemy.position, Quaternion.identity, enemyParent);
-                        break;
-                    case 1:
-                        Instantiate(frogEnemyPrefab, enemy.position, Quaternion.identity, enemyParent);
-                        break;
-                    case 2:
-                        Instantiate(spiderEnemyPrefab, enemy.position, Quaternion.identity, enemyParent);
-                        break;
+                    Enemies.Add(enemy.gameObject);
+                    switch (enemyType)
+                    {
+                        case 0:
+                            Instantiate(blobEnemyPrefab, enemy.position, Quaternion.identity, enemyParent);
+                            break;
+                        case 1:
+                            Instantiate(frogEnemyPrefab, enemy.position, Quaternion.identity, enemyParent);
+                            break;
+                        case 2:
+                            Instantiate(spiderEnemyPrefab, enemy.position, Quaternion.identity, enemyParent);
+                            break;
+                    }
                 }
             }
         }
@@ -83,43 +87,33 @@ public class RoomManager : MonoBehaviour
         yield return new WaitForSeconds(0.01f);
 
         Enemies.Clear(); foreach (Transform enemy in enemyParent) Enemies.Add(enemy.gameObject);
-        if (Enemies.Count <= 0) { roomCleared = true; SpawnComponents(); }
+        if (Enemies.Count <= 0) { roomCleared = true; ClearedRoom(); }
     }
 
-    public void SpawnComponents()
+    public bool doubleKillPrevention = true;
+    public void ClearedRoom()
     {
-        // Calculate quantity
-        int quantity = 1;
-        float minOffset = -3f;
-        float maxOffset = 3f;
-
-        while (quantity >= 1)
+        if (doubleKillPrevention)
         {
-            quantity--;
+            doubleKillPrevention = false;
+            clearedRooms.Add(player.currRoom);
 
-            float offsetX = Random.Range(minOffset, maxOffset);
-            float offsetY = Random.Range(minOffset, maxOffset);
-            Vector3 spawnPosition = new Vector3(player.transform.position.x + offsetX, player.transform.position.y + offsetY, player.transform.position.z);
+            // Calculate components quantity
+            int quantity = 2;
+            float minOffset = -1f;
+            float maxOffset = 1f;
 
-            if (true)
+            while (quantity >= 1) // Spawn components
             {
+                quantity--;
+
+                float offsetX = Random.Range(minOffset, maxOffset);
+                float offsetY = Random.Range(minOffset, maxOffset);
+                Vector3 spawnPosition = new Vector3(player.transform.position.x + offsetX, player.transform.position.y + offsetY, player.transform.position.z);
+
                 Instantiate(componentPrefab, spawnPosition, Quaternion.identity);
                 Debug.Log("Component Spawned");
             }
         }
     }
-    /* private bool IsWithinPlayableBounds(Vector3 position)
-    {
-        Tilemap tilemap = currentRoom.GetComponent<Tilemap>();
-        if (tilemap != null)
-        {
-            BoundsInt bounds = tilemap.cellBounds;
-            TileBase[] allTiles = tilemap.GetTilesBlock(bounds);
-
-            Vector3Int cellPosition = tilemap.WorldToCell(position);
-
-            if (bounds.Contains(cellPosition) && allTiles[cellPosition.x + cellPosition.y * bounds.size.x] != null) return true;
-        }
-        return false;
-    } */
 }

@@ -8,18 +8,10 @@ public class Player : MonoBehaviour
 {
     // References
     public Animator animator;
-    [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private HeartUpdate heartsHUD;
-    [SerializeField] private UIScript uiScript;
-    [SerializeField] private GameObject staminaBar;
-    [SerializeField] private GameObject staminaMask;
-    [SerializeField] private FloatSO PlayerSO;
     public LayerMask enemyLayers;
     public Transform attackPoint;
     public Light2D flashLight;
     public Light2D damageLight;
-
-    // Variables
     public bool inDungeon = false;
     public int currRoom = 2;
     public int MaxHearts = 10;
@@ -36,6 +28,13 @@ public class Player : MonoBehaviour
     public float dashingPower = 12f;
     public float attackCooldown;
     public bool dashUpgraded = false;
+
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private HeartUpdate heartsHUD;
+    [SerializeField] private UIScript uiScript;
+    [SerializeField] private GameObject staminaBar;
+    [SerializeField] private GameObject staminaMask;
+    [SerializeField] private FloatSO PlayerSO;
 
     private float stamina;
     private float attackTime;
@@ -58,6 +57,8 @@ public class Player : MonoBehaviour
     {
         if (tpCooldown >= 1 && collider.gameObject.tag == "Door" && RoomManager.roomCleared)
         {
+            GameObject.Find("Dungeon Generator").GetComponent<RoomManager>().doubleKillPrevention = true;
+
             transform.position = collider.gameObject.GetComponent<DoorMechanics>().targetDoorPos;
             currRoom = collider.gameObject.GetComponent<DoorMechanics>().targetRoomIndex;
             tpCooldown = 0;
