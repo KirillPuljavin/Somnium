@@ -30,8 +30,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.7774005, y: -0.8604053, z: 218.46512}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.4999999, y: 1.4999999, z: 1.4999999}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 9
   m_Sprite: {fileID: -1992367012, guid: f4c6bb6cae864644aafed0b2a63d0dca, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -170,3 +170,6 @@ MonoBehaviour:
   card2: {fileID: 3832351113249132469, guid: 3638f56699147bd47b7e0f5d4c5470bc, type: 3}
   card3: {fileID: 3832351113249132469, guid: b88252b46f6a1f9409c35bdb8021ec20, type: 3}
   card4: {fileID: 3832351113249132469, guid: de7479cd8c83fd34a8cdacece5bc45df, type: 3}
+  Card2Picked: 0
+  Card3Picked: 0
+  Card4Picked: 0

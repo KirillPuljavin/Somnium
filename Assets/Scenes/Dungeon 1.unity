@@ -527,6 +527,7 @@ MonoBehaviour:
   spiderEnemyPrefab: {fileID: 3563160528595184985, guid: 8089a9fe741314f4cae2384663588dad, type: 3}
   crafting1Prefab: {fileID: 4709272808223423221, guid: 7cfad57758deb0d478d0a0c2d60fa493, type: 3}
   crafting2Prefab: {fileID: 4709272808223423221, guid: 23072c4e02d2f09439bc44f89630ccd3, type: 3}
+  chestPrefab: {fileID: 2524031167517423831, guid: 54d57da51f424b34cae5dd05d409931d, type: 3}
 --- !u!1 &483133579
 GameObject:
   m_ObjectHideFlags: 0
