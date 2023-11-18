@@ -8,14 +8,12 @@ public class HeartItem : MonoBehaviour
     private HeartUpdate heartsHUD;
     private Player player;
 
-    // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
         heartsHUD = GameObject.FindWithTag("HeartsUI").GetComponent<HeartUpdate>();
     }
 
-    // Update is called once per frame
     void Update()
     {
 
@@ -24,7 +22,7 @@ public class HeartItem : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            
+
             player.Hearts += 2;
             Destroy(gameObject);
             if (player.Hearts > player.MaxHearts) player.Hearts = player.MaxHearts;

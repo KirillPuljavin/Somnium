@@ -11,6 +11,7 @@ public class EnemyFrog : MonoBehaviour
     public Animator animator;
     public float speed;
     public float enemyHP;
+    public int damageHearts;
     public float agroRange;
 
     private Player Player;
@@ -85,15 +86,9 @@ public class EnemyFrog : MonoBehaviour
 
         // Instantiate a fly
         GameObject fly = Instantiate(flyPrefab, transform.position, Quaternion.identity);
+        fly.GetComponent<FrogFly>().damageHearts = damageHearts;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            speed = 0.005f;
-        }
-    }
     private void OnTriggerStay2D(Collider2D collider)
     {
         // Dash Take Damage
@@ -101,13 +96,6 @@ public class EnemyFrog : MonoBehaviour
         {
             TakeDamage(Player.dashDamage);
             dashCooldown = 0.5f;
-        }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            speed = 1.3f;
         }
     }
 

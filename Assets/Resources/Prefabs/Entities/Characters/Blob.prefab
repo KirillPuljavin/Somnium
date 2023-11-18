@@ -56,6 +56,7 @@ MonoBehaviour:
   animator: {fileID: 5390512736680521591}
   speed: 2
   enemyHP: 8
+  damageHearts: 1
   agroRange: 8
 --- !u!70 &986158315572252183
 CapsuleCollider2D:

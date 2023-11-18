@@ -10,6 +10,7 @@ public class EnemySpider : MonoBehaviour
     public Animator animator;
     public float speed;
     public float enemyHP;
+    public int damageHearts;
     public float agroRange;
     public GameObject SpiderWebArea;
 
@@ -93,7 +94,7 @@ public class EnemySpider : MonoBehaviour
         {
             if (!Player.isDashing)
             {
-                Player.TakeDamage(1);
+                Player.TakeDamage(damageHearts);
                 attackCooldown = 0;
                 animator.Play("Attack_Right");
             }

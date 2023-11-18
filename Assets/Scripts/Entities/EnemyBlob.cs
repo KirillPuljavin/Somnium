@@ -10,6 +10,7 @@ public class EnemyBlob : MonoBehaviour
     public Animator animator;
     public float speed;
     public float enemyHP;
+    public int damageHearts;
     public float agroRange;
 
     private Player Player;
@@ -82,7 +83,7 @@ public class EnemyBlob : MonoBehaviour
         {
             if (!Player.isDashing)
             {
-                Player.TakeDamage(1);
+                Player.TakeDamage(damageHearts);
                 attackCooldown = 0;
                 animator.Play("Attack_Right");
             }

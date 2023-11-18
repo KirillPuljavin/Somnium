@@ -6,6 +6,7 @@ public class FrogFly : MonoBehaviour
 {
     Player Player;
     public int speed;
+    public int damageHearts;
 
     void Start()
     {
@@ -22,7 +23,7 @@ public class FrogFly : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            Player.TakeDamage(1);
+            Player.TakeDamage(damageHearts);
             Destroy(gameObject);
         }
     }

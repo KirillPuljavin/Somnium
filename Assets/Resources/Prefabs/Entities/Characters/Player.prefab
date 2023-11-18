@@ -434,7 +434,7 @@ MonoBehaviour:
   Vision: 2
   speed: 3.5
   isDashing: 0
-  damage: 4
+  damage: 2
   dashDamage: 4
   dashingPower: 12
   attackCooldown: 0.7

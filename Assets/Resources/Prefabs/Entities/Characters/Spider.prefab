@@ -118,6 +118,7 @@ MonoBehaviour:
   animator: {fileID: 722918383598533418}
   speed: 2
   enemyHP: 6
+  damageHearts: 1
   agroRange: 10
   SpiderWebArea: {fileID: 4450296235186559740, guid: 90759fe67fef23c48a63bd9648c4773d, type: 3}
 --- !u!195 &3011626003188151906

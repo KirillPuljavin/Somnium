@@ -9,6 +9,7 @@ public class RoomManager : MonoBehaviour
     public static DungeonGenerator dungeon;
     public static Player player;
     public static bool roomCleared = false;
+    public static int difficulty;
 
     [SerializeField] private GameObject blobEnemyPrefab;
     [SerializeField] private GameObject frogEnemyPrefab;
@@ -19,8 +20,8 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private GameObject componentPrefab;
     private Transform enemyParent;
 
-    private static List<int> clearedRooms = new List<int>();
     private static List<GameObject> Enemies = new List<GameObject>();
+    private static List<int> clearedRooms = new List<int>();
 
     public void Initialize()
     {
@@ -28,6 +29,8 @@ public class RoomManager : MonoBehaviour
         dungeon = GameObject.Find("Dungeon Generator").GetComponent<DungeonGenerator>();
         currentRoom = dungeon.RoomsInDungeon[player.currRoom];
         enemyParent = currentRoom.transform.GetChild(2).transform;
+        clearedRooms.Clear();
+        doubleKillPrevention = true;
 
         NewRoom();
     }
@@ -37,6 +40,15 @@ public class RoomManager : MonoBehaviour
         roomCleared = false;
         currentRoom = dungeon.RoomsInDungeon[player.currRoom];
         enemyParent = currentRoom.transform.GetChild(2).transform;
+        Enemies.Clear();
+
+        // Difficulty
+        if (player.currRoom >= 0 && player.currRoom <= 4) difficulty = 1;
+        else if (player.currRoom >= 5 && player.currRoom <= 9) difficulty = 2;
+        else if (player.currRoom >= 10 && player.currRoom <= 14) difficulty = 3;
+        else if (player.currRoom >= 15 && player.currRoom <= 19) difficulty = 4;
+        else if (player.currRoom >= 20 && player.currRoom <= 24) difficulty = 5;
+        Debug.Log("Difficulty: " + difficulty);
 
         // Spawn Enemies
         if (!clearedRooms.Contains(player.currRoom))
@@ -50,13 +62,33 @@ public class RoomManager : MonoBehaviour
                     switch (enemyType)
                     {
                         case 0:
-                            Instantiate(blobEnemyPrefab, enemy.position, Quaternion.identity, enemyParent);
+                            EnemyBlob spawnedBlob = Instantiate(blobEnemyPrefab, enemy.position, Quaternion.identity, enemyParent).GetComponent<EnemyBlob>();
+                            if (difficulty == 2)
+                            {
+                                spawnedBlob.enemyHP += 2;
+                            }
+                            else if (difficulty == 3)
+                            {
+
+                            }
+                            else if (difficulty == 4)
+                            {
+
+                            }
+                            else if (difficulty == 5)
+                            {
+
+                            }
                             break;
                         case 1:
-                            Instantiate(frogEnemyPrefab, enemy.position, Quaternion.identity, enemyParent);
+                            EnemyFrog spawnedFrog = Instantiate(frogEnemyPrefab, enemy.position, Quaternion.identity, enemyParent).GetComponent<EnemyFrog>();
+
+
                             break;
                         case 2:
-                            Instantiate(spiderEnemyPrefab, enemy.position, Quaternion.identity, enemyParent);
+                            EnemySpider spawnedSpider = Instantiate(spiderEnemyPrefab, enemy.position, Quaternion.identity, enemyParent).GetComponent<EnemySpider>();
+
+
                             break;
                     }
                 }
@@ -100,15 +132,13 @@ public class RoomManager : MonoBehaviour
 
             // Calculate components quantity
             int quantity = 2;
-            float minOffset = -1f;
-            float maxOffset = 1f;
 
             while (quantity >= 1) // Spawn components
             {
                 quantity--;
 
-                float offsetX = Random.Range(minOffset, maxOffset);
-                float offsetY = Random.Range(minOffset, maxOffset);
+                float offsetX = Random.Range(-1.5f, 1.5f);
+                float offsetY = Random.Range(-1f, 1f);
                 Vector3 spawnPosition = new Vector3(player.transform.position.x + offsetX, player.transform.position.y + offsetY, player.transform.position.z);
 
                 Instantiate(componentPrefab, spawnPosition, Quaternion.identity);
