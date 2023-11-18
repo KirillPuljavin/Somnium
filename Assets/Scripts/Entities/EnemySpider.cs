@@ -14,8 +14,6 @@ public class EnemySpider : MonoBehaviour
     public GameObject SpiderWebArea;
 
     private Player Player;
-    private Vector3 directionToPlayer;
-    private Vector3 localScale;
 
     private float oldSpeed;
     private float attackCooldown = 0;
@@ -26,10 +24,13 @@ public class EnemySpider : MonoBehaviour
     private bool isShooting = false;
     private float isShootingCooldown = 0;
     private float shootingDir;
-    private Vector3 target;
-    NavMeshAgent agent;
 
-    UnityEngine.Vector3 previousPosition;
+    // Pathfinding
+    private NavMeshAgent agent;
+    private Vector3 previousPosition;
+    private Vector3 currentPosition;
+    private float horizontalVelocity;
+    private float verticalVelocity;
 
     void Awake()
     {
@@ -43,50 +44,43 @@ public class EnemySpider : MonoBehaviour
         Player = GameObject.FindWithTag("Player").GetComponent<Player>();
         oldSpeed = speed;
         rb = GetComponent<Rigidbody2D>();
-        localScale = transform.localScale;
     }
 
     void Update()
     {
         float distance = Vector2.Distance(transform.position, Player.gameObject.transform.position);
-
         if (distance <= agroRange) agro = true; else agro = false;
-        if (agro && !isShooting) SetAgentPosition();
+        if (agro && !isShooting) FollowPlayer();
         else
         {
-            rb.velocity = new Vector2(0, 0);
+            agent.speed = 0;
+            animator.Play("Idle");
         }
-        if (agro && webCooldown >= 10) SpiderWebAttack();
 
         // Cooldown
+        if (agro && webCooldown >= 10) SpiderWebAttack();
         if (attackCooldown < 1) attackCooldown += Time.deltaTime;
         if (dashCooldown > 0) dashCooldown -= Time.deltaTime;
         if (reverseCooldown <= 0.2) reverseCooldown += Time.deltaTime;
         if (webCooldown <= 10) webCooldown += Time.deltaTime;
         if (isShootingCooldown <= 0.5f) isShootingCooldown += Time.deltaTime;
         if (reverseCooldown >= 0.2) speed = 2;
-
-        UnityEngine.Vector3 currentPosition = transform.position;
-
-        float horizontalVelocity = (currentPosition.x - previousPosition.x) / Time.deltaTime;
-        float verticalVelocity = (currentPosition.y - previousPosition.y) / Time.deltaTime;
+        if (isShootingCooldown >= 0.5) isShooting = false;
 
         animator.SetFloat("Horizontal", horizontalVelocity);
         animator.SetFloat("Vertical", verticalVelocity);
         animator.SetFloat("Speed", Mathf.Sqrt(horizontalVelocity * horizontalVelocity + verticalVelocity * verticalVelocity));
-
-        previousPosition = currentPosition;
-
-        if (isShootingCooldown >= 0.5) isShooting = false;
-
-        SetTargetPosition();
-        agent.speed = speed;
     }
-    // private void MoveEnemy()
-    // {
-    //     directionToPlayer = (Player.transform.position - transform.position).normalized;
-    //     rb.velocity = new Vector2(directionToPlayer.x, directionToPlayer.y) * speed;
-    // }
+    void FollowPlayer()
+    {
+        agent.SetDestination(new Vector3(Player.transform.position.x, Player.transform.position.y, transform.position.z));
+        agent.speed = speed;
+
+        currentPosition = transform.position;
+        horizontalVelocity = (currentPosition.x - previousPosition.x) / Time.deltaTime;
+        verticalVelocity = (currentPosition.y - previousPosition.y) / Time.deltaTime;
+        previousPosition = currentPosition;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -145,15 +139,5 @@ public class EnemySpider : MonoBehaviour
         if (shootingDir >= 0) animator.Play("Attack_Ranged_Right");
         webCooldown = 0;
         Instantiate(SpiderWebArea, Player.transform.position, Quaternion.identity);
-    }
-
-    void SetTargetPosition()
-    {
-        target = Player.transform.position;
-    }
-
-    void SetAgentPosition()
-    {
-        agent.SetDestination(new Vector3(target.x, target.y, transform.position.z));
     }
 }

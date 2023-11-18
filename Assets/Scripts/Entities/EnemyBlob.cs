@@ -13,14 +13,13 @@ public class EnemyBlob : MonoBehaviour
     public float agroRange;
 
     private Player Player;
-
     private bool agro;
     private float oldSpeed;
     private float attackCooldown = 0;
     private float dashCooldown = 0;
     private float reverseCooldown = 0.2f;
 
-    //Pathfinding
+    // Pathfinding
     private NavMeshAgent agent;
     private Vector3 previousPosition;
     private Vector3 currentPosition;
@@ -47,7 +46,8 @@ public class EnemyBlob : MonoBehaviour
         if (agro) FollowPlayer();
         else
         {
-            rb.velocity = new Vector2(0, 0);
+            agent.speed = 0;
+            animator.Play("Idle");
         }
 
         animator.SetFloat("Horizontal", horizontalVelocity);
@@ -69,7 +69,6 @@ public class EnemyBlob : MonoBehaviour
         horizontalVelocity = (currentPosition.x - previousPosition.x) / Time.deltaTime;
         verticalVelocity = (currentPosition.y - previousPosition.y) / Time.deltaTime;
         previousPosition = currentPosition;
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

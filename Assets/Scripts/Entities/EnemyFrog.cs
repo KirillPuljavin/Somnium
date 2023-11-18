@@ -23,11 +23,12 @@ public class EnemyFrog : MonoBehaviour
     private float dashCooldown = 0;
     private float reverseCooldown = 0.2f;
 
-    //Pathfinding
-    private Vector3 target;
-    NavMeshAgent agent;
-
-    UnityEngine.Vector3 previousPosition;
+    // Pathfinding
+    private NavMeshAgent agent;
+    private Vector3 previousPosition;
+    private Vector3 currentPosition;
+    private float horizontalVelocity;
+    private float verticalVelocity;
 
     void Awake()
     {
@@ -45,57 +46,38 @@ public class EnemyFrog : MonoBehaviour
     void Update()
     {
         float distance = Vector2.Distance(transform.position, Player.gameObject.transform.position);
-
         if (distance <= agroRange) agro = true; else agro = false;
         if (reverseCooldown >= 0.2)
         {
-            speed = 1;
-            if (distance >= closeRange && agro) SetAgentPosition();
+            if (distance >= closeRange && agro) FollowPlayer();
             else
             {
-                rb.velocity = new Vector2(0, 0);
+                agent.speed = 0;
                 animator.Play("Idle");
             }
         }
+
+        animator.SetFloat("Horizontal", horizontalVelocity);
+        animator.SetFloat("Vertical", verticalVelocity);
+        animator.SetFloat("Speed", Mathf.Sqrt(horizontalVelocity * horizontalVelocity + verticalVelocity * verticalVelocity));
 
         // Cooldown
         if (shootCooldown <= 4 && agro) shootCooldown += Time.deltaTime;
         if (dashCooldown > 0) dashCooldown -= Time.deltaTime;
         if (reverseCooldown <= 0.2) reverseCooldown += Time.deltaTime;
         if (reverseCooldown >= 0.2) speed = 2;
-
         if (shootCooldown >= 4 && agro) Shoot();
-
-        UnityEngine.Vector3 currentPosition = transform.position;
-
-        float horizontalVelocity = (currentPosition.x - previousPosition.x) / Time.deltaTime;
-        float verticalVelocity = (currentPosition.y - previousPosition.y) / Time.deltaTime;
-
-        animator.SetFloat("Horizontal", horizontalVelocity);
-        // animator.SetFloat("Vertical", verticalVelocity);
-        animator.SetFloat("Speed", Mathf.Sqrt(horizontalVelocity * horizontalVelocity + verticalVelocity * verticalVelocity));
-
-        previousPosition = currentPosition;
-
-        SetTargetPosition();
-        agent.speed = speed;
     }
-    // private void MoveEnemy()
-    // {
-    //     directionToPlayer = (Player.transform.position - transform.position).normalized;
-    //     rb.velocity = new Vector2(directionToPlayer.x, directionToPlayer.y) * speed;
-    // }
-    // private void LateUpdate()
-    // {
-    //     if (rb.velocity.x > 0)
-    //     {
-    //         transform.localScale = new Vector3(localScale.x, localScale.y, localScale.z);
-    //     }
-    //     else if (rb.velocity.x < 0)
-    //     {
-    //         transform.localScale = new Vector3(-localScale.x, localScale.y, localScale.z);
-    //     }
-    // }
+    void FollowPlayer()
+    {
+        agent.SetDestination(new Vector3(Player.transform.position.x, Player.transform.position.y, transform.position.z));
+        agent.speed = speed;
+
+        currentPosition = transform.position;
+        horizontalVelocity = (currentPosition.x - previousPosition.x) / Time.deltaTime;
+        verticalVelocity = (currentPosition.y - previousPosition.y) / Time.deltaTime;
+        previousPosition = currentPosition;
+    }
 
     void Shoot()
     {
@@ -145,15 +127,5 @@ public class EnemyFrog : MonoBehaviour
     {
         Debug.Log("ENEMY DIED");
         Destroy(gameObject);
-    }
-
-    void SetTargetPosition()
-    {
-        target = Player.transform.position;
-    }
-
-    void SetAgentPosition()
-    {
-        agent.SetDestination(new Vector3(target.x, target.y, transform.position.z));
     }
 }
