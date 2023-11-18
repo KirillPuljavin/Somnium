@@ -9,14 +9,15 @@ public class BossCat : MonoBehaviour
 
     Player Player;
     public Rigidbody2D rb;
-    public Animator animator;
+    public Animator catAnimator;
+    public Animator headAnimator;
     public GameObject healthBar;
     public GameObject healthMask;
-
     public GameObject BasicRight;
     public GameObject BasicLeft;
     public GameObject BasicUp;
     public GameObject BasicDown;
+
 
     public int health;
     public int maxHealth;
@@ -27,7 +28,6 @@ public class BossCat : MonoBehaviour
 
 
     public float activateRange;
-
     public bool inRange;
     public bool spawned = false;
     public bool inAnimation;
@@ -38,10 +38,16 @@ public class BossCat : MonoBehaviour
     private float damageCooldown = 1f;
     private float bossInvisFrames = 1f;
 
+    private bool inPhase2 = false;
+    public GameObject Head;
+    public GameObject LeftPaw;
+    public GameObject RightPaw;
+    public GameObject LeftTopPaw;
+    public GameObject RightTopPaw;
+
     void Start()
     {
         basicTimer = basicCooldown;
-
         Player = GameObject.FindWithTag("Player").GetComponent<Player>();
         /* healthBar = GameObject.FindGameObjectWithTag("BossHealth");
         healthMask = GameObject.FindGameObjectWithTag("BossMask");
@@ -52,6 +58,8 @@ public class BossCat : MonoBehaviour
         BasicLeft.SetActive(false);
         BasicUp.SetActive(false);
         BasicDown.SetActive(false);
+
+        //transform.localScale = new UnityEngine.Vector3(1, 1, 1);
     }
 
 
@@ -68,7 +76,7 @@ public class BossCat : MonoBehaviour
         calcDirection();
         if (distance <= activateRange) { StartCoroutine(Begin()); }
 
-        if (spawned == true)
+        if (spawned && !inPhase2)
         {
             if (!inRange && !inAnimation)
             {
@@ -89,8 +97,8 @@ public class BossCat : MonoBehaviour
     {
         if (!spawned)
         {
-            //Debug.Log("Begin");
-            animator.SetBool("activate", true);
+            catAnimator.SetBool("activate", true);
+            //transform.localScale = new UnityEngine.Vector3(3, 3, 3);
             yield return new WaitForSeconds(0.833f);
             /*      healthBar.SetActive(true); */
             spawned = true;
@@ -105,9 +113,9 @@ public class BossCat : MonoBehaviour
         float horizontalVelocity = (currentPosition.x - previousPosition.x) / Time.deltaTime;
         float verticalVelocity = (currentPosition.y - previousPosition.y) / Time.deltaTime;
 
-        animator.SetFloat("Horizontal", verticalVelocity);
-        animator.SetFloat("Vertical", horizontalVelocity);
-        animator.SetFloat("speed", Mathf.Sqrt(horizontalVelocity * horizontalVelocity + verticalVelocity * verticalVelocity));
+        catAnimator.SetFloat("Horizontal", verticalVelocity);
+        catAnimator.SetFloat("Vertical", horizontalVelocity);
+        catAnimator.SetFloat("speed", Mathf.Sqrt(horizontalVelocity * horizontalVelocity + verticalVelocity * verticalVelocity));
 
         previousPosition = currentPosition;
 
@@ -119,7 +127,7 @@ public class BossCat : MonoBehaviour
                 if (angle < 55 && angle > 0)
                 {
                     inAnimation = true;
-                    animator.Play("BasicRight");
+                    catAnimator.Play("BasicRight");
                     yield return new WaitForSeconds(0.4f);
                     BasicRight.SetActive(true);
                     Collider2D hitEnemy = Physics2D.OverlapCircle(BasicRight.transform.position, 1, LayerMask.GetMask("Player"));
@@ -135,7 +143,7 @@ public class BossCat : MonoBehaviour
                 else if (angle > 130 && angle < 180 || angle > -180 && angle < -130)
                 {
                     inAnimation = true;
-                    animator.Play("BasicLeft");
+                    catAnimator.Play("BasicLeft");
                     yield return new WaitForSeconds(0.4f);
                     BasicLeft.SetActive(true);
                     Collider2D hitEnemy = Physics2D.OverlapCircle(BasicLeft.transform.position, 1, LayerMask.GetMask("Player"));
@@ -151,7 +159,7 @@ public class BossCat : MonoBehaviour
                 else if (angle < 130 && angle > 55)
                 {
                     inAnimation = true;
-                    animator.Play("BasicUp");
+                    catAnimator.Play("BasicUp");
                     BasicRight.SetActive(true);
                     yield return new WaitForSeconds(0.5835f);
                     BasicRight.SetActive(false);
@@ -165,7 +173,7 @@ public class BossCat : MonoBehaviour
                     yield return new WaitForSeconds(0.5835f);
                     BasicUp.SetActive(false);
 
-                    animator.Play("BasicUpL");
+                    catAnimator.Play("BasicUpL");
                     BasicLeft.SetActive(true);
                     yield return new WaitForSeconds(0.5835f);
                     BasicLeft.SetActive(false);
@@ -184,7 +192,7 @@ public class BossCat : MonoBehaviour
                 else if (angle > -130 && angle < 0)
                 {
                     inAnimation = true;
-                    animator.Play("BasicDown");
+                    catAnimator.Play("BasicDown");
                     BasicLeft.SetActive(true);
                     yield return new WaitForSeconds(0.5835f);
                     BasicLeft.SetActive(false);
@@ -198,7 +206,7 @@ public class BossCat : MonoBehaviour
                     yield return new WaitForSeconds(0.5835f);
                     BasicDown.SetActive(false);
 
-                    animator.Play("BasicDownL");
+                    catAnimator.Play("BasicDownL");
                     BasicRight.SetActive(true);
                     yield return new WaitForSeconds(0.5835f);
                     BasicRight.SetActive(false);
@@ -259,7 +267,7 @@ public class BossCat : MonoBehaviour
         health -= amount;
         if ((maxHealth / health) == 2)
         {
-            //StartCoroutine(Phase2());
+            StartCoroutine(Phase2());
         }
         else if (health <= 0)
         {
@@ -270,7 +278,55 @@ public class BossCat : MonoBehaviour
 
     private IEnumerator Phase2()
     {
-        yield return new WaitForSeconds(0.5835f);
+        //Start Phase 2
+        inPhase2 = true;
+        transform.position = new UnityEngine.Vector3(5f, 20f, transform.position.z);
+        Head.SetActive(true);
+        RightPaw.SetActive(true);
+        LeftPaw.SetActive(true);
+        // ==================
+
+        yield return new WaitForSeconds(3f);
+
+        //Top Paw Attack
+        headAnimator.Play("PrepTop");
+        RightPaw.SetActive(false);
+        yield return new WaitForSeconds(1f);
+        float randomValue = Random.Range(6.5f, 12f);
+        RightTopPaw.transform.position = new UnityEngine.Vector3(randomValue, 0.5f, transform.position.z);
+        RightTopPaw.SetActive(true);
+        yield return new WaitForSeconds(1f);
+
+        LeftPaw.SetActive(false);
+        yield return new WaitForSeconds(1f);
+        randomValue = Random.Range(-2.5f, 2.5f);
+        LeftTopPaw.transform.position = new UnityEngine.Vector3(randomValue, 0.5f, transform.position.z);
+        LeftTopPaw.SetActive(true);
+        yield return new WaitForSeconds(3f);
+
+        LeftTopPaw.SetActive(false);
+        RightTopPaw.SetActive(false);
+        LeftPaw.SetActive(true);
+        RightPaw.SetActive(true);
+        // ==================
+
+        yield return new WaitForSeconds(3f);
+
+        //Sweep Attack
+        //Head.animator.play("PrepTop");
+            
+
+
+        //===================
+
+        //Return to normal
+        transform.position = new UnityEngine.Vector3(4.6f, 0f, transform.position.z);
+        Head.SetActive(false);
+        RightPaw.SetActive(false);
+        LeftPaw.SetActive(false);
+        inPhase2 = false;
+        // ==================
+
     }
 
     private void OnTriggerStay2D(Collider2D collider)

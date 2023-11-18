@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 67d7b000ca703e94ab9a181b7302b58f
+guid: 518582b2616eeed409f885def953afa7
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PREPARE FOR PAW ATTACK_BOSS_RIGHT_0
+      name: kittycat_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 128
-        height: 128
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +124,83 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 426a8157903079f4b9b2b52d70317edb
-      internalID: 763282621
+      spriteID: e3ceed3a90c053f4e804cdcc906759d9
+      internalID: 1667471104
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PREPARE FOR PAW ATTACK_BOSS_RIGHT_1
+      name: kittycat_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 665b476392afbf944ae8273989ce8382
+      internalID: 1500387691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kittycat_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea47b161768d23344be275171935ba0f
+      internalID: 921501476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kittycat_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abf78f692aa4928448d33155703cef10
+      internalID: -998206973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kittycat_4
       rect:
         serializedVersion: 2
         x: 128
         y: 0
-        width: 128
-        height: 128
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,20 +208,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a44da7063c38950498d2e03420ae0a9f
-      internalID: -679316682
+      spriteID: 34ec4a2d7afd5ca46a665cdd73099728
+      internalID: 419877785
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PREPARE FOR PAW ATTACK_BOSS_RIGHT_2
+      name: kittycat_5
       rect:
         serializedVersion: 2
-        x: 256
+        x: 160
         y: 0
-        width: 128
-        height: 128
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,20 +229,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d824f9fe7b753a143b0403a8b707a34f
-      internalID: -2090323126
+      spriteID: a4de0cd6a28ba4143858727468ee24ea
+      internalID: -767119927
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PREPARE FOR PAW ATTACK_BOSS_RIGHT_3
+      name: kittycat_6
       rect:
         serializedVersion: 2
-        x: 384
+        x: 192
         y: 0
-        width: 128
-        height: 128
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,92 +250,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 93da8f6a1de43424c8bf1f36532ab18d
-      internalID: 312701885
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PREPARE FOR PAW ATTACK_BOSS_RIGHT_4
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4c1bb9eddffb41e4d963ec0414c34856
-      internalID: 332502793
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PREPARE FOR PAW ATTACK_BOSS_RIGHT_5
-      rect:
-        serializedVersion: 2
-        x: 640
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 943f211b47f29604182415c73c02a075
-      internalID: 804097567
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PREPARE FOR PAW ATTACK_BOSS_RIGHT_6
-      rect:
-        serializedVersion: 2
-        x: 768
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f9b71a2fa738eb4458805c15f09e3a15
-      internalID: 262130847
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PREPARE FOR PAW ATTACK_BOSS_RIGHT_7
-      rect:
-        serializedVersion: 2
-        x: 896
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b37c3e5c27d7ad14ca3d8e5c06a790d9
-      internalID: -1394408415
+      spriteID: 6dadf5889bcb1624790ba830cb91c2da
+      internalID: -2079635072
       vertices: []
       indices: 
       edges: []
@@ -280,7 +259,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 53d21f18f33af454eadfda0265b4967b
+    spriteID: 7abc1342dbafd754b86c9e52eb50c2bb
     internalID: 0
     vertices: []
     indices: 
@@ -288,14 +267,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      PREPARE FOR PAW ATTACK_BOSS_RIGHT_0: 763282621
-      PREPARE FOR PAW ATTACK_BOSS_RIGHT_1: -679316682
-      PREPARE FOR PAW ATTACK_BOSS_RIGHT_2: -2090323126
-      PREPARE FOR PAW ATTACK_BOSS_RIGHT_3: 312701885
-      PREPARE FOR PAW ATTACK_BOSS_RIGHT_4: 332502793
-      PREPARE FOR PAW ATTACK_BOSS_RIGHT_5: 804097567
-      PREPARE FOR PAW ATTACK_BOSS_RIGHT_6: 262130847
-      PREPARE FOR PAW ATTACK_BOSS_RIGHT_7: -1394408415
+      kittycat_0: 1667471104
+      kittycat_1: 1500387691
+      kittycat_2: 921501476
+      kittycat_3: -998206973
+      kittycat_4: 419877785
+      kittycat_5: -767119927
+      kittycat_6: -2079635072
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
