@@ -217,26 +217,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3240072342329762470, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3240072342329762470, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -148.8
-      objectReference: {fileID: 0}
     - target: {fileID: 4889943354059910841, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 6359226010696778297}
-    - target: {fileID: 7919883277961508943, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7919883277961508943, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -148.8
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -528,6 +512,7 @@ MonoBehaviour:
   crafting1Prefab: {fileID: 4709272808223423221, guid: 7cfad57758deb0d478d0a0c2d60fa493, type: 3}
   crafting2Prefab: {fileID: 4709272808223423221, guid: 23072c4e02d2f09439bc44f89630ccd3, type: 3}
   chestPrefab: {fileID: 2524031167517423831, guid: 54d57da51f424b34cae5dd05d409931d, type: 3}
+  componentPrefab: {fileID: 1137787794838330148, guid: 9049b2de2aee11a40b289ec38acfcb50, type: 3}
 --- !u!1 &483133579
 GameObject:
   m_ObjectHideFlags: 0

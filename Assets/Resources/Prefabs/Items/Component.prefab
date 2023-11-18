@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5646164494337397301}
   - component: {fileID: 1403421169847363907}
   m_Layer: 6
-  m_Name: Component T2
+  m_Name: Component
   m_TagString: CompT2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 1701586748, guid: f4c6bb6cae864644aafed0b2a63d0dca, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!70 &5646164494337397301
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class RoomManager : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private GameObject crafting1Prefab;
     [SerializeField] private GameObject crafting2Prefab;
     [SerializeField] private GameObject chestPrefab;
+    [SerializeField] private GameObject componentPrefab;
     private Transform enemyParent;
 
     private static List<GameObject> Enemies = new List<GameObject>();
@@ -27,13 +29,6 @@ public class RoomManager : MonoBehaviour
         enemyParent = currentRoom.transform.GetChild(2).transform;
 
         NewRoom();
-
-        // IF EMPTY
-        if (Enemies.Count <= 0)
-        {
-            roomCleared = true;
-            Debug.Log("ROOM CLEARED");
-        }
     }
 
     public void NewRoom()
@@ -63,6 +58,7 @@ public class RoomManager : MonoBehaviour
                 }
             }
         }
+        if (Enemies.Count <= 0) roomCleared = true;
 
         // Spawn Chest
         if (player.currRoom == dungeon.currentPreset.positionChest1 || player.currRoom == dungeon.currentPreset.positionChest2)
@@ -84,9 +80,46 @@ public class RoomManager : MonoBehaviour
     public void EnemyDied() => StartCoroutine(CheckForEnemies());
     public IEnumerator CheckForEnemies()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.01f);
 
         Enemies.Clear(); foreach (Transform enemy in enemyParent) Enemies.Add(enemy.gameObject);
-        if (Enemies.Count <= 0) roomCleared = true;
+        if (Enemies.Count <= 0) { roomCleared = true; SpawnComponents(); }
     }
+
+    public void SpawnComponents()
+    {
+        // Calculate quantity
+        int quantity = 1;
+        float minOffset = -3f;
+        float maxOffset = 3f;
+
+        while (quantity >= 1)
+        {
+            quantity--;
+
+            float offsetX = Random.Range(minOffset, maxOffset);
+            float offsetY = Random.Range(minOffset, maxOffset);
+            Vector3 spawnPosition = new Vector3(player.transform.position.x + offsetX, player.transform.position.y + offsetY, player.transform.position.z);
+
+            if (true)
+            {
+                Instantiate(componentPrefab, spawnPosition, Quaternion.identity);
+                Debug.Log("Component Spawned");
+            }
+        }
+    }
+    /* private bool IsWithinPlayableBounds(Vector3 position)
+    {
+        Tilemap tilemap = currentRoom.GetComponent<Tilemap>();
+        if (tilemap != null)
+        {
+            BoundsInt bounds = tilemap.cellBounds;
+            TileBase[] allTiles = tilemap.GetTilesBlock(bounds);
+
+            Vector3Int cellPosition = tilemap.WorldToCell(position);
+
+            if (bounds.Contains(cellPosition) && allTiles[cellPosition.x + cellPosition.y * bounds.size.x] != null) return true;
+        }
+        return false;
+    } */
 }
