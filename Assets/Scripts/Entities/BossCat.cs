@@ -267,7 +267,7 @@ public class BossCat : MonoBehaviour
         health -= amount;
         if ((maxHealth / health) == 2)
         {
-            StartCoroutine(Phase2());
+            //StartCoroutine(Phase2());
         }
         else if (health <= 0)
         {
