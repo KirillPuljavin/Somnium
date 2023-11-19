@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3233790632473385849}
   - component: {fileID: 5227334474021898834}
   - component: {fileID: 1060229944734700058}
+  - component: {fileID: 8961493070591643578}
   - component: {fileID: 3347994437928775997}
   m_Layer: 0
   m_Name: Chest
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 9
+  m_SortingOrder: 10
   m_Sprite: {fileID: -1992367012, guid: f4c6bb6cae864644aafed0b2a63d0dca, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -140,7 +141,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0036816597, y: -0.084676236}
+  m_Offset: {x: 0.0036296248, y: -0.0972098}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -151,8 +152,43 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9190054, y: 0.8306475}
+  m_Size: {x: 0.9962965, y: 0.9016713}
   m_EdgeRadius: 0
+--- !u!70 &8961493070591643578
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2524031167517423831}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0052226125, y: -0.23083483}
+  m_Size: {x: 0.89764535, y: 0.53836244}
+  m_Direction: 1
 --- !u!114 &3347994437928775997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,6 +206,6 @@ MonoBehaviour:
   card2: {fileID: 3832351113249132469, guid: 3638f56699147bd47b7e0f5d4c5470bc, type: 3}
   card3: {fileID: 3832351113249132469, guid: b88252b46f6a1f9409c35bdb8021ec20, type: 3}
   card4: {fileID: 3832351113249132469, guid: de7479cd8c83fd34a8cdacece5bc45df, type: 3}
+  Card4Picked: 0
   Card2Picked: 0
   Card3Picked: 0
-  Card4Picked: 0

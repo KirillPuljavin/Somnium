@@ -93,6 +93,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 338167647349420669}
   anim: {fileID: 0}
+  chest: {fileID: 0}
+  aug: {fileID: 0}
 --- !u!1 &7443020887582448236
 GameObject:
   m_ObjectHideFlags: 0

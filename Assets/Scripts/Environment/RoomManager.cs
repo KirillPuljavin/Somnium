@@ -18,6 +18,7 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private GameObject crafting2Prefab;
     [SerializeField] private GameObject chestPrefab;
     [SerializeField] private GameObject componentPrefab;
+    [SerializeField] private GameObject healPrefab;
     private Transform enemyParent;
 
     private static List<GameObject> Enemies = new List<GameObject>();
@@ -69,15 +70,18 @@ public class RoomManager : MonoBehaviour
                             }
                             else if (difficulty == 3)
                             {
-
+                                spawnedBlob.enemyHP += 2;
+                                spawnedBlob.damageHearts += 1;
                             }
                             else if (difficulty == 4)
                             {
-
+                                spawnedBlob.enemyHP += 3;
+                                spawnedBlob.damageHearts += 2;
                             }
                             else if (difficulty == 5)
                             {
-
+                                spawnedBlob.enemyHP += 4;
+                                spawnedBlob.damageHearts += 2;
                             }
                             break;
                         case 1:
@@ -130,19 +134,56 @@ public class RoomManager : MonoBehaviour
             doubleKillPrevention = false;
             clearedRooms.Add(player.currRoom);
 
-            // Calculate components quantity
-            int quantity = 2;
-
-            while (quantity >= 1) // Spawn components
+            // Spawn Components & Heal
+            int componentAmount;
+            int healAmount;
+            switch (difficulty)
             {
-                quantity--;
+                default:
+                case 2:
+                    componentAmount = Random.Range(1, 2);
+                    healAmount = Random.Range(1, 2);
+                    break;
+                case 3:
+                    componentAmount = Random.Range(1, 3);
+                    healAmount = Random.Range(2, 3);
+                    break;
+                case 4:
+                    componentAmount = Random.Range(2, 5);
+                    healAmount = Random.Range(2, 4);
+                    break;
+                case 5:
+                    componentAmount = Random.Range(3, 5);
+                    healAmount = Random.Range(2, 5);
+                    break;
+            }
+
+            while (componentAmount >= 1)
+            {
+                componentAmount--;
 
                 float offsetX = Random.Range(-1.5f, 1.5f);
                 float offsetY = Random.Range(-1f, 1f);
-                Vector3 spawnPosition = new Vector3(player.transform.position.x + offsetX, player.transform.position.y + offsetY, player.transform.position.z);
 
-                Instantiate(componentPrefab, spawnPosition, Quaternion.identity);
+                Vector3 spawnPosition = new Vector3(player.transform.position.x + offsetX, player.transform.position.y + offsetY, player.transform.position.z);
+                Quaternion spawnRotation = Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
+
+                Instantiate(componentPrefab, spawnPosition, spawnRotation);
                 Debug.Log("Component Spawned");
+            }
+
+            while (healAmount >= 1)
+            {
+                healAmount--;
+
+                float offsetX = Random.Range(-1.5f, 1.5f);
+                float offsetY = Random.Range(-1f, 1f);
+
+                Vector3 spawnPosition = new Vector3(player.transform.position.x + offsetX, player.transform.position.y + offsetY, player.transform.position.z);
+                Quaternion spawnRotation = Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
+
+                Instantiate(healPrefab, spawnPosition, spawnRotation);
+                Debug.Log("Heal Item Spawned");
             }
         }
     }

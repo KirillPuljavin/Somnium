@@ -521,6 +521,8 @@ MonoBehaviour:
   crafting2Prefab: {fileID: 4709272808223423221, guid: 23072c4e02d2f09439bc44f89630ccd3, type: 3}
   chestPrefab: {fileID: 2524031167517423831, guid: 54d57da51f424b34cae5dd05d409931d, type: 3}
   componentPrefab: {fileID: 1137787794838330148, guid: 9049b2de2aee11a40b289ec38acfcb50, type: 3}
+  healPrefab: {fileID: 1137787794838330148, guid: 7a25be4f8e2b1d948bb66c1fadc39680, type: 3}
+  doubleKillPrevention: 1
 --- !u!1 &483133579
 GameObject:
   m_ObjectHideFlags: 0

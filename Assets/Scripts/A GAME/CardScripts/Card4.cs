@@ -22,10 +22,13 @@ public class Card4 : MonoBehaviour
     void OnMouseDown()
     {
         Cards = GameObject.FindGameObjectsWithTag("Card");
+        Player.Card4Picked = true;
+
         Player.MaxHearts += 2;
         Player.Hearts += 2;
-        Player.Card4Picked = true;
         heartsHUD.UpdateHearts();
+
+        Player.speed = Resources.Load<Player>("Prefabs/Entities/Characters/Player").speed;
         foreach (GameObject obj in Cards)
         {
             Destroy(obj);

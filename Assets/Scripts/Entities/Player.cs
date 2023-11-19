@@ -116,7 +116,7 @@ public class Player : MonoBehaviour
         if (tpCooldown <= 1) tpCooldown += Time.deltaTime;
         if (attackTime <= attackCooldown) attackTime += Time.deltaTime;
         if (stamina < dashingCooldown && WeaponEvo < 4) stamina += Time.deltaTime;
-        else if (stamina < dashingCooldown) { stamina += (Time.deltaTime * 1.3f); }
+        else if (stamina < dashingCooldown) { stamina += (Time.deltaTime * 1.5f); }
 
         if (stamina < dashingCooldown) UpdateStamina();
         if (trulyDashing) return;
@@ -182,7 +182,7 @@ public class Player : MonoBehaviour
         uiScript.UpdateUI();
 
         if (trulyDashing) return;
-        if (movement.magnitude > 1) rb.velocity = new Vector2(movement.x * (speed - 0.5f), movement.y * (speed - 0.5f));
+        if (movement.magnitude > 1 && speed != 0) rb.velocity = new Vector2(movement.x * (speed - 0.6f), movement.y * (speed - 0.6f));
         else rb.velocity = new Vector2(movement.x * speed, movement.y * speed);
     }
 
@@ -214,6 +214,7 @@ public class Player : MonoBehaviour
             case 0:
                 // Range
                 attackRange *= 1.5f;
+                damage += 1;
                 break;
             case 1:
                 // Attack Speed

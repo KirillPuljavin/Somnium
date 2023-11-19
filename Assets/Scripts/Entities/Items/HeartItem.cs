@@ -14,19 +14,14 @@ public class HeartItem : MonoBehaviour
         heartsHUD = GameObject.FindWithTag("HeartsUI").GetComponent<HeartUpdate>();
     }
 
-    void Update()
-    {
-
-    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-
             player.Hearts += 2;
-            Destroy(gameObject);
             if (player.Hearts > player.MaxHearts) player.Hearts = player.MaxHearts;
             heartsHUD.UpdateHearts();
+            Destroy(gameObject);
         }
     }
 }

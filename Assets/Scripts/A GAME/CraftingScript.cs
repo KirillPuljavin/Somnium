@@ -16,7 +16,7 @@ public class CraftingScript : MonoBehaviour
     void Start()
     {
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
-        UpgradeCosts = new int[] { 3, 3, 5, 7, 10 };
+        UpgradeCosts = new int[] { 3, 3, 5, 7, 15 };
     }
 
     void Update()

@@ -429,14 +429,14 @@ MonoBehaviour:
   MaxHearts: 10
   Hearts: 10
   staminaProcent: 0
-  Components: 30
+  Components: 0
   WeaponEvo: 0
   Vision: 2
   speed: 3.5
   isDashing: 0
   damage: 2
   dashDamage: 4
-  dashingPower: 12
+  dashingPower: 11
   attackCooldown: 0.7
   dashUpgraded: 0
   rb: {fileID: 7078594632026464168}

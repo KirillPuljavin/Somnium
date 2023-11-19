@@ -20,9 +20,12 @@ public class Card3 : MonoBehaviour
     void OnMouseDown()
     {
         Cards = GameObject.FindGameObjectsWithTag("Card");
+        Player.Card3Picked = true;
+
         Player.damage += 1;
         Player.dashDamage += 2;
-        Player.Card3Picked = true;
+
+        Player.speed = Resources.Load<Player>("Prefabs/Entities/Characters/Player").speed;
         foreach (GameObject obj in Cards)
         {
             Destroy(obj);
