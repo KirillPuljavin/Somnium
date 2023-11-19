@@ -21,31 +21,34 @@ public class CraftingScript : MonoBehaviour
 
     void Update()
     {
-        if (clickable && Input.GetKeyDown(KeyCode.E) && player.WeaponEvo < 5)
-        {
-            int amount;
-            amount = UpgradeCosts[player.WeaponEvo];
-            if (craftingLvl == 1)
+        if (RoomManager.roomCleared)
+            if (clickable && Input.GetKeyDown(KeyCode.E) && player.WeaponEvo < 5)
             {
-                if (player.Components >= amount && player.WeaponEvo < 3)
+                int amount;
+                amount = UpgradeCosts[player.WeaponEvo];
+                if (craftingLvl == 1)
                 {
-                    player.UpgradeEvo();
-                    player.Components -= amount;
+                    if (player.Components >= amount && player.WeaponEvo < 3)
+                    {
+                        StartCoroutine(player.Alert("You Upgraded!"));
+                        player.UpgradeEvo();
+                        player.Components -= amount;
+                    }
+                    else if (player.WeaponEvo >= 3) StartCoroutine(player.Alert("You need lvl 2 station now."));
+                    else StartCoroutine(player.Alert("Can't Craft! You need " + amount + " Components"));
                 }
-                else if (player.WeaponEvo >= 3) StartCoroutine(player.Alert("You need lvl 2 station now."));
-                else StartCoroutine(player.Alert("Can't Craft! You need " + amount + " Components"));
-            }
-            else
-            {
-                if (player.Components >= amount)
+                else
                 {
-                    player.UpgradeEvo();
-                    player.Components -= amount;
+                    if (player.Components >= amount)
+                    {
+                        StartCoroutine(player.Alert("You Upgraded!"));
+                        player.UpgradeEvo();
+                        player.Components -= amount;
+                    }
+                    else StartCoroutine(player.Alert("Can't Craft! You need " + amount + " Components"));
                 }
-                else StartCoroutine(player.Alert("Can't Craft! You need " + amount + " Components"));
             }
-        }
-        else if (clickable && Input.GetKeyDown(KeyCode.E) && player.WeaponEvo >= 5) StartCoroutine(player.Alert("You have maxed all upgrades."));
+            else if (clickable && Input.GetKeyDown(KeyCode.E) && player.WeaponEvo >= 5) StartCoroutine(player.Alert("You have maxed all upgrades."));
     }
 
     void OnTriggerEnter2D(Collider2D collider)
