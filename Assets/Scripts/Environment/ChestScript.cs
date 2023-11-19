@@ -44,7 +44,7 @@ public class ChestScript : MonoBehaviour
         {
             obj.gameObject.transform.localScale = new Vector3(150, 150, 0);
         }
-        if (Input.GetKeyDown(KeyCode.E) && clickable && RoomManager.roomCleared)
+        if (Input.GetKeyDown(KeyCode.E) && clickable)
         {
             CardPick();
         }
@@ -98,32 +98,32 @@ public class ChestScript : MonoBehaviour
                     break;
             }
         }
-        switch (Card1Picked, Card2Picked, Card3Picked, Card4Picked)
-        {
-            case (true, false, false, false):
-                Instantiate(card2, cardLocation1, Quaternion.identity, HUD);
-                Instantiate(card3, cardLocation2, Quaternion.identity, HUD);
-                Instantiate(card4, cardLocation3, Quaternion.identity, HUD);
-                break;
-            case (false, true, false, false):
-                Instantiate(card1, cardLocation1, Quaternion.identity, HUD);
-                Instantiate(card3, cardLocation2, Quaternion.identity, HUD);
-                Instantiate(card4, cardLocation3, Quaternion.identity, HUD);
-                break;
-            case (false, false, true, false):
-                Instantiate(card1, cardLocation1, Quaternion.identity, HUD);
-                Instantiate(card2, cardLocation2, Quaternion.identity, HUD);
-                Instantiate(card4, cardLocation3, Quaternion.identity, HUD);
-                break;
-            case (false, false, false, true):
-                Instantiate(card1, cardLocation1, Quaternion.identity, HUD);
-                Instantiate(card2, cardLocation2, Quaternion.identity, HUD);
-                Instantiate(card3, cardLocation3, Quaternion.identity, HUD);
-                break;
-            default:
-                Debug.Log("You already have 2 augments! Can't procced!");
-                break;
-        }
+        else switch (Card1Picked, Card2Picked, Card3Picked, Card4Picked)
+            {
+                case (true, false, false, false):
+                    Instantiate(card2, cardLocation1, Quaternion.identity, HUD);
+                    Instantiate(card3, cardLocation2, Quaternion.identity, HUD);
+                    Instantiate(card4, cardLocation3, Quaternion.identity, HUD);
+                    break;
+                case (false, true, false, false):
+                    Instantiate(card1, cardLocation1, Quaternion.identity, HUD);
+                    Instantiate(card3, cardLocation2, Quaternion.identity, HUD);
+                    Instantiate(card4, cardLocation3, Quaternion.identity, HUD);
+                    break;
+                case (false, false, true, false):
+                    Instantiate(card1, cardLocation1, Quaternion.identity, HUD);
+                    Instantiate(card2, cardLocation2, Quaternion.identity, HUD);
+                    Instantiate(card4, cardLocation3, Quaternion.identity, HUD);
+                    break;
+                case (false, false, false, true):
+                    Instantiate(card1, cardLocation1, Quaternion.identity, HUD);
+                    Instantiate(card2, cardLocation2, Quaternion.identity, HUD);
+                    Instantiate(card3, cardLocation3, Quaternion.identity, HUD);
+                    break;
+                default:
+                    StartCoroutine(Player.Alert("You already have 2 augments!"));
+                    break;
+            }
         Destroy(this);
     }
 }

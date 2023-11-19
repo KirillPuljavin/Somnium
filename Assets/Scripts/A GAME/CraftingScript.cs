@@ -32,8 +32,8 @@ public class CraftingScript : MonoBehaviour
                     player.UpgradeEvo();
                     player.Components -= amount;
                 }
-                else if (player.WeaponEvo >= 3) Debug.Log("You need lvl 2 station now.");
-                else Debug.Log("Can't Craft! You need " + amount + " Components");
+                else if (player.WeaponEvo >= 3) StartCoroutine(player.Alert("You need lvl 2 station now."));
+                else StartCoroutine(player.Alert("Can't Craft! You need " + amount + " Components"));
             }
             else
             {
@@ -42,10 +42,10 @@ public class CraftingScript : MonoBehaviour
                     player.UpgradeEvo();
                     player.Components -= amount;
                 }
-                else Debug.Log("Can't Craft! You need " + amount + " Components");
+                else StartCoroutine(player.Alert("Can't Craft! You need " + amount + " Components"));
             }
         }
-        else if (clickable && Input.GetKeyDown(KeyCode.E) && player.WeaponEvo >= 5) Debug.Log("You have maxed all upgrades.");
+        else if (clickable && Input.GetKeyDown(KeyCode.E) && player.WeaponEvo >= 5) StartCoroutine(player.Alert("You have maxed all upgrades."));
     }
 
     void OnTriggerEnter2D(Collider2D collider)

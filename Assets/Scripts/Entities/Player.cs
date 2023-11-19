@@ -292,6 +292,14 @@ public class Player : MonoBehaviour
         }
     }
 
+    [SerializeField] private Text textObject;
+    public IEnumerator Alert(string message)
+    {
+        textObject.text = message;
+        yield return new WaitForSeconds(2);
+        textObject.text = "";
+    }
+
     public void HealPotion()
     {
         if (Hearts < MaxHearts)

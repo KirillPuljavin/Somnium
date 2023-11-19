@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &94303048 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 797360467185239895, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
+  m_PrefabInstance: {fileID: 727911674}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &129032898
 GameObject:
   m_ObjectHideFlags: 0
@@ -936,6 +947,10 @@ PrefabInstance:
       propertyPath: staminaBar
       value: 
       objectReference: {fileID: 1540999259}
+    - target: {fileID: 4195860284930794465, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
+      propertyPath: textObject
+      value: 
+      objectReference: {fileID: 94303048}
     - target: {fileID: 4195860284930794465, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
       propertyPath: staminaMask
       value: 

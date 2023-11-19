@@ -223,19 +223,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3240072342329762470, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -149.2
+      value: -149
       objectReference: {fileID: 0}
     - target: {fileID: 4889943354059910841, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 6359226010696778297}
+    - target: {fileID: 4889943354059910841, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
+      propertyPath: m_Lens.OrthographicSize
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7919883277961508943, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7919883277961508943, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -149.2
+      value: -149
+      objectReference: {fileID: 0}
+    - target: {fileID: 8572995283403586746, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
+      propertyPath: orthographic size
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -912,6 +920,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 797360467185239895, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 797360467185239895, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 2899823166677993154, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
       propertyPath: m_Name
       value: UI
@@ -920,6 +936,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 164782855}
+    - target: {fileID: 7502656105118123170, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
+      propertyPath: m_Text
+      value: 'Components:'
+      objectReference: {fileID: 0}
     - target: {fileID: 8430058909267680900, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1005,6 +1025,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
+--- !u!114 &1128986294 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 797360467185239895, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
+  m_PrefabInstance: {fileID: 1128986293}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1228075579 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 560572297645400585, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
@@ -1601,6 +1632,10 @@ PrefabInstance:
       propertyPath: staminaBar
       value: 
       objectReference: {fileID: 1228075579}
+    - target: {fileID: 4195860284930794465, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
+      propertyPath: textObject
+      value: 
+      objectReference: {fileID: 1128986294}
     - target: {fileID: 4195860284930794465, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
       propertyPath: staminaMask
       value: 
