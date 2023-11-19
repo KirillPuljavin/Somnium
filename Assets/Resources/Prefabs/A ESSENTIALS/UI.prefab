@@ -1062,9 +1062,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Null
-
-'
+  m_Text: 'Components:'
 --- !u!114 &6438237428185695752
 MonoBehaviour:
   m_ObjectHideFlags: 0
