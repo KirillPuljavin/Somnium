@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.Windows;
 
 public class RoomManager : MonoBehaviour
 {
@@ -24,6 +25,11 @@ public class RoomManager : MonoBehaviour
     private static List<GameObject> Enemies = new List<GameObject>();
     private static List<int> clearedRooms = new List<int>();
 
+    private static bool spawnedChest1 = false;
+    private static bool spawnedChest2 = false;
+    private static bool spawnedCraft1 = false;
+    private static bool spawnedCraft2 = false;
+
     public void Initialize()
     {
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
@@ -32,7 +38,10 @@ public class RoomManager : MonoBehaviour
         enemyParent = currentRoom.transform.GetChild(2).transform;
         clearedRooms.Clear();
         doubleKillPrevention = true;
-
+        spawnedChest1 = false;
+        spawnedChest2 = false;
+        spawnedCraft1 = false;
+        spawnedCraft2 = false;
         NewRoom();
     }
 
@@ -135,20 +144,12 @@ public class RoomManager : MonoBehaviour
         if (Enemies.Count <= 0) roomCleared = true;
 
         // Spawn Chest
-        if (player.currRoom == dungeon.currentPreset.positionChest1 || player.currRoom == dungeon.currentPreset.positionChest2)
-        {
-            Instantiate(chestPrefab, currentRoom.transform.GetChild(3).GetChild(0).transform.position, Quaternion.identity, currentRoom.transform);
-        }
+        if (player.currRoom == dungeon.currentPreset.positionChest1 && !spawnedChest1) { Instantiate(chestPrefab, currentRoom.transform.GetChild(3).GetChild(0).transform.position, Quaternion.identity, currentRoom.transform); spawnedChest1 = true; }
+        else if (player.currRoom == dungeon.currentPreset.positionChest2 && !spawnedChest2) { Instantiate(chestPrefab, currentRoom.transform.GetChild(3).GetChild(0).transform.position, Quaternion.identity, currentRoom.transform); spawnedChest2 = true; }
 
         // Spawn Crafting Station
-        if (player.currRoom == dungeon.currentPreset.positionUpgrade1)
-        {
-            Instantiate(crafting1Prefab, currentRoom.transform.GetChild(4).GetChild(0).transform.position, Quaternion.identity, currentRoom.transform);
-        }
-        else if (player.currRoom == dungeon.currentPreset.positionUpgrade2)
-        {
-            Instantiate(crafting2Prefab, currentRoom.transform.GetChild(4).GetChild(0).transform.position, Quaternion.identity, currentRoom.transform);
-        }
+        if (player.currRoom == dungeon.currentPreset.positionUpgrade1 && !spawnedCraft1) { Instantiate(crafting1Prefab, currentRoom.transform.GetChild(4).GetChild(0).transform.position, Quaternion.identity, currentRoom.transform); spawnedCraft1 = true; }
+        else if (player.currRoom == dungeon.currentPreset.positionUpgrade2 && !spawnedCraft2) { Instantiate(crafting2Prefab, currentRoom.transform.GetChild(4).GetChild(0).transform.position, Quaternion.identity, currentRoom.transform); spawnedCraft2 = true; }
     }
 
     public void EnemyDied() => StartCoroutine(CheckForEnemies());
