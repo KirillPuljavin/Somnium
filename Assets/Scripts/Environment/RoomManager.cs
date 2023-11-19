@@ -15,6 +15,7 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private GameObject blobEnemyPrefab;
     [SerializeField] private GameObject frogEnemyPrefab;
     [SerializeField] private GameObject spiderEnemyPrefab;
+    [SerializeField] private GameObject catBossPrefab;
     [SerializeField] private GameObject crafting1Prefab;
     [SerializeField] private GameObject crafting2Prefab;
     [SerializeField] private GameObject chestPrefab;
@@ -152,6 +153,7 @@ public class RoomManager : MonoBehaviour
         else if (player.currRoom == dungeon.currentPreset.positionUpgrade2 && !spawnedCraft2) { Instantiate(crafting2Prefab, currentRoom.transform.GetChild(4).GetChild(0).transform.position, Quaternion.identity, currentRoom.transform); spawnedCraft2 = true; }
     }
 
+
     public void EnemyDied() => StartCoroutine(CheckForEnemies());
     public IEnumerator CheckForEnemies()
     {
@@ -222,3 +224,4 @@ public class RoomManager : MonoBehaviour
         }
     }
 }
+
