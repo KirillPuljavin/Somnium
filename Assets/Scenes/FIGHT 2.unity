@@ -308,6 +308,22 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
+--- !u!114 &727911675 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 797360467185239895, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
+  m_PrefabInstance: {fileID: 727911674}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &727911676 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2053903100432373277, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
+  m_PrefabInstance: {fileID: 727911674}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &920161607 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5446435883745518241, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
@@ -484,6 +500,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 512104528}
     - target: {fileID: 4195860284930794465, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
+      propertyPath: DeathMenu
+      value: 
+      objectReference: {fileID: 727911676}
+    - target: {fileID: 4195860284930794465, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
       propertyPath: heartsHUD
       value: 
       objectReference: {fileID: 1648695256}
@@ -491,6 +511,10 @@ PrefabInstance:
       propertyPath: staminaBar
       value: 
       objectReference: {fileID: 633413303}
+    - target: {fileID: 4195860284930794465, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
+      propertyPath: textObject
+      value: 
+      objectReference: {fileID: 727911675}
     - target: {fileID: 4195860284930794465, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
       propertyPath: staminaMask
       value: 
@@ -642,7 +666,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3240072342329762470, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7700003
+      value: 0.57000023
       objectReference: {fileID: 0}
     - target: {fileID: 4889943354059910841, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
       propertyPath: m_Follow
@@ -654,7 +678,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7919883277961508943, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7700003
+      value: 0.57000023
       objectReference: {fileID: 0}
     - target: {fileID: 8572995283403586746, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
       propertyPath: m_AllowDynamicResolution
