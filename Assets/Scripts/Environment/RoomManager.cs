@@ -135,26 +135,25 @@ public class RoomManager : MonoBehaviour
         }
         if (Enemies.Count <= 0) roomCleared = true;
 
-            // Spawn Chest
-            if (player.currRoom == dungeon.currentPreset.positionChest1 || player.currRoom == dungeon.currentPreset.positionChest2)
-            {
-                Instantiate(chestPrefab, currentRoom.transform.GetChild(3).GetChild(0).transform.position, Quaternion.identity, currentRoom.transform);
-            }
-
-            // Spawn Crafting Station
-            if (player.currRoom == dungeon.currentPreset.positionUpgrade1)
-            {
-                Instantiate(crafting1Prefab, currentRoom.transform.GetChild(4).GetChild(0).transform.position, Quaternion.identity, currentRoom.transform);
-            }
-            else if (player.currRoom == dungeon.currentPreset.positionUpgrade2)
-            {
-                Instantiate(crafting2Prefab, currentRoom.transform.GetChild(4).GetChild(0).transform.position, Quaternion.identity, currentRoom.transform);
-            }
-            Debug.Log("Normal Room " + currentRoom.name);
-            return;
+        // Spawn Chest
+        if (player.currRoom == dungeon.currentPreset.positionChest1 || player.currRoom == dungeon.currentPreset.positionChest2)
+        {
+            Instantiate(chestPrefab, currentRoom.transform.GetChild(3).GetChild(0).transform.position, Quaternion.identity, currentRoom.transform);
         }
-        bossRoom();
+
+        // Spawn Crafting Station
+        if (player.currRoom == dungeon.currentPreset.positionUpgrade1)
+        {
+            Instantiate(crafting1Prefab, currentRoom.transform.GetChild(4).GetChild(0).transform.position, Quaternion.identity, currentRoom.transform);
+        }
+        else if (player.currRoom == dungeon.currentPreset.positionUpgrade2)
+        {
+            Instantiate(crafting2Prefab, currentRoom.transform.GetChild(4).GetChild(0).transform.position, Quaternion.identity, currentRoom.transform);
+        }
+        Debug.Log("Normal Room " + currentRoom.name);
+        return;
     }
+
 
     public void EnemyDied() => StartCoroutine(CheckForEnemies());
     public IEnumerator CheckForEnemies()
@@ -226,3 +225,4 @@ public class RoomManager : MonoBehaviour
         }
     }
 }
+
