@@ -51,7 +51,7 @@ public class RoomManager : MonoBehaviour
         else if (player.currRoom >= 20 && player.currRoom <= 24) difficulty = 5;
         Debug.Log("Difficulty: " + difficulty);
 
-        // Spawn Enemies
+        // Spawn Enemies with Scaling
         if (!clearedRooms.Contains(player.currRoom))
         {
             for (int enemyType = 0; enemyType < 3; enemyType++)
@@ -86,13 +86,47 @@ public class RoomManager : MonoBehaviour
                             break;
                         case 1:
                             EnemyFrog spawnedFrog = Instantiate(frogEnemyPrefab, enemy.position, Quaternion.identity, enemyParent).GetComponent<EnemyFrog>();
-
-
+                            if (difficulty == 2)
+                            {
+                                spawnedFrog.damageHearts += 1;
+                            }
+                            else if (difficulty == 3)
+                            {
+                                spawnedFrog.enemyHP += 2;
+                                spawnedFrog.damageHearts += 1;
+                            }
+                            else if (difficulty == 4)
+                            {
+                                spawnedFrog.enemyHP += 3;
+                                spawnedFrog.damageHearts += 2;
+                            }
+                            else if (difficulty == 5)
+                            {
+                                spawnedFrog.enemyHP += 4;
+                                spawnedFrog.damageHearts += 2;
+                            }
                             break;
                         case 2:
                             EnemySpider spawnedSpider = Instantiate(spiderEnemyPrefab, enemy.position, Quaternion.identity, enemyParent).GetComponent<EnemySpider>();
-
-
+                            if (difficulty == 2)
+                            {
+                                spawnedSpider.enemyHP += 2;
+                            }
+                            else if (difficulty == 3)
+                            {
+                                spawnedSpider.enemyHP += 2;
+                                spawnedSpider.damageHearts += 1;
+                            }
+                            else if (difficulty == 4)
+                            {
+                                spawnedSpider.enemyHP += 3;
+                                spawnedSpider.damageHearts += 2;
+                            }
+                            else if (difficulty == 5)
+                            {
+                                spawnedSpider.enemyHP += 4;
+                                spawnedSpider.damageHearts += 2;
+                            }
                             break;
                     }
                 }
@@ -154,7 +188,7 @@ public class RoomManager : MonoBehaviour
                     break;
                 case 5:
                     componentAmount = Random.Range(3, 5);
-                    healAmount = Random.Range(2, 5);
+                    healAmount = Random.Range(3, 5);
                     break;
             }
 

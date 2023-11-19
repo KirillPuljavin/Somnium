@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
     public float attackCooldown;
     public bool dashUpgraded = false;
 
+    [SerializeField] private GameObject DeathMenu;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private HeartUpdate heartsHUD;
     [SerializeField] private UIScript uiScript;
@@ -53,26 +54,12 @@ public class Player : MonoBehaviour
     public bool Card4Picked = false;
 
     private float tpCooldown;
-    void OnTriggerEnter2D(Collider2D collider) // Door collider
-    {
-        if (tpCooldown >= 1 && collider.gameObject.tag == "Door" && RoomManager.roomCleared)
-        {
-            GameObject.Find("Dungeon Generator").GetComponent<RoomManager>().doubleKillPrevention = true;
-
-            transform.position = collider.gameObject.GetComponent<DoorMechanics>().targetDoorPos;
-            currRoom = collider.gameObject.GetComponent<DoorMechanics>().targetRoomIndex;
-            tpCooldown = 0;
-
-            GameObject.Find("Dungeon Generator").GetComponent<RoomManager>().NewRoom();
-        }
-    }
 
     private void Start()
     {
         uiScript = GameObject.FindWithTag("Components").GetComponent<UIScript>();
         getStoredValues();
     }
-
     private void getStoredValues()
     {
         Hearts = (int)PlayerSO.Hearts;
@@ -109,73 +96,76 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        StoreValues();
-        flashLight.pointLightOuterRadius = Vision * 4;
-
-        // Cooldown
-        if (tpCooldown <= 1) tpCooldown += Time.deltaTime;
-        if (attackTime <= attackCooldown) attackTime += Time.deltaTime;
-        if (stamina < dashingCooldown && WeaponEvo < 4) stamina += Time.deltaTime;
-        else if (stamina < dashingCooldown) { stamina += (Time.deltaTime * 1.5f); }
-
-        if (stamina < dashingCooldown) UpdateStamina();
-        if (trulyDashing) return;
-
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
-
-        // Mouse position Calculations and storing for checking where to attack.
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 temp = new Vector3(mousePos.x, mousePos.y, 0);
-        Vector3 direction = temp - gameObject.transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
-
-        // Controls
-        if (Input.GetKeyDown(KeyCode.Mouse0) && attackTime >= attackCooldown) StartCoroutine(Hit());
-        if (Input.GetKeyDown(KeyCode.Mouse1) && stamina >= 3 && movement.sqrMagnitude != 0) StartCoroutine(Dash());
-        if (Input.GetKeyDown(KeyCode.H)) HealPotion();
-
-        animator.SetFloat("Horizontal", movement.x);
-        animator.SetFloat("Vertical", movement.y);
-        animator.SetFloat("Speed", movement.sqrMagnitude);
-
-        switch ((movement.x, movement.y))
+        if (Alive)
         {
-            case (1, 0):
-                dashDirAnim = "Dash_Right";
-                break;
-            case (-1, 0):
-                dashDirAnim = "Dash_Left";
-                break;
-            case (0, 1):
-                dashDirAnim = "Dash_Up";
-                break;
-            case (0, -1):
-                dashDirAnim = "Dash_Down";
-                break;
-            case (1, 1):
-                Facing = "up-right";
-                dashDirAnim = "Dash_Up";
-                break;
-            case (1, -1):
-                Facing = "down-right";
-                dashDirAnim = "Dash_Down";
-                break;
-            case (-1, 1):
-                Facing = "up-left";
-                dashDirAnim = "Dash_Up";
-                break;
-            case (-1, -1):
-                Facing = "down-left";
-                dashDirAnim = "Dash_Down";
-                break;
-        }
+            StoreValues();
+            flashLight.pointLightOuterRadius = Vision * 4;
 
-        if (angle > -45 && angle < 45) Facing = "up";
-        else if (angle > -135 && angle < -45) Facing = "right";
-        else if (angle > -225 && angle < -135) Facing = "down";
-        else if (angle > -270 && angle < -225 || angle > 45 && angle < 90) Facing = "left";
-        else Debug.Log("Error ANGLE");
+            // Cooldown
+            if (tpCooldown <= 1) tpCooldown += Time.deltaTime;
+            if (attackTime <= attackCooldown) attackTime += Time.deltaTime;
+            if (stamina < dashingCooldown && WeaponEvo < 4) stamina += Time.deltaTime;
+            else if (stamina < dashingCooldown) { stamina += (Time.deltaTime * 1.5f); }
+
+            if (stamina < dashingCooldown) UpdateStamina();
+            if (trulyDashing) return;
+
+            movement.x = Input.GetAxisRaw("Horizontal");
+            movement.y = Input.GetAxisRaw("Vertical");
+
+            // Mouse position Calculations and storing for checking where to attack.
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 temp = new Vector3(mousePos.x, mousePos.y, 0);
+            Vector3 direction = temp - gameObject.transform.position;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
+
+            // Controls
+            if (Input.GetKeyDown(KeyCode.Mouse0) && attackTime >= attackCooldown) StartCoroutine(Hit());
+            if (Input.GetKeyDown(KeyCode.Mouse1) && stamina >= 3 && movement.sqrMagnitude != 0) StartCoroutine(Dash());
+            if (Input.GetKeyDown(KeyCode.H)) HealPotion();
+
+            animator.SetFloat("Horizontal", movement.x);
+            animator.SetFloat("Vertical", movement.y);
+            animator.SetFloat("Speed", movement.sqrMagnitude);
+
+            switch ((movement.x, movement.y))
+            {
+                case (1, 0):
+                    dashDirAnim = "Dash_Right";
+                    break;
+                case (-1, 0):
+                    dashDirAnim = "Dash_Left";
+                    break;
+                case (0, 1):
+                    dashDirAnim = "Dash_Up";
+                    break;
+                case (0, -1):
+                    dashDirAnim = "Dash_Down";
+                    break;
+                case (1, 1):
+                    Facing = "up-right";
+                    dashDirAnim = "Dash_Up";
+                    break;
+                case (1, -1):
+                    Facing = "down-right";
+                    dashDirAnim = "Dash_Down";
+                    break;
+                case (-1, 1):
+                    Facing = "up-left";
+                    dashDirAnim = "Dash_Up";
+                    break;
+                case (-1, -1):
+                    Facing = "down-left";
+                    dashDirAnim = "Dash_Down";
+                    break;
+            }
+
+            if (angle > -45 && angle < 45) Facing = "up";
+            else if (angle > -135 && angle < -45) Facing = "right";
+            else if (angle > -225 && angle < -135) Facing = "down";
+            else if (angle > -270 && angle < -225 || angle > 45 && angle < 90) Facing = "left";
+            else Debug.Log("Error ANGLE");
+        }
     }
     private void FixedUpdate() // Movement
     {
@@ -184,6 +174,20 @@ public class Player : MonoBehaviour
         if (trulyDashing) return;
         if (movement.magnitude > 1 && speed != 0) rb.velocity = new Vector2(movement.x * (speed - 0.6f), movement.y * (speed - 0.6f));
         else rb.velocity = new Vector2(movement.x * speed, movement.y * speed);
+    }
+
+    void OnTriggerEnter2D(Collider2D collider) // Door collider
+    {
+        if (tpCooldown >= 1 && collider.gameObject.tag == "Door" && RoomManager.roomCleared)
+        {
+            GameObject.Find("Dungeon Generator").GetComponent<RoomManager>().doubleKillPrevention = true;
+
+            transform.position = collider.gameObject.GetComponent<DoorMechanics>().targetDoorPos;
+            currRoom = collider.gameObject.GetComponent<DoorMechanics>().targetRoomIndex;
+            tpCooldown = 0;
+
+            GameObject.Find("Dungeon Generator").GetComponent<RoomManager>().NewRoom();
+        }
     }
 
     bool trulyDashing;
@@ -303,7 +307,6 @@ public class Player : MonoBehaviour
         StartCoroutine(DamageFlash());
         if (Hearts <= 0) Death();
     }
-
     void UpdateStamina()
     {
         staminaProcent = stamina / dashingCooldown;
@@ -318,10 +321,12 @@ public class Player : MonoBehaviour
         flashLight.color = Color.white;
     }
 
+    private bool Alive = true;
     public void Death()
     {
-        Debug.Log("YOU DIED");
-        Destroy(gameObject);
+        Alive = false;
+        speed = 0;
+        DeathMenu.SetActive(true);
     }
 
 }
