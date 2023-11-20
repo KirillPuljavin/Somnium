@@ -52,108 +52,113 @@ public class RoomManager : MonoBehaviour
         currentRoom = dungeon.RoomsInDungeon[player.currRoom];
         enemyParent = currentRoom.transform.GetChild(2).transform;
 
-        
-
-        Enemies.Clear();
-
-        // Difficulty
-        if (player.currRoom >= 0 && player.currRoom <= 4) difficulty = 1;
-        else if (player.currRoom >= 5 && player.currRoom <= 9) difficulty = 2;
-        else if (player.currRoom >= 10 && player.currRoom <= 14) difficulty = 3;
-        else if (player.currRoom >= 15 && player.currRoom <= 19) difficulty = 4;
-        else if (player.currRoom >= 20 && player.currRoom <= 24) difficulty = 5;
-        StartCoroutine(player.Alert("Difficulty: " + difficulty));
-
-        // Spawn Enemies with Scaling
-        if (!clearedRooms.Contains(player.currRoom))
+        Debug.Log("currentRoom = " + player.currRoom);
+        if (player.currRoom != 27)
         {
-            for (int enemyType = 0; enemyType < 3; enemyType++)
+            Enemies.Clear();
+
+            // Difficulty
+            if (player.currRoom >= 0 && player.currRoom <= 4) difficulty = 1;
+            else if (player.currRoom >= 5 && player.currRoom <= 9) difficulty = 2;
+            else if (player.currRoom >= 10 && player.currRoom <= 14) difficulty = 3;
+            else if (player.currRoom >= 15 && player.currRoom <= 19) difficulty = 4;
+            else if (player.currRoom >= 20 && player.currRoom <= 24) difficulty = 5;
+            StartCoroutine(player.Alert("Difficulty: " + difficulty));
+
+            // Spawn Enemies with Scaling
+            if (!clearedRooms.Contains(player.currRoom))
             {
-                Transform enemyTypeParent = currentRoom.transform.GetChild(1).GetChild(enemyType);
-                foreach (Transform enemy in enemyTypeParent)
+                for (int enemyType = 0; enemyType < 3; enemyType++)
                 {
-                    Enemies.Add(enemy.gameObject);
-                    switch (enemyType)
+                    Transform enemyTypeParent = currentRoom.transform.GetChild(1).GetChild(enemyType);
+                    foreach (Transform enemy in enemyTypeParent)
                     {
-                        case 0:
-                            EnemyBlob spawnedBlob = Instantiate(blobEnemyPrefab, enemy.position, Quaternion.identity, enemyParent).GetComponent<EnemyBlob>();
-                            if (difficulty == 2)
-                            {
-                                spawnedBlob.enemyHP += 2;
-                            }
-                            else if (difficulty == 3)
-                            {
-                                spawnedBlob.enemyHP += 2;
-                                spawnedBlob.damageHearts += 1;
-                            }
-                            else if (difficulty == 4)
-                            {
-                                spawnedBlob.enemyHP += 3;
-                                spawnedBlob.damageHearts += 2;
-                            }
-                            else if (difficulty == 5)
-                            {
-                                spawnedBlob.enemyHP += 4;
-                                spawnedBlob.damageHearts += 2;
-                            }
-                            break;
-                        case 1:
-                            EnemyFrog spawnedFrog = Instantiate(frogEnemyPrefab, enemy.position, Quaternion.identity, enemyParent).GetComponent<EnemyFrog>();
-                            if (difficulty == 2)
-                            {
-                                spawnedFrog.damageHearts += 1;
-                            }
-                            else if (difficulty == 3)
-                            {
-                                spawnedFrog.enemyHP += 2;
-                                spawnedFrog.damageHearts += 1;
-                            }
-                            else if (difficulty == 4)
-                            {
-                                spawnedFrog.enemyHP += 3;
-                                spawnedFrog.damageHearts += 2;
-                            }
-                            else if (difficulty == 5)
-                            {
-                                spawnedFrog.enemyHP += 4;
-                                spawnedFrog.damageHearts += 2;
-                            }
-                            break;
-                        case 2:
-                            EnemySpider spawnedSpider = Instantiate(spiderEnemyPrefab, enemy.position, Quaternion.identity, enemyParent).GetComponent<EnemySpider>();
-                            if (difficulty == 2)
-                            {
-                                spawnedSpider.enemyHP += 2;
-                            }
-                            else if (difficulty == 3)
-                            {
-                                spawnedSpider.enemyHP += 2;
-                                spawnedSpider.damageHearts += 1;
-                            }
-                            else if (difficulty == 4)
-                            {
-                                spawnedSpider.enemyHP += 3;
-                                spawnedSpider.damageHearts += 2;
-                            }
-                            else if (difficulty == 5)
-                            {
-                                spawnedSpider.enemyHP += 4;
-                                spawnedSpider.damageHearts += 2;
-                            }
-                            break;
+                        Enemies.Add(enemy.gameObject);
+                        switch (enemyType)
+                        {
+                            case 0:
+                                EnemyBlob spawnedBlob = Instantiate(blobEnemyPrefab, enemy.position, Quaternion.identity, enemyParent).GetComponent<EnemyBlob>();
+                                if (difficulty == 2)
+                                {
+                                    spawnedBlob.enemyHP += 2;
+                                }
+                                else if (difficulty == 3)
+                                {
+                                    spawnedBlob.enemyHP += 2;
+                                    spawnedBlob.damageHearts += 1;
+                                }
+                                else if (difficulty == 4)
+                                {
+                                    spawnedBlob.enemyHP += 3;
+                                    spawnedBlob.damageHearts += 2;
+                                }
+                                else if (difficulty == 5)
+                                {
+                                    spawnedBlob.enemyHP += 4;
+                                    spawnedBlob.damageHearts += 2;
+                                }
+                                break;
+                            case 1:
+                                EnemyFrog spawnedFrog = Instantiate(frogEnemyPrefab, enemy.position, Quaternion.identity, enemyParent).GetComponent<EnemyFrog>();
+                                if (difficulty == 2)
+                                {
+                                    spawnedFrog.damageHearts += 1;
+                                }
+                                else if (difficulty == 3)
+                                {
+                                    spawnedFrog.enemyHP += 2;
+                                    spawnedFrog.damageHearts += 1;
+                                }
+                                else if (difficulty == 4)
+                                {
+                                    spawnedFrog.enemyHP += 3;
+                                    spawnedFrog.damageHearts += 2;
+                                }
+                                else if (difficulty == 5)
+                                {
+                                    spawnedFrog.enemyHP += 4;
+                                    spawnedFrog.damageHearts += 2;
+                                }
+                                break;
+                            case 2:
+                                EnemySpider spawnedSpider = Instantiate(spiderEnemyPrefab, enemy.position, Quaternion.identity, enemyParent).GetComponent<EnemySpider>();
+                                if (difficulty == 2)
+                                {
+                                    spawnedSpider.enemyHP += 2;
+                                }
+                                else if (difficulty == 3)
+                                {
+                                    spawnedSpider.enemyHP += 2;
+                                    spawnedSpider.damageHearts += 1;
+                                }
+                                else if (difficulty == 4)
+                                {
+                                    spawnedSpider.enemyHP += 3;
+                                    spawnedSpider.damageHearts += 2;
+                                }
+                                else if (difficulty == 5)
+                                {
+                                    spawnedSpider.enemyHP += 4;
+                                    spawnedSpider.damageHearts += 2;
+                                }
+                                break;
+                        }
                     }
                 }
             }
+            if (Enemies.Count <= 0) roomCleared = true;
+
+            // Spawn Chest
+            if (player.currRoom == dungeon.currentPreset.positionChest1 && !spawnedChest1) { Instantiate(chestPrefab, currentRoom.transform.GetChild(3).GetChild(0).transform.position, Quaternion.identity, currentRoom.transform); spawnedChest1 = true; }
+            else if (player.currRoom == dungeon.currentPreset.positionChest2 && !spawnedChest2) { Instantiate(chestPrefab, currentRoom.transform.GetChild(3).GetChild(0).transform.position, Quaternion.identity, currentRoom.transform); spawnedChest2 = true; }
+
+            // Spawn Crafting Station
+            if (player.currRoom == dungeon.currentPreset.positionUpgrade1 && !spawnedCraft1) { Instantiate(crafting1Prefab, currentRoom.transform.GetChild(4).GetChild(0).transform.position, Quaternion.identity, currentRoom.transform); spawnedCraft1 = true; }
+            else if (player.currRoom == dungeon.currentPreset.positionUpgrade2 && !spawnedCraft2) { Instantiate(crafting2Prefab, currentRoom.transform.GetChild(4).GetChild(0).transform.position, Quaternion.identity, currentRoom.transform); spawnedCraft2 = true; }
+
+            return;
         }
-        if (Enemies.Count <= 0) roomCleared = true;
-
-        // Spawn Chest
-        if (player.currRoom == dungeon.currentPreset.positionChest1 && !spawnedChest1) { Instantiate(chestPrefab, currentRoom.transform.GetChild(3).GetChild(0).transform.position, Quaternion.identity, currentRoom.transform); spawnedChest1 = true; }
-        else if (player.currRoom == dungeon.currentPreset.positionChest2 && !spawnedChest2) { Instantiate(chestPrefab, currentRoom.transform.GetChild(3).GetChild(0).transform.position, Quaternion.identity, currentRoom.transform); spawnedChest2 = true; }
-
-        // Spawn Crafting Station
-        if (player.currRoom == dungeon.currentPreset.positionUpgrade1 && !spawnedCraft1) { Instantiate(crafting1Prefab, currentRoom.transform.GetChild(4).GetChild(0).transform.position, Quaternion.identity, currentRoom.transform); spawnedCraft1 = true; }
-        else if (player.currRoom == dungeon.currentPreset.positionUpgrade2 && !spawnedCraft2) { Instantiate(crafting2Prefab, currentRoom.transform.GetChild(4).GetChild(0).transform.position, Quaternion.identity, currentRoom.transform); spawnedCraft2 = true; }
+        bossRoom();
     }
 
 
@@ -174,6 +179,7 @@ public class RoomManager : MonoBehaviour
             doubleKillPrevention = false;
             clearedRooms.Add(player.currRoom);
             StartCoroutine(player.Alert("Room cleared."));
+            Debug.Log("Room Cleared: " + roomCleared);
 
             // Spawn Components & Heal
             int componentAmount;
