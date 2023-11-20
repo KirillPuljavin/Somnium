@@ -6,6 +6,7 @@ using UnityEngine;
 public class Card3 : MonoBehaviour
 {
     public Array Cards;
+    public GameObject CardBG;
     private Player Player;
     public Animator animator;
     public Animation anim;
@@ -20,6 +21,7 @@ public class Card3 : MonoBehaviour
     void OnMouseDown()
     {
         Cards = GameObject.FindGameObjectsWithTag("Card");
+        CardBG = GameObject.FindGameObjectWithTag("CardsBG");
         Player.Card3Picked = true;
 
         Player.damage += 1;
@@ -30,6 +32,7 @@ public class Card3 : MonoBehaviour
         {
             Destroy(obj);
         }
+        Destroy(CardBG);
         aug.UpdateAugments();
     }
     void OnMouseOver()
