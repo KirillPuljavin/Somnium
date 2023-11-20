@@ -51,8 +51,11 @@ public class RoomManager : MonoBehaviour
         roomCleared = false;
         currentRoom = dungeon.RoomsInDungeon[player.currRoom];
         enemyParent = currentRoom.transform.GetChild(2).transform;
-        Enemies.Clear();
+
         
+
+        Enemies.Clear();
+
         // Difficulty
         if (player.currRoom >= 0 && player.currRoom <= 4) difficulty = 1;
         else if (player.currRoom >= 5 && player.currRoom <= 9) difficulty = 2;
@@ -223,5 +226,11 @@ public class RoomManager : MonoBehaviour
             }
         }
     }
+
+    public void bossRoom()
+    {
+        Instantiate(catBossPrefab, currentRoom.transform.GetChild(1).GetChild(0).transform.position, Quaternion.identity, currentRoom.transform);
+    }
+
 }
 
