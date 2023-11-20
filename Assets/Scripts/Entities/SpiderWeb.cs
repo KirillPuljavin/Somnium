@@ -6,10 +6,12 @@ using UnityEngine.AI;
 public class SpiderWeb : MonoBehaviour
 {
     private Player player;
+    private EnemySpider spider;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        spider = GameObject.FindWithTag("Spider").GetComponent<EnemySpider>();
     }
 
     // Update is called once per frame
@@ -29,10 +31,10 @@ public class SpiderWeb : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.tag == "Player") player.speed /= 2; player.dashingPower /= 1.4f; gameObject.GetComponentInParent<EnemySpider>().speed *= 2;
+        if (collider.gameObject.tag == "Player") player.speed /= 2; player.dashingPower /= 1.4f;
     }
     void OnTriggerExit2D(Collider2D collider)
     {
-        if (collider.gameObject.tag == "Player") player.speed *= 2; player.dashingPower *= 1.4f; gameObject.GetComponentInParent<EnemySpider>().speed /= 2;
+        if (collider.gameObject.tag == "Player") player.speed *= 2; player.dashingPower *= 1.4f;
     }
 }

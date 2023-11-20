@@ -17,6 +17,11 @@ public class DungeonGenerator : MonoBehaviour
     private GameObject[] roomPrefabsSnow;
     private GameObject[] roomPrefabsBoss;
 
+    [SerializeField] private Sprite doorSpriteT;
+    [SerializeField] private Sprite doorSpriteB;
+    [SerializeField] private Sprite doorSpriteL;
+    [SerializeField] private Sprite doorSpriteR;
+
     void Start()
     {
         // Startup
@@ -70,15 +75,42 @@ public class DungeonGenerator : MonoBehaviour
             DoorPlacement doorPlacement2 = GetDoorPlacement(roomIndex2, roomIndex1);
             Vector2 doorPosition2 = CalculateDoorPosition(doorPlacement2, roomIndex2);
 
-            GameObject newDoor = Instantiate(doorPrefab, doorPosition1, Quaternion.identity, doorParent);
-            DoorMechanics door1 = newDoor.AddComponent<DoorMechanics>();
+            DoorMechanics door1 = Instantiate(doorPrefab, doorPosition1, Quaternion.identity, doorParent).GetComponent<DoorMechanics>();
             door1.targetDoorPos = doorPosition2;
             door1.targetRoomIndex = roomIndex2;
-
-            GameObject newDoor2 = Instantiate(doorPrefab, doorPosition2, Quaternion.identity, doorParent);
-            DoorMechanics door2 = newDoor2.AddComponent<DoorMechanics>();
+            switch (doorPlacement1.position)
+            {
+                case InRoomPos.Top:
+                    door1.gameObject.GetComponent<SpriteRenderer>().sprite = doorSpriteT;
+                    break;
+                case InRoomPos.Bottom:
+                    door1.gameObject.GetComponent<SpriteRenderer>().sprite = doorSpriteB;
+                    break;
+                case InRoomPos.Left:
+                    door1.gameObject.GetComponent<SpriteRenderer>().sprite = doorSpriteL;
+                    break;
+                case InRoomPos.Right:
+                    door1.gameObject.GetComponent<SpriteRenderer>().sprite = doorSpriteR;
+                    break;
+            }
+            DoorMechanics door2 = Instantiate(doorPrefab, doorPosition2, Quaternion.identity, doorParent).GetComponent<DoorMechanics>();
             door2.targetDoorPos = doorPosition1;
             door2.targetRoomIndex = roomIndex1;
+            switch (doorPlacement2.position)
+            {
+                case InRoomPos.Top:
+                    door2.gameObject.GetComponent<SpriteRenderer>().sprite = doorSpriteT;
+                    break;
+                case InRoomPos.Bottom:
+                    door2.gameObject.GetComponent<SpriteRenderer>().sprite = doorSpriteB;
+                    break;
+                case InRoomPos.Left:
+                    door2.gameObject.GetComponent<SpriteRenderer>().sprite = doorSpriteL;
+                    break;
+                case InRoomPos.Right:
+                    door2.gameObject.GetComponent<SpriteRenderer>().sprite = doorSpriteR;
+                    break;
+            }
         }
 
         GetComponent<RoomManager>().Initialize();
