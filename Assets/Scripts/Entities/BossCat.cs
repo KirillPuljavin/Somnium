@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
+using Cinemachine;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -8,6 +9,8 @@ public class BossCat : MonoBehaviour
 {
 
     Player Player;
+
+    public GameObject VisualCamera;
     public Rigidbody2D rb;
     public Animator catAnimator;
     public Animator headAnimator;
@@ -23,6 +26,8 @@ public class BossCat : MonoBehaviour
     public int maxHealth;
     public float healthProcent;
     public int speed;
+
+    public int damage;
     public float attackRange;
     public float basicCooldown;
 
@@ -48,6 +53,7 @@ public class BossCat : MonoBehaviour
     void Start()
     {
         basicTimer = basicCooldown;
+        VisualCamera = GameObject.FindGameObjectWithTag("MainCamera");
         Player = GameObject.FindWithTag("Player").GetComponent<Player>();
         /* healthBar = GameObject.FindGameObjectWithTag("BossHealth");
         healthMask = GameObject.FindGameObjectWithTag("BossMask");
@@ -78,6 +84,7 @@ public class BossCat : MonoBehaviour
 
         if (spawned && !inPhase2)
         {
+            VisualCamera.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize = 9;
             if (!inRange && !inAnimation)
             {
                 UnityEngine.Vector3 targetPosition = new UnityEngine.Vector3(Player.gameObject.transform.position.x, Player.gameObject.transform.position.y, transform.position.z);
@@ -257,7 +264,7 @@ public class BossCat : MonoBehaviour
     {
         if (damageTimer >= damageCooldown)
         {
-            Player.TakeDamage(1);
+            Player.TakeDamage(damage);
             damageTimer = 0f;
         }
     }
@@ -314,7 +321,7 @@ public class BossCat : MonoBehaviour
 
         //Sweep Attack
         //Head.animator.play("PrepTop");
-            
+
 
 
         //===================
