@@ -63,6 +63,7 @@ public class EnemyBlob : MonoBehaviour
     }
     void FollowPlayer()
     {
+        animator.SetBool("Hitting", false);
         agent.SetDestination(new Vector3(Player.transform.position.x, Player.transform.position.y, transform.position.z));
         agent.speed = speed;
 
@@ -74,7 +75,7 @@ public class EnemyBlob : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player") speed = 0.005f;
+        if (collision.gameObject.tag == "Player") agent.speed = 0.005f;
     }
     private void OnTriggerStay2D(Collider2D collider)
     {
@@ -85,7 +86,16 @@ public class EnemyBlob : MonoBehaviour
             {
                 Player.TakeDamage(damageHearts);
                 attackCooldown = 0;
-                animator.Play("Attack_Right");
+                if (Player.transform.position.x < transform.position.x)
+                {
+                    animator.SetBool("Hitting", true);
+                    animator.Play("Attack_Left");
+                }
+                else if (Player.transform.position.x > transform.position.x)
+                {
+                    animator.SetBool("Hitting", true);
+                    animator.Play("Attack_Right");
+                }
             }
         }
         // Dash Take Damage

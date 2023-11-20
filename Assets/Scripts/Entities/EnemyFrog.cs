@@ -54,6 +54,7 @@ public class EnemyFrog : MonoBehaviour
             else
             {
                 agent.speed = 0;
+                animator.SetBool("Shooting", true);
                 animator.Play("Idle");
             }
         }
@@ -71,6 +72,7 @@ public class EnemyFrog : MonoBehaviour
     }
     void FollowPlayer()
     {
+        animator.SetBool("Shooting", false);
         agent.SetDestination(new Vector3(Player.transform.position.x, Player.transform.position.y, transform.position.z));
         agent.speed = speed;
 
@@ -81,7 +83,7 @@ public class EnemyFrog : MonoBehaviour
     }
 
     void Shoot()
-    {
+    { 
         shootCooldown = 0;
 
         // Instantiate a fly
