@@ -97,7 +97,7 @@ public class Player : MonoBehaviour
         if (Alive)
         {
             StoreValues();
-            flashLight.pointLightOuterRadius = Vision * 4;
+            flashLight.pointLightOuterRadius = Vision * 3;
 
             // Cooldown
             if (tpCooldown <= 1) tpCooldown += Time.deltaTime;
