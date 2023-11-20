@@ -10,7 +10,6 @@ public class AugmentsVis : MonoBehaviour
     public GameObject Augment2;
     public GameObject Augment3;
     public GameObject Augment4;
-    public GameObject AugmentBG;
 
     private Player player;
     private UnityEngine.Vector3 firstPos;
@@ -32,6 +31,7 @@ public class AugmentsVis : MonoBehaviour
     {
         if (!firstAugmentPicked)
         {
+    
             if (player.Card1Picked)
             {
                 Instantiate(Augment1, firstPos, UnityEngine.Quaternion.identity, gameObject.transform);
@@ -60,7 +60,6 @@ public class AugmentsVis : MonoBehaviour
                 firstAugmentPicked = true;
                 card4sel = true;
             }
-        Instantiate(AugmentBG, firstPos, UnityEngine.Quaternion.identity, gameObject.transform);
         }
         else
         {
@@ -93,7 +92,6 @@ public class AugmentsVis : MonoBehaviour
                 card1sel = true;
             }
             else Debug.Log("Error!");
-            Instantiate(AugmentBG, firstPos, UnityEngine.Quaternion.identity, gameObject.transform);
         }
     }
 }

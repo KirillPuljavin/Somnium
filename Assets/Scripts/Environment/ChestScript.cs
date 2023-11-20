@@ -15,24 +15,30 @@ public class ChestScript : MonoBehaviour
     public bool Card4Picked;
     public bool Card2Picked;
     public bool Card3Picked;
+    public GameObject AugmentBG;
 
     private Player Player;
     private Vector3 cardLocation1;
     private Vector3 cardLocation2;
     private Vector3 cardLocation3;
+    private Vector3 BGLocation;
     private bool clickable = false;
     private bool Card1Picked;
+    private GameObject Hud;
 
     void Start()
     {
         Player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        Hud = GameObject.FindWithTag("HUD");
     }
 
     void Update()
     {
-        cardLocation1 = new Vector3(Player.transform.position.x - 5, Player.transform.position.y + 1, 0);
-        cardLocation2 = new Vector3(Player.transform.position.x, Player.transform.position.y + 1, 0);
-        cardLocation3 = new Vector3(Player.transform.position.x + 5, Player.transform.position.y + 1, 0);
+        cardLocation1 = new UnityEngine.Vector3(Player.transform.position.x - 2.5f, Player.transform.position.y + 1, 0);
+        cardLocation2 = new UnityEngine.Vector3(Player.transform.position.x, Player.transform.position.y + 1, 0);
+        cardLocation3 = new UnityEngine.Vector3(Player.transform.position.x + 2.5f, Player.transform.position.y + 1, 0);
+        BGLocation = new UnityEngine.Vector3(Player.transform.position.x, Player.transform.position.y + 0.65f, 0);
+        
 
         Card1Picked = Player.Card1Picked;
         Card2Picked = Player.Card2Picked;
@@ -42,11 +48,14 @@ public class ChestScript : MonoBehaviour
         Cards = GameObject.FindGameObjectsWithTag("Card");
         foreach (GameObject obj in Cards)
         {
-            obj.gameObject.transform.localScale = new Vector3(150, 150, 0);
+            obj.gameObject.transform.localScale = new UnityEngine.Vector3(150, 150, 0);
         }
+        
         if (Input.GetKeyDown(KeyCode.E) && clickable)
         {
             CardPick();
+            Instantiate(AugmentBG, BGLocation, UnityEngine.Quaternion.identity, Hud.transform);
+            Debug.Log("BG SUMMONED!");
         }
     }
 
