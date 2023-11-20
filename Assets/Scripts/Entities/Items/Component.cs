@@ -6,7 +6,6 @@ using UnityEngine;
 public class Component : MonoBehaviour
 {
     private Player player;
-    [SerializeField] private UIScript uiScript;
 
     void Start()
     {
