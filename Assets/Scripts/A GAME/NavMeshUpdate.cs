@@ -9,7 +9,7 @@ public class NavMeshUpdate : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Invoke("updateNav", 1f);
+        Invoke("updateNav", 0.1f);
     }
 
     // Update is called once per frame
