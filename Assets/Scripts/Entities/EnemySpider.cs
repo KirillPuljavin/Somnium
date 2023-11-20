@@ -45,6 +45,7 @@ public class EnemySpider : MonoBehaviour
         Player = GameObject.FindWithTag("Player").GetComponent<Player>();
         oldSpeed = speed;
         rb = GetComponent<Rigidbody2D>();
+        webCooldown = UnityEngine.Random.Range(0, 6);
     }
 
     void Update()
