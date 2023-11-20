@@ -336,7 +336,6 @@ MonoBehaviour:
     m_Bits: 64
   attackPoint: {fileID: 5117390771748221489}
   flashLight: {fileID: 8053809871869886996}
-  damageLight: {fileID: 0}
   inDungeon: 0
   currRoom: 2
   MaxHearts: 10
@@ -352,17 +351,20 @@ MonoBehaviour:
   dashingPower: 11
   attackCooldown: 0.7
   dashUpgraded: 0
+  DeathMenu: {fileID: 0}
   rb: {fileID: 7078594632026464168}
   heartsHUD: {fileID: 0}
-  uiScript: {fileID: 0}
   staminaBar: {fileID: 0}
   staminaMask: {fileID: 0}
   PlayerSO: {fileID: 11400000, guid: 7cfb78329567f4848a77e395d737187d, type: 2}
+  componentsText: {fileID: 0}
+  weaponEvoText: {fileID: 0}
   attackRange: 0.5
   Card1Picked: 0
   Card2Picked: 0
   Card3Picked: 0
   Card4Picked: 0
+  textObject: {fileID: 0}
 --- !u!50 &7078594632026464168
 Rigidbody2D:
   serializedVersion: 4
