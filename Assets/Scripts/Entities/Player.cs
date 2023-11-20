@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
@@ -172,7 +173,8 @@ public class Player : MonoBehaviour
         else rb.velocity = new Vector2(movement.x * speed, movement.y * speed);
 
         // Update UI values
-        componentsText.text = Components + "/" + CraftingScript.UpgradeCosts[WeaponEvo];
+        if (WeaponEvo > 4) componentsText.text = Components + "/ MAX";
+        else componentsText.text = Components + "/" + CraftingScript.UpgradeCosts[WeaponEvo];
         weaponEvoText.text = "" + WeaponEvo;
     }
 
@@ -216,28 +218,27 @@ public class Player : MonoBehaviour
         switch (WeaponEvo)
         {
             case 0:
-                // Range
+                Alert((WeaponEvo + 1) + ": Range +");
                 attackRange *= 1.5f;
                 damage += 1;
                 break;
             case 1:
-                // Attack Speed
+                Alert((WeaponEvo + 1) + ": Attack Speed +");
                 attackCooldown *= 0.7f;
                 break;
             case 2:
-                // Dash Damage
+                Alert((WeaponEvo + 1) + ": Dash Damage unlocked");
                 dashUpgraded = true;
                 break;
             case 3:
-                // Double Dash
+                Alert((WeaponEvo + 1) + ": Double Dash");
                 dashingCooldown = 6f;
                 break;
             case 4:
-                // Sweeping Edge
+                Alert((WeaponEvo + 1) + ": Sweeping Edge Unlocked");
                 break;
         }
         WeaponEvo++;
-        Debug.Log("You LEVELED UP to " + WeaponEvo);
     }
 
     private IEnumerator Hit()
@@ -293,10 +294,28 @@ public class Player : MonoBehaviour
     }
 
     [SerializeField] private Text textObject;
-    public IEnumerator Alert(string message)
+    private CancellationTokenSource cancellationTokenSource;
+    public void Alert(string message)
+    {
+        if (cancellationTokenSource != null) cancellationTokenSource.Cancel();
+        cancellationTokenSource = new CancellationTokenSource();
+
+        StartCoroutine(MessageToPlayer(message, cancellationTokenSource.Token));
+    }
+    public IEnumerator MessageToPlayer(string message, CancellationToken cancellationToken)
     {
         textObject.text = message;
-        yield return new WaitForSeconds(2);
+
+        float counter = 0f;
+        while (counter < 2f)
+        {
+            if (cancellationToken.IsCancellationRequested)
+            {
+                yield break; // Exit the coroutine
+            }
+            yield return null;
+            counter += Time.deltaTime;
+        }
         textObject.text = "";
     }
 

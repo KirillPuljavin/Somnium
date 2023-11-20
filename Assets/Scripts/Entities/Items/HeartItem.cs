@@ -24,4 +24,9 @@ public class HeartItem : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    void Update()
+    {
+        Vector3.MoveTowards(transform.position, player.transform.position, 1f * Time.deltaTime);
+    }
 }
