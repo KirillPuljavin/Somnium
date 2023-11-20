@@ -1392,6 +1392,7 @@ Transform:
   m_Children:
   - {fileID: 2197381861853160804}
   - {fileID: 4089529778129141870}
+  - {fileID: 8441333897243834617}
   - {fileID: 5276521745249204542}
   - {fileID: 8024817528282429361}
   - {fileID: 3925564304830564411}
@@ -9459,6 +9460,37 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
+--- !u!1 &8418045124352417495
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8441333897243834617}
+  m_Layer: 0
+  m_Name: Enemy Parent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8441333897243834617
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8418045124352417495}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.0078538945, y: -0, z: -0, w: 0.99996924}
+  m_LocalPosition: {x: -1.3799999, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 187541518539988227}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8647957375408535465
 GameObject:
   m_ObjectHideFlags: 0
