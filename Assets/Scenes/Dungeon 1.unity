@@ -916,6 +916,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2872504723286332678, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2899823166677993154, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
       propertyPath: m_Name
       value: UI
@@ -1549,6 +1553,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6547959be7c11ea4d95bc9812772ac97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LoadingScreen: {fileID: 1128986295}
   surfaces:
   - {fileID: 1897120103}
 --- !u!114 &1897120102
