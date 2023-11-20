@@ -171,12 +171,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2946973530228656972, guid: 475f3dd800da5b2439e2e75bbeaee0cf, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2946973530228656972, guid: 475f3dd800da5b2439e2e75bbeaee0cf, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2946973530228656972, guid: 475f3dd800da5b2439e2e75bbeaee0cf, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2946973530228656972, guid: 475f3dd800da5b2439e2e75bbeaee0cf, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3312525895970354279, guid: 475f3dd800da5b2439e2e75bbeaee0cf, type: 3}
       propertyPath: m_Name
       value: Room Prefab 3
       objectReference: {fileID: 0}
+    - target: {fileID: 3421682079555717795, guid: 475f3dd800da5b2439e2e75bbeaee0cf, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6488578230652769921, guid: 475f3dd800da5b2439e2e75bbeaee0cf, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 475f3dd800da5b2439e2e75bbeaee0cf, type: 3}
