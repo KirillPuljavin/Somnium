@@ -20,4 +20,9 @@ public class Component : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    void Update()
+    {
+        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, 0.5f * Time.deltaTime);
+    }
 }

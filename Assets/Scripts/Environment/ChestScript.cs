@@ -130,7 +130,7 @@ public class ChestScript : MonoBehaviour
                     Instantiate(card3, cardLocation3, Quaternion.identity, HUD);
                     break;
                 default:
-                    StartCoroutine(Player.Alert("You already have 2 augments!"));
+                    Player.Alert("You already have 2 augments!");
                     break;
             }
         Destroy(this);

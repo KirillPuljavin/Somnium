@@ -63,7 +63,7 @@ public class RoomManager : MonoBehaviour
             else if (player.currRoom >= 10 && player.currRoom <= 14) difficulty = 3;
             else if (player.currRoom >= 15 && player.currRoom <= 19) difficulty = 4;
             else if (player.currRoom >= 20 && player.currRoom <= 24) difficulty = 5;
-            StartCoroutine(player.Alert("Difficulty: " + difficulty));
+            player.Alert("Difficulty: " + difficulty);
 
             // Spawn Enemies with Scaling
             if (!clearedRooms.Contains(player.currRoom))
@@ -178,7 +178,7 @@ public class RoomManager : MonoBehaviour
         {
             doubleKillPrevention = false;
             clearedRooms.Add(player.currRoom);
-            StartCoroutine(player.Alert("Room cleared."));
+            player.Alert("Room cleared.");
             Debug.Log("Room Cleared: " + roomCleared);
 
             // Spawn Components & Heal
