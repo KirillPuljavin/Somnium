@@ -390,6 +390,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 483126001}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &330783491 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8731405514426562171, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
+  m_PrefabInstance: {fileID: 1128986293}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &483126000
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,17 +597,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 483126001}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &492401094 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8731405514426562171, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
-  m_PrefabInstance: {fileID: 1128986293}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &538214856
 GameObject:
   m_ObjectHideFlags: 0
@@ -916,13 +916,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2872504723286332678, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2899823166677993154, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
       propertyPath: m_Name
       value: UI
-      objectReference: {fileID: 0}
-    - target: {fileID: 4255302789976220322, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4260541882344694327, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
       propertyPath: m_Camera
@@ -1553,6 +1553,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6547959be7c11ea4d95bc9812772ac97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LoadingScreen: {fileID: 1128986295}
   surfaces:
   - {fileID: 1897120103}
 --- !u!114 &1897120102
@@ -1647,7 +1648,7 @@ PrefabInstance:
     - target: {fileID: 4195860284930794465, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
       propertyPath: weaponEvoText
       value: 
-      objectReference: {fileID: 492401094}
+      objectReference: {fileID: 330783491}
     - target: {fileID: 4195860284930794465, guid: e2007998f04bfb84694cccd99d7d7142, type: 3}
       propertyPath: componentsText
       value: 
