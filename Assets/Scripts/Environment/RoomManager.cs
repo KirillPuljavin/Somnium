@@ -155,7 +155,7 @@ public class RoomManager : MonoBehaviour
             // Spawn Crafting Station
             if (player.currRoom == dungeon.currentPreset.positionUpgrade1 && !spawnedCraft1) { Instantiate(crafting1Prefab, currentRoom.transform.GetChild(4).GetChild(0).transform.position, Quaternion.identity, currentRoom.transform); spawnedCraft1 = true; }
             else if (player.currRoom == dungeon.currentPreset.positionUpgrade2 && !spawnedCraft2) { Instantiate(crafting2Prefab, currentRoom.transform.GetChild(4).GetChild(0).transform.position, Quaternion.identity, currentRoom.transform); spawnedCraft2 = true; }
-            
+
             return;
         }
         bossRoom();
@@ -179,6 +179,7 @@ public class RoomManager : MonoBehaviour
             doubleKillPrevention = false;
             clearedRooms.Add(player.currRoom);
             StartCoroutine(player.Alert("Room cleared."));
+            Debug.Log("Room Cleared: " + roomCleared);
 
             // Spawn Components & Heal
             int componentAmount;
