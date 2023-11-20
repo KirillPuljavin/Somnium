@@ -52,7 +52,7 @@ public class RoomManager : MonoBehaviour
         currentRoom = dungeon.RoomsInDungeon[player.currRoom];
         enemyParent = currentRoom.transform.GetChild(2).transform;
         Enemies.Clear();
-
+        
         // Difficulty
         if (player.currRoom >= 0 && player.currRoom <= 4) difficulty = 1;
         else if (player.currRoom >= 5 && player.currRoom <= 9) difficulty = 2;
