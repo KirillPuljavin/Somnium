@@ -332,7 +332,7 @@ public class Player : MonoBehaviour
         Hearts -= amount;
         heartsHUD.UpdateHearts();
         StartCoroutine(DamageFlash());
-        if (Hearts <= 0) Death();
+        if (Hearts <= 0) StartCoroutine(Death());;
     }
     void UpdateStamina()
     {
@@ -349,10 +349,12 @@ public class Player : MonoBehaviour
     }
 
     private bool Alive = true;
-    public void Death()
+    private IEnumerator Death()
     {
         Alive = false;
         speed = 0;
+        animator.Play("Death");
+        yield return new WaitForSeconds(2f);
         DeathMenu.SetActive(true);
     }
 
