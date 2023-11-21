@@ -24,7 +24,7 @@ public class DialogManager : MonoBehaviour
 
     private void Update()
     {
-        if (isActive = true && Input.GetKeyDown(KeyCode.C)) 
+        if (isActive = true && Input.GetKeyDown(KeyCode.E)) 
         {
             DisplayNextMening();
         }
