@@ -49,10 +49,13 @@ public class BossCat : MonoBehaviour
     public GameObject RightPaw;
     public GameObject LeftTopPaw;
     public GameObject RightTopPaw;
+    public GameObject LeftSweepPaw;
+    public GameObject RightSweepPaw;
 
     void Start()
     {
         basicTimer = basicCooldown;
+
         VisualCamera = GameObject.FindGameObjectWithTag("MainCamera");
         Player = GameObject.FindWithTag("Player").GetComponent<Player>();
         /* healthBar = GameObject.FindGameObjectWithTag("BossHealth");
@@ -65,7 +68,17 @@ public class BossCat : MonoBehaviour
         BasicUp.SetActive(false);
         BasicDown.SetActive(false);
 
-        //transform.localScale = new UnityEngine.Vector3(1, 1, 1);
+        // Hide all phase 2 objects
+        Head.SetActive(false);
+        RightPaw.SetActive(false);
+        LeftPaw.SetActive(false);
+        RightTopPaw.SetActive(false);
+        LeftTopPaw.SetActive(false);
+        RightSweepPaw.SetActive(false);
+        LeftSweepPaw.SetActive(false);
+
+        // Set Default Position/Scale
+        transform.position = new UnityEngine.Vector3(0.45f, 150f, transform.position.z);
     }
 
 
@@ -272,14 +285,23 @@ public class BossCat : MonoBehaviour
     public void TakeDamage(int amount)
     {
         health -= amount;
-        if ((maxHealth / health) == 2)
-        {
-            //StartCoroutine(Phase2());
-        }
-        else if (health <= 0)
+
+        if (health <= 0)
         {
             //healthBar.SetActive(false);
             Destroy(gameObject);
+        }
+        else if (health <= 75 && health + amount > 75)
+        {
+            StartCoroutine(Phase2());
+        }
+        else if (health <= 50 && health + amount > 50)
+        {
+            StartCoroutine(Phase2());
+        }
+        else if (health <= 25 && health + amount > 25)
+        {
+            StartCoroutine(Phase2());
         }
     }
 
@@ -287,7 +309,7 @@ public class BossCat : MonoBehaviour
     {
         //Start Phase 2
         inPhase2 = true;
-        transform.position = new UnityEngine.Vector3(5f, 20f, transform.position.z);
+        transform.position = new UnityEngine.Vector3(0.45f, 170f, transform.position.z);
         Head.SetActive(true);
         RightPaw.SetActive(true);
         LeftPaw.SetActive(true);
@@ -297,37 +319,80 @@ public class BossCat : MonoBehaviour
 
         //Top Paw Attack
         headAnimator.Play("PrepTop");
-        RightPaw.SetActive(false);
         yield return new WaitForSeconds(1f);
-        float randomValue = Random.Range(6.5f, 12f);
-        RightTopPaw.transform.position = new UnityEngine.Vector3(randomValue, 0.5f, transform.position.z);
+        RightPaw.SetActive(false);
+        yield return new WaitForSeconds(0.5f);
+        float randomValue = Random.Range(2.5f, 7.25f);
+        RightTopPaw.transform.position = new UnityEngine.Vector3(randomValue, 150f, transform.position.z);
         RightTopPaw.SetActive(true);
+        yield return new WaitForSeconds(0.2f);
+        RightTopPaw.GetComponent<Collider2D>().enabled = true;
         yield return new WaitForSeconds(1f);
 
-        LeftPaw.SetActive(false);
+        headAnimator.Play("PrepTop");
         yield return new WaitForSeconds(1f);
-        randomValue = Random.Range(-2.5f, 2.5f);
-        LeftTopPaw.transform.position = new UnityEngine.Vector3(randomValue, 0.5f, transform.position.z);
+        LeftPaw.SetActive(false);
+        yield return new WaitForSeconds(0.5f);
+        randomValue = Random.Range(1.25f, 6.25f);
+        LeftTopPaw.transform.position = new UnityEngine.Vector3(-randomValue, 150f, transform.position.z);
         LeftTopPaw.SetActive(true);
+        yield return new WaitForSeconds(0.2f);
+        LeftTopPaw.GetComponent<Collider2D>().enabled = true;
+
         yield return new WaitForSeconds(3f);
 
+        RightTopPaw.GetComponent<Collider2D>().enabled = false;
+        LeftTopPaw.GetComponent<Collider2D>().enabled = false;
         LeftTopPaw.SetActive(false);
         RightTopPaw.SetActive(false);
+
         LeftPaw.SetActive(true);
         RightPaw.SetActive(true);
+
         // ==================
 
         yield return new WaitForSeconds(3f);
 
-        //Sweep Attack
-        //Head.animator.play("PrepTop");
+        //Sweep Right Attack
+        headAnimator.Play("PrepRight");
+        yield return new WaitForSeconds(1f);
+        RightPaw.SetActive(false);
+        yield return new WaitForSeconds(0.5f);
+        RightSweepPaw.transform.position = new UnityEngine.Vector3(7.25f, 150f, transform.position.z);
+        RightSweepPaw.SetActive(true);
+        RightSweepPaw.GetComponent<Collider2D>().enabled = true;
+        yield return new WaitForSeconds(1f);
 
+        RightSweepPaw.SetActive(false);
+        RightSweepPaw.GetComponent<Collider2D>().enabled = false;
 
+        LeftPaw.SetActive(true);
+        RightPaw.SetActive(true);
+
+        //===================
+
+        yield return new WaitForSeconds(3f);
+
+        //Sweep Left Attack
+        headAnimator.Play("PrepLeft");
+        yield return new WaitForSeconds(1f);
+        LeftPaw.SetActive(false);
+        yield return new WaitForSeconds(0.5f);
+        LeftSweepPaw.transform.position = new UnityEngine.Vector3(-7.25f, 150f, transform.position.z);
+        LeftSweepPaw.SetActive(true);
+        LeftSweepPaw.GetComponent<Collider2D>().enabled = true;
+        yield return new WaitForSeconds(1f);
+
+        LeftSweepPaw.SetActive(false);
+        LeftSweepPaw.GetComponent<Collider2D>().enabled = false;
+
+        LeftPaw.SetActive(true);
+        RightPaw.SetActive(true);
 
         //===================
 
         //Return to normal
-        transform.position = new UnityEngine.Vector3(4.6f, 0f, transform.position.z);
+        transform.position = new UnityEngine.Vector3(0.45f, 150f, transform.position.z);
         Head.SetActive(false);
         RightPaw.SetActive(false);
         LeftPaw.SetActive(false);
@@ -336,6 +401,17 @@ public class BossCat : MonoBehaviour
 
     }
 
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.tag == "Player")
+        {
+            if (!Player.isDashing)
+            {
+                damagePlayer();
+            }
+        }
+    }
     private void OnTriggerStay2D(Collider2D collider)
     {
         if (collider.gameObject.tag == "Player")
