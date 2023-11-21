@@ -20,7 +20,6 @@ public class EnemySpider : MonoBehaviour
     private float attackCooldown = 0;
     private float dashCooldown = 0;
     private bool agro;
-    private float reverseCooldown = 0.2f;
     private float webCooldown = 5;
     private bool isShooting = false;
     private float isShootingCooldown = 0;
@@ -45,6 +44,7 @@ public class EnemySpider : MonoBehaviour
         Player = GameObject.FindWithTag("Player").GetComponent<Player>();
         oldSpeed = speed;
         rb = GetComponent<Rigidbody2D>();
+        webCooldown = Random.Range(0, 6);
     }
 
     void Update()
@@ -62,10 +62,8 @@ public class EnemySpider : MonoBehaviour
         if (agro && webCooldown >= 10) SpiderWebAttack();
         if (attackCooldown < 1) attackCooldown += Time.deltaTime;
         if (dashCooldown > 0) dashCooldown -= Time.deltaTime;
-        if (reverseCooldown <= 0.2) reverseCooldown += Time.deltaTime;
         if (webCooldown <= 10) webCooldown += Time.deltaTime;
         if (isShootingCooldown <= 0.5f) isShootingCooldown += Time.deltaTime;
-        if (reverseCooldown >= 0.2) speed = 2;
         if (isShootingCooldown >= 0.5) isShooting = false;
 
         animator.SetFloat("Horizontal", horizontalVelocity);
@@ -111,24 +109,6 @@ public class EnemySpider : MonoBehaviour
         if (collision.gameObject.tag == "Player") speed = oldSpeed;
     }
 
-    public void TakeDamage(int amount)
-    {
-        enemyHP -= amount;
-        reverseCooldown = 0;
-        speed = -2;
-
-        if (enemyHP <= 0)
-        {
-            GameObject.Find("Dungeon Generator").GetComponent<RoomManager>().EnemyDied();
-            Death();
-        }
-    }
-    public void Death()
-    {
-        Debug.Log("ENEMY DIED");
-        Destroy(gameObject);
-    }
-
     public void SpiderWebAttack()
     {
         isShootingCooldown = 0;
@@ -140,5 +120,34 @@ public class EnemySpider : MonoBehaviour
         if (shootingDir >= 0) animator.Play("Attack_Ranged_Right");
         webCooldown = 0;
         Instantiate(SpiderWebArea, Player.transform.position, Quaternion.identity);
+    }
+
+    public void TakeDamage(int amount)
+    {
+        enemyHP -= amount;
+
+        if (enemyHP <= 0)
+        {
+            GameObject.Find("Dungeon Generator").GetComponent<RoomManager>().EnemyDied();
+            Death();
+        }
+        else StartCoroutine(DamageIndicate());
+    }
+    private IEnumerator DamageIndicate()
+    {
+        transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0f, 1f, 0f);
+        yield return new WaitForSeconds(0.2f);
+        transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
+    }
+
+    private void Death()
+    {
+        ParticleSystem deathParticle = Instantiate(GetComponentInChildren<ParticleSystem>(), transform.position, Quaternion.identity);
+        if (deathParticle != null)
+        {
+            deathParticle.Play();
+            Destroy(deathParticle.gameObject, deathParticle.main.duration);
+        }
+        Destroy(gameObject);
     }
 }

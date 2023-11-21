@@ -6,6 +6,7 @@ using UnityEngine;
 public class Card4 : MonoBehaviour
 {
     public Array Cards;
+    public GameObject CardBG;
     private Player Player;
     private HeartUpdate heartsHUD;
     public Animator animator;
@@ -22,6 +23,7 @@ public class Card4 : MonoBehaviour
     void OnMouseDown()
     {
         Cards = GameObject.FindGameObjectsWithTag("Card");
+        CardBG = GameObject.FindGameObjectWithTag("CardsBG");
         Player.Card4Picked = true;
 
         Player.MaxHearts += 2;
@@ -33,6 +35,7 @@ public class Card4 : MonoBehaviour
         {
             Destroy(obj);
         }
+        Destroy(CardBG);
         aug.UpdateAugments();
     }
     void OnMouseOver()

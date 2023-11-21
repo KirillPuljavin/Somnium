@@ -24,4 +24,16 @@ public class HeartItem : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    float maxDistance = 4f;
+    float speed = 0.8f;
+    void Update()
+    {
+        float distance = Vector2.Distance(transform.position, player.transform.position);
+        if (distance <= 10)
+        {
+            float t = Mathf.Clamp01(distance / maxDistance) * speed * Time.deltaTime;
+            transform.position = Vector2.Lerp(transform.position, player.transform.position, t);
+        }
+    }
 }

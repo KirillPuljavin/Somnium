@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
@@ -11,7 +12,6 @@ public class Player : MonoBehaviour
     public LayerMask enemyLayers;
     public Transform attackPoint;
     public Light2D flashLight;
-    public Light2D damageLight;
     public bool inDungeon = false;
     public int currRoom = 2;
     public int MaxHearts = 10;
@@ -32,10 +32,11 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject DeathMenu;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private HeartUpdate heartsHUD;
-    [SerializeField] private UIScript uiScript;
     [SerializeField] private GameObject staminaBar;
     [SerializeField] private GameObject staminaMask;
     [SerializeField] private FloatSO PlayerSO;
+    [SerializeField] private Text componentsText;
+    [SerializeField] private Text weaponEvoText;
 
     private float stamina;
     private float attackTime;
@@ -57,7 +58,6 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        uiScript = GameObject.FindWithTag("Components").GetComponent<UIScript>();
         getStoredValues();
     }
     private void getStoredValues()
@@ -91,7 +91,6 @@ public class Player : MonoBehaviour
         PlayerSO.Card2 = Card2Picked;
         PlayerSO.Card3 = Card3Picked;
         PlayerSO.Card4 = Card4Picked;
-
     }
 
     private void Update()
@@ -99,7 +98,7 @@ public class Player : MonoBehaviour
         if (Alive)
         {
             StoreValues();
-            flashLight.pointLightOuterRadius = Vision * 4;
+            flashLight.pointLightOuterRadius = Vision * 3;
 
             // Cooldown
             if (tpCooldown <= 1) tpCooldown += Time.deltaTime;
@@ -169,11 +168,14 @@ public class Player : MonoBehaviour
     }
     private void FixedUpdate() // Movement
     {
-        uiScript.UpdateUI();
-
         if (trulyDashing) return;
         if (movement.magnitude > 1 && speed != 0) rb.velocity = new Vector2(movement.x * (speed - 0.6f), movement.y * (speed - 0.6f));
         else rb.velocity = new Vector2(movement.x * speed, movement.y * speed);
+
+        // Update UI values
+        if (WeaponEvo > 4) componentsText.text = Components + "/ MAX";
+        else componentsText.text = Components + "/" + CraftingScript.UpgradeCosts[WeaponEvo];
+        weaponEvoText.text = "" + WeaponEvo;
     }
 
     void OnTriggerEnter2D(Collider2D collider) // Door collider
@@ -216,28 +218,27 @@ public class Player : MonoBehaviour
         switch (WeaponEvo)
         {
             case 0:
-                // Range
+                Alert((WeaponEvo + 1) + ": Range +");
                 attackRange *= 1.5f;
                 damage += 1;
                 break;
             case 1:
-                // Attack Speed
+                Alert((WeaponEvo + 1) + ": Attack Speed +");
                 attackCooldown *= 0.7f;
                 break;
             case 2:
-                // Dash Damage
+                Alert((WeaponEvo + 1) + ": Dash Damage unlocked");
                 dashUpgraded = true;
                 break;
             case 3:
-                // Double Dash
+                Alert((WeaponEvo + 1) + ": Double Dash");
                 dashingCooldown = 6f;
                 break;
             case 4:
-                // Sweeping Edge
+                Alert((WeaponEvo + 1) + ": Sweeping Edge Unlocked");
                 break;
         }
         WeaponEvo++;
-        Debug.Log("You LEVELED UP to " + WeaponEvo);
     }
 
     private IEnumerator Hit()
@@ -293,11 +294,28 @@ public class Player : MonoBehaviour
     }
 
     [SerializeField] private Text textObject;
-    public IEnumerator Alert(string message)
+    private CancellationTokenSource cancellationTokenSource;
+    public void Alert(string message)
     {
-        StopCoroutine(Alert(message));
+        if (cancellationTokenSource != null) cancellationTokenSource.Cancel();
+        cancellationTokenSource = new CancellationTokenSource();
+
+        StartCoroutine(MessageToPlayer(message, cancellationTokenSource.Token));
+    }
+    public IEnumerator MessageToPlayer(string message, CancellationToken cancellationToken)
+    {
         textObject.text = message;
-        yield return new WaitForSeconds(2);
+
+        float counter = 0f;
+        while (counter < 2f)
+        {
+            if (cancellationToken.IsCancellationRequested)
+            {
+                yield break; // Exit the coroutine
+            }
+            yield return null;
+            counter += Time.deltaTime;
+        }
         textObject.text = "";
     }
 
@@ -314,7 +332,7 @@ public class Player : MonoBehaviour
         Hearts -= amount;
         heartsHUD.UpdateHearts();
         StartCoroutine(DamageFlash());
-        if (Hearts <= 0) Death();
+        if (Hearts <= 0) StartCoroutine(Death());
     }
     void UpdateStamina()
     {
@@ -331,10 +349,12 @@ public class Player : MonoBehaviour
     }
 
     private bool Alive = true;
-    public void Death()
+    private IEnumerator Death()
     {
         Alive = false;
         speed = 0;
+        animator.Play("Death");
+        yield return new WaitForSeconds(2f);
         DeathMenu.SetActive(true);
     }
 

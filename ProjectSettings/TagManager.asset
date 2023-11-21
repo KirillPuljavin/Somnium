@@ -22,7 +22,9 @@ TagManager:
   - EventSystem
   - BossHealth
   - BossMask
-  - dialogTrigg
+  - CardsBG
+  - PauseMenu
+  - VirtualCamera
   layers:
   - Default
   - TransparentFX

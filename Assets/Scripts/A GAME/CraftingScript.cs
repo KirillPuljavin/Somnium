@@ -11,12 +11,11 @@ public class CraftingScript : MonoBehaviour
 
     private Player player;
     private bool clickable = false;
-    private int[] UpgradeCosts;
+    public readonly static int[] UpgradeCosts = new int[] { 3, 3, 5, 7, 15 };
 
     void Start()
     {
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
-        UpgradeCosts = new int[] { 3, 3, 5, 7, 15 };
     }
 
     void Update()
@@ -30,25 +29,23 @@ public class CraftingScript : MonoBehaviour
                 {
                     if (player.Components >= amount && player.WeaponEvo < 3)
                     {
-                        StartCoroutine(player.Alert("You Upgraded!"));
                         player.UpgradeEvo();
                         player.Components -= amount;
                     }
-                    else if (player.WeaponEvo >= 3) StartCoroutine(player.Alert("You need lvl 2 station now."));
-                    else StartCoroutine(player.Alert("Can't Craft! You need " + amount + " Components"));
+                    else if (player.WeaponEvo >= 3) player.Alert("You need lvl 2 station now.");
+                    else player.Alert("Can't Craft! You need " + amount + " Components");
                 }
                 else
                 {
                     if (player.Components >= amount)
                     {
-                        StartCoroutine(player.Alert("You Upgraded!"));
                         player.UpgradeEvo();
                         player.Components -= amount;
                     }
-                    else StartCoroutine(player.Alert("Can't Craft! You need " + amount + " Components"));
+                    else player.Alert("Can't Craft! You need " + amount + " Components");
                 }
             }
-            else if (clickable && Input.GetKeyDown(KeyCode.E) && player.WeaponEvo >= 5) StartCoroutine(player.Alert("You have maxed all upgrades."));
+            else if (clickable && Input.GetKeyDown(KeyCode.E) && player.WeaponEvo >= 5) player.Alert("You have maxed all upgrades.");
     }
 
     void OnTriggerEnter2D(Collider2D collider)

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class AugmentsVis : MonoBehaviour
 {
@@ -30,6 +31,7 @@ public class AugmentsVis : MonoBehaviour
     {
         if (!firstAugmentPicked)
         {
+    
             if (player.Card1Picked)
             {
                 Instantiate(Augment1, firstPos, UnityEngine.Quaternion.identity, gameObject.transform);

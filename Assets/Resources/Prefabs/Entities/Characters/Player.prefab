@@ -242,9 +242,9 @@ MonoBehaviour:
   m_ComponentVersion: 1
   m_LightType: 3
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.8
+  m_FalloffIntensity: 0.7
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.5
+  m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: b953aebe00000000a3db683a
@@ -289,6 +289,7 @@ GameObject:
   - component: {fileID: 4195860284930794465}
   - component: {fileID: 7078594632026464168}
   - component: {fileID: 2670255446649554775}
+  - component: {fileID: 2697257894295286537}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -336,7 +337,6 @@ MonoBehaviour:
     m_Bits: 64
   attackPoint: {fileID: 5117390771748221489}
   flashLight: {fileID: 8053809871869886996}
-  damageLight: {fileID: 0}
   inDungeon: 0
   currRoom: 2
   MaxHearts: 10
@@ -352,17 +352,20 @@ MonoBehaviour:
   dashingPower: 11
   attackCooldown: 0.7
   dashUpgraded: 0
+  DeathMenu: {fileID: 0}
   rb: {fileID: 7078594632026464168}
   heartsHUD: {fileID: 0}
-  uiScript: {fileID: 0}
   staminaBar: {fileID: 0}
   staminaMask: {fileID: 0}
   PlayerSO: {fileID: 11400000, guid: 7cfb78329567f4848a77e395d737187d, type: 2}
+  componentsText: {fileID: 0}
+  weaponEvoText: {fileID: 0}
   attackRange: 0.5
   Card1Picked: 0
   Card2Picked: 0
   Card3Picked: 0
   Card4Picked: 0
+  textObject: {fileID: 0}
 --- !u!50 &7078594632026464168
 Rigidbody2D:
   serializedVersion: 4
@@ -425,3 +428,24 @@ CapsuleCollider2D:
   m_Offset: {x: -0.010067339, y: 0.07017847}
   m_Size: {x: 0.35537198, y: 0.19307916}
   m_Direction: 1
+--- !u!95 &2697257894295286537
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6607715729755257798}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d8a91651900b2e147bfb9883d2573507, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
