@@ -240,7 +240,9 @@ public class RoomManager : MonoBehaviour
 
     public void bossRoom()
     {
-        Instantiate(catBossPrefab, currentRoom.transform.GetChild(1).GetChild(0).transform.position, Quaternion.identity, currentRoom.transform);
+        GameObject catBoss = Instantiate(catBossPrefab, currentRoom.transform.GetChild(1).GetChild(0).transform.position, Quaternion.identity);
+        catBoss.transform.localScale = catBossPrefab.transform.localScale;
+        catBoss.transform.SetParent(currentRoom.transform);
     }
 
 }
