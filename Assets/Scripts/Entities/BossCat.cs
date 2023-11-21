@@ -26,7 +26,6 @@ public class BossCat : MonoBehaviour
     public int maxHealth;
     public float healthProcent;
     public int speed;
-
     public int damage;
     public float attackRange;
     public float basicCooldown;
@@ -34,6 +33,8 @@ public class BossCat : MonoBehaviour
 
     public float activateRange;
     public bool inRange;
+    public float activateZoom;
+    private bool triggeredZoom;
     public bool spawned = false;
     public bool inAnimation;
     private float angle;
@@ -79,6 +80,7 @@ public class BossCat : MonoBehaviour
 
         // Set Default Position/Scale
         transform.position = new UnityEngine.Vector3(0.45f, 150f, transform.position.z);
+        transform.localScale = new UnityEngine.Vector3(1, 1, 1);
     }
 
 
@@ -91,13 +93,18 @@ public class BossCat : MonoBehaviour
         if (damageTimer <= damageCooldown) damageTimer += Time.deltaTime;
         if (bossInvisFrames > 0) bossInvisFrames -= Time.deltaTime;
 
+        float targetOrthographicSize = triggeredZoom ? 9f : 5f;
+        float currentOrthographicSize = VisualCamera.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize;
+        float newOrthographicSize = Mathf.MoveTowards(currentOrthographicSize, targetOrthographicSize, Time.deltaTime);
+        VisualCamera.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize = newOrthographicSize;
+
         calcDistance();
         calcDirection();
         if (distance <= activateRange) { StartCoroutine(Begin()); }
+        if (distance <= activateZoom) triggeredZoom = true;
 
         if (spawned && !inPhase2)
         {
-            VisualCamera.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize = 9;
             if (!inRange && !inAnimation)
             {
                 UnityEngine.Vector3 targetPosition = new UnityEngine.Vector3(Player.gameObject.transform.position.x, Player.gameObject.transform.position.y, transform.position.z);
@@ -108,9 +115,8 @@ public class BossCat : MonoBehaviour
                 transform.position = UnityEngine.Vector3.MoveTowards(transform.position, new UnityEngine.Vector2(Player.gameObject.transform.position.x, Player.gameObject.transform.position.y), 0);
             }
             StartCoroutine(Animations());
-            /*          calcHealth();  */
+            /* calcHealth(); */
         }
-
     }
 
     private IEnumerator Begin()
@@ -118,8 +124,10 @@ public class BossCat : MonoBehaviour
         if (!spawned)
         {
             catAnimator.SetBool("activate", true);
-            //transform.localScale = new UnityEngine.Vector3(3, 3, 3);
+            catAnimator.Play("SpawnAnimation");
+            transform.localScale = new UnityEngine.Vector3(3, 3, 3);
             yield return new WaitForSeconds(0.833f);
+            catAnimator.Play("cat_Idle");
             /*      healthBar.SetActive(true); */
             spawned = true;
         }
