@@ -135,7 +135,7 @@ public class EnemySpider : MonoBehaviour
     }
     private IEnumerator DamageIndicate()
     {
-        transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1f, 0.5f, 0.5f);
+        transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1f, 0.2f, 0.2f);
         yield return new WaitForSeconds(0.2f);
         transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
     }

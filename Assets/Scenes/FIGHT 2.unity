@@ -2105,6 +2105,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 560572297645400585, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
   m_PrefabInstance: {fileID: 727911674}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &662532892 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3139989376189692851, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
+  m_PrefabInstance: {fileID: 8274514920762887377}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &727911674
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2565,8 +2570,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.5629997, y: -0.62824917, z: 0}
-    m_Extent: {x: 32.0004, y: 32.17455, z: 0}
+    m_Center: {x: -0.5762005, y: -0.63545036, z: 0}
+    m_Extent: {x: 32.0039, y: 32.170853, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -9537,21 +9542,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6196485130247017952, guid: 77a9f157fb553ed4ab35c914f7a21c88, type: 3}
+      propertyPath: spawned
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6196485130247017952, guid: 77a9f157fb553ed4ab35c914f7a21c88, type: 3}
+      propertyPath: activateZoom
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8971672866620730438, guid: 77a9f157fb553ed4ab35c914f7a21c88, type: 3}
       propertyPath: m_Size.x
-      value: 1.3468022
+      value: 0.4334857
       objectReference: {fileID: 0}
     - target: {fileID: 8971672866620730438, guid: 77a9f157fb553ed4ab35c914f7a21c88, type: 3}
       propertyPath: m_Size.y
-      value: 1.254124
+      value: 0.74055904
       objectReference: {fileID: 0}
     - target: {fileID: 8971672866620730438, guid: 77a9f157fb553ed4ab35c914f7a21c88, type: 3}
       propertyPath: m_Offset.x
-      value: 0.00033786893
+      value: -0.012154311
       objectReference: {fileID: 0}
     - target: {fileID: 8971672866620730438, guid: 77a9f157fb553ed4ab35c914f7a21c88, type: 3}
       propertyPath: m_Offset.y
-      value: 0.57355076
+      value: 0.31676826
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
