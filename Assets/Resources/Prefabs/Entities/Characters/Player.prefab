@@ -360,6 +360,7 @@ MonoBehaviour:
   PlayerSO: {fileID: 11400000, guid: 7cfb78329567f4848a77e395d737187d, type: 2}
   componentsText: {fileID: 0}
   weaponEvoText: {fileID: 0}
+  sweepingPrefab: {fileID: 8745874108219101089, guid: 897d0ae0683f39d448c95d7ecb289fad, type: 3}
   attackRange: 0.5
   Card1Picked: 0
   Card2Picked: 0
