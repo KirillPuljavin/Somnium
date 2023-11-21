@@ -332,7 +332,7 @@ public class Player : MonoBehaviour
         Hearts -= amount;
         heartsHUD.UpdateHearts();
         StartCoroutine(DamageFlash());
-        if (Hearts <= 0) StartCoroutine(Death());;
+        if (Hearts <= 0) StartCoroutine(Death()); ;
     }
     void UpdateStamina()
     {

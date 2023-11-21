@@ -179,7 +179,6 @@ public class RoomManager : MonoBehaviour
             doubleKillPrevention = false;
             clearedRooms.Add(player.currRoom);
             player.Alert("Room cleared.");
-            Debug.Log("Room Cleared: " + roomCleared);
 
             // Spawn Components & Heal
             int componentAmount;
@@ -209,8 +208,11 @@ public class RoomManager : MonoBehaviour
             {
                 componentAmount--;
 
-                float offsetX = Random.Range(-1.5f, 1.5f);
-                float offsetY = Random.Range(-1f, 1f);
+                int x = Random.Range(0, 2); int y = Random.Range(0, 2);
+                float offsetX;
+                float offsetY;
+                if (x == 0) offsetX = Random.Range(1f, 3f); else offsetX = Random.Range(-1f, -3f);
+                if (y == 0) offsetY = Random.Range(1f, 3f); else offsetY = Random.Range(-1f, -3f);
 
                 Vector3 spawnPosition = new Vector3(player.transform.position.x + offsetX, player.transform.position.y + offsetY, player.transform.position.z);
                 Quaternion spawnRotation = Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
@@ -222,8 +224,11 @@ public class RoomManager : MonoBehaviour
             {
                 healAmount--;
 
-                float offsetX = Random.Range(-1.5f, 1.5f);
-                float offsetY = Random.Range(-1f, 1f);
+                int x = Random.Range(0, 2); int y = Random.Range(0, 2);
+                float offsetX;
+                float offsetY;
+                if (x == 0) offsetX = Random.Range(1f, 3f); else offsetX = Random.Range(-1f, -3f);
+                if (y == 0) offsetY = Random.Range(1f, 3f); else offsetY = Random.Range(-1f, -3f);
 
                 Vector3 spawnPosition = new Vector3(player.transform.position.x + offsetX, player.transform.position.y + offsetY, player.transform.position.z);
                 Quaternion spawnRotation = Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));

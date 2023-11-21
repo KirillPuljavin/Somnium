@@ -23,6 +23,11 @@ public class Component : MonoBehaviour
 
     void Update()
     {
-        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, 0.5f * Time.deltaTime);
+        float maxDistance = 4f;
+        float speed = 0.7f;
+
+        float distance = Vector2.Distance(transform.position, player.transform.position);
+        float t = Mathf.Clamp01(distance / maxDistance) * speed * Time.deltaTime;
+        transform.position = Vector2.Lerp(transform.position, player.transform.position, t);
     }
 }

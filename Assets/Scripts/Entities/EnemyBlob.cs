@@ -18,7 +18,6 @@ public class EnemyBlob : MonoBehaviour
     private float oldSpeed;
     private float attackCooldown = 0;
     private float dashCooldown = 0;
-    private float reverseCooldown = 0.2f;
 
     // Pathfinding
     private NavMeshAgent agent;
@@ -58,8 +57,6 @@ public class EnemyBlob : MonoBehaviour
         // Cooldown
         if (attackCooldown < 1) attackCooldown += Time.deltaTime;
         if (dashCooldown > 0) dashCooldown -= Time.deltaTime;
-        if (reverseCooldown <= 0.2) reverseCooldown += Time.deltaTime;
-        if (reverseCooldown >= 0.2) speed = 2;
     }
     void FollowPlayer()
     {
@@ -113,18 +110,29 @@ public class EnemyBlob : MonoBehaviour
     public void TakeDamage(int amount)
     {
         enemyHP -= amount;
-        reverseCooldown = 0;
-        speed = -2;
 
         if (enemyHP <= 0)
         {
             GameObject.Find("Dungeon Generator").GetComponent<RoomManager>().EnemyDied();
             Death();
         }
+        else StartCoroutine(DamageIndicate());
     }
-    public void Death()
+    private IEnumerator DamageIndicate()
     {
-        Debug.Log("ENEMY DIED");
+        transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1f, 0.5f, 0.5f);
+        yield return new WaitForSeconds(0.2f);
+        transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
+    }
+
+    private void Death()
+    {
+        ParticleSystem deathParticle = Instantiate(GetComponentInChildren<ParticleSystem>(), transform.position, Quaternion.identity);
+        if (deathParticle != null)
+        {
+            deathParticle.Play();
+            Destroy(deathParticle.gameObject, deathParticle.main.duration);
+        }
         Destroy(gameObject);
     }
 }
