@@ -23,6 +23,7 @@ TagManager:
   - BossHealth
   - BossMask
   - CardsBG
+  - PauseMenu
   layers:
   - Default
   - TransparentFX
