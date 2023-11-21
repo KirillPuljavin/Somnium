@@ -342,7 +342,7 @@ MonoBehaviour:
   MaxHearts: 10
   Hearts: 10
   staminaProcent: 0
-  Components: 0
+  Components: 50
   WeaponEvo: 0
   Vision: 2
   speed: 3.5
