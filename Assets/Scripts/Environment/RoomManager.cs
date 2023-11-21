@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 using UnityEngine.Windows;
 
 public class RoomManager : MonoBehaviour
@@ -21,6 +22,8 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private GameObject chestPrefab;
     [SerializeField] private GameObject componentPrefab;
     [SerializeField] private GameObject healPrefab;
+    [SerializeField] private Text difficultyText;
+    [SerializeField] private Text roomClearText;
     private Transform enemyParent;
 
     private static List<GameObject> Enemies = new List<GameObject>();
@@ -56,6 +59,7 @@ public class RoomManager : MonoBehaviour
         if (player.currRoom != 27)
         {
             Enemies.Clear();
+            roomClearText.text = "";
 
             // Difficulty
             if (player.currRoom >= 0 && player.currRoom <= 4) difficulty = 1;
@@ -64,6 +68,7 @@ public class RoomManager : MonoBehaviour
             else if (player.currRoom >= 15 && player.currRoom <= 19) difficulty = 4;
             else if (player.currRoom >= 20 && player.currRoom <= 24) difficulty = 5;
             player.Alert("Difficulty: " + difficulty);
+            if (player.currRoom != 28) difficultyText.text = "Difficulty: " + difficulty; else difficultyText.text = "Difficulty: BOSS";
 
             // Spawn Enemies with Scaling
             if (!clearedRooms.Contains(player.currRoom))
@@ -174,6 +179,7 @@ public class RoomManager : MonoBehaviour
     public bool doubleKillPrevention = true;
     public void ClearedRoom()
     {
+        roomClearText.text = "Room is Clear!";
         if (doubleKillPrevention)
         {
             doubleKillPrevention = false;
