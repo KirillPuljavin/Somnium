@@ -24,6 +24,7 @@ TagManager:
   - BossMask
   - CardsBG
   - PauseMenu
+  - VirtualCamera
   layers:
   - Default
   - TransparentFX
