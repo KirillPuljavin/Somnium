@@ -38,31 +38,6 @@ public class sceneManagerScript : MonoBehaviour
         PlayerSO.Card3 = false;
         PlayerSO.Card4 = false;
     }
-
-    void Update()
-    {
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            SceneManager.LoadScene(scene1);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            SceneManager.LoadScene(scene2);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            SceneManager.LoadScene(scene3);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            SceneManager.LoadScene(scene4);
-        }
-    }
     public void SwitchToDungeon1()
     {
         SceneManager.LoadScene(scene4);
