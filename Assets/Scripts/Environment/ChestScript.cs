@@ -51,7 +51,7 @@ public class ChestScript : MonoBehaviour
             obj.gameObject.transform.localScale = new UnityEngine.Vector3(150, 150, 0);
         }
         
-        if (Input.GetKeyDown(KeyCode.E) && clickable)
+        if (Input.GetKeyDown(KeyCode.E) && clickable && RoomManager.roomCleared)
         {
             CardPick();
             Instantiate(AugmentBG, BGLocation, UnityEngine.Quaternion.identity, Hud.transform);
