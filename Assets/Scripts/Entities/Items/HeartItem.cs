@@ -26,7 +26,7 @@ public class HeartItem : MonoBehaviour
     }
 
     float maxDistance = 4f;
-    float speed = 0.8f;
+    float speed = 1;
     void Update()
     {
         float distance = Vector2.Distance(transform.position, player.transform.position) + 1f;

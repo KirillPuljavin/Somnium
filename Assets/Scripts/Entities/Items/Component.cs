@@ -22,7 +22,7 @@ public class Component : MonoBehaviour
     }
 
     float maxDistance = 5f;
-    float speed = 0.7f;
+    float speed = 1;
     void Update()
     {
 
