@@ -57,7 +57,7 @@ public class BossCat : MonoBehaviour
     {
         basicTimer = basicCooldown;
 
-        VisualCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        VisualCamera = GameObject.FindGameObjectWithTag("VirtualCamera");
         Player = GameObject.FindWithTag("Player").GetComponent<Player>();
         /* healthBar = GameObject.FindGameObjectWithTag("BossHealth");
         healthMask = GameObject.FindGameObjectWithTag("BossMask");
@@ -363,9 +363,9 @@ public class BossCat : MonoBehaviour
 
         //Sweep Right Attack
         headAnimator.Play("PrepRight");
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         RightPaw.SetActive(false);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         RightSweepPaw.transform.position = new UnityEngine.Vector3(7.25f, 150f, transform.position.z);
         RightSweepPaw.SetActive(true);
         RightSweepPaw.GetComponent<Collider2D>().enabled = true;
@@ -383,9 +383,9 @@ public class BossCat : MonoBehaviour
 
         //Sweep Left Attack
         headAnimator.Play("PrepLeft");
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         LeftPaw.SetActive(false);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         LeftSweepPaw.transform.position = new UnityEngine.Vector3(-7.25f, 150f, transform.position.z);
         LeftSweepPaw.SetActive(true);
         LeftSweepPaw.GetComponent<Collider2D>().enabled = true;
