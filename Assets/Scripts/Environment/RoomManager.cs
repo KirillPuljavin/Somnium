@@ -151,7 +151,7 @@ public class RoomManager : MonoBehaviour
                     }
                 }
             }
-            if (Enemies.Count <= 0) roomCleared = true;
+            if (Enemies.Count <= 0) { roomCleared = true; roomClearText.text = "Room is Clear!"; }
 
             // Spawn Chest
             if (player.currRoom == dungeon.currentPreset.positionChest1 && !spawnedChest1) { Instantiate(chestPrefab, currentRoom.transform.GetChild(3).GetChild(0).transform.position, Quaternion.identity, currentRoom.transform); spawnedChest1 = true; }

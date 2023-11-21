@@ -221,6 +221,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3240072342329762470, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3240072342329762470, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -149
+      objectReference: {fileID: 0}
     - target: {fileID: 4889943354059910841, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
       propertyPath: m_Follow
       value: 
@@ -229,6 +237,14 @@ PrefabInstance:
       propertyPath: pauseMenu
       value: 
       objectReference: {fileID: 1128986296}
+    - target: {fileID: 7919883277961508943, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919883277961508943, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -149
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -560,6 +576,8 @@ MonoBehaviour:
   chestPrefab: {fileID: 2524031167517423831, guid: 54d57da51f424b34cae5dd05d409931d, type: 3}
   componentPrefab: {fileID: 1137787794838330148, guid: 9049b2de2aee11a40b289ec38acfcb50, type: 3}
   healPrefab: {fileID: 1137787794838330148, guid: 7a25be4f8e2b1d948bb66c1fadc39680, type: 3}
+  difficultyText: {fileID: 1128986298}
+  roomClearText: {fileID: 1128986297}
   doubleKillPrevention: 1
 --- !u!1 &483133579
 GameObject:
@@ -947,6 +965,10 @@ PrefabInstance:
       value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 1020424052870333190, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1020424052870333190, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
       propertyPath: m_FontData.m_FontStyle
       value: 0
       objectReference: {fileID: 0}
@@ -957,6 +979,10 @@ PrefabInstance:
     - target: {fileID: 3327858332938788998, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
       propertyPath: m_FontData.m_FontSize
       value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 3327858332938788998, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3327858332938788998, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
       propertyPath: m_FontData.m_FontStyle
@@ -1092,6 +1118,28 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6680122574202429456, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
   m_PrefabInstance: {fileID: 1128986293}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1128986297 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3327858332938788998, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
+  m_PrefabInstance: {fileID: 1128986293}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1128986298 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1020424052870333190, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
+  m_PrefabInstance: {fileID: 1128986293}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1148300701
 GameObject:
   m_ObjectHideFlags: 0
