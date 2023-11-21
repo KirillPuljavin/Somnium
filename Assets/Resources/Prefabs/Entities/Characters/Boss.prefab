@@ -310,13 +310,13 @@ MonoBehaviour:
   BasicLeft: {fileID: 6455054121925680837}
   BasicUp: {fileID: 6405653575547690341}
   BasicDown: {fileID: 5475653971427881424}
-  health: 100
-  maxHealth: 100
+  health: 75
+  maxHealth: 75
   healthProcent: 0
   speed: 2
-  damage: 4
+  damage: 1
   attackRange: 4
-  basicCooldown: 4
+  basicCooldown: 8
   activateRange: 6
   inRange: 0
   activateZoom: 10
@@ -361,7 +361,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.012154311, y: 0.31676826}
+  m_Offset: {x: 0.00033786893, y: 0.57355076}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.2}
@@ -372,7 +372,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4334857, y: 0.74055904}
+  m_Size: {x: 1.3468022, y: 1.254124}
   m_EdgeRadius: 0
 --- !u!50 &8183182038434459141
 Rigidbody2D:
