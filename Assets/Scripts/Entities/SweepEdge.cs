@@ -9,7 +9,7 @@ public class SweepEdge : MonoBehaviour
 
     void Start()
     {
-        Destroy(gameObject, 0.4f);
+        Destroy(gameObject, 0.5f);
     }
 
     void Update()

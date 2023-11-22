@@ -95,7 +95,7 @@ public class BossCat : MonoBehaviour
         if (damageTimer <= damageCooldown) damageTimer += Time.deltaTime;
         if (bossInvisFrames > 0) bossInvisFrames -= Time.deltaTime;
 
-        float targetOrthographicSize = triggeredZoom ? 9f : 5f;
+        float targetOrthographicSize = triggeredZoom ? 7f : 5f;
         float currentOrthographicSize = VisualCamera.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize;
         float newOrthographicSize = Mathf.MoveTowards(currentOrthographicSize, targetOrthographicSize, Time.deltaTime);
         VisualCamera.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize = newOrthographicSize;
@@ -297,6 +297,8 @@ public class BossCat : MonoBehaviour
     {
         health -= amount;
 
+        StartCoroutine(DamageIndicate());
+
         if (health <= 0)
         {
             //healthBar.SetActive(false);
@@ -315,6 +317,12 @@ public class BossCat : MonoBehaviour
             StartCoroutine(Phase2());
         }
     }
+    private IEnumerator DamageIndicate()
+    {
+        GetComponent<SpriteRenderer>().color = new Color(1f, 0.5f, 0.5f);
+        yield return new WaitForSeconds(0.2f);
+        GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
+    }
 
     private IEnumerator Phase2()
     {
@@ -324,7 +332,7 @@ public class BossCat : MonoBehaviour
         Head.SetActive(true);
         RightPaw.SetActive(true);
         LeftPaw.SetActive(true);
-        
+
         // ==================
 
         yield return new WaitForSeconds(3f);
