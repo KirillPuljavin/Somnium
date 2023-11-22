@@ -9752,6 +9752,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 139609588952654348, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 675020732472309064, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
       propertyPath: m_SizeDelta.x
       value: 204.25
@@ -9998,7 +10002,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9055726959230303800, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
       propertyPath: m_Text
-      value: C to Continue
+      value: E to Continue
       objectReference: {fileID: 0}
     - target: {fileID: 9055726959230303800, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
       propertyPath: m_Color.b
