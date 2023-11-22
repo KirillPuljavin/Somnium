@@ -9320,6 +9320,11 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1812485798 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6680122574202429456, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
+  m_PrefabInstance: {fileID: 727911674}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1848701693
 GameObject:
   m_ObjectHideFlags: 0
@@ -9762,42 +9767,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3139989376189692851, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
-      propertyPath: m_TagString
-      value: VirtualCamera
-      objectReference: {fileID: 0}
-    - target: {fileID: 3240072342329762470, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.43999863
-      objectReference: {fileID: 0}
-    - target: {fileID: 3240072342329762470, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 140.87
-      objectReference: {fileID: 0}
     - target: {fileID: 4889943354059910841, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 920161607}
-    - target: {fileID: 4889943354059910841, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
-      propertyPath: m_Lens.OrthographicSize
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7919883277961508943, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.43999863
-      objectReference: {fileID: 0}
-    - target: {fileID: 7919883277961508943, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 140.87
-      objectReference: {fileID: 0}
-    - target: {fileID: 8572995283403586746, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
-      propertyPath: orthographic size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8572995283403586746, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
-      propertyPath: m_AllowDynamicResolution
-      value: 0
-      objectReference: {fileID: 0}
+    - target: {fileID: 5168623259024250656, guid: 0e5ffa980daa15b4185d6e770de7c5f8, type: 3}
+      propertyPath: pauseMenu
+      value: 
+      objectReference: {fileID: 1812485798}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

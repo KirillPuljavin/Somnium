@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class DialogManager : MonoBehaviour
 {
+    public bool isActive;
+
 
     public Text nameText;
     public Text dialogText;
@@ -15,12 +17,22 @@ public class DialogManager : MonoBehaviour
     private Queue<string> meningar;
     // Start is called before the first frame update
     void Start()
+
     {
         meningar = new Queue<string>();
     }
 
-   public void StartDialog (Dialog dialog)
+    private void Update()
     {
+        if (isActive = true && Input.GetKeyDown(KeyCode.E)) 
+        {
+            DisplayNextMening();
+        }
+    }
+
+    public void StartDialog (Dialog dialog)
+    {
+        isActive = true;
         animator.SetBool("IsOpen", true);
 
         nameText.text = dialog.name;
@@ -58,6 +70,7 @@ public class DialogManager : MonoBehaviour
 
     void EndDialog()
     {
+        isActive = false;
         animator.SetBool("IsOpen", false);
     }
     

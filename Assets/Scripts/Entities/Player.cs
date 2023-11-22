@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
     [SerializeField] private FloatSO PlayerSO;
     [SerializeField] private Text componentsText;
     [SerializeField] private Text weaponEvoText;
+    [SerializeField] private GameObject sweepingPrefab;
 
     private float stamina;
     private float attackTime;
@@ -263,22 +264,6 @@ public class Player : MonoBehaviour
                 attackPoint.position = gameObject.transform.position + new Vector3(0f, -attackRange, 0f);
                 animator.Play("Attack_Down");
                 break;
-            case "up-right":
-                attackPoint.position = gameObject.transform.position + new Vector3(attackRange, attackRange, 0f);
-                animator.Play("Attack_Up");
-                break;
-            case "up-left":
-                attackPoint.position = gameObject.transform.position + new Vector3(-attackRange, attackRange, 0f);
-                animator.Play("Attack_Up");
-                break;
-            case "down-right":
-                attackPoint.position = gameObject.transform.position + new Vector3(attackRange, -attackRange, 0f);
-                animator.Play("Attack_Down");
-                break;
-            case "down-left":
-                attackPoint.position = gameObject.transform.position + new Vector3(-attackRange, -attackRange, 0f);
-                animator.Play("Attack_Down");
-                break;
         }
         yield return new WaitForSeconds(0.1f);
 
@@ -290,6 +275,34 @@ public class Player : MonoBehaviour
             else if (enemy.gameObject.GetComponent<EnemySpider>() != null) enemy.gameObject.GetComponent<EnemySpider>().TakeDamage(damage);
             else if (enemy.gameObject.GetComponent<BossCat>() != null) enemy.gameObject.GetComponent<BossCat>().TakeDamage(damage);
             else if (enemy.gameObject.GetComponent<FrogFly>() != null) enemy.gameObject.GetComponent<FrogFly>().Hit();
+        }
+
+        // Sweeping Edge
+        if (WeaponEvo == 5)
+        {
+            Quaternion targetRotation;
+            Vector3 targetPos;
+            switch (Facing)
+            {
+                default: // Up
+                    targetRotation = Quaternion.Euler(0, 0, 0);
+                    targetPos = transform.position + new Vector3(0, 1, 0);
+                    break;
+                case "left":
+                    targetRotation = Quaternion.Euler(0, 0, 90);
+                    targetPos = transform.position + new Vector3(-1, 0.5f, 0);
+                    break;
+                case "down":
+                    targetRotation = Quaternion.Euler(0, 0, 180);
+                    targetPos = transform.position + new Vector3(0, -0.5f, 0);
+                    break;
+                case "right":
+                    targetRotation = Quaternion.Euler(0, 0, 270);
+                    targetPos = transform.position + new Vector3(1, 0.5f, 0);
+                    break;
+            }
+            SweepEdge sweep = Instantiate(sweepingPrefab, targetPos, targetRotation).GetComponent<SweepEdge>();
+            sweep.damage = damage;
         }
     }
 

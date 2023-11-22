@@ -12,6 +12,7 @@ public class DialogTrigger : MonoBehaviour
     }
     private void OnMouseDown()
     {
+        Debug.Log("knapp");
         TriggerDialog();
     }
 }
