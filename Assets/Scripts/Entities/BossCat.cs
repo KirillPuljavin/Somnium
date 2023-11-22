@@ -95,7 +95,7 @@ public class BossCat : MonoBehaviour
         if (damageTimer <= damageCooldown) damageTimer += Time.deltaTime;
         if (bossInvisFrames > 0) bossInvisFrames -= Time.deltaTime;
 
-        float targetOrthographicSize = triggeredZoom ? 7f : 5f;
+        float targetOrthographicSize = triggeredZoom ? 9f : 5f;
         float currentOrthographicSize = VisualCamera.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize;
         float newOrthographicSize = Mathf.MoveTowards(currentOrthographicSize, targetOrthographicSize, Time.deltaTime);
         VisualCamera.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize = newOrthographicSize;
