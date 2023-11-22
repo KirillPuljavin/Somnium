@@ -25,6 +25,8 @@ TagManager:
   - CardsBG
   - PauseMenu
   - VirtualCamera
+  - dialogTrigg
+  - LoadingScreen
   layers:
   - Default
   - TransparentFX
