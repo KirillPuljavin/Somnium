@@ -9698,6 +9698,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbfb0e2e53a0a045853b9a7f91e3eaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loading: {fileID: 707241352}
   scenecool: Dungeon 1
 --- !u!61 &689352768
 BoxCollider2D:
@@ -9744,6 +9745,11 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.2606311, y: 3.0024915}
   m_EdgeRadius: 0
+--- !u!1 &707241352 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2872504723286332678, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
+  m_PrefabInstance: {fileID: 727911674}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &727911674
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9771,6 +9777,10 @@ PrefabInstance:
     - target: {fileID: 675020732472309064, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0.000022662
+      objectReference: {fileID: 0}
+    - target: {fileID: 2872504723286332678, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
+      propertyPath: m_TagString
+      value: LoadingScreen
       objectReference: {fileID: 0}
     - target: {fileID: 2899823166677993154, guid: 7f2e42aa851311e478a0a1cd5e8caf26, type: 3}
       propertyPath: m_Name
