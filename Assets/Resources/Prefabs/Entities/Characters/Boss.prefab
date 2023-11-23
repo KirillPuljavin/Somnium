@@ -311,11 +311,11 @@ MonoBehaviour:
   BasicLeft: {fileID: 6455054121925680837}
   BasicUp: {fileID: 6405653575547690341}
   BasicDown: {fileID: 5475653971427881424}
-  health: 75
-  maxHealth: 75
+  health: 150
+  maxHealth: 150
   healthProcent: 0
   speed: 2
-  damage: 1
+  damage: 2
   attackRange: 4
   basicCooldown: 8
   activateRange: 6

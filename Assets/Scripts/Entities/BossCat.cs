@@ -304,6 +304,10 @@ public class BossCat : MonoBehaviour
             //healthBar.SetActive(false);
             Destroy(gameObject);
         }
+        else if (health <= 100 && health + amount > 100)
+        {
+            StartCoroutine(Phase2());
+        }
         else if (health <= 75 && health + amount > 75)
         {
             StartCoroutine(Phase2());

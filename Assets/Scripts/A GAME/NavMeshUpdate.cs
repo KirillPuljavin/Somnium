@@ -13,8 +13,6 @@ public class NavMeshUpdate : MonoBehaviour
     {
         LoadingScreen.SetActive(true);
         Invoke("updateNav", 0.1f);
-        Load();
-        LoadingScreen.SetActive(false);
     }
 
     // Update is called once per frame
@@ -25,9 +23,6 @@ public class NavMeshUpdate : MonoBehaviour
         {
             surfaces[i].BuildNavMesh();
         }
-    }
-    IEnumerator Load()
-    {
-        yield return new WaitForSeconds(1f);
+        LoadingScreen.SetActive(false);
     }
 }

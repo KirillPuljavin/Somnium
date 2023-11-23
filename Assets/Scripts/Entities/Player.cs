@@ -54,6 +54,7 @@ public class Player : MonoBehaviour
     public bool Card2Picked = false;
     public bool Card3Picked = false;
     public bool Card4Picked = false;
+    public GameObject LoadingScreen;
 
     private float tpCooldown;
 
