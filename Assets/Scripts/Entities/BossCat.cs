@@ -14,6 +14,7 @@ public class BossCat : MonoBehaviour
     public Rigidbody2D rb;
     public Animator catAnimator;
     public Animator headAnimator;
+    public Animator healthBarAnimator;
     public GameObject healthBar;
     public GameObject healthMask;
     public GameObject BasicRight;
@@ -60,9 +61,11 @@ public class BossCat : MonoBehaviour
 
         VisualCamera = GameObject.FindGameObjectWithTag("VirtualCamera");
         Player = GameObject.FindWithTag("Player").GetComponent<Player>();
-        /* healthBar = GameObject.FindGameObjectWithTag("BossHealth");
+
+
+        healthBar = GameObject.FindGameObjectWithTag("BossHealth");
         healthMask = GameObject.FindGameObjectWithTag("BossMask");
-        healthBar.SetActive(false); */
+        healthBarAnimator = healthBar.GetComponent<Animator>();
 
         // Hide all basic attacks
         BasicRight.SetActive(false);
@@ -86,8 +89,6 @@ public class BossCat : MonoBehaviour
     }
 
 
-
-
     UnityEngine.Vector3 previousPosition;
     void Update()
     {
@@ -95,6 +96,7 @@ public class BossCat : MonoBehaviour
         if (damageTimer <= damageCooldown) damageTimer += Time.deltaTime;
         if (bossInvisFrames > 0) bossInvisFrames -= Time.deltaTime;
 
+        // Zoom Out
         float targetOrthographicSize = triggeredZoom ? 9f : 5f;
         float currentOrthographicSize = VisualCamera.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize;
         float newOrthographicSize = Mathf.MoveTowards(currentOrthographicSize, targetOrthographicSize, Time.deltaTime);
@@ -107,6 +109,7 @@ public class BossCat : MonoBehaviour
 
         if (spawned && !inPhase2)
         {
+            healthBarAnimator.SetBool("isActive", true);
             if (!inRange && !inAnimation)
             {
                 UnityEngine.Vector3 targetPosition = new UnityEngine.Vector3(Player.gameObject.transform.position.x, Player.gameObject.transform.position.y, transform.position.z);
@@ -117,24 +120,35 @@ public class BossCat : MonoBehaviour
                 transform.position = UnityEngine.Vector3.MoveTowards(transform.position, new UnityEngine.Vector2(Player.gameObject.transform.position.x, Player.gameObject.transform.position.y), 0);
             }
             StartCoroutine(Animations());
-            /* calcHealth(); */
         }
     }
 
+    private bool alpha = false;
     private IEnumerator Begin()
     {
         if (!spawned)
         {
             rb.GetComponent<SpriteRenderer>().enabled = true;
             Kitty.SetActive(false);
-            catAnimator.SetBool("activate", true);
-            //catAnimator.Play("SpawnAnimation");
-            yield return new WaitForSeconds(0.833f);
-            catAnimator.Play("cat_Idle");
-            /*      healthBar.SetActive(true); */
-            spawned = true;
+            Player.inCutscene = true;
+            if (!alpha)
+            {
+                catAnimator.Play("SpawnAnimation", 0);
+                yield return new WaitForSeconds(1.583f);
+                alpha = true;
+            }
+            else if (alpha)
+            {
+                catAnimator.Play("cat_Idle");
+                inAnimation = true;
+                yield return new WaitForSeconds(1.334f);
+                inAnimation = false;
+                spawned = true;
+                Player.inCutscene = false;
+            }
         }
     }
+
 
 
     private IEnumerator Animations()
@@ -269,8 +283,6 @@ public class BossCat : MonoBehaviour
     {
         distance = UnityEngine.Vector2.Distance(transform.position, Player.gameObject.transform.position);
     }
-
-
     void calcDirection()
     {
         UnityEngine.Vector3 direction = new UnityEngine.Vector3(Player.gameObject.transform.position.x - transform.position.x, Player.gameObject.transform.position.y - transform.position.y + 0.5f, 0);
@@ -281,7 +293,7 @@ public class BossCat : MonoBehaviour
     {
         healthProcent = (float)health / (float)maxHealth;
         //healthMask.transform.localPosition = new UnityEngine.Vector3(healthProcent * -2, -0.3f, 0);
-        healthMask.transform.localScale = new UnityEngine.Vector3(healthProcent * 4, 0.5f, 1);
+        healthMask.transform.localScale = new UnityEngine.Vector3(healthProcent * 8, 0.5f, 1);
     }
 
     void damagePlayer()
@@ -295,13 +307,14 @@ public class BossCat : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
+        calcHealth();
         health -= amount;
 
         StartCoroutine(DamageIndicate());
 
         if (health <= 0)
         {
-            //healthBar.SetActive(false);
+            healthBar.SetActive(false);
             Destroy(gameObject);
         }
         else if (health <= 100 && health + amount > 100)
@@ -424,8 +437,6 @@ public class BossCat : MonoBehaviour
         // ==================
 
     }
-
-
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.gameObject.tag == "Player")

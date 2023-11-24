@@ -305,20 +305,21 @@ MonoBehaviour:
   rb: {fileID: 8183182038434459141}
   catAnimator: {fileID: 7263192500600031081}
   headAnimator: {fileID: 3541533271154007525}
+  healthBarAnimator: {fileID: 0}
   healthBar: {fileID: 0}
   healthMask: {fileID: 0}
   BasicRight: {fileID: 468030214940746706}
   BasicLeft: {fileID: 6455054121925680837}
   BasicUp: {fileID: 6405653575547690341}
   BasicDown: {fileID: 5475653971427881424}
-  health: 150
-  maxHealth: 150
+  health: 20
+  maxHealth: 20
   healthProcent: 0
   speed: 2
   damage: 2
   attackRange: 4
   basicCooldown: 8
-  activateRange: 6
+  activateRange: 5
   inRange: 0
   activateZoom: 10
   spawned: 0

@@ -58,6 +58,8 @@ public class Player : MonoBehaviour
 
     private float tpCooldown;
 
+    public bool inCutscene;
+
     private void Start()
     {
         getStoredValues();
@@ -166,6 +168,14 @@ public class Player : MonoBehaviour
             else if (angle > -225 && angle < -135) Facing = "down";
             else if (angle > -270 && angle < -225 || angle > 45 && angle < 90) Facing = "left";
             else Debug.Log("Error ANGLE");
+
+            if (inCutscene)
+            {
+                movement.x = 0;
+                movement.y = 0;
+                rb.velocity = new Vector2(0, 0);
+                trulyDashing = false; // Stop dashing
+            }
         }
     }
     private void FixedUpdate() // Movement
