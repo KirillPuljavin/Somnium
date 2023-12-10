@@ -343,7 +343,7 @@ public class BossCat : MonoBehaviour
 
     private IEnumerator Phase2()
     {
-        //Start Phase 2
+        // Start Phase 2
         inPhase2 = true;
         transform.position = new UnityEngine.Vector3(0.45f, 170f, transform.position.z);
         Head.SetActive(true);
@@ -351,10 +351,24 @@ public class BossCat : MonoBehaviour
         LeftPaw.SetActive(true);
 
         // ==================
-
+        yield return new WaitForSeconds(3f);
+        yield return StartCoroutine(TopPawAttack());
+        yield return new WaitForSeconds(3f);
+        yield return StartCoroutine(SweepRightAttack());
+        yield return new WaitForSeconds(3f);
+        yield return StartCoroutine(SweepLeftAttack());
         yield return new WaitForSeconds(3f);
 
-        //Top Paw Attack
+        // Return to normal
+        transform.position = new UnityEngine.Vector3(0.45f, 150f, transform.position.z);
+        Head.SetActive(false);
+        RightPaw.SetActive(false);
+        LeftPaw.SetActive(false);
+        inPhase2 = false;
+        // ==================
+    }
+    private IEnumerator TopPawAttack()
+    {
         headAnimator.Play("PrepTop");
         yield return new WaitForSeconds(1f);
         RightPaw.SetActive(false);
@@ -385,12 +399,9 @@ public class BossCat : MonoBehaviour
 
         LeftPaw.SetActive(true);
         RightPaw.SetActive(true);
-
-        // ==================
-
-        yield return new WaitForSeconds(3f);
-
-        //Sweep Right Attack
+    }
+    private IEnumerator SweepRightAttack()
+    {
         headAnimator.Play("PrepRight");
         yield return new WaitForSeconds(2f);
         RightPaw.SetActive(false);
@@ -405,12 +416,9 @@ public class BossCat : MonoBehaviour
 
         LeftPaw.SetActive(true);
         RightPaw.SetActive(true);
-
-        //===================
-
-        yield return new WaitForSeconds(3f);
-
-        //Sweep Left Attack
+    }
+    private IEnumerator SweepLeftAttack()
+    {
         headAnimator.Play("PrepLeft");
         yield return new WaitForSeconds(2f);
         LeftPaw.SetActive(false);
@@ -425,17 +433,6 @@ public class BossCat : MonoBehaviour
 
         LeftPaw.SetActive(true);
         RightPaw.SetActive(true);
-
-        //===================
-
-        //Return to normal
-        transform.position = new UnityEngine.Vector3(0.45f, 150f, transform.position.z);
-        Head.SetActive(false);
-        RightPaw.SetActive(false);
-        LeftPaw.SetActive(false);
-        inPhase2 = false;
-        // ==================
-
     }
     private void OnTriggerEnter2D(Collider2D collider)
     {
