@@ -171,9 +171,11 @@ public class RoomManager : MonoBehaviour
     public IEnumerator CheckForEnemies()
     {
         yield return new WaitForSeconds(0.01f);
-
-        Enemies.Clear(); foreach (Transform enemy in enemyParent) Enemies.Add(enemy.gameObject);
-        if (Enemies.Count <= 0) { roomCleared = true; ClearedRoom(); }
+        if (player.currRoom != 27)
+        {
+            Enemies.Clear(); foreach (Transform enemy in enemyParent) Enemies.Add(enemy.gameObject);
+            if (Enemies.Count <= 0) { roomCleared = true; ClearedRoom(); }
+        }
     }
 
     public bool doubleKillPrevention = true;

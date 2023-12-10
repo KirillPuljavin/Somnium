@@ -332,6 +332,8 @@ MonoBehaviour:
   RightTopPaw: {fileID: 6091013353456980668}
   LeftSweepPaw: {fileID: 6243128031426644569}
   RightSweepPaw: {fileID: 660653957770538996}
+  Blob: {fileID: 3563160528595184985, guid: 4d0c754b308b705449c4446cc92a913d, type: 3}
+  Spider: {fileID: 3563160528595184985, guid: 8089a9fe741314f4cae2384663588dad, type: 3}
 --- !u!60 &8821733109767557934
 PolygonCollider2D:
   m_ObjectHideFlags: 0

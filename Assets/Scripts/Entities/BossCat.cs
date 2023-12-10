@@ -55,11 +55,15 @@ public class BossCat : MonoBehaviour
     public GameObject LeftSweepPaw;
     public GameObject RightSweepPaw;
 
+    public GameObject Blob;
+    public GameObject Spider;
+
     void Start()
     {
         basicTimer = basicCooldown;
 
         VisualCamera = GameObject.FindGameObjectWithTag("VirtualCamera");
+
         Player = GameObject.FindWithTag("Player").GetComponent<Player>();
 
 
@@ -101,6 +105,7 @@ public class BossCat : MonoBehaviour
         float currentOrthographicSize = VisualCamera.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize;
         float newOrthographicSize = Mathf.MoveTowards(currentOrthographicSize, targetOrthographicSize, Time.deltaTime);
         VisualCamera.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize = newOrthographicSize;
+
 
         calcDistance();
         calcDirection();
@@ -149,6 +154,18 @@ public class BossCat : MonoBehaviour
         }
     }
 
+
+    IEnumerator ShakeCamera()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            VisualCamera.GetComponent<CinemachineVirtualCamera>().m_Lens.Dutch = -1f;
+            yield return new WaitForSeconds(0.1f);
+            VisualCamera.GetComponent<CinemachineVirtualCamera>().m_Lens.Dutch = 1f;
+            yield return new WaitForSeconds(0.1f);
+        }
+        VisualCamera.GetComponent<CinemachineVirtualCamera>().m_Lens.Dutch = 0f;
+    }
 
 
     private IEnumerator Animations()
@@ -314,8 +331,7 @@ public class BossCat : MonoBehaviour
 
         if (health <= 0)
         {
-            healthBar.SetActive(false);
-            Destroy(gameObject);
+            StartCoroutine(BossDeath());
         }
         else if (health <= 100 && health + amount > 100)
         {
@@ -340,7 +356,14 @@ public class BossCat : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
     }
+    private IEnumerator BossDeath()
+    {
 
+        catAnimator.Play("Death");
+        yield return new WaitForSeconds(1.5f);
+        healthBar.SetActive(false);
+        Destroy(gameObject);
+    }
     private IEnumerator Phase2()
     {
         // Start Phase 2
@@ -372,24 +395,23 @@ public class BossCat : MonoBehaviour
         headAnimator.Play("PrepTop");
         yield return new WaitForSeconds(1f);
         RightPaw.SetActive(false);
+        RightTopPaw.transform.position = new UnityEngine.Vector3(Player.transform.position.x, 150f, transform.position.z);
         yield return new WaitForSeconds(0.5f);
-        float randomValue = Random.Range(2.5f, 7.25f);
-        RightTopPaw.transform.position = new UnityEngine.Vector3(randomValue, 150f, transform.position.z);
         RightTopPaw.SetActive(true);
         yield return new WaitForSeconds(0.2f);
         RightTopPaw.GetComponent<Collider2D>().enabled = true;
+        StartCoroutine(ShakeCamera());
         yield return new WaitForSeconds(1f);
 
         headAnimator.Play("PrepTop");
         yield return new WaitForSeconds(1f);
         LeftPaw.SetActive(false);
+        LeftTopPaw.transform.position = new UnityEngine.Vector3(Player.transform.position.x, 150f, transform.position.z);
         yield return new WaitForSeconds(0.5f);
-        randomValue = Random.Range(1.25f, 6.25f);
-        LeftTopPaw.transform.position = new UnityEngine.Vector3(-randomValue, 150f, transform.position.z);
         LeftTopPaw.SetActive(true);
         yield return new WaitForSeconds(0.2f);
         LeftTopPaw.GetComponent<Collider2D>().enabled = true;
-
+        StartCoroutine(ShakeCamera());
         yield return new WaitForSeconds(3f);
 
         RightTopPaw.GetComponent<Collider2D>().enabled = false;
@@ -433,6 +455,11 @@ public class BossCat : MonoBehaviour
 
         LeftPaw.SetActive(true);
         RightPaw.SetActive(true);
+    }
+    private IEnumerator SpawnEnemies()
+    {
+        Instantiate(Blob, new UnityEngine.Vector3(0.45f, 150f, transform.position.z), UnityEngine.Quaternion.identity);
+        yield return new WaitForSeconds(2f);
     }
     private void OnTriggerEnter2D(Collider2D collider)
     {
