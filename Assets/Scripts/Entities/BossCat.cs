@@ -358,10 +358,11 @@ public class BossCat : MonoBehaviour
     }
     private IEnumerator BossDeath()
     {
-
-        catAnimator.Play("Death");
-        yield return new WaitForSeconds(1.5f);
+        
         healthBar.SetActive(false);
+        inAnimation = true;
+        catAnimator.Play("Death");
+        yield return new WaitForSeconds(5.5f);
         Destroy(gameObject);
     }
     private IEnumerator Phase2()
