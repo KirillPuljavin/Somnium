@@ -358,7 +358,7 @@ public class BossCat : MonoBehaviour
     }
     private IEnumerator BossDeath()
     {
-        
+
         healthBar.SetActive(false);
         inAnimation = true;
         catAnimator.Play("Death");
@@ -376,11 +376,11 @@ public class BossCat : MonoBehaviour
 
         // ==================
         yield return new WaitForSeconds(3f);
-        yield return StartCoroutine(TopPawAttack());
+        yield return TriggerAttack();
         yield return new WaitForSeconds(3f);
-        yield return StartCoroutine(SweepRightAttack());
+        yield return TriggerAttack();
         yield return new WaitForSeconds(3f);
-        yield return StartCoroutine(SweepLeftAttack());
+        yield return TriggerAttack();
         yield return new WaitForSeconds(3f);
 
         // Return to normal
@@ -390,6 +390,33 @@ public class BossCat : MonoBehaviour
         LeftPaw.SetActive(false);
         inPhase2 = false;
         // ==================
+    }
+
+    private bool isAttacking = false;
+
+    public IEnumerator TriggerAttack()
+    {
+        if (isAttacking)
+        {
+            yield return new WaitUntil(() => !isAttacking);
+        }
+
+        isAttacking = true;
+
+        switch (Random.Range(0, 3))
+        {
+            case 0:
+                yield return TopPawAttack();
+                break;
+            case 1:
+                yield return SweepRightAttack();
+                break;
+            case 2:
+                yield return SweepLeftAttack();
+                break;
+        }
+
+        isAttacking = false;
     }
     private IEnumerator TopPawAttack()
     {
