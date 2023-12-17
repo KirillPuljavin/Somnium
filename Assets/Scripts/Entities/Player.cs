@@ -113,8 +113,11 @@ public class Player : MonoBehaviour
             if (stamina < dashingCooldown) UpdateStamina();
             if (trulyDashing) return;
 
-            movement.x = Input.GetAxisRaw("Horizontal");
-            movement.y = Input.GetAxisRaw("Vertical");
+            if (!inCutscene)
+            {
+                movement.x = Input.GetAxisRaw("Horizontal");
+                movement.y = Input.GetAxisRaw("Vertical");
+            }
 
             // Mouse position Calculations and storing for checking where to attack.
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
