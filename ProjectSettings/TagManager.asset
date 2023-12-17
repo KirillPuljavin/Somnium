@@ -27,6 +27,7 @@ TagManager:
   - VirtualCamera
   - dialogTrigg
   - LoadingScreen
+  - bossLight
   layers:
   - Default
   - TransparentFX

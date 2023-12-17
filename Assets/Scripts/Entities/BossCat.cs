@@ -55,8 +55,7 @@ public class BossCat : MonoBehaviour
     public GameObject LeftSweepPaw;
     public GameObject RightSweepPaw;
 
-    public GameObject Blob;
-    public GameObject Spider;
+    public GameObject Potion;
 
     void Start()
     {
@@ -388,6 +387,12 @@ public class BossCat : MonoBehaviour
         Head.SetActive(false);
         RightPaw.SetActive(false);
         LeftPaw.SetActive(false);
+        UnityEngine.Quaternion spawnRotation1 = UnityEngine.Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
+        UnityEngine.Quaternion spawnRotation2 = UnityEngine.Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
+        Debug.Log("1" + spawnRotation1);
+        Debug.Log("2" + spawnRotation2);
+        Instantiate(Potion, new UnityEngine.Vector3(5.5f, 150f, transform.position.z), spawnRotation1);
+        Instantiate(Potion, new UnityEngine.Vector3(-4.5f, 150f, transform.position.z), spawnRotation2);
         inPhase2 = false;
         // ==================
     }
@@ -486,7 +491,7 @@ public class BossCat : MonoBehaviour
     }
     private IEnumerator SpawnEnemies()
     {
-        Instantiate(Blob, new UnityEngine.Vector3(0.45f, 150f, transform.position.z), UnityEngine.Quaternion.identity);
+        Instantiate(Potion, new UnityEngine.Vector3(0.45f, 150f, transform.position.z), UnityEngine.Quaternion.identity);
         yield return new WaitForSeconds(2f);
     }
     private void OnTriggerEnter2D(Collider2D collider)
