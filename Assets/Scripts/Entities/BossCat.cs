@@ -37,6 +37,8 @@ public class BossCat : MonoBehaviour
     public float activateZoom;
     private bool triggeredZoom;
     public bool spawned = false;
+
+    public bool alive = true;
     public bool inAnimation;
     private float angle;
     private float distance;
@@ -56,6 +58,8 @@ public class BossCat : MonoBehaviour
     public GameObject RightSweepPaw;
 
     public GameObject Potion;
+    public AudioSource win;
+    public AudioSource meow;
 
     void Start()
     {
@@ -111,7 +115,7 @@ public class BossCat : MonoBehaviour
         if (distance <= activateRange) { StartCoroutine(Begin()); }
         if (distance <= activateZoom) triggeredZoom = true;
 
-        if (spawned && !inPhase2)
+        if (spawned && !inPhase2 && alive)
         {
             healthBarAnimator.SetBool("isActive", true);
             if (!inRange && !inAnimation)
@@ -325,8 +329,8 @@ public class BossCat : MonoBehaviour
     {
         calcHealth();
         health -= amount;
-
-        StartCoroutine(DamageIndicate());
+        if (alive)
+        { StartCoroutine(DamageIndicate()); }
 
         if (health <= 0)
         {
@@ -357,12 +361,14 @@ public class BossCat : MonoBehaviour
     }
     private IEnumerator BossDeath()
     {
-
         healthBar.SetActive(false);
         inAnimation = true;
+        alive = false;
         catAnimator.Play("Death");
-        yield return new WaitForSeconds(5.5f);
-        Destroy(gameObject);
+        yield return new WaitForSeconds(4.5f);
+        meow.Play();
+        yield return new WaitForSeconds(2f);
+        win.Play();
     }
     private IEnumerator Phase2()
     {
@@ -498,7 +504,7 @@ public class BossCat : MonoBehaviour
     {
         if (collider.gameObject.tag == "Player")
         {
-            if (!Player.isDashing)
+            if (!Player.isDashing && alive)
             {
                 damagePlayer();
             }
@@ -508,7 +514,7 @@ public class BossCat : MonoBehaviour
     {
         if (collider.gameObject.tag == "Player")
         {
-            if (!Player.isDashing)
+            if (!Player.isDashing && alive)
             {
                 damagePlayer();
             }

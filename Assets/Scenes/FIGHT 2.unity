@@ -728,18 +728,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6196485130247017952, guid: 77a9f157fb553ed4ab35c914f7a21c88, type: 3}
-      propertyPath: Potion
-      value: 
-      objectReference: {fileID: 1137787794838330148, guid: 7a25be4f8e2b1d948bb66c1fadc39680, type: 3}
-    - target: {fileID: 6196485130247017952, guid: 77a9f157fb553ed4ab35c914f7a21c88, type: 3}
-      propertyPath: health
-      value: 125
-      objectReference: {fileID: 0}
-    - target: {fileID: 6196485130247017952, guid: 77a9f157fb553ed4ab35c914f7a21c88, type: 3}
-      propertyPath: maxHealth
-      value: 125
-      objectReference: {fileID: 0}
-    - target: {fileID: 6196485130247017952, guid: 77a9f157fb553ed4ab35c914f7a21c88, type: 3}
       propertyPath: healthBarAnimator
       value: 
       objectReference: {fileID: 727911685}
