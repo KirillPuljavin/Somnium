@@ -60,6 +60,7 @@ public class BossCat : MonoBehaviour
     public GameObject Potion;
     public AudioSource win;
     public AudioSource meow;
+    public AudioSource damageTaken;
 
     void Start()
     {
@@ -329,6 +330,7 @@ public class BossCat : MonoBehaviour
     {
         calcHealth();
         health -= amount;
+        damageTaken.Play();
         if (alive)
         { StartCoroutine(DamageIndicate()); }
 

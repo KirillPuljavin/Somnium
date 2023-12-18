@@ -25,6 +25,7 @@ public class EnemyBlob : MonoBehaviour
     private Vector3 currentPosition;
     private float horizontalVelocity;
     private float verticalVelocity;
+    public AudioSource damageTaken;
 
     void Awake()
     {
@@ -109,6 +110,7 @@ public class EnemyBlob : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
+        damageTaken.Play();
         enemyHP -= amount;
 
         if (enemyHP <= 0)
@@ -127,6 +129,7 @@ public class EnemyBlob : MonoBehaviour
 
     private void Death()
     {
+        damageTaken.Play();
         ParticleSystem deathParticle = Instantiate(GetComponentInChildren<ParticleSystem>(), transform.position, Quaternion.identity);
         if (deathParticle != null)
         {

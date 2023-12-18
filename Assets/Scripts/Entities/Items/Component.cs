@@ -18,9 +18,9 @@ public class Component : MonoBehaviour
         {
             player.Components++;
             Destroy(gameObject);
+
         }
     }
-
     float maxDistance = 5f;
     float speed = 1;
     void Update()

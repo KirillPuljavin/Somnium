@@ -22,6 +22,7 @@ public class HeartItem : MonoBehaviour
             if (player.Hearts > player.MaxHearts) player.Hearts = player.MaxHearts;
             heartsHUD.UpdateHearts();
             Destroy(gameObject);
+
         }
     }
 

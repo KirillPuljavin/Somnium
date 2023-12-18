@@ -59,6 +59,8 @@ public class Player : MonoBehaviour
     private float tpCooldown;
 
     public bool inCutscene;
+    public AudioSource swordswing;
+    public AudioSource damageTaken;
 
     private void Start()
     {
@@ -210,6 +212,7 @@ public class Player : MonoBehaviour
     bool trulyDashing;
     private IEnumerator Dash()
     {
+        swordswing.Play();
         stamina -= 3;
         trulyDashing = true;
         if (dashUpgraded) isDashing = true;
@@ -258,6 +261,7 @@ public class Player : MonoBehaviour
 
     private IEnumerator Hit()
     {
+        swordswing.Play();
         attackTime = 0;
         int randNumb = UnityEngine.Random.Range(0, 1);
         switch (Facing)
@@ -356,6 +360,7 @@ public class Player : MonoBehaviour
     }
     public void TakeDamage(int amount)
     {
+        damageTaken.Play();
         Hearts -= amount;
         heartsHUD.UpdateHearts();
         StartCoroutine(DamageFlash());
