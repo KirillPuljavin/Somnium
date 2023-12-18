@@ -25,6 +25,7 @@ public class ChestScript : MonoBehaviour
     private bool clickable = false;
     private bool Card1Picked;
     private GameObject Hud;
+    public AudioSource chestOpenSound;
 
     void Start()
     {
@@ -38,7 +39,7 @@ public class ChestScript : MonoBehaviour
         cardLocation2 = new UnityEngine.Vector3(Player.transform.position.x, Player.transform.position.y + 1, 0);
         cardLocation3 = new UnityEngine.Vector3(Player.transform.position.x + 2.5f, Player.transform.position.y + 1, 0);
         BGLocation = new UnityEngine.Vector3(Player.transform.position.x, Player.transform.position.y + 0.65f, 0);
-        
+
 
         Card1Picked = Player.Card1Picked;
         Card2Picked = Player.Card2Picked;
@@ -50,9 +51,10 @@ public class ChestScript : MonoBehaviour
         {
             obj.gameObject.transform.localScale = new UnityEngine.Vector3(150, 150, 0);
         }
-        
+
         if (Input.GetKeyDown(KeyCode.E) && clickable && RoomManager.roomCleared)
         {
+            chestOpenSound.Play();
             CardPick();
             Instantiate(AugmentBG, BGLocation, UnityEngine.Quaternion.identity, Hud.transform);
             Debug.Log("BG SUMMONED!");
