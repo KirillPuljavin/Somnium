@@ -59,6 +59,9 @@ public class BossCat : MonoBehaviour
 
     public GameObject Potion;
     public AudioSource bgmusic;
+
+    public AudioSource bgFight;
+    public AudioSource bgIntro;
     public AudioSource win;
     public AudioSource meow;
     public AudioSource damageTaken;
@@ -76,7 +79,8 @@ public class BossCat : MonoBehaviour
         healthMask = GameObject.FindGameObjectWithTag("BossMask");
         healthBarAnimator = healthBar.GetComponent<Animator>();
         bgmusic = GameObject.FindGameObjectWithTag("bossLight").GetComponent<AudioSource>();
-        StartCoroutine(FadeOutMusic(3f));
+        // StartCoroutine(FadeOutMusic(3f));
+        bgIntro.Play();
 
         // Hide all basic attacks
         BasicRight.SetActive(false);
@@ -145,6 +149,7 @@ public class BossCat : MonoBehaviour
             Player.inCutscene = true;
             if (!alpha)
             {
+                bgIntro.Stop();
                 catAnimator.Play("SpawnAnimation", 0);
                 yield return new WaitForSeconds(1.583f);
                 alpha = true;
@@ -157,7 +162,7 @@ public class BossCat : MonoBehaviour
                 inAnimation = false;
                 spawned = true;
                 Player.inCutscene = false;
-                bgmusic.Play();
+                bgFight.Play();
             }
         }
     }
@@ -175,6 +180,7 @@ public class BossCat : MonoBehaviour
         }
 
         bgmusic.Stop();
+        bgIntro.Play();
     }
     IEnumerator ShakeCamera()
     {
@@ -380,6 +386,7 @@ public class BossCat : MonoBehaviour
     }
     private IEnumerator BossDeath()
     {
+        bgFight.Stop();
         healthBar.SetActive(false);
         inAnimation = true;
         alive = false;
