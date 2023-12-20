@@ -257,10 +257,15 @@ public class RoomManager : MonoBehaviour
         BossCat.alive = true;
     }
 
-    void Update()
+    private void Update()
+    {
+        StartCoroutine(Credit());
+    }
+    private IEnumerator Credit()
     {
         if (BossCat.alive == false)
         {
+            yield return new WaitForSeconds(8f);
             creditObject.SetActive(true);
         }
     }
