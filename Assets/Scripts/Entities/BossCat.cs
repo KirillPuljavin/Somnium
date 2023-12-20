@@ -58,6 +58,7 @@ public class BossCat : MonoBehaviour
     public GameObject RightSweepPaw;
 
     public GameObject Potion;
+    public AudioSource bgmusic;
     public AudioSource win;
     public AudioSource meow;
     public AudioSource damageTaken;
@@ -74,6 +75,8 @@ public class BossCat : MonoBehaviour
         healthBar = GameObject.FindGameObjectWithTag("BossHealth");
         healthMask = GameObject.FindGameObjectWithTag("BossMask");
         healthBarAnimator = healthBar.GetComponent<Animator>();
+        bgmusic = GameObject.FindGameObjectWithTag("bossLight").GetComponent<AudioSource>();
+        StartCoroutine(FadeOutMusic(3f));
 
         // Hide all basic attacks
         BasicRight.SetActive(false);
@@ -154,11 +157,25 @@ public class BossCat : MonoBehaviour
                 inAnimation = false;
                 spawned = true;
                 Player.inCutscene = false;
+                bgmusic.Play();
             }
         }
     }
 
+    private IEnumerator FadeOutMusic(float fadeDuration)
+    {
+        float startVolume = bgmusic.volume;
+        float timer = 0f;
 
+        while (timer < fadeDuration)
+        {
+            timer += Time.deltaTime;
+            bgmusic.volume = Mathf.Lerp(startVolume, 0f, timer / fadeDuration);
+            yield return null;
+        }
+
+        bgmusic.Stop();
+    }
     IEnumerator ShakeCamera()
     {
         for (int i = 0; i < 3; i++)
