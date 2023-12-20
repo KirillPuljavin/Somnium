@@ -13,6 +13,8 @@ public class RoomManager : MonoBehaviour
     public static bool roomCleared = false;
     public static int difficulty;
 
+    public GameObject creditObject;
+
     [SerializeField] private GameObject blobEnemyPrefab;
     [SerializeField] private GameObject frogEnemyPrefab;
     [SerializeField] private GameObject spiderEnemyPrefab;
@@ -251,7 +253,16 @@ public class RoomManager : MonoBehaviour
         GameObject catBoss = Instantiate(catBossPrefab, currentRoom.transform.GetChild(1).GetChild(0).transform.position, Quaternion.identity);
         catBoss.transform.localScale = catBossPrefab.transform.localScale;
         catBoss.transform.SetParent(currentRoom.transform);
+
+        BossCat.alive = true;
     }
 
+    void Update()
+    {
+        if (BossCat.alive == false)
+        {
+            creditObject.SetActive(true);
+        }
+    }
 }
 

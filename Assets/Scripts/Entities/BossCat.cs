@@ -38,7 +38,7 @@ public class BossCat : MonoBehaviour
     private bool triggeredZoom;
     public bool spawned = false;
 
-    public bool alive = true;
+    public static bool alive = true;
     public bool inAnimation;
     private float angle;
     private float distance;
@@ -80,8 +80,8 @@ public class BossCat : MonoBehaviour
         healthMask = GameObject.FindGameObjectWithTag("BossMask");
         healthBarAnimator = healthBar.GetComponent<Animator>();
         bgmusic = GameObject.FindGameObjectWithTag("bossLight").GetComponent<AudioSource>();
-        
-        
+
+
         StartCoroutine(FadeOutMusic(1f));
         // bgIntro.Play();
         // bgIntro2.Play();
