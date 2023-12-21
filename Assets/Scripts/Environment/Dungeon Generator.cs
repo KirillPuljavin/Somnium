@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,6 +22,12 @@ public class DungeonGenerator : MonoBehaviour
     [SerializeField] private Sprite doorSpriteB;
     [SerializeField] private Sprite doorSpriteL;
     [SerializeField] private Sprite doorSpriteR;
+    [SerializeField] private Sprite snowdoorSpriteT;
+    [SerializeField] private Sprite snowdoorSpriteB;
+    [SerializeField] private Sprite snowdoorSpriteL;
+    [SerializeField] private Sprite snowdoorSpriteR;
+    [SerializeField] private Sprite bossDoorSprite;
+
 
     void Start()
     {
@@ -68,51 +75,58 @@ public class DungeonGenerator : MonoBehaviour
         // Instantiate Doors
         foreach (var connection in currentPreset.passages)
         {
+            bool yes = false;
             int roomIndex1 = connection.roomIndex1;
             int roomIndex2 = connection.roomIndex2;
+            if (roomIndex1 == 27 || roomIndex2 == 27) yes = true;
+
             DoorPlacement doorPlacement1 = GetDoorPlacement(roomIndex1, roomIndex2);
-            Vector2 doorPosition1 = CalculateDoorPosition(doorPlacement1, roomIndex1);
+            Vector2 doorPosition1 = CalculateDoorPosition(doorPlacement1, roomIndex1, yes);
             DoorPlacement doorPlacement2 = GetDoorPlacement(roomIndex2, roomIndex1);
-            Vector2 doorPosition2 = CalculateDoorPosition(doorPlacement2, roomIndex2);
+            Vector2 doorPosition2 = CalculateDoorPosition(doorPlacement2, roomIndex2, yes);
 
             DoorMechanics door1 = Instantiate(doorPrefab, doorPosition1, Quaternion.identity, doorParent).GetComponent<DoorMechanics>();
             door1.targetDoorPos = doorPosition2;
             door1.targetRoomIndex = roomIndex2;
-            switch (doorPlacement1.position)
-            {
-                case InRoomPos.Top:
-                    door1.gameObject.GetComponent<SpriteRenderer>().sprite = doorSpriteT;
-                    break;
-                case InRoomPos.Bottom:
-                    door1.gameObject.GetComponent<SpriteRenderer>().sprite = doorSpriteB;
-                    break;
-                case InRoomPos.Left:
-                    door1.gameObject.GetComponent<SpriteRenderer>().sprite = doorSpriteL;
-                    break;
-                case InRoomPos.Right:
-                    door1.gameObject.GetComponent<SpriteRenderer>().sprite = doorSpriteR;
-                    break;
-            }
+
+            if (connection.roomIndex1 == 27 || connection.roomIndex2 == 27) door1.gameObject.GetComponent<SpriteRenderer>().sprite = bossDoorSprite;
+            else switch (doorPlacement1.position)
+                {
+                    case InRoomPos.Top:
+                        door1.gameObject.GetComponent<SpriteRenderer>().sprite = doorSpriteT;
+                        break;
+                    case InRoomPos.Bottom:
+                        door1.gameObject.GetComponent<SpriteRenderer>().sprite = doorSpriteB;
+                        break;
+                    case InRoomPos.Left:
+                        door1.gameObject.GetComponent<SpriteRenderer>().sprite = doorSpriteL;
+                        break;
+                    case InRoomPos.Right:
+                        door1.gameObject.GetComponent<SpriteRenderer>().sprite = doorSpriteR;
+                        break;
+                }
+
             DoorMechanics door2 = Instantiate(doorPrefab, doorPosition2, Quaternion.identity, doorParent).GetComponent<DoorMechanics>();
             door2.targetDoorPos = doorPosition1;
             door2.targetRoomIndex = roomIndex1;
-            switch (doorPlacement2.position)
-            {
-                case InRoomPos.Top:
-                    door2.gameObject.GetComponent<SpriteRenderer>().sprite = doorSpriteT;
-                    break;
-                case InRoomPos.Bottom:
-                    door2.gameObject.GetComponent<SpriteRenderer>().sprite = doorSpriteB;
-                    break;
-                case InRoomPos.Left:
-                    door2.gameObject.GetComponent<SpriteRenderer>().sprite = doorSpriteL;
-                    break;
-                case InRoomPos.Right:
-                    door2.gameObject.GetComponent<SpriteRenderer>().sprite = doorSpriteR;
-                    break;
-            }
-        }
 
+            if (connection.roomIndex1 == 27 || connection.roomIndex2 == 27) door2.gameObject.GetComponent<SpriteRenderer>().sprite = bossDoorSprite;
+            else switch (doorPlacement2.position)
+                {
+                    case InRoomPos.Top:
+                        door2.gameObject.GetComponent<SpriteRenderer>().sprite = doorSpriteT;
+                        break;
+                    case InRoomPos.Bottom:
+                        door2.gameObject.GetComponent<SpriteRenderer>().sprite = doorSpriteB;
+                        break;
+                    case InRoomPos.Left:
+                        door2.gameObject.GetComponent<SpriteRenderer>().sprite = doorSpriteL;
+                        break;
+                    case InRoomPos.Right:
+                        door2.gameObject.GetComponent<SpriteRenderer>().sprite = doorSpriteR;
+                        break;
+                }
+        }
         GetComponent<RoomManager>().Initialize();
     }
 
@@ -141,22 +155,26 @@ public class DungeonGenerator : MonoBehaviour
         }
         else return new DoorPlacement();
     }
-    Vector2 CalculateDoorPosition(DoorPlacement doorPlacement, int roomIndex)
+    Vector2 CalculateDoorPosition(DoorPlacement doorPlacement, int roomIndex, bool bossDoor)
     {
         Vector2 roomPosition = CalculateRoomPosition(roomIndex);
-        switch (doorPlacement.position)
+        if (bossDoor)
         {
-            case InRoomPos.Top:
-                return RoomsInDungeon[roomIndex].transform.GetChild(0).GetChild(0).transform.position;
-            case InRoomPos.Right:
-                return RoomsInDungeon[roomIndex].transform.GetChild(0).GetChild(1).transform.position;
-            case InRoomPos.Bottom:
-                return RoomsInDungeon[roomIndex].transform.GetChild(0).GetChild(2).transform.position;
-            case InRoomPos.Left:
-                return RoomsInDungeon[roomIndex].transform.GetChild(0).GetChild(3).transform.position;
-            default:
-                return roomPosition;
+            return RoomsInDungeon[roomIndex].transform.GetChild(0).GetChild(0).transform.position;
         }
+        else switch (doorPlacement.position)
+            {
+                case InRoomPos.Top:
+                    return RoomsInDungeon[roomIndex].transform.GetChild(0).GetChild(0).transform.position;
+                case InRoomPos.Right:
+                    return RoomsInDungeon[roomIndex].transform.GetChild(0).GetChild(1).transform.position;
+                case InRoomPos.Bottom:
+                    return RoomsInDungeon[roomIndex].transform.GetChild(0).GetChild(2).transform.position;
+                case InRoomPos.Left:
+                    return RoomsInDungeon[roomIndex].transform.GetChild(0).GetChild(3).transform.position;
+                default:
+                    return roomPosition;
+            }
     }
 
     Vector2 CalculateRoomPosition(int roomIndex)
