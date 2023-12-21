@@ -423,7 +423,7 @@ public class BossCat : MonoBehaviour
         yield return new WaitForSeconds(3f);
 
         // Return to normal
-        transform.position = new UnityEngine.Vector3(0.45f, 150f, transform.position.z);
+        transform.position = new UnityEngine.Vector3(0.45f, 154f, transform.position.z);
         Head.SetActive(false);
         RightPaw.SetActive(false);
         LeftPaw.SetActive(false);
