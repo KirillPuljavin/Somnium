@@ -90,6 +90,21 @@ public class DungeonGenerator : MonoBehaviour
             door1.targetRoomIndex = roomIndex2;
 
             if (connection.roomIndex1 == 27 || connection.roomIndex2 == 27) door1.gameObject.GetComponent<SpriteRenderer>().sprite = bossDoorSprite;
+            else if (roomIndex1 > 14 || roomIndex2 > 14) switch (doorPlacement1.position)
+                {
+                    case InRoomPos.Top:
+                        door1.gameObject.GetComponent<SpriteRenderer>().sprite = snowdoorSpriteT;
+                        break;
+                    case InRoomPos.Bottom:
+                        door1.gameObject.GetComponent<SpriteRenderer>().sprite = snowdoorSpriteB;
+                        break;
+                    case InRoomPos.Left:
+                        door1.gameObject.GetComponent<SpriteRenderer>().sprite = snowdoorSpriteL;
+                        break;
+                    case InRoomPos.Right:
+                        door1.gameObject.GetComponent<SpriteRenderer>().sprite = snowdoorSpriteR;
+                        break;
+                }
             else switch (doorPlacement1.position)
                 {
                     case InRoomPos.Top:
@@ -111,7 +126,22 @@ public class DungeonGenerator : MonoBehaviour
             door2.targetRoomIndex = roomIndex1;
 
             if (connection.roomIndex1 == 27 || connection.roomIndex2 == 27) door2.gameObject.GetComponent<SpriteRenderer>().sprite = bossDoorSprite;
-            else switch (doorPlacement2.position)
+            else if (roomIndex1 > 14 || roomIndex2 > 14) switch (doorPlacement1.position)
+                {
+                    case InRoomPos.Top:
+                        door2.gameObject.GetComponent<SpriteRenderer>().sprite = snowdoorSpriteT;
+                        break;
+                    case InRoomPos.Bottom:
+                        door2.gameObject.GetComponent<SpriteRenderer>().sprite = snowdoorSpriteB;
+                        break;
+                    case InRoomPos.Left:
+                        door2.gameObject.GetComponent<SpriteRenderer>().sprite = snowdoorSpriteL;
+                        break;
+                    case InRoomPos.Right:
+                        door2.gameObject.GetComponent<SpriteRenderer>().sprite = snowdoorSpriteR;
+                        break;
+                }
+            else switch (doorPlacement1.position)
                 {
                     case InRoomPos.Top:
                         door2.gameObject.GetComponent<SpriteRenderer>().sprite = doorSpriteT;
@@ -128,6 +158,8 @@ public class DungeonGenerator : MonoBehaviour
                 }
         }
         GetComponent<RoomManager>().Initialize();
+
+        Player.inDungeon = true;
     }
 
     DoorPlacement GetDoorPlacement(int roomIndex1, int roomIndex2)

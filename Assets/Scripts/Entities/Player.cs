@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     public LayerMask enemyLayers;
     public Transform attackPoint;
     public Light2D flashLight;
-    public bool inDungeon = false;
+    public static bool inDungeon = false;
     public int currRoom = 2;
     public int MaxHearts = 10;
     public int Hearts = 10;
@@ -55,6 +55,7 @@ public class Player : MonoBehaviour
     public bool Card3Picked = false;
     public bool Card4Picked = false;
     public GameObject LoadingScreen;
+    public float timer;
 
     private float tpCooldown;
 
@@ -65,6 +66,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         getStoredValues();
+        timerUI = GameObject.Find("timerUI").GetComponent<Text>();
     }
     private void getStoredValues()
     {
@@ -99,18 +101,21 @@ public class Player : MonoBehaviour
         PlayerSO.Card4 = Card4Picked;
     }
 
+    public Text timerUI;
     private void Update()
     {
         if (Alive)
         {
             StoreValues();
             flashLight.pointLightOuterRadius = Vision * 3;
+            if (inDungeon) timer += Time.deltaTime;
+            timerUI.text = "Time: " + (int)timer + " s.";
 
             // Cooldown
             if (tpCooldown <= 1) tpCooldown += Time.deltaTime;
             if (attackTime <= attackCooldown) attackTime += Time.deltaTime;
             if (stamina < dashingCooldown && WeaponEvo < 4) stamina += Time.deltaTime;
-            else if (stamina < dashingCooldown) { stamina += (Time.deltaTime * 1.5f); }
+            else if (stamina < dashingCooldown) { stamina += Time.deltaTime * 1.5f; }
 
             if (stamina < dashingCooldown) UpdateStamina();
             if (trulyDashing) return;
@@ -130,7 +135,8 @@ public class Player : MonoBehaviour
             // Controls
             if (Input.GetKeyDown(KeyCode.Mouse0) && attackTime >= attackCooldown) StartCoroutine(Hit());
             if (Input.GetKeyDown(KeyCode.Mouse1) && stamina >= 3 && movement.sqrMagnitude != 0) StartCoroutine(Dash());
-            if (Input.GetKeyDown(KeyCode.H)) HealPotion();
+            if (Input.GetKeyDown(KeyCode.Slash)) { Alert("Cheats activated..."); attackCooldown /= 10; }
+            // if (Input.GetKeyDown(KeyCode.H)) HealPot ion();
 
             animator.SetFloat("Horizontal", movement.x);
             animator.SetFloat("Vertical", movement.y);
