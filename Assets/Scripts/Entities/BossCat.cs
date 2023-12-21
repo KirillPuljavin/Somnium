@@ -79,12 +79,10 @@ public class BossCat : MonoBehaviour
         healthBar = GameObject.FindGameObjectWithTag("BossHealth");
         healthMask = GameObject.FindGameObjectWithTag("BossMask");
         healthBarAnimator = healthBar.GetComponent<Animator>();
-        // bgmusic = GameObject.FindGameObjectWithTag("bossLight").GetComponent<AudioSource>();
+        bgmusic = GameObject.FindGameObjectWithTag("bossLight").GetComponent<AudioSource>();
 
 
         StartCoroutine(FadeOutMusic(1f));
-        // bgIntro.Play();
-        // bgIntro2.Play();
 
 
 
@@ -408,8 +406,16 @@ public class BossCat : MonoBehaviour
     {
         // Start Phase 2
         inPhase2 = true;
+        catAnimator.StopPlayback();
+        catAnimator.Play("JumpUp");
+        yield return new WaitForSeconds(0.5f);
         transform.position = new UnityEngine.Vector3(0.45f, 170f, transform.position.z);
+        yield return new WaitForSeconds(1f);
         Head.SetActive(true);
+        headAnimator.Play("DropDown");
+        yield return new WaitForSeconds(0.25f);
+        StartCoroutine(ShakeCamera());
+        yield return new WaitForSeconds(0.75f);
         RightPaw.SetActive(true);
         LeftPaw.SetActive(true);
 
@@ -423,10 +429,15 @@ public class BossCat : MonoBehaviour
         yield return new WaitForSeconds(3f);
 
         // Return to normal
-        transform.position = new UnityEngine.Vector3(0.45f, 154f, transform.position.z);
-        Head.SetActive(false);
         RightPaw.SetActive(false);
         LeftPaw.SetActive(false);
+        headAnimator.Play("DropUp");
+        yield return new WaitForSeconds(0.667f);
+        Head.SetActive(false);
+        transform.position = new UnityEngine.Vector3(0.45f, 154f, transform.position.z);
+        catAnimator.Play("Jump Down");
+        yield return new WaitForSeconds(0.5f);
+        catAnimator.Play("cat_Idle");
         UnityEngine.Quaternion spawnRotation1 = UnityEngine.Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
         UnityEngine.Quaternion spawnRotation2 = UnityEngine.Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
         Debug.Log("1" + spawnRotation1);
