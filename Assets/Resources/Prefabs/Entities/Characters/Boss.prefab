@@ -593,7 +593,6 @@ MonoBehaviour:
   inRange: 0
   activateZoom: 10
   spawned: 0
-  alive: 1
   inAnimation: 0
   Kitty: {fileID: 3686576747336558123}
   Head: {fileID: 6084727041310268641}
@@ -1662,8 +1661,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1095871559
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: -1940130838, guid: 3f7823ce91c99374c8307ba226fd3082, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
