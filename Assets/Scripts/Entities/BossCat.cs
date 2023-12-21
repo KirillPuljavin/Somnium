@@ -79,7 +79,7 @@ public class BossCat : MonoBehaviour
         healthBar = GameObject.FindGameObjectWithTag("BossHealth");
         healthMask = GameObject.FindGameObjectWithTag("BossMask");
         healthBarAnimator = healthBar.GetComponent<Animator>();
-        // bgmusic = GameObject.FindGameObjectWithTag("bossLight").GetComponent<AudioSource>();
+        bgmusic = GameObject.FindGameObjectWithTag("bossLight").GetComponent<AudioSource>();
 
 
         StartCoroutine(FadeOutMusic(1f));
