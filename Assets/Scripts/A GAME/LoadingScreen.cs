@@ -8,11 +8,11 @@ public class LoadingScreen : MonoBehaviour
 
     void Start()
     {
-        
+
     }
     void Update()
     {
-        
+
     }
 
     public void LoadScene(int sceneId)
@@ -29,7 +29,7 @@ public class LoadingScreen : MonoBehaviour
         {
             float progress = Mathf.Clamp01(asyncOperation.progress / 0.9f);
 
-            Loading.SetActive(true);
+            if (Loading != null) Loading.SetActive(true);
 
             yield return null;
         }

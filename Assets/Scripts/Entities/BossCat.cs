@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
 using Cinemachine;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class BossCat : MonoBehaviour
