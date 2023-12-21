@@ -535,6 +535,11 @@ MonoBehaviour:
   doorSpriteB: {fileID: 21300000, guid: 8ce82244fca74ec4a8cb8cd944d81552, type: 3}
   doorSpriteL: {fileID: 21300000, guid: 3c7ed1813e275b44bbb0267f5d1f98c6, type: 3}
   doorSpriteR: {fileID: 21300000, guid: 823c65986dc8af443b215d86eb23ef0e, type: 3}
+  snowdoorSpriteT: {fileID: 21300000, guid: 6a54b44c72772c848a0dde9cc6adb264, type: 3}
+  snowdoorSpriteB: {fileID: 21300000, guid: 415989fb0092f2f42b8dbacea3cd7fed, type: 3}
+  snowdoorSpriteL: {fileID: 21300000, guid: d64610049217efe438de4b74a80d32d8, type: 3}
+  snowdoorSpriteR: {fileID: 21300000, guid: c1bc1d3bd07a3b24d8fc2b07e150a6e2, type: 3}
+  bossDoorSprite: {fileID: 21300000, guid: cfa376a718efcf846abe40e404a898f6, type: 3}
 --- !u!114 &483126003
 MonoBehaviour:
   m_ObjectHideFlags: 0
