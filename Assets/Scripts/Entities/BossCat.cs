@@ -407,6 +407,7 @@ public class BossCat : MonoBehaviour
         // Start Phase 2
         inPhase2 = true;
         catAnimator.StopPlayback();
+        StopCoroutine(Animations());
         catAnimator.Play("JumpUp");
         yield return new WaitForSeconds(0.5f);
         transform.position = new UnityEngine.Vector3(0.45f, 170f, transform.position.z);
